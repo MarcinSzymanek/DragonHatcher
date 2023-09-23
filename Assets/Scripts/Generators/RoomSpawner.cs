@@ -21,6 +21,7 @@ public class NewBehaviourScript : MonoBehaviour
         if(!spawned) {
             //This can 100% be optimized and made looked way better
             if(openingDirection == 1) {
+                //Where the error occurs: Nullpointer apparently in all if statements even though I populated the game object with prefabs
                 rand = Random.Range(0, templates.bottomRooms.Length);
                 Instantiate(templates.bottomRooms[rand], transform.position, templates.bottomRooms[rand].transform.rotation);
             }
