@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 493642756}
   - component: {fileID: 493642757}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WalkCollider
   m_TagString: WalkCollider
   m_Icon: {fileID: 0}
@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 670068225}
   - component: {fileID: 670068226}
   - component: {fileID: 670068227}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -617,7 +617,7 @@ GameObject:
   - component: {fileID: 705871690}
   - component: {fileID: 705871691}
   - component: {fileID: 705871692}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AIScanner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -651,10 +651,10 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 1600
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 511
+    m_Bits: 447
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -782,7 +782,7 @@ GameObject:
   - component: {fileID: 891185650}
   - component: {fileID: 891185651}
   - component: {fileID: 891185652}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -955,7 +955,7 @@ GameObject:
   - component: {fileID: 1393511724}
   - component: {fileID: 1393511723}
   - component: {fileID: 1393511722}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3534,7 +3534,7 @@ GameObject:
   - component: {fileID: 1658162948}
   - component: {fileID: 1658162947}
   - component: {fileID: 1658162946}
-  m_Layer: 11
+  m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
