@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int health;
+    public int currentHealth;
     public int maxHealth = 5;
 
     // Events
@@ -12,15 +12,15 @@ public class Health : MonoBehaviour
     public event System.Action OnDeath;
     void Awake()
     {
-        health = maxHealth;
+        currentHealth = maxHealth;
     }
 
     // TakeDamage function to invoke damage event and possibly destroy object on death
     public void TakeDamage(int amount)
     {
         OnDamageTaken?.Invoke(amount);
-        Debug.Log("Ouch");
-        if (health <= 0) 
+        currentHealth -= amount;
+        if (currentHealth <= 0) 
         {
             OnDeath?.Invoke();
 
