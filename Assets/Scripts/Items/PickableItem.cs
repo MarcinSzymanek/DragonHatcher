@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 /* Allows the item to be picked up
 *  
@@ -10,13 +10,15 @@ using UnityEngine;
 public class PickableItem : MonoBehaviour
 {
 	AddHoverText textScript_;
+	[SerializeReference]
+	public ResourceObject resource_data;
 	
 	void Start(){
 		textScript_ = GetComponent<AddHoverText>();
 	}
     
 	public void TextOn() {
-		textScript_.SetText("Press 'E' to pick");
+		textScript_.SetText(resource_data.Name);
 	}
 	
 	public void TextOff() {
