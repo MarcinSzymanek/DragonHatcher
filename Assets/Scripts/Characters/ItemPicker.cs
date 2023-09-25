@@ -5,10 +5,10 @@ using UnityEngine;
 // Allows a character to pick up objects
 public class ItemPicker : MonoBehaviour
 {
-    Collider2D collider_;
+	Inventory inv_;
     void Awake()
-    {
-        collider_ = GetComponent<Collider2D>();
+	{
+		inv_ = GetComponent<Inventory>();
     }
 
     public void OnPickup(){
@@ -18,6 +18,7 @@ public class ItemPicker : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.transform.TryGetComponent<PickableItem>(out PickableItem pickable)){
 			pickable.TextOn();
+			pickable.OnPickup(inv_);
 		}
 		else{
 			Debug.Log("Couldn't get coll2d");

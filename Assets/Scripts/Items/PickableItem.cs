@@ -11,14 +11,17 @@ public class PickableItem : MonoBehaviour
 {
 	AddHoverText textScript_;
 	[SerializeReference]
-	public ResourceObject resource_data;
+	public ResourceID res_id;
+	public int Count;
+	private string name_;
 	
 	void Start(){
 		textScript_ = GetComponent<AddHoverText>();
+		name_ = res_id.ToString();
 	}
     
 	public void TextOn() {
-		textScript_.SetText(resource_data.Name);
+		textScript_.SetText(name_);
 	}
 	
 	public void TextOff() {
@@ -27,6 +30,7 @@ public class PickableItem : MonoBehaviour
 	
 	public void OnPickup(Inventory i) {
 		// Add item to players inventory. 
+		ResourceManager.instance.Add(res_id, Count);
 		gameObject.SetActive(false);
 	}
 }

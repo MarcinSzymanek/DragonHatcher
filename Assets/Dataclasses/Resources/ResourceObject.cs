@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum ResourceID{
     wood,
@@ -8,12 +9,14 @@ public enum ResourceID{
     gold
 }
 [CreateAssetMenu(fileName="Resource", menuName = "ScriptableObjects/Resource")]
-public class ResourceObject : ScriptableObject
+[Serializable]
+public class ResourceSO : ScriptableObject
 {
     public string Name;
     public string Icon;
     public string SpritePickable;
-    public ResourceID ID;
-    public int Tier;
-
+	public ResourceID ID;
+	[SerializeField]
+	public int Tier;
 }
+
