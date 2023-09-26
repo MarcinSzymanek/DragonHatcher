@@ -8,5 +8,6 @@
 /[Uu]ser[Ss]ettings/
 /Assets/Plugins/
 /Assets/Plugins.meta
+/Assets/Scenes/
 *.sln
 *.csproj
