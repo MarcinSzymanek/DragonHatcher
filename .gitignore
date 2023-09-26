@@ -7,5 +7,6 @@
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 /Assets/Plugins/
+/Assets/Plugins.meta
 *.sln
 *.csproj
