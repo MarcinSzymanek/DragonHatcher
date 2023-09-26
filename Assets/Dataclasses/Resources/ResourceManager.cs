@@ -13,6 +13,8 @@ public class ResourceManager : MonoBehaviour
 	[SerializeReference]
 	List<ResourceSO> res_list;
 	bool loaded_ = false;
+	public event System.Action<ResourceID, int> resource_updated;
+	
 	Dictionary<ResourceID, int> session_store_;
     void Awake()
     {
@@ -26,6 +28,7 @@ public class ResourceManager : MonoBehaviour
 	        LoadData();
         }
     }
+    
     
 	// Load data from SO assets
 	private void LoadData(){
@@ -60,9 +63,11 @@ public class ResourceManager : MonoBehaviour
 	
 	public void Add(ResourceID id, int count){
 		session_store_[id] += count;
+		resource_updated?.Invoke(id, session_store_[id]);
 	}
 	
 	public void Reduce(ResourceID id, int count){
 		session_store_[id] += count;
+		resource_updated?.Invoke(id, session_store_[id]);
 	}
 }
