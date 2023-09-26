@@ -6,5 +6,6 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+/Assets/Plugins/
 *.sln
 *.csproj
