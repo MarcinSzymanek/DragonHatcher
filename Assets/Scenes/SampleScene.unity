@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 155744294}
   - component: {fileID: 155744296}
   - component: {fileID: 155744295}
+  - component: {fileID: 155744297}
   m_Layer: 0
   m_Name: MapForeground
   m_TagString: Untagged
@@ -243,6 +244,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &155744297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155744293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97a62886e1a252468b75f9b11b56a23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallTilePrefab: {fileID: 2907750810227925635, guid: f81dd6fc7a7204849a799a72968a1341, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

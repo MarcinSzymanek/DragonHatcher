@@ -21,11 +21,15 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 68d478157cc8d4546b3a9a5a507d1fb9, type: 3}
     instantiationMode: 0
+  - dependency: {fileID: 2800000, guid: 4c4b838940d611d4982b57c27c748074, type: 3}
+    instantiationMode: 0
   - dependency: {fileID: 5630183390205105385, guid: c3f917cc8bf9de14d8d66e8f17da174d, type: 3}
     instantiationMode: 0
   - dependency: {fileID: -944628639613478452, guid: e279d8c10ced7af44a1183da57e35b57, type: 3}
     instantiationMode: 1
   - dependency: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    instantiationMode: 0
+  - dependency: {fileID: 2907750810227925635, guid: f81dd6fc7a7204849a799a72968a1341, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 40265a896a0f341bb956e90c59025a29, type: 3}
     instantiationMode: 1
