@@ -1,4 +1,4 @@
-
+/.idea/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -6,6 +6,9 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+/Assets/Plugins/
+/Assets/Plugins.meta
+/Assets/Scenes/Test/
 *.sln
 *.csproj
 /Assets/Scripts/Characters/TakeDamage.cs
