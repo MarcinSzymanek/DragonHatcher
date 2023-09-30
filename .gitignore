@@ -8,3 +8,12 @@
 /[Uu]ser[Ss]ettings/
 *.sln
 *.csproj
+/Assets/Scripts/Characters/TakeDamage.cs
+/Assets/Scripts/DamageFeedback
+/Assets/Scripts/Characters
+/ProjectSettings
+/Assets/Scripts/Characters/TakeDamage.cs
+/.vs/DragonHatcher/FileContentIndex
+/.vs/DragonHatcher/v17
+/Assets/Scripts/Characters/TakeDamage.cs
+/Assets/Scripts/DamageFeedback.meta
