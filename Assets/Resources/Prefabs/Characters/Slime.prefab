@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5628646912928174971}
   - component: {fileID: 2785617767381128219}
-  - component: {fileID: 5795181816331895517}
+  - component: {fileID: 5149629238813075730}
   m_Layer: 7
   m_Name: AIScanner
   m_TagString: Untagged
@@ -68,7 +68,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3
---- !u!114 &5795181816331895517
+--- !u!114 &5149629238813075730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,9 +91,9 @@ GameObject:
   - component: {fileID: 5930693059844116191}
   - component: {fileID: 6004404672642651635}
   - component: {fileID: 2800097341721043378}
-  - component: {fileID: 2191706700747449904}
-  - component: {fileID: 3368697597647814026}
-  - component: {fileID: 1427658209266713908}
+  - component: {fileID: 409993661435461350}
+  - component: {fileID: 706706613547486374}
+  - component: {fileID: 3900094340578031374}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
@@ -161,20 +161,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2191706700747449904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3974789886877665124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c198f1288f78d499ec7babd3206b71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <FlashFalloffSpeed>k__BackingField: 2
---- !u!114 &3368697597647814026
+--- !u!114 &409993661435461350
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,9 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e99e9ed3df3ac0428e9b58ddf92d971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <LockOnRefresh>k__BackingField: 0.15
-  <AttackDistance>k__BackingField: 1
---- !u!114 &1427658209266713908
+  <LockOnRefresh>k__BackingField: 0
+  <AttackDistance>k__BackingField: 0
+--- !u!114 &706706613547486374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,9 +184,45 @@ MonoBehaviour:
   m_GameObject: {fileID: 3974789886877665124}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 261daaf0e4f1d56439a54bb1bfbbbebe, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c8339006eab9364eafd7aa20b4e8c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 0
+--- !u!58 &3900094340578031374
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3974789886877665124}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.2}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &4984793606010035071
 GameObject:
   m_ObjectHideFlags: 0
