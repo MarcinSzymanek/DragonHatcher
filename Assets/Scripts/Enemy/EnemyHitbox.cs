@@ -20,7 +20,7 @@ public class EnemyHitbox : MonoBehaviour
 		TakeDamage tdamage = collider.transform.parent.GetComponent<TakeDamage>();
 		if (tdamage != null)
 		{
-			tdamage.TriggerTakeDamage(damageAmount);
+			tdamage.TakeDamageOnHit(damageAmount);
 		}
         
 	}

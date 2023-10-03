@@ -15,9 +15,10 @@ public class InputManager : MonoBehaviour
 	
 	Movement moveScript_;
 	ItemPicker itemPicker_;
-	
+    ProjectileBehaviour projectile;
+
     // Start is called before the first frame update
-	void Awake()
+    void Awake()
     {
 	    input_ = GetComponent<PlayerInput>();
 	    controlled_ = GameObject.Find("Player");
@@ -29,6 +30,7 @@ public class InputManager : MonoBehaviour
 		actionMove = controlledMap.FindAction("Move");
 	    
 	    itemPicker_ = controlled_.GetComponent<ItemPicker>();
+		projectile = controlled_.GetComponent<ProjectileBehaviour>();
     }
 
 	
@@ -51,6 +53,7 @@ public class InputManager : MonoBehaviour
 	
 	void OnAttack(InputAction.CallbackContext context){
 		Debug.Log("Attack button!!!");
-		//attackScript_.InitiateAttack();		
+		//attackScript_.InitiateAttack();
+		projectile.ShootArrow();
 	}
 }
