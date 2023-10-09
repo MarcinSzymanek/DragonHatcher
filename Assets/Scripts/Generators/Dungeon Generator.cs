@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class DungeonGenerator : MonoBehaviour
 {
     public GameObject wallTilePrefab = null;
     public GameObject emptyTilePrefab = null;
+    public Tilemap tileMap = null;
+    public TileBase tileToPlace = null;
 
     struct Square
     {
@@ -85,9 +88,16 @@ public class DungeonGenerator : MonoBehaviour
                 bool isOuterBorder = Mathf.Abs(i) >= halfSize - padding || Mathf.Abs(j) >= halfSize - padding;
 
                 // Place wallTilePrefab on outer border, else place emptyTilePrefab
-                GameObject prefabToPlace = isOuterBorder ? wallTilePrefab : emptyTilePrefab;
-
-                PlaceTile(posX, posY, posZ, prefabToPlace);
+                //GameObject prefabToPlace = isOuterBorder ? wallTilePrefab : emptyTilePrefab;
+                if(isOuterBorder) {
+                    PlaceWall(posX, posY, posZ, wallTilePrefab);
+                }
+                else 
+                {
+                    PlaceTile((int)posX, (int)posY, (int)posZ, tileToPlace);
+                }
+                //This is where we would usually call the placeWall function but simply with the empty prefab
+                //New Error: Some tiles simply dont get placed even though they should
             }
         }
     }
@@ -105,9 +115,15 @@ void SpawnSquaresNextToEachOther(int amount, float size)
 }
 
 
-    void PlaceTile(float posX, float posY, float posZ, GameObject prefab)
+    void PlaceWall(float posX, float posY, float posZ, GameObject prefab)
     {
         Vector3 spawnPosition = new Vector3(posX, posY, posZ);
         Instantiate(prefab, spawnPosition, Quaternion.identity);
+    }
+
+     void PlaceTile(int posX, int posY, int posZ, TileBase tile)
+    {
+        //Using instantiate instead breaks everything
+        tileMap.SetTile(new Vector3Int(posX, posY, posZ), tileToPlace);
     }   
 }
