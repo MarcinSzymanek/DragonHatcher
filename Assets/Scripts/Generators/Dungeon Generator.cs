@@ -71,7 +71,7 @@ public class DungeonGenerator : MonoBehaviour
     //Size is hardcoded atm but we can change it later to a parameter
     void CreateSquare(Vector3 position)
     {
-        float size = 5f;
+        float size = 6f;
         float halfSize = size / 2f;
         // Padding to leave some space from the outer border
         float padding = 0.5f; 
@@ -94,6 +94,7 @@ public class DungeonGenerator : MonoBehaviour
                 }
                 else 
                 {
+                    //Need to convert here, -0.5 is needed because else the placement is messy
                     PlaceTile((int)posX, (int)posY, (int)posZ, tileToPlace);
                 }
                 //This is where we would usually call the placeWall function but simply with the empty prefab
