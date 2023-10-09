@@ -18,7 +18,9 @@ public class DungeonGenerator : MonoBehaviour
     void Start()
     {
         // Call the function to generate squares
-        GenerateSquares(5);
+        //GenerateSquares(5);
+        // Try to spawn squares next to each other for now
+        SpawnSquaresNextToEachOther(5, 5f);
     }
 
     void GenerateSquares(int amount)
@@ -63,11 +65,13 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    //Size is hardcoded atm but we can change it later to a parameter
     void CreateSquare(Vector3 position)
     {
         float size = 5f;
         float halfSize = size / 2f;
-        float padding = 0.5f; // Padding to leave some space from the outer border
+        // Padding to leave some space from the outer border
+        float padding = 0.5f; 
 
         for (float i = -halfSize; i <= halfSize; i++)
         {
@@ -75,7 +79,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 float posX = position.x + i;
                 float posY = position.y + j;
-                loat posZ = position.z;
+                float posZ = position.z;
 
                 // Check if the current position is on the outer border
                 bool isOuterBorder = Mathf.Abs(i) >= halfSize - padding || Mathf.Abs(j) >= halfSize - padding;
@@ -87,6 +91,18 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
     }
+
+void SpawnSquaresNextToEachOther(int amount, float size)
+{
+    float gap = 1f;
+
+    for (int i = 0; i < amount; i++)
+    {
+        Vector3 position = new Vector3(i * (size + gap), 0, 0);
+        squares.Add(new Square { position = position });
+        CreateSquare(position);
+    }
+}
 
 
     void PlaceTile(float posX, float posY, float posZ, GameObject prefab)
