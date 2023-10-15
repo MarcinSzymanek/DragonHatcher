@@ -5,7 +5,7 @@ using UnityEngine;
 public class Cursor : MonoBehaviour
 {
     Transform tf_;
-	Vector2 pos_;
+	Vector3 pos_;
 	Camera cam_;
     // Start is called before the first frame update
     void Start()
@@ -26,4 +26,8 @@ public class Cursor : MonoBehaviour
 		
         tf_.position = new Vector3(mousePos.x, mousePos.y, 0);
     }
+    
+	public Vector3 GetPosition(){
+		return pos_;
+	}
 }
