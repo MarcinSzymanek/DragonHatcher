@@ -46,7 +46,7 @@ public class InputManager : MonoBehaviour
 	}
 	
 	void OnGet(InputAction.CallbackContext context){
-		itemPicker_.OnPickup();
+		//itemPicker_.OnPickup();
 	}
 	
 	void OnAttack(InputAction.CallbackContext context){

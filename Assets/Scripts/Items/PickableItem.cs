@@ -28,7 +28,7 @@ public class PickableItem : MonoBehaviour
 		textScript_.SetText("");
 	}
 	
-	public void OnPickup(Inventory i) {
+	public void OnPickup() {
 		// Add item to players inventory. 
 		ResourceManager.instance.Add(res_id, Count);
 		gameObject.SetActive(false);
