@@ -77,7 +77,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         Vector3 position = new Vector3(i * (size + gap), 0, 0);
         squares.Add(new Square { position = position });
-        CreateSquare(position, size);
+        CreateRoom(position, size);
     }
 }
 
