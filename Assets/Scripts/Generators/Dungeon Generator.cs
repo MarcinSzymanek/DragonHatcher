@@ -5,6 +5,12 @@ using UnityEngine.Tilemaps;
 
 public class DungeonGenerator : MonoBehaviour
 {
+
+    //   Overall TODO:
+    // - Add variety to walls and fill-tiles
+    // - Select random locations for potential spawning
+    // - Refactor code so that we parameterize most stuff such as size and room-count
+    
     public GameObject wallTilePrefab = null;
     public GameObject emptyTilePrefab = null;
     public Tilemap tileMap = null;
@@ -13,65 +19,20 @@ public class DungeonGenerator : MonoBehaviour
     struct Square
     {
         public Vector3 position;
-        public bool hasSingleEntrance;
     }
 
     List<Square> squares = new List<Square>();
 
     void Start()
     {
-        // Call the function to generate squares
-        //GenerateSquares(5);
-        // Try to spawn squares next to each other for now
-        SpawnSquaresNextToEachOther(5, 5f);
-    }
-
-    void GenerateSquares(int amount)
-    {
-        float size = 5f;
-        float gap = 1f; // Gap between squares
-
-        // Generate x-amount squares positioned randomly
-        for (int i = 0; i < amount; i++)
-        {
-            bool roomPlaced = false;
-            Vector3 position = Vector3.zero;
-
-            // Try placing the room until a non-overlapping position is found
-            while (!roomPlaced)
-            {
-
-                float x = Random.Range(-15f, 15f); // Random x position within a range
-                float y = Random.Range(-15f, 15f); // Random y position within a range
-                position = new Vector3(x, y, 0);
-
-                // Check for collisions with existing rooms
-                bool collisionDetected = false;
-                foreach (var square in squares)
-                {
-                    if (Mathf.Abs(position.x - square.position.x) < size + gap && Mathf.Abs(position.y - square.position.y) < size + gap)
-                    {
-                        collisionDetected = true;
-                        break;
-                    }
-                }
-
-                // If no collision, place the room
-                if (!collisionDetected)
-                {
-                    roomPlaced = true;
-                }
-            }
-
-            squares.Add(new Square { position = position });
-            CreateSquare(position);
-        }
+        //Generating several rooms next to each other
+        //Note: Only use un-even numbers for the size of the room as it messes up the tile allignment for the filling
+        SpawnSquaresNextToEachOther(5, 19f);
     }
 
     //Size is hardcoded atm but we can change it later to a parameter
-    void CreateSquare(Vector3 position)
+    void CreateSquare(Vector3 position, float size)
     {
-        float size = 6f;
         float halfSize = size / 2f;
         // Padding to leave some space from the outer border
         float padding = 0.5f; 
@@ -87,7 +48,8 @@ public class DungeonGenerator : MonoBehaviour
                 // Check if the current position is on the outer border
                 bool isOuterBorder = Mathf.Abs(i) >= halfSize - padding || Mathf.Abs(j) >= halfSize - padding;
 
-                // Place wallTilePrefab on outer border, else place emptyTilePrefab
+                //Place wallTilePrefab on outer border, else place filling-tiles
+                //Adjusting room position is not neccesary as we can simply block out all the other rooms from the player view and have them all next to each other
                 //GameObject prefabToPlace = isOuterBorder ? wallTilePrefab : emptyTilePrefab;
                 if(isOuterBorder) {
                     PlaceWall(posX, posY, posZ, wallTilePrefab);
@@ -95,23 +57,21 @@ public class DungeonGenerator : MonoBehaviour
                 else 
                 {
                     //Need to convert here, -0.5 is needed because else the placement is messy
-                    PlaceTile((int)posX, (int)posY, (int)posZ, tileToPlace);
+                    PlaceTile( (int)(posX-0.5), (int)(posY-0.5), (int)(posZ-0.5), tileToPlace);
                 }
-                //This is where we would usually call the placeWall function but simply with the empty prefab
-                //New Error: Some tiles simply dont get placed even though they should
             }
         }
     }
 
 void SpawnSquaresNextToEachOther(int amount, float size)
 {
-    float gap = 1f;
+    float gap = 5f;
 
     for (int i = 0; i < amount; i++)
     {
         Vector3 position = new Vector3(i * (size + gap), 0, 0);
         squares.Add(new Square { position = position });
-        CreateSquare(position);
+        CreateSquare(position, size);
     }
 }
 

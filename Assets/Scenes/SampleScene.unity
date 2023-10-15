@@ -258,6 +258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallTilePrefab: {fileID: 2907750810227925635, guid: f81dd6fc7a7204849a799a72968a1341, type: 3}
   emptyTilePrefab: {fileID: 2589175252476403355, guid: a568d875067e55f4ab1e733d9f0ad4e8, type: 3}
+  tileMap: {fileID: 155744296}
+  tileToPlace: {fileID: 11400000, guid: 8f8e96decf83b6d48a2fe48b53bcd905, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
