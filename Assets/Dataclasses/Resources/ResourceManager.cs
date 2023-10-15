@@ -62,6 +62,8 @@ public class ResourceManager : MonoBehaviour
 	}
 	
 	public void Add(ResourceID id, int count){
+		Debug.Log("Adding " + count.ToString() + " of " + id.ToString());
+		Debug.Log("Current: " + session_store_[id]);
 		session_store_[id] += count;
 		resource_updated?.Invoke(id, session_store_[id]);
 	}
