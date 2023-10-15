@@ -14,7 +14,8 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject wallTilePrefab = null;
     public GameObject emptyTilePrefab = null;
     public Tilemap tileMap = null;
-    public TileBase tileToPlace = null;
+    public TileBase[] tileToPlace = null;
+    
 
     struct Square
     {
@@ -57,7 +58,7 @@ public class DungeonGenerator : MonoBehaviour
                 else 
                 {
                     //Need to convert here, -0.5 is needed because else the placement is messy
-                    PlaceTile( (int)(posX-0.5), (int)(posY-0.5), (int)(posZ-0.5), tileToPlace);
+                    PlaceTile((int)(posX-0.5), (int)(posY-0.5), (int)(posZ-0.5), tileToPlace[Random.Range(0,tileToPlace.Length)]);
                 }
             }
         }
@@ -85,6 +86,6 @@ void SpawnSquaresNextToEachOther(int amount, float size)
      void PlaceTile(int posX, int posY, int posZ, TileBase tile)
     {
         //Using instantiate instead breaks everything
-        tileMap.SetTile(new Vector3Int(posX, posY, posZ), tileToPlace);
+        tileMap.SetTile(new Vector3Int(posX, posY, posZ), tile);
     }   
 }
