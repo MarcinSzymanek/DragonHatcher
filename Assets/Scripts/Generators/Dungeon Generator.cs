@@ -64,17 +64,17 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-void SpawnSquaresNextToEachOther(int amount, float size)
-{
-    float gap = 5f;
-
-    for (int i = 0; i < amount; i++)
+    void SpawnSquaresNextToEachOther(int amount, float size)
     {
-        Vector3 position = new Vector3(i * (size + gap), 0, 0);
-        squares.Add(new Square { position = position });
-        CreateSquare(position, size);
+        float gap = 5f;
+
+        for (int i = 0; i < amount; i++)
+        {
+            Vector3 position = new Vector3(i * (size + gap), 0, 0);
+            squares.Add(new Square { position = position });
+            CreateSquare(position, size);
+        }
     }
-}
 
 
     void PlaceWall(float posX, float posY, float posZ, GameObject prefab)
