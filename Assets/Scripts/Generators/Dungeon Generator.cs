@@ -15,7 +15,8 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject emptyTilePrefab = null;
     public Tilemap tileMap = null;
     public TileBase[] tileToPlace = null;
-    
+    private int roomNumber = 1;
+
 
     struct Square
     {
@@ -32,9 +33,14 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     //Size is hardcoded atm but we can change it later to a parameter
-    void CreateSquare(Vector3 position, float size)
+    void CreateRoom(Vector3 position, float size)
     {
+
+        GameObject grid = GameObject.FindWithTag("MapForeground");
+        GameObject room = new GameObject("Room " + roomNumber);
+        room.transform.parent = grid.transform;
         float halfSize = size / 2f;
+
         // Padding to leave some space from the outer border
         float padding = 0.5f; 
 
@@ -49,19 +55,18 @@ public class DungeonGenerator : MonoBehaviour
                 // Check if the current position is on the outer border
                 bool isOuterBorder = Mathf.Abs(i) >= halfSize - padding || Mathf.Abs(j) >= halfSize - padding;
 
-                //Place wallTilePrefab on outer border, else place filling-tiles
-                //Adjusting room position is not neccesary as we can simply block out all the other rooms from the player view and have them all next to each other
-                //GameObject prefabToPlace = isOuterBorder ? wallTilePrefab : emptyTilePrefab;
+                //If not, place a wall
                 if(isOuterBorder) {
-                    PlaceWall(posX, posY, posZ, wallTilePrefab);
+                    PlaceWall(posX, posY, posZ, wallTilePrefab, room);
                 }
                 else 
                 {
-                    //Need to convert here, -0.5 is needed because else the placement is messy
+                    //Else, place filling for the room
                     PlaceTile((int)(posX-0.5), (int)(posY-0.5), (int)(posZ-0.5), tileToPlace[Random.Range(0,tileToPlace.Length)]);
                 }
             }
         }
+        roomNumber++;
     }
 
 void SpawnSquaresNextToEachOther(int amount, float size)
@@ -72,15 +77,15 @@ void SpawnSquaresNextToEachOther(int amount, float size)
     {
         Vector3 position = new Vector3(i * (size + gap), 0, 0);
         squares.Add(new Square { position = position });
-        CreateSquare(position, size);
+        CreateRoom(position, size);
     }
 }
 
 
-    void PlaceWall(float posX, float posY, float posZ, GameObject prefab)
+    void PlaceWall(float posX, float posY, float posZ, GameObject prefab, GameObject room)
     {
         Vector3 spawnPosition = new Vector3(posX, posY, posZ);
-        Instantiate(prefab, spawnPosition, Quaternion.identity);
+        Instantiate(prefab, spawnPosition, Quaternion.identity, room.transform);
     }
 
      void PlaceTile(int posX, int posY, int posZ, TileBase tile)
