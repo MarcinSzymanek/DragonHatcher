@@ -12,10 +12,11 @@ public class DungeonGenerator : MonoBehaviour
     // - Refactor code so that we parameterize most stuff such as size and room-count
     
     public GameObject wallTilePrefab = null;
-    public GameObject emptyTilePrefab = null;
     public Tilemap tileMap = null;
     public TileBase[] tileToPlace = null;
     private int roomNumber = 1;
+    private Transform wallParentTf_;
+    public GameObject wallParent;
 
 
     struct Square
@@ -25,6 +26,9 @@ public class DungeonGenerator : MonoBehaviour
 
     List<Square> squares = new List<Square>();
 
+    void Awake() {
+        wallParentTf_ = wallParent.transform;
+    }
     void Start()
     {
         //Generating several rooms next to each other
@@ -35,10 +39,8 @@ public class DungeonGenerator : MonoBehaviour
     //Size is hardcoded atm but we can change it later to a parameter
     void CreateRoom(Vector3 position, float size)
     {
-
-        GameObject grid = GameObject.FindWithTag("MapForeground");
         GameObject room = new GameObject("Room " + roomNumber);
-        room.transform.parent = grid.transform;
+        room.transform.parent = wallParentTf_;
         float halfSize = size / 2f;
 
         // Padding to leave some space from the outer border
