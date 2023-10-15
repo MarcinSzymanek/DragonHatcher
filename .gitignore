@@ -6,5 +6,11 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+/Assets/Plugins/
+/Assets/Plugins.meta
+/Assets/Scenes/Test/
 *.sln
 *.csproj
+/ProjectSettings
+/.vs/DragonHatcher/FileContentIndex
+/.vs/DragonHatcher/v17
