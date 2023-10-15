@@ -69,15 +69,15 @@ public class DungeonGenerator : MonoBehaviour
         roomNumber++;
     }
 
-void SpawnSquaresNextToEachOther(int amount, float size)
-{
-    float gap = 5f;
+    void SpawnSquaresNextToEachOther(int amount, float size)
+    {
+        float gap = 5f;
 
     for (int i = 0; i < amount; i++)
     {
         Vector3 position = new Vector3(i * (size + gap), 0, 0);
         squares.Add(new Square { position = position });
-        CreateRoom(position, size);
+        CreateSquare(position, size);
     }
 }
 
