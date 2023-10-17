@@ -3,48 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class Spawner : MonoBehaviour
+public class ResourceSpawner : Spawner, IResourceSpawner
 {
-	public GameObject[] objectPool;
-    
-	public int countMax = 10;
+	int maxResCount_ = 10;
 
-	private int totalResource = 0;
-
-	void Awake(){
-		totalResource = 0;
-	}
-
-	public GameObject Spawn(int index, Vector3 position){
-		var newobj = Instantiate(objectPool[index], position, Quaternion.identity);
-		PickableItem item = newobj.GetComponent<PickableItem>();
-		item.Count = Random.Range(0, countMax);
-		totalResource += item.Count;
-		return newobj;
+	public void SetMaxResource(int count){
+		maxResCount_ = count;
 	}
 	
-	public GameObject Spawn(int index, Vector3 position, Transform parent){
-		var newobj = Instantiate(objectPool[index], position, Quaternion.identity, parent);
-		PickableItem item = newobj.GetComponent<PickableItem>();
-		item.Count = Random.Range(0, countMax);
-		totalResource += item.Count;
-		return newobj;
+	void Awake(){
+		Spawn(0, new Vector3(1.5f, 1.5f, 0f));
+	}
+	
+	public override GameObject Spawn(int index, Vector3 position){
+		var obj = base.Spawn(index, position);
+		PickableItem item = obj.GetComponent<PickableItem>();
+		item.Count = Random.Range(1, maxResCount_);
+		return obj;
+	}
+	
+	public override GameObject Spawn(int index, Vector3 position, Transform parent){
+		var obj = base.Spawn(index, position);
+		PickableItem item = obj.GetComponent<PickableItem>();
+		item.Count = Random.Range(1, maxResCount_);
+		return obj;
 	}
 }
 
-// Spawn the last resource in the list at the center of scene
-[CustomEditor(typeof(Spawner))]
-public class CustomButton : Editor
-{
-	public override void OnInspectorGUI()
-	{
-		DrawDefaultInspector();
-
-		Spawner myScript = (Spawner)target;
-		if (GUILayout.Button("Spawn"))
-		{
-			myScript.Spawn(myScript.objectPool.Length - 1, new Vector3(0, 0, 0));
-		}
-	}
-
-}

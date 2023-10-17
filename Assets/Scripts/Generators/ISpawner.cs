@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface ISpawner
 {
-	GameObject Spawn(Vector3 position);
-	GameObject Spawn(Vector3 position, Transform parent);
+	GameObject Spawn(int idx, Vector3 position);
+	GameObject Spawn(int idx, Vector3 position, Transform parent);
 }
