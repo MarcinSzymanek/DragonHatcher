@@ -107,7 +107,6 @@ public class Movement : MonoBehaviour
 	public void Move(){
 		if(dirx_ == 0 && diry_ == 0) {
 			anim_.SetBool("IsMoving", false);
-			anim_.SetTrigger("TriggerStop");
 			return;
 		}
 		
