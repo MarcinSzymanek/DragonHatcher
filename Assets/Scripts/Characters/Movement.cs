@@ -41,6 +41,9 @@ public class Movement : MonoBehaviour
 		if(directionLock_) return;
 		dirx_ = dirx;
 		diry_ = diry;
+		anim_.SetFloat("dirx", dirx_);
+		anim_.SetFloat("diry", diry_);
+		
 	}
 	
 
@@ -104,6 +107,7 @@ public class Movement : MonoBehaviour
 	public void Move(){
 		if(dirx_ == 0 && diry_ == 0) {
 			anim_.SetBool("IsMoving", false);
+			anim_.SetTrigger("TriggerStop");
 			return;
 		}
 		
