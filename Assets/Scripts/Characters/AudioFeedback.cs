@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AudioFeedback : MonoBehaviour
 {
+	public bool randomize_pitch;
 	public AudioClip footstep1;
 	public AudioClip footstep2;
 	private AudioSource audios_;
@@ -26,7 +27,9 @@ public class AudioFeedback : MonoBehaviour
 		if(cycle > 1){
 			cycle = 0;
 		}
-		setNewPitch();
+		if(randomize_pitch){
+			setNewPitch();
+		} 
 	}
 	
 	void setNewPitch(){
