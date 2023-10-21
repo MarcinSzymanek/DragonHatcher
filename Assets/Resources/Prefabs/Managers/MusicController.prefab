@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &4779702602190705938
 AudioSource:
@@ -141,4 +141,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68d1d10412c3384f94a59f682c3b973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playMusic: 1
+  playMusic: 0
