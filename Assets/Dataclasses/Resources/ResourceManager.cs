@@ -9,6 +9,9 @@ public class ResourceManager : MonoBehaviour
 {
 	public static ResourceManager instance {get; private set;}
 	private static Dictionary<ResourceID, string> res_path_dict;
+	private AudioSource audios_;
+	
+	private float[] pitch_vals = {1f, 0.9f, 0.8f, 0.7f, 0.5f};
 	
 	[SerializeReference]
 	List<ResourceSO> res_list;
@@ -25,6 +28,7 @@ public class ResourceManager : MonoBehaviour
         else
         {
 	        instance = this;
+	        audios_ = GetComponent<AudioSource>();
 	        LoadData();
         }
     }
@@ -66,6 +70,8 @@ public class ResourceManager : MonoBehaviour
 		Debug.Log("Current: " + session_store_[id]);
 		session_store_[id] += count;
 		resource_updated?.Invoke(id, session_store_[id]);
+		audios_.PlayOneShot(audios_.clip);
+		audios_.pitch = pitch_vals[Random.Range(0, 4)];
 	}
 	
 	public void Reduce(ResourceID id, int count){
