@@ -23,7 +23,6 @@ public class AddHoverText : MonoBehaviour
     }
     
 	public void SetText(string text) {
-		Debug.Log("Setting text!!");
 		textComponent_.text = text;
 	}
 

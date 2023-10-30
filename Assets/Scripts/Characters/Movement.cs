@@ -41,6 +41,9 @@ public class Movement : MonoBehaviour
 		if(directionLock_) return;
 		dirx_ = dirx;
 		diry_ = diry;
+		anim_.SetFloat("dirx", dirx_);
+		anim_.SetFloat("diry", diry_);
+		
 	}
 	
 
