@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5329520115332041430}
   - component: {fileID: 4018339312538438945}
   - component: {fileID: 7915353604427868930}
-  - component: {fileID: 2011149842237212625}
+  - component: {fileID: 6441596180626113164}
   m_Layer: 0
   m_Name: Ice-shard
   m_TagString: Untagged
@@ -160,7 +160,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.9923236, y: 3.2}
   m_EdgeRadius: 0
---- !u!114 &2011149842237212625
+--- !u!114 &6441596180626113164
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
