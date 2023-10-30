@@ -21,15 +21,15 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -2113072524, guid: 756f4fe78ead03248976afe626886057, type: 3}
+      value: {fileID: 1512819691, guid: 505c3fa0e1a54c243878340c13512cd7, type: 3}
     - time: 0.13333334
-      value: {fileID: -606040225, guid: 756f4fe78ead03248976afe626886057, type: 3}
+      value: {fileID: -1016069542, guid: 505c3fa0e1a54c243878340c13512cd7, type: 3}
     - time: 0.26666668
-      value: {fileID: 752979407, guid: 756f4fe78ead03248976afe626886057, type: 3}
+      value: {fileID: -1105736565, guid: 505c3fa0e1a54c243878340c13512cd7, type: 3}
     - time: 0.4
-      value: {fileID: -287686629, guid: 756f4fe78ead03248976afe626886057, type: 3}
+      value: {fileID: -1911065097, guid: 505c3fa0e1a54c243878340c13512cd7, type: 3}
     - time: 0.53333336
-      value: {fileID: -1044892150, guid: 756f4fe78ead03248976afe626886057, type: 3}
+      value: {fileID: 1512819691, guid: 505c3fa0e1a54c243878340c13512cd7, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -52,11 +52,11 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -2113072524, guid: 756f4fe78ead03248976afe626886057, type: 3}
-    - {fileID: -606040225, guid: 756f4fe78ead03248976afe626886057, type: 3}
-    - {fileID: 752979407, guid: 756f4fe78ead03248976afe626886057, type: 3}
-    - {fileID: -287686629, guid: 756f4fe78ead03248976afe626886057, type: 3}
-    - {fileID: -1044892150, guid: 756f4fe78ead03248976afe626886057, type: 3}
+    - {fileID: 1512819691, guid: 505c3fa0e1a54c243878340c13512cd7, type: 3}
+    - {fileID: -1016069542, guid: 505c3fa0e1a54c243878340c13512cd7, type: 3}
+    - {fileID: -1105736565, guid: 505c3fa0e1a54c243878340c13512cd7, type: 3}
+    - {fileID: -1911065097, guid: 505c3fa0e1a54c243878340c13512cd7, type: 3}
+    - {fileID: 1512819691, guid: 505c3fa0e1a54c243878340c13512cd7, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

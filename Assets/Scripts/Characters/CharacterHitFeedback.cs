@@ -9,21 +9,24 @@ public class CharacterHitFeedback : MonoBehaviour
 	// Locker locker_;
 	Animator anim_;
 	Movement move_;
-	float startMaskStrength_ = 0.8f;
+	AudioSource audio_;
+	float startMaskStrength_ = 0.1f;
 	float maskStrength_;
 	
 	[field: SerializeField]
 	public float FlashFalloffSpeed{get; set;}
 	
-	const string maskName_ = "_MaskStrength";
+	const string maskName_ = "_FlashAmount";
 	Material mat_;
 	
 	void Awake(){
 		// GetComponent<TakeDamage>().HitEvent += OnHit;
 		
 		// locker_ = GetComponent<Locker>();
+		GetComponent<TakeDamage>().OnDamageTaken += OnHit;
 		move_ = GetComponent<Movement>();
 		anim_ = transform.Find("Model").GetComponent<Animator>();
+		audio_ = transform.Find("Hitbox").GetComponent<AudioSource>();
 	}
 	
     // Start is called before the first frame update
@@ -33,13 +36,14 @@ public class CharacterHitFeedback : MonoBehaviour
 		mat_ = spriteRend_.material;
     }
 
-	public void OnHit(object? sender, EventArgs args){
+	public void OnHit(int dmg){
 		ProcessHit();
 	}
 	
 	public void ProcessHit(){
 		Debug.Log("Process hit");
 		anim_.SetTrigger("Hit");
+		audio_.PlayOneShot(audio_.clip);
 		spriteRend_.material.SetFloat(maskName_, startMaskStrength_);
 		StartCoroutine(ReduceMask());
 		// VfxManager.Instance.InvokeHitStop();		
