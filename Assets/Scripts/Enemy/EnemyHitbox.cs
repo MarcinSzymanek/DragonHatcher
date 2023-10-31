@@ -15,6 +15,7 @@ public class EnemyHitbox : MonoBehaviour
 	}
     
 	private void OnTriggerStay2D(Collider2D collider){
+		Debug.Log("Damage hitbox");
 		if(currentGrace > 0) return;
 		currentGrace += gracePeriod;
 		TakeDamage tdamage = collider.transform.parent.GetComponent<TakeDamage>();
