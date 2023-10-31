@@ -118,7 +118,7 @@ Transform:
   - {fileID: 199858050907908300}
   - {fileID: 3267820914836234630}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6004404672642651635
 MonoBehaviour:
@@ -412,9 +412,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.2}
+  m_Offset: {x: 0, y: -0.17801964}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.2780196
 --- !u!114 &7431607756213639106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,7 +635,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.13}
+  m_Offset: {x: 0, y: -0.23764}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -646,7 +646,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.2}
+  m_Size: {x: 0.4, y: 0.2527528}
   m_EdgeRadius: 0
 --- !u!1001 &7294111320327453547
 PrefabInstance:

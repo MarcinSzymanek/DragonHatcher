@@ -239,6 +239,8 @@ GameObject:
   - component: {fileID: 3464664396773468477}
   - component: {fileID: 7893834810721719845}
   - component: {fileID: 3732726807582956351}
+  - component: {fileID: 2050282914240643403}
+  - component: {fileID: 4453358841371443413}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -262,7 +264,7 @@ Transform:
   - {fileID: 6273387112618772985}
   - {fileID: 1712231730325332727}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5057374331487044504
 MonoBehaviour:
@@ -354,6 +356,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <FlashFalloffSpeed>k__BackingField: 0.1
+--- !u!114 &2050282914240643403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6967782429068629415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f6a2ed8310a80429aaf7aec2e39bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2714237192674745623, guid: d35daecdbf6be434992b5c3a97a6ee01, type: 3}
+  firePoint: {fileID: 5542127636106361436}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  speed: 10
+--- !u!114 &4453358841371443413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6967782429068629415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f6a2ed8310a80429aaf7aec2e39bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2714237192674745623, guid: d35daecdbf6be434992b5c3a97a6ee01, type: 3}
+  firePoint: {fileID: 5542127636106361436}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  speed: 10
 --- !u!1 &8435144363798435266
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,10 +454,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.043053642, y: -0.2726724}
+  m_Offset: {x: 0.043053627, y: -0.21409273}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -430,7 +468,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.91389275, y: 0.45465517}
+  m_Size: {x: 0.91389275, y: 0.57181454}
   m_EdgeRadius: 0
 --- !u!82 &4057011065395871811
 AudioSource:

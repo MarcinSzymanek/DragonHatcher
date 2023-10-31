@@ -53,7 +53,7 @@ public class CharacterHitFeedback : MonoBehaviour
 	private IEnumerator ReduceMask(){
 		maskStrength_ = startMaskStrength_;
 		while(maskStrength_ > 0){
-			maskStrength_ -= 0.01f * FlashFalloffSpeed;
+			maskStrength_ -= 0.001f * FlashFalloffSpeed;
 			mat_.SetFloat(maskName_, maskStrength_);
 			yield return null;
 		}
