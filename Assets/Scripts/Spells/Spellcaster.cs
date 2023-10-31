@@ -7,10 +7,12 @@ public class Spellcaster : MonoBehaviour
 	public Spellbook spellbook;
 	public int maxSpells;
 	public SpellLogic[] spellSlots;
+	Animator anim_;
     
 	// Start is called before the first frame update
     void Start()
-    {
+	{
+		anim_ = GetComponentInChildren<Animator>();
 	    spellbook = GetComponentInChildren<Spellbook>();
 	    spellSlots = new SpellLogic[maxSpells];
 	    ReadySpell(0, 0);
@@ -29,10 +31,14 @@ public class Spellcaster : MonoBehaviour
 	}
 	
 	public void CastSpell(){
-		spellSlots[0].onCast.Invoke();
+		spellSlots[0].CastSpell();
+		anim_.SetTrigger("castSpell");
+		anim_.SetBool("casting", true);
 	}
 	
 	public void CastSpell(int slot){
-		spellSlots[slot].onCast.Invoke();
+		spellSlots[slot].CastSpell();
+		anim_.SetTrigger("castSpell");
+		anim_.SetBool("casting", true);
 	}
 }
