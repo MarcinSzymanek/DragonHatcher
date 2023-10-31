@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerAnimEvents : MonoBehaviour
 {
 	Animator anim_;
+	AudioFeedback audio_;
     // Start is called before the first frame update
     void Start()
-    {
+	{
+		audio_ = transform.Find("AudioFootsteps").GetComponent<AudioFeedback>();
 	    anim_ = GetComponent<Animator>();
     }
 
@@ -17,5 +19,9 @@ public class PlayerAnimEvents : MonoBehaviour
 	
 	public void OnIdleExit(){
 		anim_.SetFloat("idleIter", 0);
+	}
+	
+	public void PlayFootstepSound(){
+		audio_.PlayFootstep();
 	}
 }
