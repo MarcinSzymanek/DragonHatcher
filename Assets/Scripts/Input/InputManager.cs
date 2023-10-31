@@ -7,9 +7,10 @@ public class InputManager : MonoBehaviour
 {
 	PlayerInput input_;
 	GameObject controlled_;
+	Spellcaster caster_;
 	// Attack attackScript_;
 	
-	InputAction actionAttack;
+	InputAction actionCast;
 	InputAction actionGet;
 	InputAction actionMove;
 	
@@ -24,18 +25,19 @@ public class InputManager : MonoBehaviour
 	    moveScript_ = controlled_.GetComponent<Movement>();
 	    // attackScript_ = controlled_.GetComponent<Attack>();
 	    InputActionMap controlledMap = input_.actions.FindActionMap("Character");
-	    actionAttack = controlledMap.FindAction("Attack");
+	    actionCast = controlledMap.FindAction("Attack");
 	    actionGet = controlledMap.FindAction("Get");
 		actionMove = controlledMap.FindAction("Move");
 	    
 	    itemPicker_ = controlled_.GetComponent<ItemPicker>();
+	    caster_ = controlled_.GetComponent<Spellcaster>();
     }
 
 	
 	void Start()
 	{
 		actionGet.performed += OnGet;
-		actionAttack.performed += OnAttack;
+		actionCast.performed += OnCast;
     }
     
 	// Continuously read input from move action and change player movement based on that
@@ -49,8 +51,8 @@ public class InputManager : MonoBehaviour
 		//itemPicker_.OnPickup();
 	}
 	
-	void OnAttack(InputAction.CallbackContext context){
-		Debug.Log("Attack button!!!");
-		//attackScript_.InitiateAttack();		
+	
+	void OnCast(InputAction.CallbackContext context){
+		caster_.CastSpell();	
 	}
 }

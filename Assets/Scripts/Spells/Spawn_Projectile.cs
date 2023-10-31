@@ -9,20 +9,8 @@ public class Spawn_Projectile : MonoBehaviour
 	public LayerMask targetLayer;
 
     public float speed = 10f;
-	
-	void Start(){
-		
-	}
-	
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Shoot();
-        }
-    }
 
-    void Shoot()
+	public void Shoot()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;

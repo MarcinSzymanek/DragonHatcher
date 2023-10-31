@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 409993661435461350}
   - component: {fileID: 5154362259675903960}
   - component: {fileID: 6364104730838539335}
+  - component: {fileID: 1457296575589113144}
   m_Layer: 7
   m_Name: Slime
   m_TagString: Untagged
@@ -118,7 +119,7 @@ Transform:
   - {fileID: 199858050907908300}
   - {fileID: 3267820914836234630}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6004404672642651635
 MonoBehaviour:
@@ -203,6 +204,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52aaf9db76792a4409eee47a73783525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1457296575589113144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3974789886877665124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c198f1288f78d499ec7babd3206b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <FlashFalloffSpeed>k__BackingField: 0
 --- !u!1 &4266425780107662509
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3267820914836234630}
   - component: {fileID: 7088547261905728375}
+  - component: {fileID: 4941102447148562472}
   m_Layer: 10
   m_Name: Hitbox
   m_TagString: Untagged
@@ -270,6 +285,102 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.2}
   serializedVersion: 2
   m_Radius: 0.35
+--- !u!82 &4941102447148562472
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4266425780107662509}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4984793606010035071
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,6 +770,14 @@ PrefabInstance:
     - target: {fileID: 2420661955800115770, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: m_Name
       value: DamageHitbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918425535754093748, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 1535
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918425535754093748, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5721043954608749229, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: gracePeriod
