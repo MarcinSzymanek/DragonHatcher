@@ -41,13 +41,10 @@ public class Spawn_Projectile : MonoBehaviour
     
 	void setPrefabTarget(GameObject obj){
 		var col = obj.transform.GetChild(1).GetComponent<Collider2D>();
-		col.includeLayers += targetLayer;
-		col.excludeLayers -= targetLayer;
+		col.excludeLayers += targetLayer;
 		col = obj.transform.GetChild(0).GetComponent<Collider2D>();
-		col.includeLayers += targetLayer;
-		col.excludeLayers -= targetLayer;
+		col.excludeLayers += targetLayer;
 		var rb = obj.GetComponent<Rigidbody2D>();
-		rb.includeLayers += targetLayer;
-		rb.excludeLayers -= targetLayer;
+		rb.excludeLayers += targetLayer;
 	}
 }

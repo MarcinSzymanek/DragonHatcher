@@ -21,6 +21,7 @@ public class EnemyHitbox : MonoBehaviour
 		TakeDamage tdamage = collider.transform.parent.GetComponent<TakeDamage>();
 		if (tdamage != null)
 		{
+			Debug.Log("tdamage");
 			tdamage.TriggerTakeDamage(damageAmount);
 		}
         
