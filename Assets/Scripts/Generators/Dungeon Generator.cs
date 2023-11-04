@@ -17,7 +17,15 @@ public class DungeonGenerator : MonoBehaviour
     public TileBase[] tileToPlace = null;
     private int roomNumber = 1;
     private Transform wallParentTf_;
+
+    private Transform transformedSender;
+
+    private Transform transformedReceiver;
     public GameObject wallParent;
+    private GameObject player;
+
+    private Transform playerTransform;
+    private bool entranceTeleporterPlaced = false;
 
 
     struct Square
@@ -29,6 +37,7 @@ public class DungeonGenerator : MonoBehaviour
 
     void Awake() {
         wallParentTf_ = wallParent.transform;
+        player = GameObject.Find("Player");
     }
     void Start()
     {
@@ -38,11 +47,27 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     //Size is hardcoded atm but we can change it later to a parameter
+    //Teleportation logic:
+    //- When a room is created we need to create a sender and receiver teleporter at each entrance/exti
+    //- The first entrance is semi hardcoded as its the entrance into the actual dungeon itself
+    //- The First room exit needs to connect into the next room and also place the correct amount of teleporters
+    //- A teleporter and a receiver on each entrance and exit where they link respectively themselves
+
     void CreateRoom(Vector3 position, float size)
     {
+        playerTransform = player.transform;
         float acc = 0.5f;
-        bool teleporterPlaced = false;
         GameObject room = new GameObject("Room " + roomNumber);
+        GameObject initialTeleporter = null;
+        ObjectTeleportation script = null;
+
+        if(!entranceTeleporterPlaced) {
+            //Create the outer teleporter that we want to enter the dungeon in
+            //Currently hard-coded but we can change that for the dungeon entrance later on when integrating
+            initialTeleporter = PlaceTeleporter(-0.5f, -10.5f, 0f, doorPrefab, room);
+            script = AttachScriptAndCollider(initialTeleporter);
+            entranceTeleporterPlaced = true;
+        }
         room.transform.parent = wallParentTf_;
         float halfSize = size / 2f;
 
@@ -59,12 +84,34 @@ public class DungeonGenerator : MonoBehaviour
 
                 // Check if the current position is on the outer border
                 bool isOuterBorder = Mathf.Abs(i) >= halfSize - padding || Mathf.Abs(j) >= halfSize - padding;
+
                 //If not, place a wall
                 if(isOuterBorder) {
                     PlaceWall(posX, posY, posZ, wallTilePrefab, room);
-                    if(acc == size/2f && !teleporterPlaced && posY > 0) {
-                        PlaceTeleporterAndReceiver(posX, posY - 1, posZ, doorPrefab, room);
-                        teleporterPlaced = true;
+                     
+                    if(acc == size/2f && posY > 0) {
+                        GameObject sender = PlaceTeleporter(posX, posY - 1, posZ, doorPrefab, room);
+                        transformedSender = sender.transform; 
+                        
+                        ObjectTeleportation senderScript = AttachScriptAndCollider(sender);
+
+
+                    }
+                    if(acc == size/2f && posY < 0) {
+                        GameObject receiver = PlaceReceiver(posX, posY + 1, posZ, doorPrefab, room);
+                        transformedReceiver = receiver.transform;
+
+                        ObjectTeleportation receiverScript = AttachScriptAndCollider(receiver);
+                        
+                        
+                        if(roomNumber == 1) {
+                            script.setDestination(transformedReceiver);
+                            script.setPlayer(player);
+                            script.setObjectToTeleport(playerTransform);
+                        }
+                        else {
+
+                        }
                     }
                 }
                 else 
@@ -81,16 +128,16 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     void SpawnSquaresNextToEachOther(int amount, float size)
-    {
+    {   
         float gap = 5f;
 
-    for (int i = 0; i < amount; i++)
-    {
+        for (int i = 0; i < amount; i++)
+        {
         Vector3 position = new Vector3(i * (size + gap), 0, 0);
         squares.Add(new Square { position = position });
         CreateRoom(position, size);
+        }
     }
-}
 
 
     void PlaceWall(float posX, float posY, float posZ, GameObject prefab, GameObject room)
@@ -105,32 +152,43 @@ public class DungeonGenerator : MonoBehaviour
         tileMap.SetTile(new Vector3Int(posX, posY, posZ), tile);
     }
 
-    void PlaceTeleporterAndReceiver(float posX, float posY, float posZ, GameObject prefab, GameObject room)
+    GameObject PlaceReceiver(float posX, float posY, float posZ, GameObject prefab, GameObject room)
+    {
+        //Place Receiver
+        Vector3 spawnPosition = new Vector3(posX, posY, posZ);
+        GameObject receiver = Instantiate(prefab, spawnPosition, Quaternion.identity, room.transform);
+
+        return receiver;
+    }
+
+
+    GameObject PlaceTeleporter(float posX, float posY, float posZ, GameObject prefab, GameObject room) 
     {
         //Place Sender
         Vector3 spawnPosition = new Vector3(posX, posY, posZ);
         GameObject sender = Instantiate(prefab, spawnPosition, Quaternion.identity, room.transform);
 
-        //Attach collider to the door
-        BoxCollider2D collider = sender.AddComponent<BoxCollider2D>();
+        return sender;
+    }
+
+    ObjectTeleportation AttachScriptAndCollider(GameObject objectToAttach) {
+         //Attach collider to the door
+        BoxCollider2D collider = objectToAttach.AddComponent<BoxCollider2D>();
         collider.isTrigger = true;
 
-        //Place Receiver
-        GameObject receiver = Instantiate(prefab, new Vector3(10.5f, 1.5f, 0), Quaternion.identity);
-
         //Attach the teleporter script
-        ObjectTeleportation teleportScript = sender.AddComponent<ObjectTeleportation>();
+        ObjectTeleportation teleportScript = objectToAttach.AddComponent<ObjectTeleportation>();
+        return teleportScript;
+    }
 
-        //Get the player
-        GameObject player = GameObject.Find("Player");
-        Transform playerToTeleport = player.transform;
-
-        //Get the objects for the script
-        Transform destination = receiver.transform;
-
-        //Attaching the objects to the script
+     void AttachObjectsRespectively(ObjectTeleportation teleportScript, GameObject player, Transform destination, Transform objectToTeleport) 
+    {
         teleportScript.setPlayer(player);
         teleportScript.setDestination(destination);
-        teleportScript.setObjectToTeleport(playerToTeleport);
-    }  
+        teleportScript.setObjectToTeleport(objectToTeleport);
+    } 
+
+
+
+
 }
