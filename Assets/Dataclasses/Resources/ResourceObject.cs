@@ -5,7 +5,9 @@ using System;
 
 public enum ResourceID{
     wood,
-    stone,
+	stone,
+	fire,
+	air,
     gold
 }
 [CreateAssetMenu(fileName="Resource", menuName = "ScriptableObjects/Resource")]
