@@ -19,4 +19,19 @@ public class Math2d
 		Vector2 dir = new Vector2(targetPos.x - x, targetPos.y - y);
 		return dir;
 	}
+	
+	public static float Rad2Deg(float rad){
+		return (rad * 180)/Mathf.PI;
+	}
+	
+	public static float Deg2Rad(float deg){
+		return (deg * Mathf.PI)/180;
+	}
+	
+	public static Vector2 RotVector(Vector2 vector, float degrees){
+		float rad = Deg2Rad(degrees);
+		float x = vector.x * Mathf.Cos(rad) - vector.y * Mathf.Sin(rad);
+		float y = vector.x * Mathf.Sin(rad) + vector.y * Mathf.Cos(rad);
+		return new Vector2(x, y);		
+	}
 }
