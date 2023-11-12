@@ -8,11 +8,14 @@ public class AIRangedSimple : MonoBehaviour
 	Movement move_;
 	Animator anim_;
 	AIScan scanner_;
+	AudioSource audio_;
+	Spawn_Projectile projectileSpawner_;
 	[field: SerializeField]
 	public float AttackDistance{get; set;}
 	
 	Vector2? moveTarget_ = null;
 	Transform? attackTarget_ = null;
+	Transform firepoint_;
 	Transform t_;
 	Transform attackMarker_;
 	float distance_to_target_;
@@ -53,6 +56,8 @@ public class AIRangedSimple : MonoBehaviour
 	    move_ = GetComponent<Movement>();
 	    anim_ = GetComponentInChildren<Animator>();
 	    scanner_ = GetComponentInChildren<AIScan>();
+	    audio_ = transform.Find("attackAudio").GetComponent<AudioSource>();
+	    projectileSpawner_ = GetComponent<Spawn_Projectile>();
 	    
 	    GetComponentInChildren<EnemyAnimEvents>().arrowReleased += OnArrowRelease;
 	    GetComponentInChildren<EnemyAnimEvents>().attackFinished += OnAttackFinished;
@@ -60,6 +65,7 @@ public class AIRangedSimple : MonoBehaviour
     	
     	t_ = transform;
     	attackMarker_ = t_.Find("AttackMarker");
+    	firepoint_ = t_.Find("firePoint");
     	
     	range_far = AttackDistance * 0.85f;
     	range_mid = AttackDistance * 0.65f;
@@ -75,7 +81,6 @@ public class AIRangedSimple : MonoBehaviour
 	}
 	
 	public void OnAttackFinished(object? s, EventArgs args){
-		Debug.Log("Animation attack finished");
 		animFinished_ = true;
 	}
     
@@ -89,12 +94,10 @@ public class AIRangedSimple : MonoBehaviour
 	}
 	
 	private void pickAction_(){
-		Debug.Log("PickAction");
 		switch (state_)
 		{
 		case State.attack:
 			InitiateAttack();
-			Debug.Log("Attack INVOKED!");
 			break;
 		
 		case State.attack_finished:
@@ -102,7 +105,6 @@ public class AIRangedSimple : MonoBehaviour
 			distance_to_target_ = Math2d.CalcDistance(t_.position, attackTarget_.position);
 				
 			StartCoroutine(Reposition());
-			Debug.Log("REPOSITION INVOKED");
 			break;
 	
 		case State.reposition:
@@ -113,7 +115,6 @@ public class AIRangedSimple : MonoBehaviour
 				break;
 			}
 			int dice = UnityEngine.Random.Range(1, 7);
-			print("Dice: " + dice.ToString());
 			if(dice > 4){
 				StartCoroutine(Reposition());
 				break;
@@ -126,8 +127,6 @@ public class AIRangedSimple : MonoBehaviour
 		default:
 			break;
 		}
-
-		Debug.Log("pickAction finished");
 	} 
 	
 	// Calculate direction to move to target
@@ -168,8 +167,15 @@ public class AIRangedSimple : MonoBehaviour
 		var move_distance = Math2d.CalcDistance(t_.position, target);
 		move_.ChangeDirection(move_dir.x, move_dir.y);
 		float threshold = 0.02f;
+		float prev_move_distance;
 		while(move_distance > threshold){
+			prev_move_distance = move_distance;
 			move_distance = Math2d.CalcDistance(t_.position, target);
+			if(move_distance > prev_move_distance){
+				// Recalculate move
+				move_dir = pickDirection_();
+				target = (Vector2) t_.position + move_dir;
+			}
 			yield return new WaitForFixedUpdate();
 		}
 		move_.Stop();
@@ -291,27 +297,30 @@ public class AIRangedSimple : MonoBehaviour
 	// Follow the target direction, release when animation event happens
 	private IEnumerator RangedAttackRoutine(System.Action callback){
 		anim_.Play("Attack");
-		Debug.Log("Right after play");
+		audio_.PlayOneShot(audio_.clip);
 		float wait_time = 0.2f;
+		Vector2 dir = new Vector2(0, 0);
+		float angle = 0;
+		// "Charge" and lock in on target
 		while(attackTrigger_ == false){
-			// Attack logic will go here
-			// Probably just move some cursor and launch projectile in callback
-			Vector2 dir = Math2d.CalcDirection(t_.position, attackTarget_.position);
-			float angle = Math2d.GetDegreeFromVector(dir, 90);
-			Debug.Log("Angle: " + angle.ToString());
+			dir = Math2d.CalcDirection(t_.position, attackTarget_.position);
+			angle = Math2d.GetDegreeFromVector(dir, 90);
 			attackMarker_.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 			attackMarker_.localPosition = dir;
+			firepoint_.localPosition = dir;
 			wait_time -= 0.02f;
 			yield return new WaitForSeconds(wait_time);
 		}
+		
+		// Launch arrow
 		attackMarker_.gameObject.SetActive(false);
+		projectileSpawner_.Shoot(new VectorTarget(t_.position, dir));
 		
 		while(animFinished_ == false){
 			yield return new WaitForFixedUpdate();
 		}
 		
 		state_ = State.attack_finished;
-		Debug.Log("Archer coroutine finished");
 		pickAction_();
 	}
 }

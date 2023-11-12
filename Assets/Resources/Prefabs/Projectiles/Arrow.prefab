@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f7bbad2cb8952d5429cb9cb286175a06, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -106,10 +106,10 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 2039
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -162,7 +162,7 @@ BoxCollider2D:
     m_Bits: 8
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 2039
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -172,14 +172,14 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.020688038, y: -0.22530276}
+  m_Offset: {x: -0.14999312, y: -0.08033875}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -190,7 +190,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.066521205, y: 2.3452063}
+  m_Size: {x: 2.817821, y: 0.1482845}
   m_EdgeRadius: 0
 --- !u!114 &3075159520341097517
 MonoBehaviour:
@@ -222,15 +222,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4918425535754093748, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: m_Radius
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4918425535754093748, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: m_Offset.x
-      value: 0.10722533
+      value: 1.68
       objectReference: {fileID: 0}
     - target: {fileID: 4918425535754093748, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: m_Offset.y
-      value: 0.1
+      value: -1.3
       objectReference: {fileID: 0}
     - target: {fileID: 4918425535754093748, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: m_IsTrigger
@@ -238,7 +238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4918425535754093748, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4918425535754093748, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: m_IncludeLayers.m_Bits
@@ -250,6 +250,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5721043954608749229, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5721043954608749229, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
+      propertyPath: destroyOnDamage
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7493965930957624231, guid: d9b31fd263eda9d469934be88c2795af, type: 3}

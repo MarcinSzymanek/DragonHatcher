@@ -9,7 +9,7 @@ public class EnemyHitbox : MonoBehaviour
 	private int currentGrace = 0;
 	public int gracePeriod;
 	public List<TakeDamage> objDamage;
-	
+	public bool destroyOnDamage;
 	void Start(){
 		objDamage = new List<TakeDamage>();
 	}
@@ -20,14 +20,23 @@ public class EnemyHitbox : MonoBehaviour
 			return;
 		}
 		if(objDamage.Count == 0) return;
-		
+		bool dealtDamage = false;
 		foreach(TakeDamage d in objDamage){
+			if(d == null) continue;
+			if(objDamage.Count == 0) return;
 			d.TriggerTakeDamage(damageAmount);
+			dealtDamage = true;}
+		
+		if(dealtDamage && destroyOnDamage){
+			transform.parent.gameObject.SetActive(false);
 		}
+		
+		if(objDamage.Count == 0) return;
 		currentGrace = gracePeriod;
 	}
     
 	private void OnTriggerEnter2D(Collider2D collider){
+		Debug.Log("Collided with: " + collider.gameObject.name);
 		TakeDamage tdamage = collider.transform.parent.GetComponent<TakeDamage>();
 		if(objDamage.Contains(tdamage)) return;
 		objDamage.Add(tdamage);

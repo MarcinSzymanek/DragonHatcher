@@ -45,10 +45,10 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 1536
+    m_Bits: 512
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 447
+    m_Bits: 7679
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -119,7 +119,7 @@ Transform:
   - {fileID: 199858050907908300}
   - {fileID: 3267820914836234630}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6004404672642651635
 MonoBehaviour:
@@ -771,9 +771,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: DamageHitbox
       objectReference: {fileID: 0}
+    - target: {fileID: 2420661955800115770, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4918425535754093748, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
-      value: 1535
+      value: 1152
       objectReference: {fileID: 0}
     - target: {fileID: 4918425535754093748, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: m_IncludeLayers.m_Bits
