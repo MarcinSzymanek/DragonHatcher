@@ -59,7 +59,6 @@ public class AIMeleeSimple : MonoBehaviour
 			moveTarget = (Vector2)(attackTarget.position);
 			if(Math2d.CalcDistance(t_.position, moveTarget) < AttackDistance) direction = new Vector2(0, 0);
 			else{
-				Debug.Log("Visualize");
 				direction = Math2d.CalcDirection(t_.position, moveTarget).normalized;
 				MathVisualise.DrawArrow(transform, direction);
 			}

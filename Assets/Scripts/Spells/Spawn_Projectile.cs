@@ -22,7 +22,7 @@ public class Spawn_Projectile : MonoBehaviour
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         rb.velocity = shootDirection * speed;
 
-        float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg - 90f;
+	    float angle = Math2d.GetDegreeFromVector(shootDirection, 90f);
         projectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
     }
