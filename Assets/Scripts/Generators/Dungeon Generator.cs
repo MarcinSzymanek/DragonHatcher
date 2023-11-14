@@ -23,6 +23,8 @@ public class DungeonGenerator : MonoBehaviour
     private Transform transformedReceiver;
     public GameObject wallParent;
     private GameObject player;
+    private ObjectTeleportation receiverScript;
+    private ObjectTeleportation senderScript;
 
     private Transform playerTransform;
     private bool entranceTeleporterPlaced = false;
@@ -43,6 +45,9 @@ public class DungeonGenerator : MonoBehaviour
         player = GameObject.Find("Player");
         listOfReceivers = new List<GameObject>();
         listOfSenders = new List<GameObject>();
+        receiverScript = doorPrefab.GetComponent<ObjectTeleportation>();
+        senderScript = doorPrefab.GetComponent<ObjectTeleportation>();
+
     }
     void Start()
     {
@@ -60,8 +65,6 @@ public class DungeonGenerator : MonoBehaviour
 
     void CreateRoom(Vector3 position, float size)
     {
-        ObjectTeleportation senderScript = null;
-        ObjectTeleportation receiverScript = null;
         playerTransform = player.transform;
         float acc = 0.5f;
         GameObject room = new GameObject("Room " + roomNumber);
@@ -115,29 +118,13 @@ public class DungeonGenerator : MonoBehaviour
         //Second receiver <- First Sender
         //i <- i+1 (j)
         roomNumber++;
-        for(int i = 0; i < listOfReceivers.Count; i++) {
-            receiverScript = AttachScriptAndCollider(listOfReceivers[i]);
-            receiverScript.setPlayer(player);
-            receiverScript.setObjectToTeleport(player.transform);
-            for (int k = 0; k < listOfSenders.Count; k++) {
-                receiverScript.setDestination(listOfSenders[k].transform);
-            }
-        }
-        for (int i = 0; i < listOfSenders.Count; i++) {
-            senderScript = AttachScriptAndCollider(listOfSenders[i]);
-            senderScript.setPlayer(player);
-            senderScript.setObjectToTeleport(player.transform);
-            for (int j = 1; j < listOfReceivers.Count; j++) {
-                if(j == 1)
-                {
-                    senderScript.setDestination(listOfReceivers[0].transform);
-                } 
-                else 
-                {   
-                    senderScript.setDestination(listOfReceivers[j].transform);
-                }
-            }
-        }
+        receiverScript.setObjectToTeleport(player.transform);
+        receiverScript.setPlayer(player);
+        senderScript.setPlayer(player);
+        senderScript.setObjectToTeleport(player.transform);
+
+
+        
     }
 
     void SpawnSquaresNextToEachOther(int amount, float size)
