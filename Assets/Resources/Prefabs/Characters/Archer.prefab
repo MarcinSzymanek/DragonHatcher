@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 6746081835510595862}
   - component: {fileID: 966573452975387240}
   m_Layer: 7
-  m_Name: attackAudio
+  m_Name: mainAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -531,6 +531,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2c198f1288f78d499ec7babd3206b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clips_:
+  - {fileID: 8300000, guid: 8646687070d899544b26ebc6bf0d3d8d, type: 3}
+  - {fileID: 8300000, guid: 7463e458ca13b6e4d8a32b1d390600b8, type: 3}
   <FlashFalloffSpeed>k__BackingField: 4
 --- !u!114 &6438790255493618687
 MonoBehaviour:
@@ -773,7 +776,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.875
   m_Pitch: 1
   Loop: 0
   Mute: 0
