@@ -56,7 +56,7 @@ public class AIRangedSimple : MonoBehaviour
 	    move_ = GetComponent<Movement>();
 	    anim_ = GetComponentInChildren<Animator>();
 	    scanner_ = GetComponentInChildren<AIScan>();
-	    audio_ = transform.Find("attackAudio").GetComponent<AudioSource>();
+	    audio_ = transform.Find("mainAudio").GetComponent<AudioSource>();
 	    projectileSpawner_ = GetComponent<Spawn_Projectile>();
 	    
 	    GetComponentInChildren<EnemyAnimEvents>().arrowReleased += OnArrowRelease;

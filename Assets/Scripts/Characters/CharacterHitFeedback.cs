@@ -13,6 +13,8 @@ public class CharacterHitFeedback : MonoBehaviour
 	float startMaskStrength_ = 0.1f;
 	float maskStrength_;
 	
+	public AudioClip[] clips_;
+	
 	[field: SerializeField]
 	public float FlashFalloffSpeed{get; set;}
 	
@@ -43,7 +45,7 @@ public class CharacterHitFeedback : MonoBehaviour
 	public void ProcessHit(){
 		Debug.Log("Process hit");
 		anim_.SetTrigger("Hit");
-		audio_.PlayOneShot(audio_.clip);
+		if(clips_.Length > 0) audio_.PlayOneShot(clips_[UnityEngine.Random.Range(0, clips_.Length)]);
 		spriteRend_.material.SetFloat(maskName_, startMaskStrength_);
 		StartCoroutine(ReduceMask());
 		// VfxManager.Instance.InvokeHitStop();		
