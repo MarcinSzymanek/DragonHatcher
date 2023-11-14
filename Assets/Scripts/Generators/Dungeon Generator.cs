@@ -26,6 +26,8 @@ public class DungeonGenerator : MonoBehaviour
 
     private Transform playerTransform;
     private bool entranceTeleporterPlaced = false;
+    public List<GameObject> listOfReceivers;
+    public List<GameObject> listOfSenders;
 
 
     struct Square
@@ -35,9 +37,12 @@ public class DungeonGenerator : MonoBehaviour
 
     List<Square> squares = new List<Square>();
 
+
     void Awake() {
         wallParentTf_ = wallParent.transform;
         player = GameObject.Find("Player");
+        listOfReceivers = new List<GameObject>();
+        listOfSenders = new List<GameObject>();
     }
     void Start()
     {
@@ -55,6 +60,8 @@ public class DungeonGenerator : MonoBehaviour
 
     void CreateRoom(Vector3 position, float size)
     {
+        ObjectTeleportation senderScript = null;
+        ObjectTeleportation receiverScript = null;
         playerTransform = player.transform;
         float acc = 0.5f;
         GameObject room = new GameObject("Room " + roomNumber);
@@ -65,7 +72,7 @@ public class DungeonGenerator : MonoBehaviour
             //Create the outer teleporter that we want to enter the dungeon in
             //Currently hard-coded but we can change that for the dungeon entrance later on when integrating
             initialTeleporter = PlaceTeleporter(-0.5f, -10.5f, 0f, doorPrefab, room);
-            script = AttachScriptAndCollider(initialTeleporter);
+            listOfSenders.Add(initialTeleporter);
             entranceTeleporterPlaced = true;
         }
         room.transform.parent = wallParentTf_;
@@ -91,27 +98,9 @@ public class DungeonGenerator : MonoBehaviour
                      
                     if(acc == size/2f && posY > 0) {
                         GameObject sender = PlaceTeleporter(posX, posY - 1, posZ, doorPrefab, room);
-                        transformedSender = sender.transform; 
-                        
-                        ObjectTeleportation senderScript = AttachScriptAndCollider(sender);
-
-
                     }
                     if(acc == size/2f && posY < 0) {
-                        GameObject receiver = PlaceReceiver(posX, posY + 1, posZ, doorPrefab, room);
-                        transformedReceiver = receiver.transform;
-
-                        ObjectTeleportation receiverScript = AttachScriptAndCollider(receiver);
-                        
-                        
-                        if(roomNumber == 1) {
-                            script.setDestination(transformedReceiver);
-                            script.setPlayer(player);
-                            script.setObjectToTeleport(playerTransform);
-                        }
-                        else {
-
-                        }
+                        GameObject receiver = PlaceReceiver(posX, posY + 1, posZ, doorPrefab, room);        
                     }
                 }
                 else 
@@ -122,9 +111,33 @@ public class DungeonGenerator : MonoBehaviour
             }
             acc++;
         }
+        //Do the connection of the teleporters here
+        //Second receiver <- First Sender
+        //i <- i+1 (j)
         roomNumber++;
-        //Need to make it so that this is not hardcoded anymore
-        //PlaceTeleporter(0.5f, 8.5f, 0f, doorPrefab, room);
+        for(int i = 0; i < listOfReceivers.Count; i++) {
+            receiverScript = AttachScriptAndCollider(listOfReceivers[i]);
+            receiverScript.setPlayer(player);
+            receiverScript.setObjectToTeleport(player.transform);
+            for (int k = 0; k < listOfSenders.Count; k++) {
+                receiverScript.setDestination(listOfSenders[k].transform);
+            }
+        }
+        for (int i = 0; i < listOfSenders.Count; i++) {
+            senderScript = AttachScriptAndCollider(listOfSenders[i]);
+            senderScript.setPlayer(player);
+            senderScript.setObjectToTeleport(player.transform);
+            for (int j = 1; j < listOfReceivers.Count; j++) {
+                if(j == 1)
+                {
+                    senderScript.setDestination(listOfReceivers[0].transform);
+                } 
+                else 
+                {   
+                    senderScript.setDestination(listOfReceivers[j].transform);
+                }
+            }
+        }
     }
 
     void SpawnSquaresNextToEachOther(int amount, float size)
@@ -157,17 +170,16 @@ public class DungeonGenerator : MonoBehaviour
         //Place Receiver
         Vector3 spawnPosition = new Vector3(posX, posY, posZ);
         GameObject receiver = Instantiate(prefab, spawnPosition, Quaternion.identity, room.transform);
-
+        listOfReceivers.Add(receiver);
         return receiver;
     }
-
 
     GameObject PlaceTeleporter(float posX, float posY, float posZ, GameObject prefab, GameObject room) 
     {
         //Place Sender
         Vector3 spawnPosition = new Vector3(posX, posY, posZ);
         GameObject sender = Instantiate(prefab, spawnPosition, Quaternion.identity, room.transform);
-
+        listOfSenders.Add(sender);
         return sender;
     }
 
@@ -180,15 +192,4 @@ public class DungeonGenerator : MonoBehaviour
         ObjectTeleportation teleportScript = objectToAttach.AddComponent<ObjectTeleportation>();
         return teleportScript;
     }
-
-     void AttachObjectsRespectively(ObjectTeleportation teleportScript, GameObject player, Transform destination, Transform objectToTeleport) 
-    {
-        teleportScript.setPlayer(player);
-        teleportScript.setDestination(destination);
-        teleportScript.setObjectToTeleport(objectToTeleport);
-    } 
-
-
-
-
 }
