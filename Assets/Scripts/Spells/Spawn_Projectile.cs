@@ -47,6 +47,8 @@ public class Spawn_Projectile : MonoBehaviour
 		col.gameObject.layer = layerInt_;
 	
 		col = obj.transform.GetChild(0).GetComponent<Collider2D>();
+		col.callbackLayers += targetLayer;
+		col.contactCaptureLayers += targetLayer;
 		col.gameObject.layer = layerInt_;
 		var rb = obj.GetComponent<Rigidbody2D>();
 	}

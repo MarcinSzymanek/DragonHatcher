@@ -423,6 +423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2c198f1288f78d499ec7babd3206b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clips_:
+  - {fileID: 8300000, guid: d8df0ec535e9ba54fb4fbde21aedf6e7, type: 3}
   <FlashFalloffSpeed>k__BackingField: 1
 --- !u!114 &6711520653642366815
 MonoBehaviour:
