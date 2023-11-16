@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Spellbook : MonoBehaviour
 {
-	private Dictionary<int, SpellLogic> heldSpells;
+	Dictionary<int, SpellLogic> heldSpells;
+	AudioSource audio_;
     // Start is called before the first frame update
 	void Awake()
-    {
+	{
+		audio_ = GetComponent<AudioSource>();
 	    heldSpells = new Dictionary<int, SpellLogic>();
 	    var spells = GetComponentsInChildren<SpellLogic>();
 	    foreach (SpellLogic s in spells){
@@ -21,4 +23,5 @@ public class Spellbook : MonoBehaviour
 		}
 		return null;
 	}
+	
 }

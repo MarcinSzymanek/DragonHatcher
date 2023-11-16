@@ -8,11 +8,13 @@ public class Spellcaster : MonoBehaviour
 	public int maxSpells;
 	public SpellLogic[] spellSlots;
 	Animator anim_;
+	AudioSource audio_;
     
 	// Start is called before the first frame update
     void Start()
 	{
 		anim_ = GetComponentInChildren<Animator>();
+		audio_ = transform.Find("Spellbook").GetComponent<AudioSource>();
 	    spellbook = GetComponentInChildren<Spellbook>();
 	    spellSlots = new SpellLogic[maxSpells];
 	    ReadySpell(0, 0);
@@ -31,13 +33,13 @@ public class Spellcaster : MonoBehaviour
 	}
 	
 	public void CastSpell(){
-		spellSlots[0].CastSpell();
-		anim_.SetTrigger("castSpell");
-		anim_.SetBool("casting", true);
+		CastSpell(0);
 	}
 	
 	public void CastSpell(int slot){
-		spellSlots[slot].CastSpell();
+		var spell = spellSlots[slot];
+		audio_.PlayOneShot(spell.GetAudioClip());
+		spell.CastSpell();
 		anim_.SetTrigger("castSpell");
 		anim_.SetBool("casting", true);
 	}
