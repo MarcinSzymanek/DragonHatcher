@@ -120,7 +120,7 @@ public class DungeonGenerator : MonoBehaviour
             }
             else {
                 listOfScripts[i].setDestination(listOfTeleporters[i+1]);
-                listOfScripts[i-1].setDestination(listOfTeleporters[i]); 
+                listOfScripts[i+1].setDestination(listOfTeleporters[i]); 
             }
         }      
     }
