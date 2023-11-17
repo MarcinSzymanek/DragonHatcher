@@ -111,18 +111,33 @@ public class DungeonGenerator : MonoBehaviour
         //Second receiver <- First Sender
         //i <- i+1 (j)
         roomNumber++;
-        for(int i = 0; i < listOfScripts.Count - 1; i++) {
+        if (listOfTeleporters.Count >= 2) {
+        for (int i = 0; i < listOfTeleporters.Count - 1; i++) {
             listOfScripts[i].setPlayer(player);
             listOfScripts[i].setObjectToTeleport(playerTransform);
-            if (i == 0 || i == 1) {
-                listOfScripts[i].setDestination(listOfTeleporters[1]); 
-                listOfScripts[1].setDestination(listOfTeleporters[0]);
+            if (i % 2 == 0) {
+                // Even-numbered teleporters teleport into rooms (forward)
+                listOfScripts[i].setDestination(listOfTeleporters[(i + 1) % listOfTeleporters.Count]);
+            } else {
+                // Odd-numbered teleporters teleport backwards
+                int prevIndex = (i == 0) ? listOfTeleporters.Count - 1 : i - 1;
+                listOfScripts[i].setDestination(listOfTeleporters[prevIndex]);
             }
-            else {
-                listOfScripts[i].setDestination(listOfTeleporters[i+1]);
-                listOfScripts[i+1].setDestination(listOfTeleporters[i]); 
+        }
+
+        // Handle the last teleporter
+        int lastIndex = listOfTeleporters.Count - 1;
+        listOfScripts[lastIndex].setPlayer(player);
+        listOfScripts[lastIndex].setObjectToTeleport(playerTransform);
+        if (lastIndex % 2 == 0) {
+            // Last teleporter is even-numbered, teleports into the first room
+            listOfScripts[lastIndex].setDestination(listOfTeleporters[0]);
+        } else {
+            // Last teleporter is odd-numbered, teleports backwards to the previous room
+            int prevIndex = (lastIndex == 0) ? listOfTeleporters.Count - 1 : lastIndex - 1;
+            listOfScripts[lastIndex].setDestination(listOfTeleporters[prevIndex]);
             }
-        }      
+        }
     }
 
     void SpawnSquaresNextToEachOther(int amount, float size)
