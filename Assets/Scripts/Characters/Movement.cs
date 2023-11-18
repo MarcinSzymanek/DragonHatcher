@@ -131,5 +131,6 @@ public class Movement : MonoBehaviour
 	public void Stop(){
 		dirx_ = 0;
 		diry_ = 0;
+		anim_.SetBool("IsMoving", false);
 	}
 }

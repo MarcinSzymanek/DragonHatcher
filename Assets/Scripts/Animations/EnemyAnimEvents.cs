@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyAnimEvents : MonoBehaviour
 {
 	AudioFeedback audio_;
+	public event EventHandler attackFinished;
+	public event EventHandler arrowReleased;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,5 +16,13 @@ public class EnemyAnimEvents : MonoBehaviour
 
 	public void PlayFootsteps(){
 		audio_.PlayFootstep();
+	}
+	
+	public void ReleaseArrow(){
+		arrowReleased?.Invoke(this, new EventArgs());
+	}
+	
+	public void AttackAnimFinished(){
+		attackFinished?.Invoke(this, new EventArgs());
 	}
 }

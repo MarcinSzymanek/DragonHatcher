@@ -52,12 +52,15 @@ public class AIMeleeSimple : MonoBehaviour
 		Transform attackTarget = (Transform)attackTarget_;
 		Vector2 moveTarget, direction;
 		
+		
+		
 		for(;;){
 			// if(locker_.Locked) yield return new WaitForSeconds(LockOnRefresh);
 			moveTarget = (Vector2)(attackTarget.position);
 			if(Math2d.CalcDistance(t_.position, moveTarget) < AttackDistance) direction = new Vector2(0, 0);
 			else{
 				direction = Math2d.CalcDirection(t_.position, moveTarget).normalized;
+				MathVisualise.DrawArrow(transform, direction);
 			}
 			move_.ChangeDirection(direction.x, direction.y);
 			yield return new WaitForSeconds(LockOnRefresh);

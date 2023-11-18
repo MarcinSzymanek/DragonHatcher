@@ -18,8 +18,8 @@ TagManager:
   - Pickable
   - PlayerHitbox
   - EnemyHitbox
-  - 
-  - 
+  - PlayerDamage
+  - EnemyDamage
   - 
   - 
   - 

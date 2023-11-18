@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
 {
 	PlayerInput input_;
 	GameObject controlled_;
+	Transform playerTf_;
 	Spellcaster caster_;
 	// Attack attackScript_;
 	
@@ -22,6 +23,7 @@ public class InputManager : MonoBehaviour
     {
 	    input_ = GetComponent<PlayerInput>();
 	    controlled_ = GameObject.Find("Player");
+	    playerTf_ = controlled_.transform;
 	    moveScript_ = controlled_.GetComponent<Movement>();
 	    // attackScript_ = controlled_.GetComponent<Attack>();
 	    InputActionMap controlledMap = input_.actions.FindActionMap("Character");
@@ -53,6 +55,6 @@ public class InputManager : MonoBehaviour
 	
 	
 	void OnCast(InputAction.CallbackContext context){
-		caster_.CastSpell();	
+		caster_.CastSpell(new VectorTarget(playerTf_.position, Math2d.CalcDirection(playerTf_.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))));	
 	}
 }
