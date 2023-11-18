@@ -6,40 +6,43 @@ using System;
 public class DeathController : MonoBehaviour
 {
 	Animator anim_;
-	Transform model_;
 	Transform weapon_;
 	Transform[] children_;
+	Collider2D hitboxCollider_;
+	Collider2D modelCollider_;
+	AudioSource deathAudio_;
 	
     void Start()
 	{
-		bool excludeModel(Transform t){
-			return t.gameObject.name != "Model";
+		bool excludeSelected(Transform t){
+			return t.gameObject.name != "Model" && t.gameObject.name != "Hitbox" && t != transform;
 		}
 		TakeDamage dmgScript = GetComponent<TakeDamage>();
 		dmgScript.Death += OnDeath;
 		dmgScript.Death += GetComponent<Movement>().OnDeath;
-    	model_ = transform.Find("Model");
-    	anim_ = model_.GetComponent<Animator>();
+		Transform model = transform.Find("Model");
+		anim_ = model.GetComponent<Animator>();
+		modelCollider_ = model.GetComponent<Collider2D>();
 		var temp = GetComponentsInChildren<Transform>();
-		children_ = Array.FindAll(temp, excludeModel);
-	
+		children_ = Array.FindAll(temp, excludeSelected);
+		hitboxCollider_ = transform.Find("Hitbox").GetComponent<Collider2D>(); 
 		IStopOnDeath[] scriptsToStop_ = GetComponents<IStopOnDeath>();
 		foreach(IStopOnDeath script in scriptsToStop_){
 			dmgScript.Death += script.OnDeath;
 		}
+		deathAudio_ = hitboxCollider_.GetComponent<AudioSource>();
     }
 	
 	public void OnDeath(){
 		Debug.Log(gameObject.name + " died!");
+		deathAudio_.PlayOneShot(deathAudio_.clip);
+		hitboxCollider_.enabled = false;
+		modelCollider_.GetComponent<Collider2D>().enabled = false;
+		modelCollider_.GetComponent<SpriteRenderer>().sortingOrder--;
 		foreach(var child in children_){
-			if(child == transform) continue;
 			child.gameObject.SetActive(false);
 		}
-		model_.GetComponent<Collider2D>().enabled = false;
 		anim_.SetTrigger("Death");
 	}
 	
-	public void DeathAnimFinished() {
-		// Need to clean up the object somehow
-	}
 }

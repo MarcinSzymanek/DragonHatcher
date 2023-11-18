@@ -25,4 +25,8 @@ public class EnemyAnimEvents : MonoBehaviour
 	public void AttackAnimFinished(){
 		attackFinished?.Invoke(this, new EventArgs());
 	}
+	
+	public void DeathAnimFinished(){
+		GetComponent<Animator>().enabled = false;
+	}
 }
