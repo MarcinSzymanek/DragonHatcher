@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class Movement : MonoBehaviour, IStopOnDeath
 {
 	Transform tf_;
 	Rigidbody2D body_;
@@ -146,5 +146,9 @@ public class Movement : MonoBehaviour
 		dirx_ = 0;
 		diry_ = 0;
 		anim_.SetBool("IsMoving", false);
+	}
+	
+	public void OnDeath(){
+		Stop();
 	}
 }

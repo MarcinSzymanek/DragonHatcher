@@ -244,6 +244,14 @@ PrefabInstance:
       propertyPath: m_IncludeLayers.m_Bits
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4918425535754093748, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
+      propertyPath: m_CallbackLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918425535754093748, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
+      propertyPath: m_ContactCaptureLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5721043954608749229, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: gracePeriod
       value: 20

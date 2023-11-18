@@ -21,12 +21,13 @@ public class EnemyHitbox : MonoBehaviour
 		}
 		if(objDamage.Count == 0) return;
 		bool dealtDamage = false;
+		Debug.Log("Iterating through objDamage list");
 		foreach(TakeDamage d in objDamage){
-			if(d == null) continue;
 			if(objDamage.Count == 0) return;
+			if(d == null) continue;
 			d.TriggerTakeDamage(damageAmount);
 			dealtDamage = true;}
-		
+		Debug.Log("Done");
 		if(dealtDamage && destroyOnDamage){
 			transform.parent.gameObject.SetActive(false);
 		}
@@ -36,8 +37,19 @@ public class EnemyHitbox : MonoBehaviour
 	}
     
 	private void OnTriggerEnter2D(Collider2D collider){
-		Debug.Log("Collided with: " + collider.gameObject.name);
-		TakeDamage tdamage = collider.transform.parent.GetComponent<TakeDamage>();
+		// Debug.Log("Collided with: " + collider.gameObject.name);
+		TakeDamage tdamage;
+		try {
+			Debug.Log(collider.gameObject.name);
+			if(!collider || !collider.transform.parent.TryGetComponent<TakeDamage>(out tdamage)) return;
+		}
+			catch(UnityException e){
+				Debug.LogWarning("Exception caught: ");
+				Debug.LogError(e.Message);
+				Debug.LogError(e.Source.ToString());
+				return;
+		}
+		
 		if(objDamage.Contains(tdamage)) return;
 		objDamage.Add(tdamage);
 	}
@@ -45,7 +57,10 @@ public class EnemyHitbox : MonoBehaviour
 	// OnTriggerExit is called when the Collider other has stopped touching the trigger.
 	protected void OnTriggerExit2D(Collider2D collider)
 	{
-		TakeDamage tdamage = collider.transform.parent.GetComponent<TakeDamage>();
+		TakeDamage tdamage;
+		if(!collider || !collider.transform.parent.TryGetComponent<TakeDamage>(out tdamage)) return;
+		if (tdamage.dead) return;
+		Debug.Log("Removing tdamage from objects to deal dmg to... ");	
 		objDamage.Remove(tdamage);
 	}
 }
