@@ -22,7 +22,7 @@ public class Spawn_Projectile : MonoBehaviour
 			layerVal /= 2;
 			layerInt_ ++;
 		}
-		Debug.Log("Layer int is: " + layerInt_.ToString());
+		// Debug.Log("Layer int is: " + layerInt_.ToString());
 	}
 
 	public void Shoot(VectorTarget target)

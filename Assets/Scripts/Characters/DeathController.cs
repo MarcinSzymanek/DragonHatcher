@@ -12,12 +12,17 @@ public class DeathController : MonoBehaviour
 	
     void Start()
 	{
+		bool excludeModel(Transform t){
+			return t.gameObject.name != "Model";
+		}
 		TakeDamage dmgScript = GetComponent<TakeDamage>();
 		dmgScript.Death += OnDeath;
 		dmgScript.Death += GetComponent<Movement>().OnDeath;
     	model_ = transform.Find("Model");
     	anim_ = model_.GetComponent<Animator>();
-		children_ = GetComponentsInChildren<Transform>();
+		var temp = GetComponentsInChildren<Transform>();
+		children_ = Array.FindAll(temp, excludeModel);
+	
 		IStopOnDeath[] scriptsToStop_ = GetComponents<IStopOnDeath>();
 		foreach(IStopOnDeath script in scriptsToStop_){
 			dmgScript.Death += script.OnDeath;
@@ -30,6 +35,7 @@ public class DeathController : MonoBehaviour
 			if(child == transform) continue;
 			child.gameObject.SetActive(false);
 		}
+		model_.GetComponent<Collider2D>().enabled = false;
 		anim_.SetTrigger("Death");
 	}
 	

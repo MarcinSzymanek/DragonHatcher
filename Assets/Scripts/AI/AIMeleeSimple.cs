@@ -8,7 +8,7 @@ public enum State{
 	aware
 }
 
-public class AIMeleeSimple : MonoBehaviour
+public class AIMeleeSimple : MonoBehaviour, IStopOnDeath
 {
 	Movement move_;
 	AIScan scanner_;
@@ -86,5 +86,7 @@ public class AIMeleeSimple : MonoBehaviour
 		move_.ChangeDirection(0, 0);
 	}
 	
-	
+	public void OnDeath(){
+		StopAllCoroutines();
+	}
 }

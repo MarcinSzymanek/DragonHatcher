@@ -43,12 +43,10 @@ public class CharacterHitFeedback : MonoBehaviour
 	}
 	
 	public void ProcessHit(){
-		Debug.Log("Process hit");
 		anim_.SetTrigger("Hit");
 		if(clips_.Length > 0) audio_.PlayOneShot(clips_[UnityEngine.Random.Range(0, clips_.Length)]);
 		spriteRend_.material.SetFloat(maskName_, startMaskStrength_);
 		StartCoroutine(ReduceMask());
-		// VfxManager.Instance.InvokeHitStop();		
 	}
 	
 	
