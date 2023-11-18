@@ -9,6 +9,8 @@ public class Movement : MonoBehaviour
 	Animator anim_;
 	SpriteRenderer sprite_;
 	Locker<Movement> locker_;
+	Transform hitboxTf_;
+	Transform modelTf_;
 	
 	private bool directionLock_ = false;
 	
@@ -28,7 +30,9 @@ public class Movement : MonoBehaviour
 	    tf_ = gameObject.transform;
 	    body_ = tf_.GetComponent<Rigidbody2D>();
 	    anim_ = tf_.GetChild(0).GetComponent<Animator>();
-	    sprite_ = tf_.GetChild(0).GetComponent<SpriteRenderer>();
+		sprite_ = tf_.GetChild(0).GetComponent<SpriteRenderer>();
+		hitboxTf_ = tf_.Find("Hitbox");
+		modelTf_ = tf_.Find("Model");
     }
 
     // Update is called once per frame
@@ -112,13 +116,11 @@ public class Movement : MonoBehaviour
 		
 		if(dirx_ < 0 && Facing > 0) {
 			// Debug.Log("Flip left");
-			sprite_.flipX = true;
-			Facing = -1;
+			Flip();
 		}
 		else if (dirx_ > 0 && Facing < 0) {
 			// Debug.Log("Flip right");			
-			sprite_.flipX = false;
-			Facing = 1;
+			Flip();
 		}
 		//var pos = tf_.position;
 		anim_.SetBool("IsMoving", true);
@@ -126,7 +128,19 @@ public class Movement : MonoBehaviour
 		body_.MovePosition((body_.position + new Vector2(dirx_, diry_) * Speed * Time.fixedDeltaTime));
 		
 	}
-
+	
+	public void Flip(){
+		if(Facing > 0){
+			hitboxTf_.localEulerAngles = new Vector3(0, 180, 0);
+			modelTf_.localEulerAngles = new Vector3(0, 180, 0);
+			Facing = -1;
+			return;
+		}
+		
+		hitboxTf_.localEulerAngles = new Vector3(0, 0, 0);
+		modelTf_.localEulerAngles = new Vector3(0, 0, 0);
+		Facing = 1;
+	}
 	    
 	public void Stop(){
 		dirx_ = 0;
