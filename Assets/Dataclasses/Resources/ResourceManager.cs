@@ -39,14 +39,13 @@ public class ResourceManager : MonoBehaviour
 		res_list = new List<ResourceSO>();
 		session_store_ = new Dictionary<ResourceID, int>();
 		res_path_dict = new Dictionary<ResourceID, string>(){
-			{ResourceID.wood, "DataObjects/Wood"},
-			{ResourceID.stone, "DataObjects/Stone"},
-			{ResourceID.gold, "DataObjects/Gold"}
 		};
-		foreach(var item in res_path_dict){
-			res_list.Add(Resources.Load<ResourceSO>(item.Value)); 
-			session_store_[item.Key] = 0;
+		
+		foreach (var asset in Resources.LoadAll<ResourceSO>("DataObjects/")){
+			res_list.Add(asset);
+			session_store_[asset.ID] = 0;
 		}
+		
 		loaded_ = true;
 	}
     
