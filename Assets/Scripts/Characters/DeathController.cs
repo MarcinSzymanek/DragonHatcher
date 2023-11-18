@@ -35,6 +35,7 @@ public class DeathController : MonoBehaviour
 	
 	public void OnDeath(){
 		Debug.Log(gameObject.name + " died!");
+		deathAudio_.volume += 0.2f;
 		deathAudio_.PlayOneShot(deathAudio_.clip);
 		hitboxCollider_.enabled = false;
 		modelCollider_.GetComponent<Collider2D>().enabled = false;
