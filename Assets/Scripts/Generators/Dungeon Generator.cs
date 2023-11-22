@@ -96,7 +96,7 @@ public class DungeonGenerator : MonoBehaviour
                     }
                     if(acc == size/2f && posY < 0) {
                         GameObject teleporter = PlaceTeleporter(posX, posY + 1, posZ, doorPrefab, room); 
-                        listOfTeleporters.Add(teleporter.transform);       
+                        listOfTeleporters.Add(teleporter.transform);
                     }
                 }
                 else 
