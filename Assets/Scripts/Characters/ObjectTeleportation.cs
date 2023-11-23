@@ -9,9 +9,11 @@ public class ObjectTeleportation : MonoBehaviour
     public float teleportDelay = 1.5f;
     private bool canTeleport = true;
     private GameObject attachedGameObject = null;
+    private Vector3 teleportOffset;
 
     private void Awake()
     {
+        teleportOffset = new Vector3(0f, -3f, 0f);
         attachedGameObject = this.gameObject;
     }
 
@@ -19,34 +21,37 @@ public class ObjectTeleportation : MonoBehaviour
     {
         if (other != null && canTeleport)
         {
-            StartCoroutine(TeleportPlayer());
-            canTeleport = false;
+            playerg.SetActive(false);
+            // Check the player's movement direction relative to the teleporter so we dont mess up the teleportation offset
+            // First if = entering the teleporter into the next room from below or the side 
+            if (destination.transform.position.y <= gameObject.transform.position.y )
+            {
+                
+                teleportOffset = new Vector3(0f, 2f, 0f);
+            }
+            else if (destination.transform.position.y >= gameObject.transform.position.y)
+            {
+                teleportOffset = new Vector3(0f, -2f, 0f);
+            }
+           
+           
+            disableTpFor(2.0f);
+            objectToTeleport.position = destination.position + teleportOffset;
+
+            playerg.SetActive(true);
+            
         }
     }
 
-    IEnumerator TeleportPlayer()
+    //Invoke happens in seconds, meaning after a certain amount of time we allow for teleportation to happen again
+    public void disableTpFor(float time) {
+        canTeleport = false;
+        Invoke("enableTp", time);
+    }
+
+    //Is called by the invoke above
+    public void enableTp()
     {
-        playerg.SetActive(false);
-
-        yield return new WaitForSeconds(teleportDelay);
-
-        Vector3 teleportOffset = Vector3.zero;
-
-        // Check the player's movement direction relative to the teleporter so we dont mess up the teleportation offset
-        if (playerg.transform.position.y < gameObject.transform.position.y)
-        {
-            teleportOffset = new Vector3(0f, 2f, 0f);
-        }
-        else if (playerg.transform.position.y > gameObject.transform.position.y && (playerg.transform.position.x < gameObject.transform.position.x || playerg.transform.position.x > gameObject.transform.position.x))
-        { 
-            teleportOffset = new Vector3(0f, -2f, 0f);
-        }
-
-        // Apply the calculated offset to the teleport destination
-        objectToTeleport.position = destination.position + teleportOffset;
-
-        playerg.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
         canTeleport = true;
     }
 
