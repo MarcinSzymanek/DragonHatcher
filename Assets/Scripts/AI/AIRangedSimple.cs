@@ -168,13 +168,16 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath
 		move_.ChangeDirection(move_dir.x, move_dir.y);
 		float threshold = 0.02f;
 		float prev_move_distance;
-		while(move_distance > threshold){
+		bool done = false;
+		
+		while(move_distance > threshold && !done){
 			prev_move_distance = move_distance;
 			move_distance = Math2d.CalcDistance(t_.position, target);
 			if(move_distance > prev_move_distance){
 				// Recalculate move
 				move_dir = pickDirection_();
 				target = (Vector2) t_.position + move_dir;
+				move_.ChangeDirection(move_dir.x, move_dir.y);
 			}
 			yield return new WaitForFixedUpdate();
 		}
