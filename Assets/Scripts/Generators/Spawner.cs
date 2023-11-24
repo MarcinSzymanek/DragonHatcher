@@ -8,7 +8,6 @@ public class Spawner : MonoBehaviour, ISpawner
 	
 	public GameObject[] objectPool;
 
-
 	public virtual GameObject Spawn(int index, Vector3 position){
 		var newobj = Instantiate(objectPool[index], position, Quaternion.identity);
 		return newobj;

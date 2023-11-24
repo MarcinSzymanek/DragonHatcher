@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SimeAnimOverride
+  m_Controller: {fileID: 9100000, guid: 8e1d32756deb65f4caadfab8db432414, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 9714e891b08a7e540a3eb3bbee9fe8b0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b902cdc0ea339ed40b45f35f85740a78, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3ae8b8925a028ca4088cce13898a3594, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1871079dad0c84f4a9d29a802afd35f5, type: 2}
