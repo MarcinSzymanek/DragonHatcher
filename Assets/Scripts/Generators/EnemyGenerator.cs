@@ -9,6 +9,9 @@ public class EnemyGenerator : MonoBehaviour
 	// How fast the enemies should spawn
 	public float spawnRate = 1.0f;
 	
+	// Base delay between enemies spawning
+	public float spawnDelay = 2.0f;
+	
 	// How many enemies are yet to be spawned
 	private int enemiesLeft_;
 	
@@ -38,7 +41,7 @@ public class EnemyGenerator : MonoBehaviour
 			return;
 		}
 		
-		Invoke("SpawnContinuously", spawnRate);
+		Invoke("SpawnContinuously", 1/spawnRate * spawnDelay);
 	}
     
     
