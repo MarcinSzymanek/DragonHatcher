@@ -15,7 +15,7 @@ public class Spellbook : MonoBehaviour
 	    	heldSpells[s.id] = s;
 	    } 
     }
-
+	#nullable enable
 	public ISpell? GetSpellById(int id){
 		if(heldSpells.ContainsKey(id)){
 			return heldSpells[id];

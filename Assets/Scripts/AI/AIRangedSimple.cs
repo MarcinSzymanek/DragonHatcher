@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class AIRangedSimple : MonoBehaviour
+public class AIRangedSimple : MonoBehaviour, IStopOnDeath
 {
 	Movement move_;
 	Animator anim_;
@@ -322,5 +322,10 @@ public class AIRangedSimple : MonoBehaviour
 		
 		state_ = State.attack_finished;
 		pickAction_();
+	}
+	
+	public void OnDeath(){
+		StopAllCoroutines();
+		if(attackMarker_.gameObject.activeSelf) attackMarker_.gameObject.SetActive(false);
 	}
 }

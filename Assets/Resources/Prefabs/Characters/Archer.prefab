@@ -384,10 +384,10 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 512
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 512
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -422,6 +422,7 @@ GameObject:
   - component: {fileID: 6774762297280452021}
   - component: {fileID: 6438790255493618687}
   - component: {fileID: 6998720961386249199}
+  - component: {fileID: 5515742834431210794}
   m_Layer: 7
   m_Name: Archer
   m_TagString: Untagged
@@ -570,6 +571,18 @@ MonoBehaviour:
     m_Bits: 4096
   rotationOffset: 0
   speed: 16
+--- !u!114 &5515742834431210794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5615005933002219845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261daaf0e4f1d56439a54bb1bfbbbebe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6033712528865391100
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,9 +787,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 0.875
+  m_audioClip: {fileID: 8300000, guid: 04f3dff6a9073d3439eaaf44031b7262, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.688
   m_Pitch: 1
   Loop: 0
   Mute: 0
