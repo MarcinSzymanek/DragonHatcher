@@ -286,7 +286,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.459
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -449,7 +449,7 @@ Transform:
   - {fileID: 2041210850407286930}
   - {fileID: 6746081835510595862}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8204994771377074155
 MonoBehaviour:
@@ -833,7 +833,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.807
       inSlope: 0
       outSlope: 0
       tangentMode: 0
