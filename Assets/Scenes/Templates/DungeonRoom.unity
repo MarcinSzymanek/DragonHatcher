@@ -3475,7 +3475,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4999,7 +4999,7 @@ MonoBehaviour:
   m_Follow: {fileID: 864905816}
   m_Lens:
     FieldOfView: 34
-    OrthographicSize: 4
+    OrthographicSize: 6
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -7906,6 +7906,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4741669651856115089, guid: 914aa21d37d72a641b8173c28b0a80d0, type: 3}
+      propertyPath: Count
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4010640622554557594, guid: 525e55fd9180ef242a457f3d04d22761, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -7953,10 +7957,6 @@ PrefabInstance:
     - target: {fileID: 6315562092802337400, guid: 525e55fd9180ef242a457f3d04d22761, type: 3}
       propertyPath: m_Name
       value: pickable_wood (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4741669651856115089, guid: 914aa21d37d72a641b8173c28b0a80d0, type: 3}
-      propertyPath: Count
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
