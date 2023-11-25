@@ -9,6 +9,7 @@ public class IdleAnimBehavior : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 	    animator.SetFloat("idleIter", 0);
+	    animator.SetInteger("facey", 1);
     }
     
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

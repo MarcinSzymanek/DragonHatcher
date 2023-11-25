@@ -9,6 +9,9 @@ public class ResourceManager : MonoBehaviour
 {
 	public static ResourceManager instance {get; private set;}
 	private static Dictionary<ResourceID, string> res_path_dict;
+	private AudioSource audios_;
+	
+	private float[] pitch_vals = {1f, 0.9f, 0.8f, 0.7f, 0.5f};
 	
 	[SerializeReference]
 	List<ResourceSO> res_list;
@@ -25,6 +28,7 @@ public class ResourceManager : MonoBehaviour
         else
         {
 	        instance = this;
+	        audios_ = GetComponent<AudioSource>();
 	        LoadData();
         }
     }
@@ -35,14 +39,13 @@ public class ResourceManager : MonoBehaviour
 		res_list = new List<ResourceSO>();
 		session_store_ = new Dictionary<ResourceID, int>();
 		res_path_dict = new Dictionary<ResourceID, string>(){
-			{ResourceID.wood, "DataObjects/Wood"},
-			{ResourceID.stone, "DataObjects/Stone"},
-			{ResourceID.gold, "DataObjects/Gold"}
 		};
-		foreach(var item in res_path_dict){
-			res_list.Add(Resources.Load<ResourceSO>(item.Value)); 
-			session_store_[item.Key] = 0;
+		
+		foreach (var asset in Resources.LoadAll<ResourceSO>("DataObjects/")){
+			res_list.Add(asset);
+			session_store_[asset.ID] = 0;
 		}
+		
 		loaded_ = true;
 	}
     
@@ -66,6 +69,8 @@ public class ResourceManager : MonoBehaviour
 		Debug.Log("Current: " + session_store_[id]);
 		session_store_[id] += count;
 		resource_updated?.Invoke(id, session_store_[id]);
+		audios_.PlayOneShot(audios_.clip);
+		audios_.pitch = pitch_vals[Random.Range(0, 4)];
 	}
 	
 	public void Reduce(ResourceID id, int count){

@@ -15,6 +15,5 @@ MonoBehaviour:
   Name: Gold
   Icon: Assets/Resources/Sprites/Icons/Resources/icon_wood.png
   SpritePickable: Assets/Resources/Sprites/Icons/Resources/icon_wood.png
-  ID: 2
+  ID: 4
   Tier: 1
-  Count: 0

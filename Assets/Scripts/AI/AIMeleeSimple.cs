@@ -8,7 +8,7 @@ public enum State{
 	aware
 }
 
-public class AIMeleeSimple : MonoBehaviour
+public class AIMeleeSimple : MonoBehaviour, IStopOnDeath
 {
 	Movement move_;
 	AIScan scanner_;
@@ -40,7 +40,7 @@ public class AIMeleeSimple : MonoBehaviour
 	}
     
 	public void OnPlayerNoticed(object? sender, ObjectEnteredArgs args){
-		Debug.Log("Noticed the player!!! Distance: " + CalcDistance(args.T.position));
+		Debug.Log("Noticed the player!!! Distance: " + Math2d.CalcDistance(t_.position, args.T.position));
 		scanner_.objectEntered -= OnPlayerNoticed;
 		attackTarget_ = args.T;
 		moveTarget_ = (Vector2)(((Transform)attackTarget_).position);
@@ -52,12 +52,15 @@ public class AIMeleeSimple : MonoBehaviour
 		Transform attackTarget = (Transform)attackTarget_;
 		Vector2 moveTarget, direction;
 		
+		
+		
 		for(;;){
 			// if(locker_.Locked) yield return new WaitForSeconds(LockOnRefresh);
 			moveTarget = (Vector2)(attackTarget.position);
-			if(CalcDistance(moveTarget) < AttackDistance) direction = new Vector2(0, 0);
+			if(Math2d.CalcDistance(t_.position, moveTarget) < AttackDistance) direction = new Vector2(0, 0);
 			else{
-				direction = CalcDirection(moveTarget).normalized;
+				direction = Math2d.CalcDirection(t_.position, moveTarget).normalized;
+				MathVisualise.DrawArrow(transform, direction);
 			}
 			move_.ChangeDirection(direction.x, direction.y);
 			yield return new WaitForSeconds(LockOnRefresh);
@@ -65,35 +68,25 @@ public class AIMeleeSimple : MonoBehaviour
 	}
     
 	private IEnumerator MoveToTarget(){
-		Vector2 direction = CalcDirection(moveTarget_.Value).normalized;
+		Vector2 direction = Math2d.CalcDirection(t_.position, moveTarget_.Value).normalized;
 		move_.ChangeDirection(direction.x, direction.y);
-		float distance = CalcDistance(moveTarget_.Value);
+		float distance = Math2d.CalcDistance(t_.position, moveTarget_.Value);
 		float prevDistance = distance;
 		while(distance > 0.10){
 			if(distance > prevDistance){
-				Vector2 newDir = CalcDirection(moveTarget_.Value);
+				Vector2 newDir = Math2d.CalcDirection(t_.position, moveTarget_.Value);
 				newDir = newDir.normalized;
 				move_.ChangeDirection(newDir.x, newDir.y);
 			}
 			//move_.Move();
 			prevDistance = distance;
-			distance = CalcDistance(moveTarget_.Value);
+			distance = Math2d.CalcDistance(t_.position, moveTarget_.Value);
 			yield return new WaitForFixedUpdate();
 		}
 		move_.ChangeDirection(0, 0);
 	}
 	
-	private float CalcDistance(Vector2 targetPos){
-		float x = t_.position.x, y = t_.position.y;
-		float otherx = targetPos.x, othery = targetPos.y;
-		
-		float distance = Mathf.Sqrt(Mathf.Pow((x - otherx), 2) + Mathf.Pow((y - othery), 2));
-		return distance;
-	}
-	
-	private Vector2 CalcDirection(Vector2 targetPos){
-		float x = t_.position.x, y = t_.position.y;
-		Vector2 dir = new Vector2(targetPos.x - x, targetPos.y - y);
-		return dir;
+	public void OnDeath(){
+		StopAllCoroutines();
 	}
 }

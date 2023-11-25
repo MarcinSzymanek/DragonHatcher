@@ -17,9 +17,9 @@ TagManager:
   - Enemy
   - Pickable
   - PlayerHitbox
-  - 
-  - 
-  - 
+  - EnemyHitbox
+  - PlayerDamage
+  - EnemyDamage
   - 
   - 
   - 
@@ -42,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 1392490425
     locked: 0

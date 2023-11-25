@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 
 public class EnemyHitbox : MonoBehaviour
 {
@@ -7,22 +8,60 @@ public class EnemyHitbox : MonoBehaviour
 	public int damageAmount;
 	private int currentGrace = 0;
 	public int gracePeriod;
+	public List<TakeDamage> objDamage;
+	public bool destroyOnDamage;
+	void Start(){
+		objDamage = new List<TakeDamage>();
+	}
 	
 	void FixedUpdate(){
 		if(currentGrace > 0){
 			currentGrace--;
+			return;
 		}
+		if(objDamage.Count == 0) return;
+		bool dealtDamage = false;
+		Debug.Log("Iterating through objDamage list");
+		foreach(TakeDamage d in objDamage){
+			if(objDamage.Count == 0) return;
+			if(d == null) continue;
+			d.TriggerTakeDamage(damageAmount);
+			dealtDamage = true;}
+		Debug.Log("Done");
+		if(dealtDamage && destroyOnDamage){
+			transform.parent.gameObject.SetActive(false);
+		}
+		
+		if(objDamage.Count == 0) return;
+		currentGrace = gracePeriod;
 	}
     
-	private void OnTriggerStay2D(Collider2D collider){
-		if(currentGrace > 0) return;
-		currentGrace += gracePeriod;
-		TakeDamage tdamage = collider.transform.parent.GetComponent<TakeDamage>();
-		if (tdamage != null)
-		{
-			tdamage.TriggerTakeDamage(damageAmount);
+	private void OnTriggerEnter2D(Collider2D collider){
+		// Debug.Log("Collided with: " + collider.gameObject.name);
+		TakeDamage tdamage;
+		try {
+			Debug.Log(collider.gameObject.name);
+			if(!collider || !collider.transform.parent.TryGetComponent<TakeDamage>(out tdamage)) return;
 		}
-        
+			catch(UnityException e){
+				Debug.LogWarning("Exception caught: ");
+				Debug.LogError(e.Message);
+				Debug.LogError(e.Source.ToString());
+				return;
+		}
+		
+		if(objDamage.Contains(tdamage)) return;
+		objDamage.Add(tdamage);
+	}
+	
+	// OnTriggerExit is called when the Collider other has stopped touching the trigger.
+	protected void OnTriggerExit2D(Collider2D collider)
+	{
+		TakeDamage tdamage;
+		if(!collider || !collider.transform.parent.TryGetComponent<TakeDamage>(out tdamage)) return;
+		if (tdamage.dead) return;
+		Debug.Log("Removing tdamage from objects to deal dmg to... ");	
+		objDamage.Remove(tdamage);
 	}
 }
 
