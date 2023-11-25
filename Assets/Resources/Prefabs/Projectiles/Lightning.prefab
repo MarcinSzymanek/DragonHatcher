@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6789387326729941256}
   - component: {fileID: 6307595985622483671}
   - component: {fileID: 7466000405330656893}
+  - component: {fileID: 762988560680932382}
   m_Layer: 0
   m_Name: Lightning
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   - {fileID: 108206984740595857}
   - {fileID: 1892900696974857609}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6789387326729941256
 SpriteRenderer:
@@ -136,6 +137,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &762988560680932382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5471292214467111266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc569d02e50f842a4bbcea32a9e64f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6503288065486225300
 GameObject:
   m_ObjectHideFlags: 0
