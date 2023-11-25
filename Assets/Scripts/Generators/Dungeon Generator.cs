@@ -17,14 +17,15 @@ public class DungeonGenerator : MonoBehaviour
     public TileBase[] tileToPlace = null;
     private int roomNumber = 1;
 
-    public List<Transform> listOfTeleporters;
+    private List<Transform> listOfTeleporters;
     private Transform wallParentTf_;
     public GameObject wallParent;
     private GameObject player;
 
     private Transform playerTransform;
     private bool entranceTeleporterPlaced = false;
-    public List<ObjectTeleportation> listOfScripts;
+    private bool exitTeleporterPlaced = false;
+    private List<ObjectTeleportation> listOfScripts;
 
 
     struct Square
