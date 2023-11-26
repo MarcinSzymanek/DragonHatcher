@@ -17,6 +17,16 @@ public class Spawner : MonoBehaviour, ISpawner
 		var newobj = Instantiate(objectPool[index], position, Quaternion.identity, parent);
 		return newobj;
 	}
+
+	public virtual GameObject Spawn(Vector3 position, int amount)
+	{
+		GameObject newObj = null;
+		for (int i = 0; i < amount; i++)
+		{
+            newObj = Instantiate(objectPool[Random.Range(0, objectPool.Length)]);
+        }
+		return newObj;
+	}
 }
 
 // Spawn the last resource in the list at the center of scene - for testing

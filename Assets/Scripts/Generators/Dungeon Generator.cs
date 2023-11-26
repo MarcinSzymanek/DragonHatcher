@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 
 public class DungeonGenerator : MonoBehaviour
@@ -26,6 +27,9 @@ public class DungeonGenerator : MonoBehaviour
     private bool entranceTeleporterPlaced = false;
     private bool exitTeleporterPlaced = false;
     private List<ObjectTeleportation> listOfScripts;
+    private List <Vector3> listOfRandomPositions;
+    private EnemySpawner spawner;
+    
 
 
     struct Square
@@ -40,7 +44,9 @@ public class DungeonGenerator : MonoBehaviour
         wallParentTf_ = wallParent.transform;
         player = GameObject.Find("Player");
         listOfScripts = new List<ObjectTeleportation>();
+        listOfRandomPositions = new List<Vector3>();
         listOfTeleporters = new List<Transform>();
+        spawner = GetComponent<EnemySpawner>();
     }
     void Start()
     {
@@ -62,7 +68,6 @@ public class DungeonGenerator : MonoBehaviour
         float acc = 0.5f;
         GameObject room = new GameObject("Room " + roomNumber);
         GameObject initialTeleporter = null;
-
         if(!entranceTeleporterPlaced) {
             //Create the outer teleporter that we want to enter the dungeon in
             //Currently hard-coded but we can change that for the dungeon entrance later on when integrating
@@ -83,7 +88,7 @@ public class DungeonGenerator : MonoBehaviour
                 float posX = position.x + i;
                 float posY = position.y + j;
                 float posZ = position.z;
-
+                
                 // Check if the current position is on the outer border
                 bool isOuterBorder = Mathf.Abs(i) >= halfSize - padding || Mathf.Abs(j) >= halfSize - padding;
 
@@ -108,6 +113,25 @@ public class DungeonGenerator : MonoBehaviour
             }
             acc++;
         }
+
+        //Get random places within the dungeon to parse to the spawner
+
+        float MinX = position.x - halfSize + 0.5f;
+        float MaxX = position.x + halfSize - 0.5f;
+        float MinY = position.y - halfSize + 0.5f;
+        float MaxY = position.y + halfSize - 0.5f;
+
+        float RandomX = Random.Range(MinX, MaxX);
+        float RandomY = Random.Range(MinY, MaxY);
+
+        Vector3 randomPosition = new Vector3(RandomX, RandomY, 0f);
+        listOfRandomPositions.Add(randomPosition);
+
+        for (int k = 0; 0 < listOfRandomPositions.Count; k++)
+        {
+            spawner.Spawn(listOfRandomPositions[k], Random.Range(0, 8));
+        }
+
         //Do the connection of the teleporters here
         //Second receiver <- First Sender
         //i <- i+1 (j)
@@ -143,7 +167,7 @@ public class DungeonGenerator : MonoBehaviour
 
     void SpawnSquaresNextToEachOther(int amount, float size)
     {   
-        float gap = 5f;
+        float gap = 20f;
 
         for (int i = 0; i < amount; i++)
         {
