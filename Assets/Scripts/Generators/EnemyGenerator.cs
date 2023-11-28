@@ -21,7 +21,16 @@ public class EnemyGenerator : MonoBehaviour
 	public bool startOnSceneStart = true;
 	// The scripts responsible for placing enemies in the scene
 	private IEnemySpawner[] spawners_;
-    // Start is called before the first frame update
+    
+	// Regulate spawn rate based o number of enemies left
+	public float regulateThreshold = 0.5f;
+
+	void Regulate()
+	{
+		spawnRate *= 2;
+	}
+	
+	// Start is called before the first frame update
     void Start()
 	{
 		enemiesLeft_ = enemyCount;
