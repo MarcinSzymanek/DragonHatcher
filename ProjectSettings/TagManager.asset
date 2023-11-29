@@ -20,7 +20,7 @@ TagManager:
   - EnemyHitbox
   - PlayerDamage
   - EnemyDamage
-  - 
+  - NonBlockingObjects
   - 
   - 
   - 
@@ -40,6 +40,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 297345795
+    locked: 0
+  - name: GroundObjects
+    uniqueID: 637338703
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 3372011291850254077}
   - component: {fileID: 5156104911953050866}
   - component: {fileID: 8965831448901967921}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: AIScanner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -449,7 +449,7 @@ Transform:
   - {fileID: 2041210850407286930}
   - {fileID: 6746081835510595862}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8204994771377074155
 MonoBehaviour:

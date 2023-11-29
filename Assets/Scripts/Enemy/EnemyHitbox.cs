@@ -21,13 +21,13 @@ public class EnemyHitbox : MonoBehaviour
 		}
 		if(objDamage.Count == 0) return;
 		bool dealtDamage = false;
-		Debug.Log("Iterating through objDamage list");
+		// Debug.Log("Iterating through objDamage list");
 		foreach(TakeDamage d in objDamage){
 			if(objDamage.Count == 0) return;
 			if(d == null) continue;
 			d.TriggerTakeDamage(damageAmount);
 			dealtDamage = true;}
-		Debug.Log("Done");
+		// Debug.Log("Done");
 		if(dealtDamage && destroyOnDamage){
 			transform.parent.gameObject.SetActive(false);
 		}
