@@ -108,7 +108,7 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath
 			break;
 	
 		case State.reposition:
-			Debug.Log("State: reposition");
+			// Debug.Log("State: reposition");
 			distance_to_target_ = Math2d.CalcDistance(t_.position, attackTarget_.position);
 			if(getRange() == Range.out_of_range){
 				StartCoroutine(Reposition());
@@ -137,7 +137,7 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath
 		}
 		
 		float prevDistance = distance_to_target_;
-		Debug.Log("Archer CloseIn");
+		// Debug.Log("Archer CloseIn");
 		
 		var dir = Math2d.CalcDirection(t_.position, attackTarget_.position);
 		move_.ChangeDirection(dir.x, dir.y);
@@ -152,7 +152,7 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath
 			distance_to_target_ = Math2d.CalcDistance(t_.position, attackTarget_.position);
 			yield return new WaitForFixedUpdate();
 		}
-		Debug.Log("Closein finished");
+		// Debug.Log("Closein finished");
 		state_ = State.attack;
 		pickAction_();
 	}
@@ -160,7 +160,7 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath
 	private IEnumerator Reposition(){
 		state_ = State.reposition;
 		Vector2 move_dir = pickDirection_();
-		Debug.Log("Move dir: " + move_dir.ToString());
+		// Debug.Log("Move dir: " + move_dir.ToString());
 		MathVisualise.DrawArrow(t_, move_dir, Color.green, 5f);
 		
 		Vector2 target = (Vector2) t_.position + move_dir;	
@@ -184,7 +184,7 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath
 			yield return new WaitForFixedUpdate();
 		}
 		move_.Stop();
-		Debug.Log("Reposition finished");
+		// Debug.Log("Reposition finished");
 		pickAction_();
 	}
 	
@@ -235,9 +235,6 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath
 			dir_degree = UnityEngine.Random.Range(min_degree_away, max_degree_away);
 			dir_degree = UnityEngine.Random.Range(-dir_degree, dir_degree);
 			move_dir = Math2d.RotVector(-Math2d.CalcDirection(t_.position, attackTarget_.position), dir_degree);
-			Debug.Log("Direction " + Math2d.CalcDirection(t_.position, attackTarget_.position).ToString());
-			Debug.Log("Close Move vector: " + move_dir.ToString());
-			Debug.Log("Close pos: " + t_.position + " target: " + attackTarget_.position);
 			move_dir = findUnblockedDirection_(move_dir);
 			return move_dir;
 		}
@@ -249,14 +246,23 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath
 	
 	private Vector2 findUnblockedDirection_(Vector2 move_dir){
 		bool done = false;
+		int no_iter = 0;
+		RaycastHit2D hitData;
+		LayerMask blocking = LayerMask.GetMask("Obstacles", "Enemy", "Player");
 		while(!done){
+			no_iter++;
+			if(no_iter > 5){
+				Debug.LogError("Could not find unblocked direction");
+				return move_dir;
+			}
 			MathVisualise.DrawArrow(t_, move_dir, Color.blue);
 			Ray2D ray = new Ray2D(t_.position, move_dir);
-			RaycastHit2D hitData;
-			if (Physics2D.Raycast(t_.position, move_dir, 1f, LayerMask.NameToLayer("Obstacles"))){
-				// Path is blocked, rotate and recalculate
-				Debug.Log("Path blocked!");
-				move_dir = Math2d.RotVector(move_dir, 15);
+			hitData = Physics2D.Raycast(t_.position, move_dir, 0.5f, blocking);
+			if (hitData && hitData.transform != transform){
+				// Path is blocked, try rotate and recalculate
+				Debug.Log("Path blocked! By: " + hitData.transform.gameObject.name);
+				move_dir = Math2d.RotVector(move_dir, 25);
+				Debug.Log("New move_dir: " + move_dir.ToString());
 			}
 			else{
 				done = true;
