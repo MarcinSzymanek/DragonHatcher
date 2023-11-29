@@ -23,9 +23,9 @@ public class EnemySpawner : Spawner, IEnemySpawner
 		return newobj;
 	}
 
-	public override GameObject Spawn(Vector3 position, int amount)
+	public override GameObject Spawn(Vector3 position, Transform parent)
 	{
-		GameObject enemy = base.Spawn(position, amount);
+		GameObject enemy = base.Spawn(position, parent);
 		return enemy;
 	}
 }

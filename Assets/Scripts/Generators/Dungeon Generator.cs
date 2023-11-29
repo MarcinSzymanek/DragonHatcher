@@ -29,7 +29,9 @@ public class DungeonGenerator : MonoBehaviour
     private List<ObjectTeleportation> listOfScripts;
     private List <Vector3> listOfRandomPositions;
     private EnemySpawner spawner;
-    
+    private Vector3 randomPosition = Vector3.zero;
+
+    public GameObject test;
 
 
     struct Square
@@ -124,13 +126,16 @@ public class DungeonGenerator : MonoBehaviour
         float RandomX = Random.Range(MinX, MaxX);
         float RandomY = Random.Range(MinY, MaxY);
 
+        int random = Random.Range(3, 10);
         Vector3 randomPosition = new Vector3(RandomX, RandomY, 0f);
-        listOfRandomPositions.Add(randomPosition);
-
-        for (int k = 0; 0 < listOfRandomPositions.Count; k++)
+        
+        for (int g = 0; g < random; g++ )
         {
-            spawner.Spawn(listOfRandomPositions[k], Random.Range(0, 8));
+            spawner.Spawn(randomPosition, room.transform);
+            //Instantiate(test, randomPosition, Quaternion.identity, room.transform);
         }
+        //spawner.Spawn(randomPosition, Random.Range(0,3));
+        
 
         //Do the connection of the teleporters here
         //Second receiver <- First Sender
