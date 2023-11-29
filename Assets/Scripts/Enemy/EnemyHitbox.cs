@@ -10,8 +10,11 @@ public class EnemyHitbox : MonoBehaviour
 	public int gracePeriod;
 	public List<TakeDamage> objDamage;
 	public bool destroyOnDamage;
+	public bool logCollisions;
+	private string parentName_;
 	void Start(){
 		objDamage = new List<TakeDamage>();
+		parentName_ = transform.parent.name;
 	}
 	
 	void FixedUpdate(){
@@ -40,7 +43,7 @@ public class EnemyHitbox : MonoBehaviour
 		// Debug.Log("Collided with: " + collider.gameObject.name);
 		TakeDamage tdamage;
 		try {
-			Debug.Log(collider.gameObject.name);
+			if(logCollisions) Debug.Log(parentName_ + " collided with " + collider.transform.parent.name);
 			if(!collider || !collider.transform.parent.TryGetComponent<TakeDamage>(out tdamage)) return;
 		}
 			catch(UnityException e){
