@@ -22,4 +22,10 @@ public class EnemySpawner : Spawner, IEnemySpawner
 		var newobj = Instantiate(objectPool[index], position, Quaternion.identity);
 		return newobj;
 	}
+
+	public override GameObject Spawn(Vector3 position, Transform parent)
+	{
+		GameObject enemy = base.Spawn(position, parent);
+		return enemy;
+	}
 }

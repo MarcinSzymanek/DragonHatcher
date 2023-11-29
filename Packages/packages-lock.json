@@ -281,6 +281,12 @@
       },
       "url": "https://packages.unity.com"
     },
+    "io.backtrace.unity": {
+      "version": "file:C:/GameDev/Unity/backtrace-unity-3.8.3",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallTilePrefab: {fileID: 2907750810227925635, guid: f81dd6fc7a7204849a799a72968a1341, type: 3}
+  doorPrefab: {fileID: 2589175252476403355, guid: a568d875067e55f4ab1e733d9f0ad4e8, type: 3}
   tileMap: {fileID: 1458809183}
   tileToPlace:
   - {fileID: 11400000, guid: ee5161b2c86327f439f334654ec8592e, type: 2}
