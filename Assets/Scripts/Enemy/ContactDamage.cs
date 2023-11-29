@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Collections.Generic;
 
-public class EnemyHitbox : MonoBehaviour
+public class ContactDamage : MonoBehaviour
 {
 
 	public int damageAmount;
