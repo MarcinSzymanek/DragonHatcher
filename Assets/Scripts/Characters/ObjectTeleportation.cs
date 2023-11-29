@@ -14,12 +14,12 @@ public class ObjectTeleportation : MonoBehaviour
     private void Awake()
     {
         teleportOffset = new Vector3(0f, -3f, 0f);
-        attachedGameObject = this.gameObject;
+        attachedGameObject = this.gameObject;  
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other != null && canTeleport)
+        if (other != null && canTeleport && other.gameObject == objectToTeleport)
         {
             playerg.SetActive(false);
             // Check the player's movement direction relative to the teleporter so we dont mess up the teleportation offset

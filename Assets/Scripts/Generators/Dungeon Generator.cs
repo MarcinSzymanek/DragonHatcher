@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
@@ -14,13 +15,13 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject wallTilePrefab = null;
 
     public GameObject doorPrefab = null;
-    public Tilemap tileMap = null;
+    private Tilemap tileMap = null;
     public TileBase[] tileToPlace = null;
     private int roomNumber = 1;
 
     private List<Transform> listOfTeleporters;
     private Transform wallParentTf_;
-    public GameObject wallParent;
+    private GameObject wallParent;
     private GameObject player;
 
     private Transform playerTransform;
@@ -31,9 +32,6 @@ public class DungeonGenerator : MonoBehaviour
     private EnemySpawner spawner;
     private Vector3 randomPosition = Vector3.zero;
 
-    public GameObject test;
-
-
     struct Square
     {
         public Vector3 position;
@@ -43,6 +41,8 @@ public class DungeonGenerator : MonoBehaviour
 
 
     void Awake() {
+        tileMap = GameObject.Find("MapBackground").GetComponent<Tilemap>();
+        wallParent = GameObject.Find("MapForeground");
         wallParentTf_ = wallParent.transform;
         player = GameObject.Find("Player");
         listOfScripts = new List<ObjectTeleportation>();
@@ -56,13 +56,6 @@ public class DungeonGenerator : MonoBehaviour
         //Note: Only use un-even numbers for the size of the room as it messes up the tile allignment for the filling
         SpawnSquaresNextToEachOther(5, 19f);
     }
-
-    //Size is hardcoded atm but we can change it later to a parameter
-    //Teleportation logic:
-    //- When a room is created we need to create a sender and receiver teleporter at each entrance/exti
-    //- The first entrance is semi hardcoded as its the entrance into the actual dungeon itself
-    //- The First room exit needs to connect into the next room and also place the correct amount of teleporters
-    //- A teleporter and a receiver on each entrance and exit where they link respectively themselves
 
     void CreateRoom(Vector3 position, float size)
     {

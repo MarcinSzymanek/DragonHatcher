@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &173362380306224252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8059406331999643152}
+  - component: {fileID: 7523202746048098675}
+  - component: {fileID: 1753699278332248998}
+  m_Layer: 0
+  m_Name: DungeonGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8059406331999643152
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173362380306224252}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7523202746048098675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173362380306224252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63de2277261c3ab41a294cb2fe3d41e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPool:
+  - {fileID: 5615005933002219845, guid: b032a7b801968884bb373325d80d28f9, type: 3}
+  - {fileID: 3974789886877665124, guid: 208320e5f90090a46a2f6ebe314e0914, type: 3}
+  offset: {x: 0, y: 0, z: 0}
+--- !u!114 &1753699278332248998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173362380306224252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97a62886e1a252468b75f9b11b56a23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallTilePrefab: {fileID: 2907750810227925635, guid: f81dd6fc7a7204849a799a72968a1341, type: 3}
+  doorPrefab: {fileID: 2589175252476403355, guid: a568d875067e55f4ab1e733d9f0ad4e8, type: 3}
+  tileMap: {fileID: 0}
+  tileToPlace:
+  - {fileID: 11400000, guid: ee5161b2c86327f439f334654ec8592e, type: 2}
+  - {fileID: 11400000, guid: b8311692b118a674282472f0930eae46, type: 2}
+  - {fileID: 11400000, guid: 5cc945eab61f3a04895922fa1d25f2c9, type: 2}
+  - {fileID: 11400000, guid: fec634ac9d1879d4996847c2133c8940, type: 2}
+  - {fileID: 11400000, guid: 7481a27207d8d8d409b5ae75ab374402, type: 2}
+  - {fileID: 11400000, guid: 8f8e96decf83b6d48a2fe48b53bcd905, type: 2}
+  - {fileID: 11400000, guid: dda7b8f813a7fab49b6fbc4affc2b730, type: 2}
+  - {fileID: 11400000, guid: 7c1db1280e97887458a417b20639d7db, type: 2}
+  - {fileID: 11400000, guid: e30535467f8d7834a90ccd1e8ceafb1b, type: 2}
+  - {fileID: 11400000, guid: 0ef765163f504274fb1d3ea8fbc6b0c1, type: 2}
+  - {fileID: 11400000, guid: f89aeda5a1fc624409599251e46cfe9d, type: 2}
+  - {fileID: 11400000, guid: c7a2124028b66e346bbf02d7ad262dbc, type: 2}
+  - {fileID: 11400000, guid: 22bceda9461f92146be80a3d1318c03d, type: 2}
+  wallParent: {fileID: 0}
+  test: {fileID: 0}

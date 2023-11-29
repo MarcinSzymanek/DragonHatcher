@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6806618607152634007}
   - component: {fileID: 1209171121456423938}
+  - component: {fileID: 4840649089584445836}
+  - component: {fileID: -8010943451640192782}
   m_Layer: 0
   m_Name: EnemyGenerator
   m_TagString: Untagged
@@ -48,3 +50,35 @@ MonoBehaviour:
   spawnRate: 3
   spawnDelay: 2
   startOnSceneStart: 1
+--- !u!114 &4840649089584445836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5012305057232973547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63de2277261c3ab41a294cb2fe3d41e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPool: []
+  offset: {x: 0, y: 0, z: 0}
+--- !u!114 &-8010943451640192782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5012305057232973547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97a62886e1a252468b75f9b11b56a23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallTilePrefab: {fileID: 0}
+  doorPrefab: {fileID: 0}
+  tileMap: {fileID: 0}
+  tileToPlace: []
+  wallParent: {fileID: 0}
+  test: {fileID: 0}
