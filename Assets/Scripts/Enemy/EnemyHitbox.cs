@@ -60,7 +60,6 @@ public class EnemyHitbox : MonoBehaviour
 		TakeDamage tdamage;
 		if(!collider || !collider.transform.parent.TryGetComponent<TakeDamage>(out tdamage)) return;
 		if (tdamage.dead) return;
-		Debug.Log("Removing tdamage from objects to deal dmg to... ");	
 		objDamage.Remove(tdamage);
 	}
 }
