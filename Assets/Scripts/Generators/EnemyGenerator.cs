@@ -41,7 +41,6 @@ public class EnemyGenerator : MonoBehaviour
     }
 
 	void SpawnContinuously(){
-		Debug.Log(spawners_.Length);
 		int spawner_index = UnityEngine.Random.Range(0, spawners_.Length);
 		spawners_[spawner_index].Spawn();
 		enemiesLeft_--;

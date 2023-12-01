@@ -12,9 +12,12 @@ public class GameController : MonoBehaviour
 	}
 	
 	GameState state_;
+	InputManager input_;
     
 	void Awake()
 	{
+		input_ = GameObject.FindObjectOfType<InputManager>();
+		
 		Scene s = SceneManager.GetActiveScene();
 		if(s.name == "TitleScene"){
     		state_ = GameState.title;
@@ -22,10 +25,13 @@ public class GameController : MonoBehaviour
 		SceneProperties sceneProperties = GameObject.FindObjectOfType<SceneProperties>();
 		if(sceneProperties.sceneType == SceneProperties.SceneType.WAVE_DEFENCE){
 			// Set enemy generator AI strategy to target immediatily
+			// Set egg dying as the lose condition
+			GameObject.Find("DragonEgg").GetComponent<DeathController>().objectDied += GameOver;
 		}
 		else{
 			// Set dungeon generator enemy spawner to trigger via AIScanner
 		}
+		GameObject.Find("Player").GetComponent<DeathController>().objectDied += GameOver;
 	}
     
 	public void StartNewGame(){
@@ -39,6 +45,13 @@ public class GameController : MonoBehaviour
 		#else
 		Application.Quit();
 		#endif
+	}
+	
+	private void GameOver(object? sender, ObjectDeathArgs args){
+		// Handle player losing the game: Either player died or the egg got destroyed
+		Debug.Log(args.ObjectName + " died! Game over...");
+		input_.DisableGameplayInput();
+		
 	}
 
 }

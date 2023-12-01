@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+public class ObjectDeathArgs : EventArgs
+{
+	public ObjectDeathArgs(string n){
+		ObjectName = n;
+	}
+	public string ObjectName;
+}
+
 public class DeathController : MonoBehaviour
 {
 	Animator anim_;
@@ -11,6 +19,7 @@ public class DeathController : MonoBehaviour
 	Collider2D hitboxCollider_;
 	Collider2D modelCollider_;
 	AudioSource deathAudio_;
+	public event EventHandler<ObjectDeathArgs> objectDied;
 	
     void Start()
 	{
@@ -19,7 +28,7 @@ public class DeathController : MonoBehaviour
 		}
 		TakeDamage dmgScript = GetComponent<TakeDamage>();
 		dmgScript.Death += OnDeath;
-		dmgScript.Death += GetComponent<Movement>().OnDeath;
+		
 		Transform model = transform.Find("Model");
 		anim_ = model.GetComponent<Animator>();
 		modelCollider_ = model.GetComponent<Collider2D>();
@@ -37,13 +46,16 @@ public class DeathController : MonoBehaviour
 		Debug.Log(gameObject.name + " died!");
 		deathAudio_.volume += 0.2f;
 		deathAudio_.PlayOneShot(deathAudio_.clip);
-		hitboxCollider_.enabled = false;
+		hitboxCollider_.gameObject.SetActive(false);
 		modelCollider_.GetComponent<Collider2D>().enabled = false;
 		modelCollider_.GetComponent<SpriteRenderer>().sortingOrder--;
+		
 		foreach(var child in children_){
 			child.gameObject.SetActive(false);
 		}
-		anim_.SetTrigger("Death");
+		
+		if(anim_) anim_.SetTrigger("Death");
+		objectDied?.Invoke(this, new ObjectDeathArgs(name));
 	}
 	
 }
