@@ -18,7 +18,14 @@ public class GameController : MonoBehaviour
 		Scene s = SceneManager.GetActiveScene();
 		if(s.name == "TitleScene"){
     		state_ = GameState.title;
-    	}
+		}
+		SceneProperties sceneProperties = GameObject.FindObjectOfType<SceneProperties>();
+		if(sceneProperties.sceneType == SceneProperties.SceneType.WAVE_DEFENCE){
+			// Set enemy generator AI strategy to target immediatily
+		}
+		else{
+			// Set dungeon generator enemy spawner to trigger via AIScanner
+		}
 	}
     
 	public void StartNewGame(){
