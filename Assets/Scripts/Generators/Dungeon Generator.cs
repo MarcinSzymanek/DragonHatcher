@@ -92,11 +92,11 @@ public class DungeonGenerator : MonoBehaviour
                     PlaceWall(posX, posY, posZ, wallTilePrefab, room);
                      
                     if(acc == size/2f && posY > 0) {
-                        GameObject teleporter = PlaceTeleporter(posX, posY - 1, posZ, doorPrefab, room);
+                        GameObject teleporter = PlaceTeleporter(posX, posY - 1.5f, posZ, doorPrefab, room);
                         listOfTeleporters.Add(teleporter.transform);
                     }
                     if(acc == size/2f && posY < 0) {
-                        GameObject teleporter = PlaceTeleporter(posX, posY + 1, posZ, doorPrefab, room); 
+                        GameObject teleporter = PlaceTeleporter(posX, posY + 1.3f, posZ, doorPrefab, room); 
                         listOfTeleporters.Add(teleporter.transform);
                     }
                 }
