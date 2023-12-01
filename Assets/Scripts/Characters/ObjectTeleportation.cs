@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,9 +18,11 @@ public class ObjectTeleportation : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other != null && canTeleport && other.gameObject == objectToTeleport)
+	{
+		Debug.Log("Trigger Enter");
+		if (other != null && canTeleport)
         {
+        	Debug.Log("I am teleporter");
             playerg.SetActive(false);
             // Check the player's movement direction relative to the teleporter so we dont mess up the teleportation offset
             // First if = entering the teleporter into the next room from below or the side 
@@ -33,7 +35,7 @@ public class ObjectTeleportation : MonoBehaviour
             {
                 teleportOffset = new Vector3(0f, -2f, 0f);
             }
-           
+			// 
            
             disableTpFor(2.0f);
             objectToTeleport.position = destination.position + teleportOffset;
