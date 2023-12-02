@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +26,6 @@ public class Spawn_Lightning : MonoBehaviour, ISpell
         
         foreach (Collider2D enemyCollider in hitEnemies)
         {
-            Debug.Log("hey");
             Vector3 spawnPosition = enemyCollider.transform.position;
             GameObject lightning = Instantiate(lightningPrefab, spawnPosition, Quaternion.identity);
         }

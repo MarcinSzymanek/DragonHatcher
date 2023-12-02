@@ -1,5 +1,5 @@
 {
-    "name": "Shoota",
+    "name": "MainGameplay",
     "maps": [
         {
             "name": "Character",
@@ -223,6 +223,50 @@
                     "name": "",
                     "id": "cf525c4e-2788-4411-8099-b653eb871bda",
                     "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "696f214b-bbbe-495e-8264-8972b873d06c",
+                    "path": "<Keyboard>/#(1)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e2e09b00-f0e0-4b77-8659-693e6955aae6",
+                    "path": "<Keyboard>/#(2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa175e31-c092-4ec8-b145-315fc5a5a3a9",
+                    "path": "<Keyboard>/#(3)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8d778074-64d7-409d-9c62-ff719b562e38",
+                    "path": "<Keyboard>/#(4)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
