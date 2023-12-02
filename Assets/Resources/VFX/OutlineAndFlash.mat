@@ -43,7 +43,7 @@ Material:
     m_Floats:
     - _FlashAmount: 0
     - _OutlineOn: 0
-    - _OutlineThickness: 0
+    - _OutlineThickness: 1
     m_Colors:
     - _FlashColor: {r: 6.964404, g: 6.964404, b: 6.964404, a: 1}
     - _OutlineColor: {r: 0.9236599, g: 0.9245283, b: 0.74572796, a: 0}
