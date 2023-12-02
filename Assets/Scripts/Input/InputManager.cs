@@ -59,14 +59,13 @@ public class InputManager : MonoBehaviour
 	
 	void OnCast(InputAction.CallbackContext context){
 		if(!enabled_) return;
+		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		if(context.control.name == "1" || context.control.name == "2" || context.control.name == "3" ||context.control.name == "4"){
-			Debug.Log("Control number pressed");
-			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			caster_.CastSpell(int.Parse(context.control.name), mousePos);
 		}
 		else
 		{
-            caster_.CastSpell(new VectorTarget(playerTf_.position, Math2d.CalcDirection(playerTf_.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))));
+			caster_.CastSpell(0, mousePos);
         }
    }
 	

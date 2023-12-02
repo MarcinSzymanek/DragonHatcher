@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +19,11 @@ public class Spawn_Firewall : MonoBehaviour, ISpell
     {
         SpawnFirewall(parameters.pointTarget);
     }
+    
+	public void CastSpell(Vector3 mousePos){
+		PointTarget target = new PointTarget(mousePos.x, mousePos.y);
+		SpawnFirewall(target);
+	}
 
     private void SpawnFirewall(PointTarget pt)
     {

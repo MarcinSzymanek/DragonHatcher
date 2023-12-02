@@ -15,9 +15,11 @@ public class Spellcaster : MonoBehaviour
 		anim_ = GetComponentInChildren<Animator>();
 		spellbook = GetComponentInChildren<Spellbook>();
 		spellSlots = new ISpell[5];
-		for(int i = 0; i < spellbook.spellCount; i++){
-			Debug.Log(spellbook.spellCount.ToString());
+		Debug.Log(spellbook.spellCount.ToString());
+		for(int i = 0; i < maxSpells; i++){
 			spellSlots[i] = spellbook.GetSpellById(i);
+			if(spellSlots[i] != null)
+				Debug.Log(spellSlots[i].name);
 		}
 	    ReadySpell(0, 0);
     }
@@ -40,25 +42,27 @@ public class Spellcaster : MonoBehaviour
 			Debug.LogWarning("Player tried to cast spell at slot " + slot.ToString() + ", but does not have spell in that slot!");
 			return;
 		}
-		// Figure out which Spellparameters we need here
-	}
-	
-	public void CastSpell(VectorTarget target){
-		spellSlots[0].CastSpell(new SpellParameters(target));
+		spellSlots[slot].CastSpell(mousePosition);
 		anim_.SetTrigger("castSpell");
 		anim_.SetBool("casting", true);
 	}
 	
-	public void CastSpell(int slot, VectorTarget target){
-		spellSlots[slot].CastSpell(new SpellParameters(target));
-		anim_.SetTrigger("castSpell");
-		anim_.SetBool("casting", true);
-	}
+	//public void CastSpell(VectorTarget target){
+	//	spellSlots[0].CastSpell(new SpellParameters(target));
+	//	anim_.SetTrigger("castSpell");
+	//	anim_.SetBool("casting", true);
+	//}
+	
+	//public void CastSpell(int slot, VectorTarget target){
+	//	spellSlots[slot].CastSpell(new SpellParameters(target));
+	//	anim_.SetTrigger("castSpell");
+	//	anim_.SetBool("casting", true);
+	//}
 
-    public void CastSpell(int slot, PointTarget target)
-    {
-        spellSlots[slot].CastSpell(new SpellParameters(target));
-        anim_.SetTrigger("castSpell");
-        anim_.SetBool("casting", true);
-    }
+    //public void CastSpell(int slot, PointTarget target)
+    //{
+    //    spellSlots[slot].CastSpell(new SpellParameters(target));
+    //    anim_.SetTrigger("castSpell");
+    //    anim_.SetBool("casting", true);
+    //}
 }

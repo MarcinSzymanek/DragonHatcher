@@ -23,6 +23,12 @@ public class ProjectileSpell : MonoBehaviour, ISpell, IVectorTargeted
 		castSpell_(parameters.vectorTarget);
 	}
 	
+	public void CastSpell(Vector3 mousePos){
+		Vector3 parentPos = transform.parent.parent.position;
+		VectorTarget target = new VectorTarget(parentPos, Math2d.CalcDirection(parentPos, mousePos));
+		castSpell_(target);
+	}
+	
 	private void castSpell_(VectorTarget target){
 		target_ = target;
 		Invoke("cast_", castDelay);
