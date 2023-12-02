@@ -18,6 +18,8 @@ public class InputManager : MonoBehaviour
 	Movement moveScript_;
 	ItemPicker itemPicker_;
 	
+	private bool enabled_ = true;
+	
     // Start is called before the first frame update
 	void Awake()
     {
@@ -44,6 +46,7 @@ public class InputManager : MonoBehaviour
     
 	// Continuously read input from move action and change player movement based on that
 	void Update(){
+		if(!enabled_) return;
 		var moveDirection = actionMove.ReadValue<Vector2>();
 		//Debug.Log(moveDirection);
 		moveScript_.ChangeDirection(moveDirection.x, moveDirection.y);
@@ -55,6 +58,7 @@ public class InputManager : MonoBehaviour
 	
 	
 	void OnCast(InputAction.CallbackContext context){
+		if(!enabled_) return;
 		if(context.control.name == "1")
 		{
 			Vector3 cam = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -64,5 +68,14 @@ public class InputManager : MonoBehaviour
 		{
             caster_.CastSpell(new VectorTarget(playerTf_.position, Math2d.CalcDirection(playerTf_.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))));
         }
-    }
+   }
+	
+	public void DisableGameplayInput(){
+		enabled_ = false;
+	}
+	
+	public void EnableGameplayInput(){
+		enabled_ = true;
+	}
+
 }

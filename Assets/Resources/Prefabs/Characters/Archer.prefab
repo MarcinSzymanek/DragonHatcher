@@ -251,7 +251,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 15.000001
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -286,7 +286,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.459
+      value: 0.844
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -583,6 +583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261daaf0e4f1d56439a54bb1bfbbbebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathGrunt: {fileID: 8300000, guid: 88a7559d1a5ef7243af0e003e378de9a, type: 3}
 --- !u!1 &6033712528865391100
 GameObject:
   m_ObjectHideFlags: 0

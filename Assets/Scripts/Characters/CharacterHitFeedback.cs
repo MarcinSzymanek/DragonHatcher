@@ -28,7 +28,7 @@ public class CharacterHitFeedback : MonoBehaviour
 		GetComponent<TakeDamage>().OnDamageTaken += OnHit;
 		move_ = GetComponent<Movement>();
 		anim_ = transform.Find("Model").GetComponent<Animator>();
-		audio_ = transform.Find("Hitbox").GetComponent<AudioSource>();
+		audio_ = transform.Find("mainAudio").GetComponent<AudioSource>();
 	}
 	
     // Start is called before the first frame update
@@ -43,7 +43,7 @@ public class CharacterHitFeedback : MonoBehaviour
 	}
 	
 	public void ProcessHit(){
-		anim_.SetTrigger("hit");
+		if(anim_) anim_.SetTrigger("hit");
 		if(clips_.Length > 0) audio_.PlayOneShot(clips_[UnityEngine.Random.Range(0, clips_.Length)]);
 		spriteRend_.material.SetFloat(maskName_, startMaskStrength_);
 		StartCoroutine(ReduceMask());

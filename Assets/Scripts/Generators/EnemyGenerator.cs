@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AIStrategies;
 
 public class EnemyGenerator : MonoBehaviour
 {
@@ -30,18 +31,27 @@ public class EnemyGenerator : MonoBehaviour
 		spawnRate *= 2;
 	}
 	
+	// Set AI strategy according to scene type
+	public void Awake(){
+		IAI_Strategy strategy;
+		if(GameObject.FindObjectOfType<GameController>().currentSceneType == SceneProperties.SceneType.WAVE_DEFENCE) strategy = new AIStrategies.StrategyTargetEgg();
+		else strategy = new AIStrategies.StrategyScanForPlayer();
+		enemiesLeft_ = enemyCount;
+		spawners_ = GetComponentsInChildren<IEnemySpawner>();
+		foreach(var s in spawners_){
+			s.SetAIStrategy(strategy);
+		}
+	}
+	
 	// Start is called before the first frame update
     void Start()
 	{
-		enemiesLeft_ = enemyCount;
-		spawners_ = GetComponentsInChildren<IEnemySpawner>();
 		if(startOnSceneStart){
 			Invoke("SpawnContinuously", 5f);
 		}
     }
 
 	void SpawnContinuously(){
-		Debug.Log(spawners_.Length);
 		int spawner_index = UnityEngine.Random.Range(0, spawners_.Length);
 		spawners_[spawner_index].Spawn();
 		enemiesLeft_--;

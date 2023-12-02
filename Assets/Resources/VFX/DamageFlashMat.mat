@@ -42,10 +42,13 @@ Material:
     m_Ints: []
     m_Floats:
     - _FlashAmount: 0
+    - _Outline: 0
+    - _OutlineThickness: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
     - _FlashColor: {r: 6.964404, g: 6.964404, b: 6.964404, a: 1}
+    - _OutlineColor: {r: 0.6886792, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3481495809232802021
 MonoBehaviour:

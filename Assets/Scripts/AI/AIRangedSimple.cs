@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using AIStrategies;
 
-public class AIRangedSimple : MonoBehaviour, IStopOnDeath
+public class AIRangedSimple : MonoBehaviour, IStopOnDeath, IAIBase
 {
 	Movement move_;
 	Animator anim_;
 	AIScan scanner_;
+	public AIScan scanner {get{return scanner_;}}
 	AudioSource audio_;
 	Spawn_Projectile projectileSpawner_;
 	[field: SerializeField]
 	public float AttackDistance{get; set;}
+	public IAI_Strategy strategy;
 	
 	Vector2? moveTarget_ = null;
 	Transform? attackTarget_ = null;
@@ -50,27 +53,36 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath
 	
 	State state_ = State.wait_player;
 	Range range_ = Range.out_of_range;
+	
+	void Awake(){
+		t_ = transform;
+		scanner_ = GetComponentInChildren<AIScan>();
+		move_ = GetComponent<Movement>();
+		anim_ = GetComponentInChildren<Animator>();
+
+		audio_ = transform.Find("mainAudio").GetComponent<AudioSource>();
+		projectileSpawner_ = GetComponent<Spawn_Projectile>();
+	    
+		GetComponentInChildren<EnemyAnimEvents>().arrowReleased += OnArrowRelease;
+		GetComponentInChildren<EnemyAnimEvents>().attackFinished += OnAttackFinished;
+    	
+		attackMarker_ = t_.Find("AttackMarker");
+		firepoint_ = t_.Find("firePoint");
+    	
+		range_far = AttackDistance * 0.85f;
+		range_mid = AttackDistance * 0.65f;
+		range_close = AttackDistance * 0.4f;
+	}
     // Start is called before the first frame update
     void Start()
     {
-	    move_ = GetComponent<Movement>();
-	    anim_ = GetComponentInChildren<Animator>();
-	    scanner_ = GetComponentInChildren<AIScan>();
-	    audio_ = transform.Find("mainAudio").GetComponent<AudioSource>();
-	    projectileSpawner_ = GetComponent<Spawn_Projectile>();
 	    
-	    GetComponentInChildren<EnemyAnimEvents>().arrowReleased += OnArrowRelease;
-	    GetComponentInChildren<EnemyAnimEvents>().attackFinished += OnAttackFinished;
-    	scanner_.objectEntered += OnPlayerNoticed;
-    	
-    	t_ = transform;
-    	attackMarker_ = t_.Find("AttackMarker");
-    	firepoint_ = t_.Find("firePoint");
-    	
-    	range_far = AttackDistance * 0.85f;
-    	range_mid = AttackDistance * 0.65f;
-    	range_close = AttackDistance * 0.4f;
     }
+    
+	public void SetStrategy(IAI_Strategy strat){
+		strategy = strat;
+		strategy.Setup(this);
+	}
 	
 	public void OnDeath(object? s, EventArgs args){
 		StopAllCoroutines();
@@ -84,10 +96,11 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath
 		animFinished_ = true;
 	}
     
-	public void OnPlayerNoticed(object? sender, ObjectEnteredArgs args){
+	public void OnTargetAcquired(object? sender, ObjectEnteredArgs args){
+		Debug.Log(t_.name + " acquired " + t_.position );
 		var dist = Math2d.CalcDistance(t_.position, args.T.position);
 		Debug.Log("Noticed the player!!! Distance: " + dist);
-		scanner_.objectEntered -= OnPlayerNoticed;
+		scanner_.objectEntered -= OnTargetAcquired;
 		attackTarget_ = args.T;
 		moveTarget_ = (Vector2)(((Transform)attackTarget_).position);
 		StartCoroutine(CloseIn());
