@@ -8830,7 +8830,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4889399139544168491, guid: 19175eea286da7d439e55e61af601cc7, type: 3}
   m_PrefabInstance: {fileID: 1030232920145256016}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1471658038
+--- !u!114 &1471658036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8846,9 +8846,12 @@ MonoBehaviour:
   Intensity: 0
   OuterRadius: 0
   flicker:
-    enabled: 0
-    intensityStep: 1
-    frequency: 0
+    enabled: 1
+    intensityStep: 0.5
+    radiusMult: 1.3
+    delayBetweenFlicker: 0.5
+    flickerTime: 0.2
+    stepUp: 1
   flash:
     enabled: 0
     use_volumetric_light: 0
@@ -10249,7 +10252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7137042445348209184, guid: 19175eea286da7d439e55e61af601cc7, type: 3}
       propertyPath: m_LightVolumeIntensity
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7137042445348209184, guid: 19175eea286da7d439e55e61af601cc7, type: 3}
       propertyPath: m_PointLightInnerAngle
@@ -10261,11 +10264,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7137042445348209184, guid: 19175eea286da7d439e55e61af601cc7, type: 3}
       propertyPath: m_PointLightInnerRadius
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7137042445348209184, guid: 19175eea286da7d439e55e61af601cc7, type: 3}
       propertyPath: m_PointLightOuterRadius
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7137042445348209184, guid: 19175eea286da7d439e55e61af601cc7, type: 3}
       propertyPath: m_LocalBounds.m_Center.x
@@ -10302,7 +10305,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4889399139544168491, guid: 19175eea286da7d439e55e61af601cc7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1471658038}
+      addedObject: {fileID: 1471658036}
   m_SourcePrefab: {fileID: 100100000, guid: 19175eea286da7d439e55e61af601cc7, type: 3}
 --- !u!1001 &1473977230330709681
 PrefabInstance:
@@ -10437,18 +10440,6 @@ PrefabInstance:
     - target: {fileID: 2382880241544636628, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
       propertyPath: m_Name
       value: UIMain
-      objectReference: {fileID: 0}
-    - target: {fileID: 3373452283021288840, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3381968999836434279, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3724103671557716062, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5220200972660286590, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
       propertyPath: Tracked

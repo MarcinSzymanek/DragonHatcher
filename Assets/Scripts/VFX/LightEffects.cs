@@ -10,9 +10,11 @@ public class LightEffects : MonoBehaviour
 	public class Flicker
 	{
 		public bool enabled;	
-		public float intensityStep = 1;
-		public int frequency = 2;
-    
+		public float intensityStep = 1f;
+		public float radiusMult = 2f;
+		public float delayBetweenFlicker = 0.5f;
+		public float flickerTime = 0.2f;
+		public bool stepUp = true;
 		//private void OnAnimationStep(){
 		//	counter += 1;
 		
@@ -33,6 +35,7 @@ public class LightEffects : MonoBehaviour
 		public bool use_volumetric_light;
 		public float intensityAmp;
 		public float falloffSpeedMultiplier;
+		
 	}
 	
 	private Light2D light_;
@@ -51,7 +54,32 @@ public class LightEffects : MonoBehaviour
 	void Awake()
 	{
 		light_ = GetComponent<UnityEngine.Rendering.Universal.Light2D>();
-		var a = flash.enabled;
+		baseIntensity_ = light_.intensity;
+		baseInnerRadius_ = light_.pointLightInnerRadius;
+		baseOuterRadius_ = light_.pointLightOuterRadius;
+		if(flicker.enabled) Invoke("processFlicker", flicker.delayBetweenFlicker);
 	}
 	
+	void processFlicker(){
+		if(!flicker.enabled) return;
+		
+		if(flicker.stepUp){
+			light_.intensity += flicker.intensityStep;
+			light_.pointLightInnerRadius *= flicker.radiusMult;
+			light_.pointLightOuterRadius *= flicker.radiusMult;
+			flicker.stepUp = false;
+			Invoke("processFlicker", flicker.delayBetweenFlicker);
+		}
+		else{
+			light_.intensity -= flicker.intensityStep;
+			light_.pointLightInnerRadius = baseInnerRadius_;
+			light_.pointLightOuterRadius = baseOuterRadius_;
+			flicker.stepUp = true;
+			Invoke("processFlicker", flicker.flickerTime);
+		}
+	}
+	
+
 }
+
+
