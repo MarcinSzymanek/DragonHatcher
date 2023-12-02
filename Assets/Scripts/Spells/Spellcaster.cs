@@ -34,6 +34,15 @@ public class Spellcaster : MonoBehaviour
 		}
 	}
 	
+	public void CastSpell(int slot, Vector3 mousePosition){
+		Debug.Log("CastSpell slot " + slot.ToString());
+		if(spellSlots[slot] == null){
+			Debug.LogWarning("Player tried to cast spell at slot " + slot.ToString() + ", but does not have spell in that slot!");
+			return;
+		}
+		// Figure out which Spellparameters we need here
+	}
+	
 	public void CastSpell(VectorTarget target){
 		spellSlots[0].CastSpell(new SpellParameters(target));
 		anim_.SetTrigger("castSpell");
