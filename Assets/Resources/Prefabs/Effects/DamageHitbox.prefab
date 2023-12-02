@@ -48,7 +48,7 @@ MonoBehaviour:
   damageAmount: 2
   gracePeriod: 20
   objDamage: []
-  destroyOnDamage: 1
+  destroyOnDamage: 0
 --- !u!58 &4918425535754093748
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -81,6 +81,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01882455, y: 0.14399631}
+  m_Offset: {x: -0.006171408, y: 0.14399631}
   serializedVersion: 2
-  m_Radius: 0.05525064
+  m_Radius: 0.12273407

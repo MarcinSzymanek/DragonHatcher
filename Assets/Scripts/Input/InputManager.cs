@@ -55,6 +55,14 @@ public class InputManager : MonoBehaviour
 	
 	
 	void OnCast(InputAction.CallbackContext context){
-		caster_.CastSpell(new VectorTarget(playerTf_.position, Math2d.CalcDirection(playerTf_.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))));	
-	}
+		if(context.control.name == "1")
+		{
+			Vector3 cam = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			caster_.CastSpell(1, new PointTarget(cam.x, cam.y));
+		}
+		else
+		{
+            caster_.CastSpell(new VectorTarget(playerTf_.position, Math2d.CalcDirection(playerTf_.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))));
+        }
+    }
 }

@@ -7,8 +7,13 @@ public class Spawn_Lightning : MonoBehaviour, ISpell
     public GameObject lightningPrefab;
     public LayerMask targetLayer;
     public float spawnRadius = 5f;
-    public int id{get; set;}
-	string name_;
+    public int id
+    {
+        get { return id_; }
+        set { }
+    }
+    public int id_ = 2;
+    string name_;
 	public string name{get => name_;}
 
     public void CastSpell(SpellParameters parameters) {
@@ -22,7 +27,7 @@ public class Spawn_Lightning : MonoBehaviour, ISpell
         foreach (Collider2D enemyCollider in hitEnemies)
         {
             Debug.Log("hey");
-            Vector3 spawnPosition = enemyCollider.transform.position + Vector3.up;
+            Vector3 spawnPosition = enemyCollider.transform.position;
             GameObject lightning = Instantiate(lightningPrefab, spawnPosition, Quaternion.identity);
         }
     }
