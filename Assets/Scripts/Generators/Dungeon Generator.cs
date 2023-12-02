@@ -1,9 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
+using AIStrategies;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -48,7 +49,8 @@ public class DungeonGenerator : MonoBehaviour
         listOfScripts = new List<ObjectTeleportation>();
         listOfRandomPositions = new List<Vector3>();
         listOfTeleporters = new List<Transform>();
-        spawner = GetComponent<EnemySpawner>();
+	    spawner = GetComponent<EnemySpawner>();
+	    spawner.SetAIStrategy(new AIStrategies.StrategyScanForPlayer());
     }
     void Start()
     {

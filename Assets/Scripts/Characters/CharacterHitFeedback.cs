@@ -28,7 +28,7 @@ public class CharacterHitFeedback : MonoBehaviour
 		GetComponent<TakeDamage>().OnDamageTaken += OnHit;
 		move_ = GetComponent<Movement>();
 		anim_ = transform.Find("Model").GetComponent<Animator>();
-		audio_ = transform.Find("Hitbox").GetComponent<AudioSource>();
+		audio_ = transform.Find("mainAudio").GetComponent<AudioSource>();
 	}
 	
     // Start is called before the first frame update

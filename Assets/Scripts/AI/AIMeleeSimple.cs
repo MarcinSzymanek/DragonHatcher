@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using AIStrategies;
 
 public enum State{
 	unaware,
 	aware
 }
 
-public class AIMeleeSimple : MonoBehaviour, IStopOnDeath
+public class AIMeleeSimple : MonoBehaviour, IStopOnDeath, IAIBase
 {
 	Movement move_;
 	AIScan scanner_;
@@ -24,24 +25,36 @@ public class AIMeleeSimple : MonoBehaviour, IStopOnDeath
 	
 	
 	Transform t_;
+	IAI_Strategy strategy_;
+	
+	public AIScan scanner{get{return scanner_;}}
+	public void SetStrategy(IAI_Strategy strategy){
+		strategy_ = strategy;
+		strategy.Setup(this);
+	}
+	
+	void Awake(){
+		t_ = transform;	
+		scanner_ = GetComponentInChildren<AIScan>();
+		if(LockOnRefresh == 0) LockOnRefresh = 0.3f;
+		if(AttackDistance == 0) AttackDistance = 0.7f;
+		move_ = GetComponent<Movement>();
+	}
 	
     void Start()
 	{
-		if(LockOnRefresh == 0) LockOnRefresh = 0.3f;
-		if(AttackDistance == 0) AttackDistance = 0.7f;
-    	move_ = GetComponent<Movement>();
-    	scanner_ = GetComponentInChildren<AIScan>();
-    	scanner_.objectEntered += OnPlayerNoticed;
-    	t_ = transform;
+		
 	}
     
 	public void OnDeath(object? s, EventArgs args){
 		StopAllCoroutines();
 	}
     
-	public void OnPlayerNoticed(object? sender, ObjectEnteredArgs args){
+	public void OnTargetAcquired(object? sender, ObjectEnteredArgs args){
+		Debug.Log("My pos: " + t_.position);
+		Debug.Log("Args are null? " + args != null);
 		Debug.Log("Noticed the player!!! Distance: " + Math2d.CalcDistance(t_.position, args.T.position));
-		scanner_.objectEntered -= OnPlayerNoticed;
+		scanner_.objectEntered -= OnTargetAcquired;
 		attackTarget_ = args.T;
 		moveTarget_ = (Vector2)(((Transform)attackTarget_).position);
 		StartCoroutine(LockOnTarget());

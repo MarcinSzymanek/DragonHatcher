@@ -10,4 +10,6 @@ public class SceneProperties : MonoBehaviour
 	};
 	
 	public SceneType sceneType;
+	
+	public int maxEnemies;
 }

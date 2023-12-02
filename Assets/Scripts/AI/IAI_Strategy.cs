@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IAI_Strategy
-{
-	void OnEnter();
+// Figure out what to do when AI enters the scene
+namespace AIStrategies{
+	public interface IAI_Strategy
+	{
+		void Setup(IAIBase ai);
+	}	
 }
+
