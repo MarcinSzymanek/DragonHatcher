@@ -24,12 +24,19 @@ public class ContactDamage : MonoBehaviour
 		}
 		if(objDamage.Count == 0) return;
 		bool dealtDamage = false;
+		List<int> toRemove = new List<int>();
 		// Debug.Log("Iterating through objDamage list");
-		foreach(TakeDamage d in objDamage){
-			if(objDamage.Count == 0) return;
+		for(int i = 0; i < objDamage.Count; i++){
+			var d = objDamage[i];
 			if(d == null) continue;
 			d.TriggerTakeDamage(damageAmount);
-			dealtDamage = true;}
+			dealtDamage = true;
+			if(d.dead) toRemove.Add(i);
+		}
+		
+		foreach(int i in toRemove){
+			objDamage.RemoveAt(i);
+		}
 		// Debug.Log("Done");
 		if(dealtDamage && destroyOnDamage){
 			transform.parent.gameObject.SetActive(false);

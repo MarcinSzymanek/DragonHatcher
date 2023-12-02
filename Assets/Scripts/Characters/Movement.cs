@@ -23,16 +23,20 @@ public class Movement : MonoBehaviour, IStopOnDeath
 	public float Speed{get; set;}
 	public float HopSpeed = 3f;
 
-    void Start()
-	{
-		
+	void Awake(){
 		locker_ = new Locker<Movement>();
-	    tf_ = gameObject.transform;
-	    body_ = tf_.GetComponent<Rigidbody2D>();
-	    anim_ = tf_.GetChild(0).GetComponent<Animator>();
+		tf_ = gameObject.transform;
+		body_ = tf_.GetComponent<Rigidbody2D>();
+		anim_ = tf_.GetChild(0).GetComponent<Animator>();
 		sprite_ = tf_.GetChild(0).GetComponent<SpriteRenderer>();
 		hitboxTf_ = tf_.Find("Hitbox");
 		modelTf_ = tf_.Find("Model");
+	}
+	
+    void Start()
+	{
+		
+		
     }
 
     // Update is called once per frame
