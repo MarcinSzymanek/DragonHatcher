@@ -35,7 +35,7 @@ public class ContactDamage : MonoBehaviour
 		}
 		
 		foreach(int i in toRemove){
-			objDamage.RemoveAt(i);
+			if(i < objDamage.Count) objDamage.RemoveAt(i);
 		}
 		// Debug.Log("Done");
 		if(dealtDamage && destroyOnDamage){

@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class PointTarget : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float x ;
+    public float y;
+    public PointTarget(float xposition, float yposition)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        x = xposition;
+        y = yposition;
     }
 }
