@@ -34,23 +34,6 @@ public class Spellcaster : MonoBehaviour
 		}
 	}
 	
-
-	public void CastSpell(){
-		if(spellSlots[0] is IVectorTargeted){
-			Debug.LogError("CastSpell: spell requires a vector target");
-			return;
-		}
-		spellSlots[0].CastSpell(new SpellParameters());
-		anim_.SetTrigger("castSpell");
-		anim_.SetBool("casting", true);
-	}
-	
-	public void CastSpell(int slot){
-		spellSlots[slot].CastSpell(new SpellParameters());
-		anim_.SetTrigger("castSpell");
-		anim_.SetBool("casting", true);
-	}
-	
 	public void CastSpell(VectorTarget target){
 		spellSlots[0].CastSpell(new SpellParameters(target));
 		anim_.SetTrigger("castSpell");
@@ -62,4 +45,11 @@ public class Spellcaster : MonoBehaviour
 		anim_.SetTrigger("castSpell");
 		anim_.SetBool("casting", true);
 	}
+
+    public void CastSpell(int slot, PointTarget target)
+    {
+        spellSlots[slot].CastSpell(new SpellParameters(target));
+        anim_.SetTrigger("castSpell");
+        anim_.SetBool("casting", true);
+    }
 }

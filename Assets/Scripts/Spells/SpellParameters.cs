@@ -10,4 +10,11 @@ public class SpellParameters
 	
 	public VectorTarget? vectorTarget{get; private set;}
 
+	public SpellParameters(PointTarget ptarget = null)
+	{
+		pointTarget = ptarget;
+	}
+
+	public PointTarget? pointTarget { get; private set;}
+
 }
