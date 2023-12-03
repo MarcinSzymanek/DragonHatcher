@@ -11,7 +11,8 @@ public class UIHp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-	    slider_ = GetComponentInChildren<Slider>();   
+		slider_ = GetComponentInChildren<Slider>();
+		if(name == "UIPlayerHp") Tracked = GameObject.Find("Player");
 		var health = Tracked.GetComponent<Health>();
 		hp_ = health.currentHealth;
 		Tracked.GetComponent<TakeDamage>().OnDamageTaken += ReduceHp;

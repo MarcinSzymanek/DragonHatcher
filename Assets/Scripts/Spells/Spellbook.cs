@@ -10,10 +10,7 @@ public class Spellbook : MonoBehaviour
 	void Awake()
     {
 	    heldSpells = new Dictionary<int, ISpell>();
-	    var spells = GetComponentsInChildren<ISpell>();
-	    foreach (ISpell s in spells){
-	    	heldSpells[s.id] = s;
-	    } 
+	    updateHeldSpells_();
     }
 	#nullable enable
 	public ISpell? GetSpellById(int id){
@@ -21,5 +18,14 @@ public class Spellbook : MonoBehaviour
 			return heldSpells[id];
 		}
 		return null;
+	}
+	#nullable disable
+	
+	private void updateHeldSpells_(){
+		var spells = GetComponentsInChildren<ISpell>();
+		foreach (ISpell s in spells){
+			Debug.Log("Adding " + s.name + " to index " + s.id.ToString());
+			heldSpells[s.id] = s;
+		} 
 	}
 }

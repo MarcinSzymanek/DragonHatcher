@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
 public class Spawn_Lightning : MonoBehaviour, ISpell
 {
     public GameObject lightningPrefab;
@@ -13,13 +15,15 @@ public class Spawn_Lightning : MonoBehaviour, ISpell
         set { }
     }
     public int id_ = 2;
-    string name_;
-	public string name{get => name_;}
 
     public void CastSpell(SpellParameters parameters) {
         SpawnLightningAboveEnemies();
     }
-
+	
+	public void CastSpell(Vector3 mousePos){
+		SpawnLightningAboveEnemies();
+	}
+	
     public void SpawnLightningAboveEnemies()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, spawnRadius, targetLayer);

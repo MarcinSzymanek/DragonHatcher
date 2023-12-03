@@ -59,14 +59,13 @@ public class InputManager : MonoBehaviour
 	
 	void OnCast(InputAction.CallbackContext context){
 		if(!enabled_) return;
-		if(context.control.name == "1")
-		{
-			Vector3 cam = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			caster_.CastSpell(1, new PointTarget(cam.x, cam.y));
+		Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		if(context.control.name == "1" || context.control.name == "2" || context.control.name == "3" ||context.control.name == "4"){
+			caster_.CastSpell(int.Parse(context.control.name), mousePos);
 		}
 		else
 		{
-            caster_.CastSpell(new VectorTarget(playerTf_.position, Math2d.CalcDirection(playerTf_.position, Camera.main.ScreenToWorldPoint(Input.mousePosition))));
+			caster_.CastSpell(0, mousePos);
         }
    }
 	
