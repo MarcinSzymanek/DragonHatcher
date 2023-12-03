@@ -9,13 +9,8 @@ public class Spawn_Lightning : MonoBehaviour, ISpell
     public GameObject lightningPrefab;
     public LayerMask targetLayer;
     public float spawnRadius = 5f;
-    public int id
-    {
-        get { return id_; }
-        set { }
-    }
-    public int id_ = 2;
-
+    public int id {get; set;}
+ 
     public void CastSpell(SpellParameters parameters) {
         SpawnLightningAboveEnemies();
     }

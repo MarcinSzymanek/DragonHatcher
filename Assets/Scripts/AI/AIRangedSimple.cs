@@ -97,9 +97,7 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath, IAIBase
 	}
     
 	public void OnTargetAcquired(object? sender, ObjectEnteredArgs args){
-		Debug.Log(t_.name + " acquired " + t_.position );
 		var dist = Math2d.CalcDistance(t_.position, args.T.position);
-		Debug.Log("Noticed the player!!! Distance: " + dist);
 		scanner_.objectEntered -= OnTargetAcquired;
 		attackTarget_ = args.T;
 		moveTarget_ = (Vector2)(((Transform)attackTarget_).position);

@@ -56,7 +56,9 @@ public class Spellbook : MonoBehaviour
 	}
 	
 	public void PrepareSpell(int slot, SpellDataObject spell){
-		// update heldSpells with the new spell	
+		// update heldSpells with the new spell
+		GameObject prepared = Instantiate(spell.spellPrefab, transform);
+		prepared.GetComponent<ISpell>().id = slot;
 		spellPrepared?.Invoke(this, new SpellPreparedArgs(slot, spell));
 	}
 }

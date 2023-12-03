@@ -5,7 +5,7 @@ using System;
 
 public interface ISpell
 {
-	int id{get;}
+	int id{get; set;}
 	string name{get;}
 	void CastSpell(SpellParameters parameters);
 	void CastSpell(Vector3 mousePos);
