@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeda647e1b83fa1488c6d416e48e2a46, type: 3}
+  m_Name: Firewall
+  m_EditorClassIdentifier: 
+  name: Firewall
+  description: Creates a wall of flames at target location
+  icon: {fileID: 0}
+  cooldown: 0.8
+  spellPrefab: {fileID: 8937565274442709528, guid: f6dbc0909cf2fc641ab93a7bda0ffd23, type: 3}
+  target:
+    serializedVersion: 2
+    m_Bits: 1024

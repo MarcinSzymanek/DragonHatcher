@@ -10,16 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeda647e1b83fa1488c6d416e48e2a46, type: 3}
-  m_Name: Arrow
+  m_Name: CallLightning
   m_EditorClassIdentifier: 
-  name: Arrow
-  description: Shoots a meager arrow
-  cooldown: 0.3
-  projectile: 1
-  groundTargeted: 0
+  name: Call Lightning
+  description: Calls down a series of lightning strikes at enemies around the caster
+  icon: {fileID: 0}
+  cooldown: 0.5
+  spellPrefab: {fileID: 3504240422263237668, guid: edb854222dbc10c49bdaf374097a4453, type: 3}
   target:
     serializedVersion: 2
     m_Bits: 1024
-  onCast:
-    m_PersistentCalls:
-      m_Calls: []

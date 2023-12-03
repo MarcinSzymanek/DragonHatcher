@@ -7,7 +7,7 @@ using System;
 *  
 *  Turns on the popup help text when the player is in range  
 */ 
-public class PickableItem : MonoBehaviour
+public class PickableItem : MonoBehaviour, IPickable
 {
 	AddHoverText textScript_;
 	[SerializeReference]
