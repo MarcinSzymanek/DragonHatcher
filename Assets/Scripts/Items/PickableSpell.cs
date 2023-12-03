@@ -8,6 +8,7 @@ public class PickableSpell : MonoBehaviour, IPickable
 	private Spellbook playerSpellbook_;
 	
 	void Awake(){
+		GetComponent<SpriteRenderer>().sprite = spellData.icon;
 		playerSpellbook_ = GameObject.Find("Player").GetComponentInChildren<Spellbook>();
 	}
 	
