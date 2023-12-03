@@ -19,8 +19,6 @@ public class Spellcaster : MonoBehaviour
 		Debug.Log(spellbook.spellCount.ToString());
 		for(int i = 0; i < maxSpells; i++){
 			spellSlots[i] = spellbook.GetSpellById(i);
-			if(spellSlots[i] != null)
-				Debug.Log(spellSlots[i].name);
 		}
 	    ReadySpell(0, 0);
     }

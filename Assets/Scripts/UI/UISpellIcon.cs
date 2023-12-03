@@ -1,18 +1,18 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UISpellIcon : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	Image image_;
+	public int Id;
+	
+	void Awake(){
+		image_ = GetComponent<Image>();	
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public void ChangeIcon(Sprite sprite){
+		image_.sprite = sprite;
+	}
 }
