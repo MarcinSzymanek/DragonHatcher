@@ -37,7 +37,7 @@ public class Spellcaster : MonoBehaviour
 	
 	public void CastSpell(int slot, Vector3 mousePosition){
 		Debug.Log("CastSpell slot " + slot.ToString());
-		var spell = spellbook.GetSpellById(slot);
+		ISpell spell = spellbook.GetSpellById(slot);
 		if(spell == null){
 			Debug.LogWarning("Player tried to cast spell at slot " + slot.ToString() + ", but does not have spell in that slot!");
 			return;

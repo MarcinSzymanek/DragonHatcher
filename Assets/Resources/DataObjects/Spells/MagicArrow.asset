@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Arrow
   description: A wizardly classic
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 49730d1e64faf644b806b12ce37edcfb, type: 3}
   cooldown: 0.3
   spellPrefab: {fileID: 5185818274522853722, guid: ee556e2a966888b4d85653f7c312c9b5, type: 3}
   target:
