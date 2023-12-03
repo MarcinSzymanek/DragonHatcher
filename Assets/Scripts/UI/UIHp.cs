@@ -8,14 +8,18 @@ public class UIHp : MonoBehaviour
 	Slider slider_;
 	int hp_;
 	public GameObject Tracked;
-    // Start is called before the first frame update
-    void Start()
-	{
+	
+	void Awake(){
 		slider_ = GetComponentInChildren<Slider>();
 		if(name == "UIPlayerHp") Tracked = GameObject.Find("Player");
+		Tracked.GetComponent<TakeDamage>().OnDamageTaken += ReduceHp;
+		
+	}
+	
+    void Start()
+	{
 		var health = Tracked.GetComponent<Health>();
 		hp_ = health.currentHealth;
-		Tracked.GetComponent<TakeDamage>().OnDamageTaken += ReduceHp;
 		slider_.maxValue = health.maxHealth;
 		slider_.value = hp_;
     }

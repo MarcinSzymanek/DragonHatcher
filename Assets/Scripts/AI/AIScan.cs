@@ -18,7 +18,7 @@ public class AIScan : MonoBehaviour
 public class ObjectEnteredArgs : EventArgs
 {
 	public ObjectEnteredArgs(Transform t){
-		Debug.Log(t.name + " at " + t.position);
+		// Debug.Log(t.name + " at " + t.position);
 		T = t;
 	}
 	public Transform T{get; set;}
