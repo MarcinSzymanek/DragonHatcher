@@ -11,7 +11,9 @@ namespace Utils{
 				Debug.Log(item.ToString());
 			}
 		}
+	}
 	
+	public class StringUtils{
 		public static void PrintList(List<MonoBehaviour> list){
 			foreach(MonoBehaviour item in list){
 				if(item.transform.parent != null){

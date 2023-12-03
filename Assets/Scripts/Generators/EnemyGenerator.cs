@@ -58,6 +58,7 @@ public class EnemyGenerator : MonoBehaviour
 			regulateThresholdList.Add((int)(enemyCount - enemyCount * 1/(i + 1f)));
 		}
 		nextThreshold = regulateThresholdList[regulationCount];
+
 	}
 	
 	// Start is called before the first frame update
