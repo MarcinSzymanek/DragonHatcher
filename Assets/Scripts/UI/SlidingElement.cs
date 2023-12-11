@@ -10,11 +10,13 @@ public class SlidingElement : MonoBehaviour
 	private RectTransform tf_;
 	private bool isSliding = false;
 	public float baseSpeed;
+	public bool initialDirectionRight;
 	
 	void Awake()
 	{
 		tf_	= GetComponent<RectTransform>();
 		direction = new Vector2(1, 0);
+		if(!initialDirectionRight) direction = new Vector2(-1, 0);
 	}
 	
 	public void Slide(){

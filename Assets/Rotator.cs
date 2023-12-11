@@ -7,16 +7,17 @@ using static Unity.Mathematics.math;
 public class Rotator : MonoBehaviour
 {
 	int counter = 0;
-	Transform tf_;
-	Transform playertf;
+	public Transform target;
+	private Transform tf_;
+	
     void Awake()
     {
 	    tf_ = transform;
-	    playertf = GameObject.Find("Player").transform;
     }
     
 	void FixedUpdate(){
-		RotateToTarget(playertf);
+		if(target == null) return;
+		RotateToTarget(target);
 	}
     
 	private int overflow(int val, int target){
@@ -40,7 +41,6 @@ public class Rotator : MonoBehaviour
 		var v1 = float2(x, y);
 		var v2 = float2(tf_.position.x, tf_.position.y);
 		var t = v1 - v2;
-		Debug.Log(t.x + "." + t.y);
 		float angle = Mathf.Atan2(t.y, t.x) * Mathf.Rad2Deg;
 		return angle;
 	}

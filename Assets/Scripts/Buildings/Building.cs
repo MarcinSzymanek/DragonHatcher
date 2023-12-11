@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class Building : MonoBehaviour, IPlaceable
 {
 	private Collider2D placeCollider;
@@ -11,8 +15,7 @@ public class Building : MonoBehaviour, IPlaceable
 	private SpriteMask[] spriteMasks;
 	private Collider2D[] childColliders;
 	private bool isPlaced = false;
-	public int attached = 0;
-	public int detached = 0;
+	
 	void Awake(){
 		if(isPlaced) return;
 
@@ -29,8 +32,13 @@ public class Building : MonoBehaviour, IPlaceable
 			i++;
 		}
 	}
-
+	
 	public bool TryPlaceBuilding(){
+		return Construct();
+	}
+	
+	[ContextMenu("Construct")]
+	bool Construct(){
 		if(!canBePlaced || isPlaced) return false;
 		GetComponent<Cursor>().enabled = false;
 		for(int i = 0; i < outlineMats.Length; i++){
@@ -43,15 +51,35 @@ public class Building : MonoBehaviour, IPlaceable
 			collider.enabled = true;
 		}
 		transform.SetParent(GameObject.Find("PlayerBuildings").transform);
+		gameObject.AddComponent<AIBasicTurret>();
 		isPlaced = true;
 		return true;
 	}
-
+	
+	[ContextMenu("Deconstruct")]
+	bool Deconstruct(){
+		if(!isPlaced) return false;
+		// GetComponent<Cursor>().enabled = true;
+		for(int i = 0; i < outlineMats.Length; i++){
+			outlineMats[i].SetInt("_OutlineOn", 1);
+			outlineMats[i].SetFloat("_OutlineThickness", 1);
+			spriteMasks[i].enabled = true;
+		}
+		foreach (var collider in childColliders)
+		{
+			collider.enabled = false;
+		}
+		transform.SetParent(GameObject.Find("PlayerBuildings").transform);
+		placeCollider.enabled = true;
+		isPlaced = false;
+		Destroy(GetComponent<AIBasicTurret>());
+		return true;
+	}
+	
 	void OnTriggerEnter2D(Collider2D collider){
 		try{
 			if(collisions.Contains(collider)) return;
 			collisions.Add(collider);
-			attached++;
 		
 			if(canBePlaced){
 				canBePlaced = false;
@@ -71,7 +99,6 @@ public class Building : MonoBehaviour, IPlaceable
 		try{
 			if(!collisions.Contains(collider)) return;
 			collisions.Remove(collider);
-			detached++;
 		
 			if(collisions.Count == 0){
 				canBePlaced = true;
@@ -86,3 +113,4 @@ public class Building : MonoBehaviour, IPlaceable
 		}
 	}
 }
+
