@@ -437,6 +437,7 @@ GameObject:
   - component: {fileID: 3732726807582956351}
   - component: {fileID: 6711520653642366815}
   - component: {fileID: 537575253059631419}
+  - component: {fileID: 6871076692266369367}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -583,6 +584,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathGrunt: {fileID: 0}
+--- !u!114 &6871076692266369367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6967782429068629415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c47f8e83fca924f8fee602e29892cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedBuilding: {fileID: 0}
 --- !u!1 &8198899777773685063
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,6 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0942ff96d7bb7ee4aa8257e4b7b3b0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knownSpells: []
 --- !u!1 &8435144363798435266
 GameObject:
   m_ObjectHideFlags: 0

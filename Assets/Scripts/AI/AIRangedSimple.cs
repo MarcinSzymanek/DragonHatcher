@@ -263,7 +263,7 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath, IAIBase
 		while(!done){
 			no_iter++;
 			if(no_iter > 5){
-				Debug.LogError("Could not find unblocked direction");
+				Debug.LogWarning("Could not find unblocked direction");
 				return move_dir;
 			}
 			MathVisualise.DrawArrow(t_, move_dir, Color.blue);
