@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
+
 public class AIBasicTurret : MonoBehaviour
 {
 	private AIScan scanner;
@@ -9,8 +11,11 @@ public class AIBasicTurret : MonoBehaviour
 	Transform currentTarget;
 	[SerializeField]
 	private bool isShooting;
-	public float attackDelay = 1.5f;
+	public float attackDelay = 1.0f;
 	private Rotator rotator;
+	Spawn_Projectile projectiles;
+	
+	Animator anim;
 	
     void Awake()
 	{
@@ -20,6 +25,11 @@ public class AIBasicTurret : MonoBehaviour
 		rotator = GetComponentInChildren<Rotator>();
 		scanner.objectEntered += OnObjectEntered;
 		scanner.objectExited += OnObjectExited;
+		anim = GetComponentInChildren<Animator>();
+		var events = GetComponentInChildren<EnemyAnimEvents>();
+		events.arrowReleased += OnArrowReleased;
+		events.attackFinished += OnAttackFinished;
+		projectiles = GetComponent<Spawn_Projectile>();
 	}
 	
 	void FixedUpdate(){
@@ -27,10 +37,36 @@ public class AIBasicTurret : MonoBehaviour
 		
 	}
 	
+	// If target died before this method is called, cancel
+	void Shoot(){
+		if(currentTarget == null || isShooting) return;
+		isShooting = true;
+		anim.SetTrigger("Attack");
+	}
+	
+	void OnArrowReleased(object? sender, System.EventArgs args){
+		// Actually shoot the projectile here
+		Vector2 direction = new Vector2(0, 0);
+		if(currentTarget != null) direction = Math2d.CalcDirection(transform.position, currentTarget.position);
+		projectiles.Shoot(new VectorTarget(transform.position, direction));
+		Debug.Log("On arrow released called");
+	}
+	
+	// Cleanup after shooting and repeat if target is still alive
+	void OnAttackFinished(object? sender, System.EventArgs args){
+		Debug.Log("On Attack Finished called");
+		isShooting = false;
+		anim.SetTrigger("AttackFinished");
+		if(currentTarget != null) Invoke("Shoot", attackDelay);
+	}
+	
 	// Add or remove targets to the target pool if they enter/exit scan range
 	void OnObjectEntered(object? sender, ObjectEnteredArgs args){
 		targetPool.Add(args.T);
-		if(currentTarget == null) pickNewTarget();
+		if(currentTarget == null){
+			pickNewTarget();
+			Shoot();
+		}
 	}
 
 	void OnObjectExited(object? sender, ObjectEnteredArgs args){

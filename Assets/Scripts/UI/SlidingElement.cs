@@ -20,9 +20,7 @@ public class SlidingElement : MonoBehaviour
 	}
 	
 	public void Slide(){
-		Debug.Log("Slide entered");
 		if(isSliding) return;
-		Debug.Log("Slide continue");
 		isSliding = true;
 		Vector3 destination;
 		destination = (direction.x > 0)? new Vector3(tf_.localPosition.x + offset.x, tf_.localPosition.y + offset.y) : new Vector3(tf_.localPosition.x - offset.x, tf_.localPosition.y - offset.y);
@@ -33,7 +31,6 @@ public class SlidingElement : MonoBehaviour
 	// A little silly to use delegates here, but I wanted to learn them
 	delegate bool doneDelegate();
 	private IEnumerator slideRoutine(Vector3 destination){
-		Debug.Log("slideRoutine start");
 		doneDelegate finished;
 		if(destination.x > tf_.localPosition.x) finished = () => tf_.localPosition.x > destination.x;
 		else finished = () => tf_.localPosition.x < destination.x;
@@ -43,7 +40,6 @@ public class SlidingElement : MonoBehaviour
 			yield return new WaitForFixedUpdate();
 		}
 		direction = new Vector2(-direction.x, direction.y);
-		Debug.Log("Finished");
 		isSliding = false;
 	}
 }

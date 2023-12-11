@@ -1,0 +1,444 @@
+fileFormatVersion: 2
+guid: 5058eb8da565cc140b289a5df008588b
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: Head_Ballista_attack_Frame_0
+    originalName: 
+    pivot: {x: 0.375, y: -0.35}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 96
+      y: 42
+      width: 8
+      height: 20
+    spriteID: 29817ce3a4b61c94ea7ec05337be9dae
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 96, y: 42}
+  - name: Head_Ballista_attack_Frame_1
+    originalName: 
+    pivot: {x: 0.44444445, y: -0.2857143}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 42
+      width: 9
+      height: 21
+    spriteID: af1d5bce22f320646bae81ebd4ebdd0b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 42}
+  - name: Head_Ballista_attack_Frame_2
+    originalName: 
+    pivot: {x: 0.71428573, y: -0.11111111}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 109
+      y: 4
+      width: 14
+      height: 27
+    spriteID: cdf980c48ffde81428274084df42750c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 109, y: 4}
+  - name: Head_Ballista_attack_Frame_3
+    originalName: 
+    pivot: {x: 0.7647059, y: -0.107142866}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 54
+      y: 42
+      width: 17
+      height: 28
+    spriteID: c1fb4979262be4e4a8ce3b1bf3d5b949
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 54, y: 42}
+  - name: Head_Ballista_attack_Frame_4
+    originalName: 
+    pivot: {x: 0.7647059, y: -0.10344827}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 42
+      width: 17
+      height: 29
+    spriteID: c3e378a2f97dd9a459a417f7eaebb440
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 42}
+  - name: Head_Ballista_attack_Frame_5
+    originalName: 
+    pivot: {x: 0.7647059, y: -0.10344827}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 29
+      y: 42
+      width: 17
+      height: 29
+    spriteID: f79ab88c45d5a4044badf23e1dd338ce
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 29, y: 42}
+  - name: Head_Ballista_attack_Frame_6
+    originalName: 
+    pivot: {x: 0.4074074, y: -0.033333335}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 41
+      y: 4
+      width: 27
+      height: 30
+    spriteID: 9338d034d2c87f54e89730062c8abd42
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 41, y: 4}
+  - name: Head_Ballista_attack_Frame_7
+    originalName: 
+    pivot: {x: 0.4827586, y: -0.033333335}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 29
+      height: 30
+    spriteID: 00edbb68b94306b4eb2f1568db6992be
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: Head_Ballista_attack_Frame_8
+    originalName: 
+    pivot: {x: 0.59999996, y: -0.06896552}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 76
+      y: 4
+      width: 25
+      height: 29
+    spriteID: 36e94e389853c3f4eb9f85226abb2036
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 76, y: 4}
+  - name: Head_Ballista_attack_Frame_9
+    originalName: 
+    pivot: {x: 0.5, y: -0.36842105}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 79
+      width: 8
+      height: 19
+    spriteID: bfd3ca4ffb18cb44bba782922818aa7d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 79}
+  - name: Head_Ballista_attack_Frame_10
+    originalName: 
+    pivot: {x: 0.375, y: -0.35}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 112
+      y: 42
+      width: 8
+      height: 20
+    spriteID: 3c96f3a9b3bd2004f8954af9872f1d39
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 112, y: 42}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 1271587368
+    name: Head_Ballista_attack
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Head_Ballista_attack_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 13
+        y: 7
+        width: 8
+        height: 20
+      spriteId: 29817ce3a4b61c94ea7ec05337be9dae
+    - name: Head_Ballista_attack_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 12
+        y: 6
+        width: 9
+        height: 21
+      spriteId: af1d5bce22f320646bae81ebd4ebdd0b
+    - name: Head_Ballista_attack_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 6
+        y: 3
+        width: 14
+        height: 27
+      spriteId: cdf980c48ffde81428274084df42750c
+    - name: Head_Ballista_attack_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 3
+        y: 3
+        width: 17
+        height: 28
+      spriteId: c1fb4979262be4e4a8ce3b1bf3d5b949
+    - name: Head_Ballista_attack_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 3
+        y: 3
+        width: 17
+        height: 29
+      spriteId: c3e378a2f97dd9a459a417f7eaebb440
+    - name: Head_Ballista_attack_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 3
+        y: 3
+        width: 17
+        height: 29
+      spriteId: f79ab88c45d5a4044badf23e1dd338ce
+    - name: Head_Ballista_attack_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 5
+        y: 1
+        width: 27
+        height: 30
+      spriteId: 9338d034d2c87f54e89730062c8abd42
+    - name: Head_Ballista_attack_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 2
+        y: 1
+        width: 29
+        height: 30
+      spriteId: 00edbb68b94306b4eb2f1568db6992be
+    - name: Head_Ballista_attack_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 1
+        y: 2
+        width: 25
+        height: 29
+      spriteId: 36e94e389853c3f4eb9f85226abb2036
+    - name: Head_Ballista_attack_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 12
+        y: 7
+        width: 8
+        height: 19
+      spriteId: bfd3ca4ffb18cb44bba782922818aa7d
+    - name: Head_Ballista_attack_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 13
+        y: 7
+        width: 8
+        height: 20
+      spriteId: 3c96f3a9b3bd2004f8954af9872f1d39
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 32, y: 32}

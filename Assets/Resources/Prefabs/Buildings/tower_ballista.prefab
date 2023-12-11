@@ -465,6 +465,8 @@ GameObject:
   - component: {fileID: 6346650522005858222}
   - component: {fileID: 3858787041297238823}
   - component: {fileID: 493927739867444874}
+  - component: {fileID: 363779670708450829}
+  - component: {fileID: 5932883559953260890}
   m_Layer: 0
   m_Name: TurretHead
   m_TagString: Untagged
@@ -615,6 +617,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+--- !u!95 &363779670708450829
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5354678588381025626}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 2cb1bbeda7756634da3dab441f3f9da4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5932883559953260890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5354678588381025626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4889c2c7c67ddc5448ca67695b097743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6012676829778987779
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,6 +662,7 @@ GameObject:
   - component: {fileID: 7315394244150917535}
   - component: {fileID: 783702483458960081}
   - component: {fileID: 7018798903889691736}
+  - component: {fileID: 4389466319873407362}
   m_Layer: 0
   m_Name: tower_ballista
   m_TagString: Untagged
@@ -722,3 +758,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3fba557133929947bfc642ec3c703fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4389466319873407362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6012676829778987779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f6a2ed8310a80429aaf7aec2e39bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2714237192674745623, guid: a0ba2271e757d024e868ffbe0de2b24b, type: 3}
+  firePoint: {fileID: 3473313577739469508}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  ownerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  rotationOffset: 0
+  speed: 20
