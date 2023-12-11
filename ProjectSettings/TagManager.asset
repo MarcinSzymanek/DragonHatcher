@@ -7,6 +7,7 @@ TagManager:
   - WalkCollider
   - MapForeground
   - Egg
+  - Building
   layers:
   - Default
   - TransparentFX
@@ -22,8 +23,8 @@ TagManager:
   - PlayerDamage
   - EnemyDamage
   - NonBlockingObjects
-  - 
-  - 
+  - Cursor
+  - BuildingPanel
   - 
   - 
   - 
@@ -49,6 +50,15 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: TowerBase
+    uniqueID: 3400124589
+    locked: 0
+  - name: TurretBase
+    uniqueID: 2734584055
+    locked: 0
+  - name: TurretHead
+    uniqueID: 3434385843
     locked: 0
   - name: UI
     uniqueID: 1392490425

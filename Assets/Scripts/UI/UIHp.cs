@@ -12,6 +12,7 @@ public class UIHp : MonoBehaviour
 	void Awake(){
 		slider_ = GetComponentInChildren<Slider>();
 		if(name == "UIPlayerHp") Tracked = GameObject.Find("Player");
+		if(name == "UIEggHp") Tracked = GameObject.FindGameObjectWithTag("Egg");
 		Tracked.GetComponent<TakeDamage>().OnDamageTaken += ReduceHp;
 		
 	}

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class Spawner : MonoBehaviour, ISpawner
 {
@@ -25,6 +27,7 @@ public class Spawner : MonoBehaviour, ISpawner
 	}
 }
 
+#if UNITY_EDITOR
 // Spawn the last resource in the list at the center of scene - for testing
 [CustomEditor(typeof(Spawner))]
 public class CustomButton : Editor
@@ -41,3 +44,4 @@ public class CustomButton : Editor
 	}
 
 }
+#endif
