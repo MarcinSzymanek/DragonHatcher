@@ -50,9 +50,11 @@ public class Spawn_Tornado : MonoBehaviour, ISpell
 
     private void SpawnTornado(VectorTarget target)
     {
+        Debug.Log("hej");
         GameObject tornado = Instantiate(tornadoPrefab, firePoint.position, firePoint.rotation);
         setPrefabTarget(tornado);
         Rigidbody2D rb = tornado.GetComponent<Rigidbody2D>();
+        Debug.Log(target.direction * speed);
         rb.velocity = target.direction * speed;
 
         tornado.transform.rotation = Quaternion.Euler(new Vector3(0, 0, target.angle));
