@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TornadoDamage : MonoBehaviour
 {
-    public GameObject target;
+	public LayerMask target;
+    private List<int> collidedLayers = new List<int>();
     public float knockbackForce;
 	public int damageAmount;
 	private int currentGrace = 0;
@@ -62,21 +63,33 @@ public class TornadoDamage : MonoBehaviour
 				Debug.LogError(e.Source.ToString());
 				return;
 		}
-		
-		if(objDamage.Contains(tdamage)) return;
-		objDamage.Add(tdamage);
 
-        Rigidbody2D enemyRigidbody = target.GetComponent<Rigidbody2D>();
-        if (enemyRigidbody != null)
+        int layer = collider.gameObject.layer;
+        if (target == (target | (1 << layer)))
         {
-            Vector2 knockbackDirection = (collider.transform.position - transform.position).normalized;
-            enemyRigidbody.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+            collidedLayers.Add(layer);
+
+            Rigidbody2D enemyRigidbody = collider.GetComponent<Rigidbody2D>();
+            if (enemyRigidbody != null)
+            {
+                Vector2 knockbackDirection = (collider.transform.position - transform.position).normalized;
+                enemyRigidbody.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+            }
         }
+
+        if (objDamage.Contains(tdamage)) return;
+        objDamage.Add(tdamage);
 	}
 	
 	// OnTriggerExit is called when the Collider other has stopped touching the trigger.
 	protected void OnTriggerExit2D(Collider2D collider)
 	{
+		int layer = collider.gameObject.layer;
+        if (target == (target | (1 << layer)))
+		{
+			collidedLayers.Remove(layer);
+		}
+        
 		TakeDamage tdamage;
 		if(!collider || !collider.transform.parent.TryGetComponent<TakeDamage>(out tdamage)) return;
 		if (tdamage.dead) return;
