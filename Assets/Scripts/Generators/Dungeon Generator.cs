@@ -23,6 +23,8 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject[] wallTileCornerTopLeftPrefab = null;
 
     public GameObject doorPrefab = null;
+    public int numberOfRooms = 0;
+    public float sizeOfRooms = 0;
     private Tilemap tileMap = null;
     public TileBase[] tileToPlace = null;
     private int roomNumber = 1;
@@ -63,7 +65,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         //Generating several rooms next to each other
         //Note: Only use un-even numbers for the size of the room as it messes up the tile allignment for the filling
-        SpawnSquaresNextToEachOther(1, 19f);
+        SpawnSquaresNextToEachOther(numberOfRooms, sizeOfRooms);
     }
 
     void CreateRoom(Vector3 position, float size)
