@@ -135,6 +135,70 @@ PrefabInstance:
       propertyPath: m_Name
       value: DungeonGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTilePrefab.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTilePrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 2907750810227925635, guid: 01c7cd73a669adc4cb73a23c1f4ed849, type: 3}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileTopPrefab.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileRightPrefab.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileBottomPrefab.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileTopPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 2907750810227925635, guid: f81dd6fc7a7204849a799a72968a1341, type: 3}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileRightPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 2907750810227925635, guid: 27aba83448f231146af02291bee166fc, type: 3}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileBottomPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 2907750810227925635, guid: 5e8c7c8257258d84ea6606650ff6f5c9, type: 3}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileCornerTopLeftPrefab.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileCornerTopRightPrefab.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileCornerBottomLeftPrefab.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileCornerTopLeftPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 2907750810227925635, guid: 376d24b82f135ca49a0bf6183540978f, type: 3}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileCornerBottomRightPrefab.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileCornerTopRightPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 2907750810227925635, guid: a07d3b03e8f8e564c8a250c6a9381e3f, type: 3}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileCornerBottomLeftPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 2907750810227925635, guid: 1467a370fafaa80459aa857f68b2cc93, type: 3}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: wallTileCornerBottomRightPrefab.Array.data[0]
+      value: 
+      objectReference: {fileID: 2907750810227925635, guid: f7bfc9c63e331d44c9b143b367f1cd6e, type: 3}
     - target: {fileID: 8059406331999643152, guid: e3389476f75a94646a14d01c668943cf, type: 3}
       propertyPath: m_RootOrder
       value: 7
