@@ -8,10 +8,13 @@ public class UISpellIcon : MonoBehaviour
 	Image image_;
 	public int Id;
 	
-	CastDelayIndicator delayIndicator;
+	CastDelayIndicator delayIndicator_;
+	SpellCooldownIndicator cooldownIndicator_;
+	
 	void Awake(){
 		image_ = GetComponent<Image>();
-		delayIndicator = GetComponentInChildren<CastDelayIndicator>();
+		delayIndicator_ = GetComponentInChildren<CastDelayIndicator>();
+		cooldownIndicator_ = GetComponentInChildren<SpellCooldownIndicator>();
 	}
 
 	public void ChangeIcon(Sprite sprite){
@@ -19,6 +22,10 @@ public class UISpellIcon : MonoBehaviour
 	}
 	
 	public void StartDelayIndicator(float castDelay){
-		delayIndicator.OnCast(castDelay);
+		delayIndicator_.OnCast(castDelay);
+	}
+	
+	public void StartCooldownIndicator(float cooldown){
+		cooldownIndicator_.StartCooldownIndicator(cooldown);
 	}
 }

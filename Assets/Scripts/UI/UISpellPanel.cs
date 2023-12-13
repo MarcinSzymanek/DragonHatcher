@@ -27,12 +27,13 @@ public class UISpellPanel : MonoBehaviour
 	
 	private void OnSpellCast(object? sender, SpellCastArgs args){
 		iconDict[args.Slot].StartDelayIndicator(args.CastDelay);
-		StartCoroutine(OnSpellCooldown(args.CastDelay, args.Cooldown));
+		StartCoroutine(OnSpellCooldown(args.Slot, args.CastDelay, args.Cooldown));
 	}
 	
-	private IEnumerator OnSpellCooldown(float delay, float cooldown){
+	private IEnumerator OnSpellCooldown(int slot, float delay, float cooldown){
 		yield return new WaitForSeconds(delay);
 		Debug.Log("UI spell process cooldown");
+		iconDict[slot].StartCooldownIndicator(cooldown);
 	}
 	
 }
