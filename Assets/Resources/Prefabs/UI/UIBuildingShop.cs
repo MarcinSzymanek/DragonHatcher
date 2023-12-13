@@ -37,8 +37,14 @@ public class UIBuildingShop : MonoBehaviour
 	
 	// TODO: Check if the player actually has resources first
 	public void OnButtonClick(object? sender, UIButton.ButtonClickArgs args){
-		GameObject building = Instantiate(buildings[args.Id].prefab, GameObject.Find("PlayerBuildings").transform);
-		builderScript.SelectedBuilding = building.GetComponent<Building>();
+		var b = buildings[args.Id];
+		if(!ResourceManager.instance.CheckPlayerHasResources(b.cost)){
+			Debug.Log("Player tried to buy " + b.name + " but did not have enough resources");	
+			return;
+		}
+		GameObject building = Instantiate(b.prefab, GameObject.Find("PlayerBuildings").transform);
+		Debug.Log("Updating cost in builder: " + b.cost.Count + b.cost[0].amount);
+		builderScript.UpdateSelected(building.GetComponent<Building>(), b.cost);
 		onBuildingCreated?.Invoke(this, new EventArgs());
 	}
 	
