@@ -1,6 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
+public class SpellCastArgs : EventArgs{
+	public int Slot{get;}
+	public float CastDelay{get;}
+	public float Cooldown{get;}
+	public SpellCastArgs(int slot, float castDelay, float cooldown){
+		Slot = slot;
+		CastDelay = castDelay;
+		Cooldown = cooldown;
+	}
+}
 
 public class Spellcaster : MonoBehaviour
 {
@@ -8,6 +20,8 @@ public class Spellcaster : MonoBehaviour
 	public int maxSpells;
 	public ISpell[] spellSlots;
 	Animator anim_;
+    
+	public event EventHandler<SpellCastArgs> spellCastEvent;
     
 	// Start is called before the first frame update
     void Start()
@@ -36,7 +50,7 @@ public class Spellcaster : MonoBehaviour
 	}
 	
 	public void CastSpell(int slot, Vector3 mousePosition){
-		Debug.Log("CastSpell slot " + slot.ToString());
+		// Debug.Log("CastSpell slot " + slot.ToString());
 		#nullable enable
 		ISpell? spell = spellbook.GetSpellById(slot);
 		if(spell == null){
@@ -44,8 +58,9 @@ public class Spellcaster : MonoBehaviour
 			return;
 		}
 		#nullable disable
-		Debug.Log("Trying to cast spell: " + spell.name);
-		spell.CastSpell(mousePosition);
+		//Debug.Log("Trying to cast spell: " + spell.name);
+		if(!spell.CastSpell(mousePosition)) return;
+		spellCastEvent(this, new SpellCastArgs(slot, spell.castDelay, spell.cooldown));
 		anim_.SetTrigger("castSpell");
 		anim_.SetBool("casting", true);
 	}

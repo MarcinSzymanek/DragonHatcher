@@ -7,8 +7,9 @@ public class UISpellPanel : MonoBehaviour
 	Dictionary<int, UISpellIcon> iconDict;
 	
 	void Awake(){
-		Spellbook book = GameObject.Find("Player").GetComponentInChildren<Spellbook>();
-		book.spellPrepared += OnSpellPrepared;
+		var player = GameObject.Find("Player");
+		player.GetComponentInChildren<Spellbook>().spellPrepared += OnSpellPrepared;
+		player.GetComponent<Spellcaster>().spellCastEvent += OnSpellCast;
 		iconDict = new	Dictionary<int, UISpellIcon>();
 		foreach(UISpellIcon script in GetComponentsInChildren<UISpellIcon>()){
 			iconDict[script.Id] = script;
@@ -23,4 +24,15 @@ public class UISpellPanel : MonoBehaviour
 	private void UpdateIcon(int slot, Sprite icon){
 		iconDict[slot].ChangeIcon(icon);
 	}
+	
+	private void OnSpellCast(object? sender, SpellCastArgs args){
+		iconDict[args.Slot].StartDelayIndicator(args.CastDelay);
+		StartCoroutine(OnSpellCooldown(args.CastDelay, args.Cooldown));
+	}
+	
+	private IEnumerator OnSpellCooldown(float delay, float cooldown){
+		yield return new WaitForSeconds(delay);
+		Debug.Log("UI spell process cooldown");
+	}
+	
 }

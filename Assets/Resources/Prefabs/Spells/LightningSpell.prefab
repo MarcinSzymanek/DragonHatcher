@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef13a05786c504974b5b0f920ce7a955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <cooldown>k__BackingField: 5
+  <castDelay>k__BackingField: 0.3
   lightningPrefab: {fileID: 5471292214467111266, guid: 1dfd22b6c609a49389dd761eeb7b1bda, type: 3}
   targetLayer:
     serializedVersion: 2
     m_Bits: 1024
   spawnRadius: 5
-  id_: 2

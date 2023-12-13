@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ef3746d9a0a1b4418db85647fcfa453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <cooldown>k__BackingField: 3
+  <castDelay>k__BackingField: 0.5
   firewallPrefab: {fileID: 6807184933910990204, guid: a8689096e893a01418238d510a6a0ed0, type: 3}
-  id_: 1

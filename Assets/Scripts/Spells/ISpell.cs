@@ -8,7 +8,9 @@ public interface ISpell
 	// void CastSpell(SpellParameters parameters);
 	public int id{get; set;}
 	public string name{get;}
-	void CastSpell(Vector3 mousePos);
+	public float castDelay{get;}
+	public float cooldown{get;}
+	bool CastSpell(Vector3 mousePos);
 }
 
 internal interface ISpellEffect<T>

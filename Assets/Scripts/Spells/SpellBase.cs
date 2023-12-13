@@ -18,9 +18,11 @@ public abstract class SpellBase<T> : MonoBehaviour, ISpell
 	abstract internal T getTarget(Vector3 mousePos);
 
 	
-	public void CastSpell(Vector3 mousePos){
+	public bool CastSpell(Vector3 mousePos){
+		if(onCooldown) return false;
 		T target = getTarget(mousePos);
 		StartCoroutine(cast_(target));
+		return true;
 	}
 	
 	private IEnumerator cast_(T target){
