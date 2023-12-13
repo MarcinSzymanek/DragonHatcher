@@ -1,26 +1,17 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawn_Tornado : MonoBehaviour, ISpell
+public class Spawn_Tornado : SpellBase<VectorTarget>
 {
     public GameObject tornadoPrefab;
     public Transform firePoint;
-
+	
     public LayerMask targetLayer;
     public LayerMask ownerLayer;
 
     // How many times must we bitshift to set the layer: integer value of the layer
     private int layerInt_ = 0;
-
-    public int id
-    {
-        get { return id_; }
-        set { }
-    }
-    public int id_ = 2;
-    string name_;
-    public string name { get => name_; }
 
     public float speed = 10f;
 
@@ -34,18 +25,15 @@ public class Spawn_Tornado : MonoBehaviour, ISpell
         }
         // Debug.Log("Layer int is: " + layerInt_.ToString());
     }
-
-    public void CastSpell(SpellParameters parameters)
+	
+	internal override VectorTarget getTarget(Vector3 mousePos){
+		Vector2 direction = ((Vector2)mousePos - (Vector2)firePoint.position).normalized;
+		return new VectorTarget(firePoint.position, direction);
+	}
+	
+	internal override void onCast(VectorTarget target)
     {
-        SpawnTornado(parameters.vectorTarget);
-    }
-
-    public void CastSpell(Vector3 mousePos)
-    {
-        Vector2 direction = ((Vector2)mousePos - (Vector2)firePoint.position).normalized;
-        
-        VectorTarget target = new VectorTarget(firePoint.position, direction);
-        SpawnTornado(target);
+	    SpawnTornado(target);
     }
 
     private void SpawnTornado(VectorTarget target)
@@ -57,7 +45,7 @@ public class Spawn_Tornado : MonoBehaviour, ISpell
         Debug.Log(target.direction * speed);
         rb.velocity = target.direction * speed;
 
-        tornado.transform.rotation = Quaternion.Euler(new Vector3(0, 0, target.angle));
+	    tornado.transform.rotation = Quaternion.Euler(new Vector3(0, 0, target.angle));
     }
 
     void setPrefabTarget(GameObject obj)

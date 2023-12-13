@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 309c7693b352c774f96979495e044f4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <cooldown>k__BackingField: 0.5
+  <castDelay>k__BackingField: 0.1
   tornadoPrefab: {fileID: 3092800731291281327, guid: aceb2347c41454c3f915804bfec5dfdd, type: 3}
   firePoint: {fileID: 0}
   targetLayer:
@@ -52,5 +54,4 @@ MonoBehaviour:
   ownerLayer:
     serializedVersion: 2
     m_Bits: 2048
-  id_: 3
   speed: 2

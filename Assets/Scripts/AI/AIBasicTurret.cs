@@ -49,12 +49,10 @@ public class AIBasicTurret : MonoBehaviour
 		Vector2 direction = new Vector2(0, 0);
 		if(currentTarget != null) direction = Math2d.CalcDirection(transform.position, currentTarget.position);
 		projectiles.Shoot(new VectorTarget(transform.position, direction));
-		Debug.Log("On arrow released called");
 	}
 	
 	// Cleanup after shooting and repeat if target is still alive
 	void OnAttackFinished(object? sender, System.EventArgs args){
-		Debug.Log("On Attack Finished called");
 		isShooting = false;
 		anim.SetTrigger("AttackFinished");
 		if(currentTarget != null) Invoke("Shoot", attackDelay);

@@ -2,29 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawn_Firewall : MonoBehaviour, ISpell
+public class Spawn_Firewall : SpellBase<PointTarget>
 {
     public GameObject firewallPrefab;
 
-    public int id
-    {
-        get { return id_; }
-        set { }
-    }
-    public int id_ = 1;
-    string name_;
-    public string name { get => name_; }
-
-    public void CastSpell(SpellParameters parameters)
-    {
-        SpawnFirewall(parameters.pointTarget);
-    }
-    
-	public void CastSpell(Vector3 mousePos){
-		PointTarget target = new PointTarget(mousePos.x, mousePos.y);
-		SpawnFirewall(target);
+	internal override PointTarget getTarget(Vector3 mousePos){
+		return new PointTarget(mousePos.x, mousePos.y);
 	}
 
+	internal override void onCast(PointTarget target){
+		SpawnFirewall(target);
+	}
+    
     private void SpawnFirewall(PointTarget pt)
     {
         Vector3 position = new Vector3(pt.x, pt.y, 0);

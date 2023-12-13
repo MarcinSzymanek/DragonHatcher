@@ -67,4 +67,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0131eb92cbd118c498aaffba1badbed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castDelay: 0.15
+  <cooldown>k__BackingField: 0.15
+  <castDelay>k__BackingField: 0.15

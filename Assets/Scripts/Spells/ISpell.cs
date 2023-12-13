@@ -5,8 +5,15 @@ using System;
 
 public interface ISpell
 {
-	int id{get; set;}
-	string name{get;}
-	void CastSpell(SpellParameters parameters);
-	void CastSpell(Vector3 mousePos);
+	// void CastSpell(SpellParameters parameters);
+	public int id{get; set;}
+	public string name{get;}
+	public float castDelay{get;}
+	public float cooldown{get;}
+	bool CastSpell(Vector3 mousePos);
+}
+
+internal interface ISpellEffect<T>
+{
+	void OnCast(T param);
 }

@@ -2,39 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileSpell : MonoBehaviour, ISpell, IVectorTargeted
+// ISpell<Vector3> means you must put Vector3 as param 
+// SpellBase<VectorTarget> means that the spell effect needs to make a VectorTarget to cast it
+public class ProjectileSpell : SpellBase<VectorTarget>, IVectorTargeted
 {
-	VectorTarget target_;
-	public float castDelay;
-	public int id{get; set;}
-	string name_;
-	public string name{get => name_;}
 	Spawn_Projectile projectileSpawner_;
 	
 	void Awake(){
-		name_ = gameObject.name;
 		projectileSpawner_ = GetComponent<Spawn_Projectile>();
 	}
-	public void CastSpell(SpellParameters parameters){
-		if(parameters.vectorTarget == null){
-			Debug.LogError("Projectile spell cannot be cast with no parameters, " + gameObject.name);
-			return;
-		}
-		castSpell_(parameters.vectorTarget);
-	}
 	
-	public void CastSpell(Vector3 mousePos){
+	internal override VectorTarget getTarget(Vector3 mousePos){
 		Vector3 parentPos = transform.parent.parent.position;
-		VectorTarget target = new VectorTarget(parentPos, Math2d.CalcDirection(parentPos, mousePos));
-		castSpell_(target);
+		return new VectorTarget(parentPos, Math2d.CalcDirection(parentPos, mousePos));
 	}
-	
-	private void castSpell_(VectorTarget target){
-		target_ = target;
-		Invoke("cast_", castDelay);
+
+	internal override void onCast(VectorTarget target){
+		projectileSpawner_.Shoot(target);
 	}
-	
-	private void cast_(){
-		projectileSpawner_.Shoot(target_);
-	} 
 }

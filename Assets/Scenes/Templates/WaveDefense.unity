@@ -1656,6 +1656,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 389749723776117017, guid: 874a016e2aac40e419650c137f3ac939, type: 3}
+      propertyPath: <cooldown>k__BackingField
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 389749723776117017, guid: 874a016e2aac40e419650c137f3ac939, type: 3}
+      propertyPath: <castDelay>k__BackingField
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 3464664396773468477, guid: 874a016e2aac40e419650c137f3ac939, type: 3}
+      propertyPath: <maxHealth>k__BackingField
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652060442065749730, guid: 874a016e2aac40e419650c137f3ac939, type: 3}
+      propertyPath: speed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652060442065749730, guid: 874a016e2aac40e419650c137f3ac939, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 864905816}
     - target: {fileID: 6967782429068629415, guid: 874a016e2aac40e419650c137f3ac939, type: 3}
       propertyPath: m_Name
       value: Player
@@ -10218,7 +10238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7918787026460909685, guid: 19175eea286da7d439e55e61af601cc7, type: 3}
       propertyPath: <maxHealth>k__BackingField
-      value: 5000
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10355,10 +10375,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 254589214934786637, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 400
-      objectReference: {fileID: 0}
     - target: {fileID: 2382880241544636628, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
       propertyPath: m_Name
       value: UIMain
@@ -10367,22 +10383,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 5206461328612907474, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5206461328612907474, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
-      propertyPath: m_PixelPerfect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5206461328612907474, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
-      propertyPath: m_SortingOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5206461328612907474, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1392490425
-      objectReference: {fileID: 0}
     - target: {fileID: 6082006325524713563, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -10482,14 +10482,6 @@ PrefabInstance:
     - target: {fileID: 8204593895280040414, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8557762484185902083, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
-      propertyPath: offset.x
-      value: 390
-      objectReference: {fileID: 0}
-    - target: {fileID: 8557762484185902083, guid: db8b5bffc4fdb1240a383d62d029f558, type: 3}
-      propertyPath: baseSpeed
-      value: 800
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
