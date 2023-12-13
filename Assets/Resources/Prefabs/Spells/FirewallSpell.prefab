@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <cooldown>k__BackingField: 3
-  <castDelay>k__BackingField: 0.5
+  <castDelay>k__BackingField: 0.2
   firewallPrefab: {fileID: 6807184933910990204, guid: a8689096e893a01418238d510a6a0ed0, type: 3}

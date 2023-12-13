@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <cooldown>k__BackingField: 5
-  <castDelay>k__BackingField: 0.3
+  <castDelay>k__BackingField: 0.2
   lightningPrefab: {fileID: 5471292214467111266, guid: 1dfd22b6c609a49389dd761eeb7b1bda, type: 3}
   targetLayer:
     serializedVersion: 2
