@@ -6,7 +6,7 @@ using AIStrategies;
 public class EnemyGenerator : MonoBehaviour
 {
 	// How many enemies should be spawned total
-	public int enemyCount;
+	public int enemiesToSpawn;
 	// How fast the enemies should spawn
 	public float spawnRate = 1.0f;
 	
@@ -15,6 +15,7 @@ public class EnemyGenerator : MonoBehaviour
 	
 	// How many enemies are yet to be spawned
 	private int enemiesLeft_;
+	private int enemiesAlive_;
 	
 	private List<int> regulateThresholdList;
 	
@@ -30,6 +31,8 @@ public class EnemyGenerator : MonoBehaviour
 	private int regulationCount = 0;
 	private int nextThreshold = 0;
 	
+	GameController gameController_;
+	
 	void Regulate()
 	{
 		spawnRate *= regulateIntensity;
@@ -43,11 +46,13 @@ public class EnemyGenerator : MonoBehaviour
 	
 	// Set AI strategy according to scene type
 	public void Awake(){
+		gameController_ = FindObjectOfType<GameController>();
+		
 		IAI_Strategy strategy;
 		SceneProperties sceneProps = GameObject.FindObjectOfType<SceneProperties>();
 		if(sceneProps.sceneType == SceneProperties.SceneType.WAVE_DEFENCE) strategy = new AIStrategies.StrategyTargetEgg();
 		else strategy = new AIStrategies.StrategyScanForPlayer();
-		enemiesLeft_ = enemyCount;
+		enemiesLeft_ = enemiesToSpawn;
 		spawners_ = GetComponentsInChildren<IEnemySpawner>();
 		foreach(var s in spawners_){
 			s.SetAIStrategy(strategy);
@@ -55,7 +60,7 @@ public class EnemyGenerator : MonoBehaviour
 		
 		regulateThresholdList = new List<int>();
 		for(int i = sceneProps.difficulty; i > 0; i--){
-			regulateThresholdList.Add((int)(enemyCount - enemyCount * 1/(i + 1f)));
+			regulateThresholdList.Add((int)(enemiesToSpawn - enemiesToSpawn * 1/(i + 1f)));
 		}
 		nextThreshold = regulateThresholdList[regulationCount];
 
@@ -71,8 +76,10 @@ public class EnemyGenerator : MonoBehaviour
 
 	void SpawnContinuously(){
 		int spawner_index = UnityEngine.Random.Range(0, spawners_.Length);
-		spawners_[spawner_index].Spawn();
+		var enemy = spawners_[spawner_index].Spawn();
+		enemy.GetComponent<DeathController>().objectDied += OnEnemyDeath;
 		enemiesLeft_--;
+		enemiesAlive_++;
 		
 		if(enemiesLeft_ < 1){
 			return;
@@ -84,7 +91,14 @@ public class EnemyGenerator : MonoBehaviour
 		
 		Invoke("SpawnContinuously", 1/spawnRate * spawnDelay);
 	}
-    
+	
+	void OnEnemyDeath(object? obj, ObjectDeathArgs args){
+		enemiesAlive_--;
+		if(enemiesAlive_ < 1 && enemiesLeft_ < 1){
+			Debug.LogWarning("All enemies have been defeated!");
+			gameController_.OnWinCondition();
+		}
+	}
     
     
     
