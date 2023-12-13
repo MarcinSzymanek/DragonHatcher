@@ -64,10 +64,34 @@ public class ResourceManager : MonoBehaviour
 		return res_list.Find(x => x.ID == id).Icon;
 	}
 	
+	public bool CheckPlayerHasResources(List<ResourceCost> cost){
+		foreach (ResourceCost item in cost)
+		{
+			if(session_store_[item.id] < item.amount) return false;
+		}
+		return true;
+	}
+	
+	public bool ProcessTransaction(List<ResourceCost> cost){
+		Debug.Log("Processing transaction...");
+		var old_session_state = session_store_;
+		bool success = true;
+		foreach (ResourceCost item in cost)
+		{
+			Debug.Log("item: " + item.id.ToString());
+			if(session_store_[item.id] < item.amount) success = false;
+			Debug.Log("Updating " + item.id.ToString() + " -" + item.amount);
+			session_store_[item.id] -= item.amount;
+			resource_updated?.Invoke(item.id, session_store_[item.id]);
+		}
+		if(!success) session_store_ = old_session_state;
+		return success;
+	}
+	
 	public void Add(ResourceID id, int count){
 		Debug.Log("Adding " + count.ToString() + " of " + id.ToString());
-		Debug.Log("Current: " + session_store_[id]);
 		session_store_[id] += count;
+		Debug.Log("New val: " + session_store_[id]);
 		resource_updated?.Invoke(id, session_store_[id]);
 		audios_.PlayOneShot(audios_.clip);
 		audios_.pitch = pitch_vals[Random.Range(0, 4)];
