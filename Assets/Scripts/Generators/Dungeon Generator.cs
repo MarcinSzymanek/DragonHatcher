@@ -108,7 +108,7 @@ public class DungeonGenerator : MonoBehaviour
                     {
                         PlaceWall(posX - 1f, posY, posZ, wallTileCornerBottomRightPrefab[Random.Range(0, wallTileCornerBottomRightPrefab.Length)], room);
                     }
-                    if (Mathf.Approximately(posX, position.x - halfSize) && Mathf.Approximately(posY, position.y + halfSize))
+                    else if (Mathf.Approximately(posX, position.x - halfSize) && Mathf.Approximately(posY, position.y + halfSize))
                     {
                         PlaceWall(posX + 1f, posY, posZ, wallTileCornerTopLeftPrefab[Random.Range(0, wallTileCornerTopLeftPrefab.Length)], room);
                     }
