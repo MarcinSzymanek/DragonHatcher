@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1175045117748327104
 MonoBehaviour:
@@ -46,4 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <cooldown>k__BackingField: 3
   <castDelay>k__BackingField: 0.2
+  spellSo: {fileID: 11400000, guid: 5b4875d30b17fa8449d280fd8bec3578, type: 2}
   firewallPrefab: {fileID: 6807184933910990204, guid: a8689096e893a01418238d510a6a0ed0, type: 3}

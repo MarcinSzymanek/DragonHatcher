@@ -30,8 +30,8 @@ MonoBehaviour:
   AnrWatchdogTimeout: 5000
   DeduplicationStrategy: 0
   EnableBreadcrumbsSupport: 0
-  BacktraceBreadcrumbsLevel: 127
-  LogLevel: 31
+  BacktraceBreadcrumbsLevel: -1
+  LogLevel: -1
   UseNormalizedExceptionMessage: 0
   MinidumpType: 524286
   GenerateScreenshotOnException: 0

@@ -35,7 +35,13 @@ public class InputManager : MonoBehaviour
 	
     // Start is called before the first frame update
 	void Awake()
-    {
+	{
+		var sceneProps = GameObject.FindObjectOfType<SceneProperties>();
+		if(sceneProps.sceneType != SceneProperties.SceneType.WAVE_DEFENCE && sceneProps.sceneType != SceneProperties.SceneType.DUNGEON_CRAWL) {
+			Destroy(this);
+			return;
+		}
+		
 	    input_ = GetComponent<PlayerInput>();
 	    controlled_ = GameObject.Find("Player");
 	    playerTf_ = controlled_.transform;
@@ -69,6 +75,7 @@ public class InputManager : MonoBehaviour
 	{
 		actionGet.performed += OnGet;
 		actionCast.performed += OnCast;
+		
 		actionShop.performed += OnShopButton;
 		actionCancel.performed += OnCancel;
     }
@@ -129,6 +136,7 @@ public class InputManager : MonoBehaviour
 	}
 	
 	public void DisableGameplayInput(){
+		moveScript_.Stop();
 		enabled_ = false;
 	}
 	

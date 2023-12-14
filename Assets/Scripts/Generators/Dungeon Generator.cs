@@ -51,11 +51,13 @@ public class DungeonGenerator : MonoBehaviour
         listOfTeleporters = new List<Transform>();
 	    spawner = GetComponent<EnemySpawner>();
 	    spawner.SetAIStrategy(new AIStrategies.StrategyScanForPlayer());
+	    Debug.Log("DUNGEN AWAKE");
     }
     void Start()
     {
         //Generating several rooms next to each other
-        //Note: Only use un-even numbers for the size of the room as it messes up the tile allignment for the filling
+	    //Note: Only use un-even numbers for the size of the room as it messes up the tile allignment for the filling
+	    Debug.Log("DUNGEN START");
         SpawnSquaresNextToEachOther(5, 19f);
     }
 
@@ -173,7 +175,7 @@ public class DungeonGenerator : MonoBehaviour
         {
         Vector3 position = new Vector3(i * (size + gap), 0, 0);
         squares.Add(new Square { position = position });
-        CreateRoom(position, size);
+	        CreateRoom(position, size);
         }
     }
 
@@ -191,7 +193,7 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     GameObject PlaceTeleporter(float posX, float posY, float posZ, GameObject prefab, GameObject room)
-    {
+	{
         //Place Receiver
         Vector3 spawnPosition = new Vector3(posX, posY, posZ);
         GameObject teleporter = Instantiate(prefab, spawnPosition, Quaternion.identity, room.transform);

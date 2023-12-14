@@ -18,6 +18,7 @@ public class TakeDamage: MonoBehaviour
     // TakeDamage function to invoke damage event and possibly destroy object on death
 	public void TriggerTakeDamage(int amount)
 	{
+		if(dead) return;
         OnDamageTaken?.Invoke(amount);
         healthComponent.currentHealth -= amount;
         if (healthComponent.currentHealth <= 0)
