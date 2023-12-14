@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Templates/Loading.unity
     guid: 1d70ee8f97c691245bbab0f943d29428
+  - enabled: 1
+    path: Assets/Scenes/Templates/DungeonGenerator.unity
+    guid: 5c6c58136e9902344ab6ecd8d584d4d4
+  - enabled: 1
+    path: Assets/Scenes/Templates/GameOver.unity
+    guid: 7e2692cada170b5459967303e92391e3
   m_configObjects: {}

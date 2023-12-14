@@ -8,6 +8,8 @@ TagManager:
   - MapForeground
   - Egg
   - Building
+  - GlobalLight
+  - UIMain
   layers:
   - Default
   - TransparentFX
