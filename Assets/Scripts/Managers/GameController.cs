@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
 	GameObject player_;
 	static bool subbed = false;
 	static bool initialized = false;
+	public bool sandbox = false;
+	
 	void Awake()
 	{
 		input_ = GameObject.FindObjectOfType<InputManager>();
@@ -95,6 +97,7 @@ public class GameController : MonoBehaviour
 	}
 	
 	public void OnWinCondition(){
+		if(sandbox) return;
 		sceneLoader_.ChangeScene(nextScene_);	
 	}
 }
