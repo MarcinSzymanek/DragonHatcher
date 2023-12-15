@@ -136,6 +136,14 @@ PrefabInstance:
       value: DungeonGenerator
       objectReference: {fileID: 0}
     - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: sizeOfRooms
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: numberOfRooms
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
       propertyPath: wallTilePrefab
       value: 
       objectReference: {fileID: 2907750810227925635, guid: f81dd6fc7a7204849a799a72968a1341, type: 3}
