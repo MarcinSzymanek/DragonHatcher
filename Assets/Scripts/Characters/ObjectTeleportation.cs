@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Searcher;
 using UnityEngine;
 
 public class ObjectTeleportation : MonoBehaviour
@@ -21,33 +22,40 @@ public class ObjectTeleportation : MonoBehaviour
         fadeEffect = blackscreen.GetComponent<FadeEffect>();
     }
 
+
     void OnTriggerEnter2D(Collider2D other)
 	{
 		Debug.Log("Trigger Enter");
 		if (other != null && canTeleport)
         {
+            fadeEffect.ScreenFadeOut();
+            Invoke("teleport", 0.5f);
             fadeEffect.ScreenFadeIn();
-        	Debug.Log("I am teleporter");
-            playerg.SetActive(false);
-            // Check the player's movement direction relative to the teleporter so we dont mess up the teleportation offset
-            // First if = entering the teleporter into the next room from below or the side 
-            if (destination.transform.position.y <= gameObject.transform.position.y )
-            {
-                
-                teleportOffset = new Vector3(0f, 2f, 0f);
-            }
-            else if (destination.transform.position.y >= gameObject.transform.position.y)
-            {
-                teleportOffset = new Vector3(0f, -2f, 0f);
-            }
-			// 
-           
-            disableTpFor(2.0f);
-            objectToTeleport.position = destination.position + teleportOffset;
-
-            playerg.SetActive(true);
-            
         }
+    }
+
+
+
+    public void teleport()
+    {
+        Debug.Log("I am teleporter");
+        playerg.SetActive(false);
+        // Check the player's movement direction relative to the teleporter so we dont mess up the teleportation offset
+        // First if = entering the teleporter into the next room from below or the side 
+        if (destination.transform.position.y <= gameObject.transform.position.y)
+        {
+
+            teleportOffset = new Vector3(0f, 2f, 0f);
+        }
+        else if (destination.transform.position.y >= gameObject.transform.position.y)
+        {
+            teleportOffset = new Vector3(0f, -2f, 0f);
+        }
+        // 
+
+        disableTpFor(2.0f);
+        objectToTeleport.position = destination.position + teleportOffset;
+        playerg.SetActive(true);
     }
 
     //Invoke happens in seconds, meaning after a certain amount of time we allow for teleportation to happen again
