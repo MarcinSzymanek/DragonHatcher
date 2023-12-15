@@ -13,12 +13,15 @@ public class Builder : MonoBehaviour
 	}
 	
 	public bool PlaceBuilding(){
+		Debug.Log("Trying to place building");
 		if(SelectedBuilding == null) return false;
 		if(SelectedBuilding.TryPlaceBuilding()){
 			if(!ResourceManager.instance.ProcessTransaction(SelectedCost)) CancelBuild();
 			input.SwitchInputMode(InputManager.InputMode.cast);
 			return true;
 		}
+		Debug.Log("Cancelling");
+		CancelBuild();
 		return false;
 	}
 	

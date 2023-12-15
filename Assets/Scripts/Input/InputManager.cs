@@ -32,6 +32,7 @@ public class InputManager : MonoBehaviour
 	ItemPicker itemPicker_;
 	
 	private bool enabled_ = true;
+	private bool isBuilding_ = false;
 	
     // Start is called before the first frame update
 	void Awake()
@@ -78,7 +79,7 @@ public class InputManager : MonoBehaviour
 	}
 
 	void EnterBuildMode(object? obj, EventArgs args){
-		mode_ = InputMode.build;
+		isBuilding_ = true;
 	}
     
 	// Continuously read input from move action and change player movement based on that
@@ -100,9 +101,10 @@ public class InputManager : MonoBehaviour
 	
 	void OnCancel(InputAction.CallbackContext context){
 		Debug.Log("Cancel button pressed");
-		if(mode_ ==	InputMode.build){
+		if(isBuilding_){
 			builder_.CancelBuild();
 			mode_ = InputMode.cast;
+			isBuilding_ = false;
 		}
 	}
 	
@@ -115,6 +117,11 @@ public class InputManager : MonoBehaviour
 			return;
 		}	
 		
+		if(isBuilding_){
+			controlled_.GetComponent<Builder>().PlaceBuilding();
+			isBuilding_ = false;
+		}
+		
 		switch(mode_){
 		case InputMode.cast:
 			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -126,7 +133,7 @@ public class InputManager : MonoBehaviour
 			return;
 			
 		case InputMode.build:
-			controlled_.GetComponent<Builder>().PlaceBuilding();
+			// controlled_.GetComponent<Builder>().PlaceBuilding();
 			return;
 		}
 	}
@@ -148,7 +155,7 @@ public class InputManager : MonoBehaviour
 		mode_ = InputMode.ui;
 	}
 	public void OnPointerExitShop(){
-		if(mode_ != InputMode.build) mode_ = InputMode.cast;
+		mode_ = InputMode.cast;
 	}
 	
 	
