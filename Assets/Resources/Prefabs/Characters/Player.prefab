@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 6871076692266369367}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -395,7 +395,7 @@ Transform:
   - {fileID: 9115508353655514117}
   - {fileID: 547246493985174816}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5057374331487044504
 MonoBehaviour:
@@ -503,6 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellbook: {fileID: 394700681885242164}
   maxSpells: 5
+  debugSpellCount: 0
 --- !u!114 &537575253059631419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,6 +530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectedBuilding: {fileID: 0}
+  SelectedCost: []
 --- !u!1 &8198899777773685063
 GameObject:
   m_ObjectHideFlags: 0

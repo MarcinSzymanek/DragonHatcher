@@ -33,7 +33,7 @@ public class Spellcaster : MonoBehaviour
 		spellSlots = new ISpell[5];
 		for(int i = 0; i < maxSpells; i++){
 			spellSlots[i] = spellbook.GetSpellById(i);
-			debugSpellCount++;
+			if(spellSlots[i] != null) debugSpellCount++;
 		}
 	    ReadySpell(0, 0);
     }

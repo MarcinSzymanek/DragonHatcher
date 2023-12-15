@@ -22,6 +22,8 @@ public class Spawn_Projectile : MonoBehaviour
 			layerVal /= 2;
 			layerInt_ ++;
 		}
+		
+		if(firePoint == null) firePoint = transform.parent.parent.transform;
 		// Debug.Log("Layer int is: " + layerInt_.ToString());
 	}
 

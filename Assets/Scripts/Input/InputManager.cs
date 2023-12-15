@@ -64,14 +64,14 @@ public class InputManager : MonoBehaviour
 	}
     
 	void Start(){
+		actionCast.performed += OnCast;	
+		actionShop.performed += OnShopButton;
+		actionCancel.performed += OnCancel;
+		
 		shop_ = GameObject.FindObjectOfType<UIBuildingShop>();
 		if(shop_ == null) return;
 		
 		shop_.onBuildingCreated += EnterBuildMode;
-
-		actionCast.performed += OnCast;	
-		actionShop.performed += OnShopButton;
-		actionCancel.performed += OnCancel;
 	}
 
 	void EnterBuildMode(object? obj, EventArgs args){
