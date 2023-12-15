@@ -18,7 +18,7 @@ public class ResourceManager : MonoBehaviour
 	bool loaded_ = false;
 	public event System.Action<ResourceID, int> resource_updated;
 	
-	Dictionary<ResourceID, int> session_store_;
+	static Dictionary<ResourceID, int> session_store_;
     void Awake()
     {
         if (instance != null && instance != this)
@@ -33,11 +33,16 @@ public class ResourceManager : MonoBehaviour
         }
     }
     
+	public Dictionary<ResourceID, int> GetPlayerResources(){
+		return session_store_;
+	}
     
 	// Load data from SO assets
 	private void LoadData(){
 		res_list = new List<ResourceSO>();
-		session_store_ = new Dictionary<ResourceID, int>();
+		if(session_store_ == null){
+			session_store_ = new Dictionary<ResourceID, int>();	
+		}
 		res_path_dict = new Dictionary<ResourceID, string>(){
 		};
 		
