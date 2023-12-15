@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3313481261206699843}
   - component: {fileID: 4569796983159004757}
   - component: {fileID: 7061436677483981745}
-  - component: {fileID: 1582733084790606520}
+  - component: {fileID: 6145438172083679008}
   m_Layer: 3
   m_Name: Wall_Corner_Top_Left
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4569796983159004757
 SpriteRenderer:
@@ -113,8 +113,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &1582733084790606520
-BoxCollider2D:
+--- !u!60 &6145438172083679008
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -145,7 +145,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.20966339}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -155,6 +155,13 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.5806732}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5, y: 0.5}
+      - {x: -0.5, y: -0.5}
+      - {x: -0.1875, y: -0.5}
+      - {x: -0.18561444, y: 0.25224304}
+      - {x: 0.50289714, y: 0.24833965}
+      - {x: 0.5, y: 0.25928974}
+      - {x: 0.5, y: 0.5}
+  m_UseDelaunayMesh: 0
