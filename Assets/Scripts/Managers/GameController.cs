@@ -98,6 +98,13 @@ public class GameController : MonoBehaviour
 	
 	public void OnWinCondition(){
 		if(sandbox) return;
+		currentSceneType = GameObject.FindObjectOfType<SceneProperties>().sceneType;
+		if(currentSceneType == SceneProperties.SceneType.WAVE_DEFENCE){
+			nextScene_ = "DungeonGenerator";
+		}
+		else{
+			nextScene_ = "WaveDefense";
+		}
 		sceneLoader_.ChangeScene(nextScene_);	
 	}
 }
