@@ -10,11 +10,15 @@ public class ObjectTeleportation : MonoBehaviour
     private bool canTeleport = true;
     private GameObject attachedGameObject = null;
     private Vector3 teleportOffset;
+    private FadeEffect fadeEffect;
 
     private void Awake()
     {
         teleportOffset = new Vector3(0f, -3f, 0f);
         attachedGameObject = this.gameObject;  
+        GameObject uiMain = GameObject.Find("UIMain");
+        GameObject blackscreen = uiMain.transform.Find("BlackScreen").gameObject;
+        fadeEffect = blackscreen.GetComponent<FadeEffect>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -22,6 +26,7 @@ public class ObjectTeleportation : MonoBehaviour
 		Debug.Log("Trigger Enter");
 		if (other != null && canTeleport)
         {
+            fadeEffect.ScreenFadeIn();
         	Debug.Log("I am teleporter");
             playerg.SetActive(false);
             // Check the player's movement direction relative to the teleporter so we dont mess up the teleportation offset
