@@ -37,7 +37,9 @@ public class InputManager : MonoBehaviour
 	void Awake()
 	{
 		var sceneProps = GameObject.FindObjectOfType<SceneProperties>();
-		if(sceneProps.sceneType != SceneProperties.SceneType.WAVE_DEFENCE && sceneProps.sceneType != SceneProperties.SceneType.DUNGEON_CRAWL) {
+		
+		// No Player Input during Loading/Death scenes
+		if(sceneProps.sceneType == SceneProperties.SceneType.LOADING) {
 			Destroy(this);
 			return;
 		}
@@ -58,27 +60,23 @@ public class InputManager : MonoBehaviour
 	    itemPicker_ = controlled_.GetComponent<ItemPicker>();
 	    caster_ = controlled_.GetComponent<Spellcaster>();
 	    builder_ = controlled_.GetComponent<Builder>();
-	    shop_ = GameObject.FindObjectOfType<UIBuildingShop>();
 	    
-	    if(shop_ != null) {
-		    shop_.onBuildingCreated += EnterBuildMode;
-	    	actionShop.performed += OnShopButton;
-	    	Debug.Log(actionShop);
-	    }
-    }
+	}
+    
+	void Start(){
+		shop_ = GameObject.FindObjectOfType<UIBuildingShop>();
+		if(shop_ == null) return;
+		
+		shop_.onBuildingCreated += EnterBuildMode;
+
+		actionCast.performed += OnCast;	
+		actionShop.performed += OnShopButton;
+		actionCancel.performed += OnCancel;
+	}
 
 	void EnterBuildMode(object? obj, EventArgs args){
 		mode_ = InputMode.build;
 	}
-	
-	void Start()
-	{
-		actionGet.performed += OnGet;
-		actionCast.performed += OnCast;
-		
-		actionShop.performed += OnShopButton;
-		actionCancel.performed += OnCancel;
-    }
     
 	// Continuously read input from move action and change player movement based on that
 	void Update(){
@@ -90,7 +88,11 @@ public class InputManager : MonoBehaviour
 	
 	void OnShopButton(InputAction.CallbackContext context){
 		Debug.Log("Shop button pressed");
-		shop_?.SlidePanel();
+		if(shop_ == null) {
+			Debug.LogWarning("No shop in this scene!");
+			return;
+		}
+		shop_.SlidePanel();
 	}
 	
 	void OnCancel(InputAction.CallbackContext context){
@@ -100,11 +102,6 @@ public class InputManager : MonoBehaviour
 			mode_ = InputMode.cast;
 		}
 	}
-	
-	void OnGet(InputAction.CallbackContext context){
-		//itemPicker_.OnPickup();
-	}
-	
 	
 	void OnCast(InputAction.CallbackContext context){
 		if(!enabled_) return;
@@ -150,4 +147,6 @@ public class InputManager : MonoBehaviour
 	public void OnPointerExitShop(){
 		if(mode_ != InputMode.build) mode_ = InputMode.cast;
 	}
+	
+	
 }
