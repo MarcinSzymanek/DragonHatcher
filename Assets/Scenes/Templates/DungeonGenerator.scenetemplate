@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 13966, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: DungeonGenerator
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   templateScene: {fileID: 102900000, guid: 5c6c58136e9902344ab6ecd8d584d4d4, type: 3}
   templateName: DungeonGeneratorTemplate
   description: Base scene for dungeon generation
@@ -33,11 +33,11 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 11400000, guid: e30535467f8d7834a90ccd1e8ceafb1b, type: 2}
     instantiationMode: 1
-  - dependency: {fileID: -944628639613478452, guid: 18da369c2f284f542ad17b30fa616c1f, type: 3}
-    instantiationMode: 1
   - dependency: {fileID: 2800000, guid: a36e644d003c0e14489b813ca21ad45a, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 8300000, guid: cacff89ab7095694e9c426c45f06bace, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: -944628639613478452, guid: 18da369c2f284f542ad17b30fa616c1f, type: 3}
     instantiationMode: 1
   - dependency: {fileID: 2800000, guid: 2fd6421f253b4ef1a19526541f9ffc0c, type: 3}
     instantiationMode: 1
@@ -168,6 +168,8 @@ MonoBehaviour:
   - dependency: {fileID: 22100000, guid: d51e76e0c78eaaf47857c66a7cb12299, type: 2}
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: ee148e281f3c41c5b4ff5f8a5afe5a6c, type: 3}
+    instantiationMode: 1
+  - dependency: {fileID: 11400000, guid: 5a7ae6a5bd8f01f4cbbb2b6e708fc97c, type: 2}
     instantiationMode: 1
   - dependency: {fileID: 8300000, guid: 92d6240eaca9e36418fcb165f3636666, type: 3}
     instantiationMode: 1
