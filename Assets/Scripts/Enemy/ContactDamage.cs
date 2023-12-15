@@ -39,6 +39,8 @@ public class ContactDamage : MonoBehaviour
 		}
 		// Debug.Log("Done");
 		if(dealtDamage && destroyOnDamage){
+			var ctrl = transform.parent.GetComponent<ParticleController>();
+			if(ctrl != null) ctrl.DetachParticles();
 			transform.parent.gameObject.SetActive(false);
 		}
 		

@@ -1492,9 +1492,13 @@ PrefabInstance:
       propertyPath: <maxHealth>k__BackingField
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 3732726807582956351, guid: 874a016e2aac40e419650c137f3ac939, type: 3}
+      propertyPath: <FlashFalloffSpeed>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6652060442065749730, guid: 874a016e2aac40e419650c137f3ac939, type: 3}
       propertyPath: speed
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6652060442065749730, guid: 874a016e2aac40e419650c137f3ac939, type: 3}
       propertyPath: firePoint
@@ -10189,7 +10193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4799891455555506896, guid: 84ebf58f51381644a9a0f3d10607e923, type: 3}
       propertyPath: sandbox
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7273638825936316145, guid: 84ebf58f51381644a9a0f3d10607e923, type: 3}
       propertyPath: m_Intensity
@@ -10466,8 +10470,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1209171121456423938, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
-      propertyPath: enemiesToSpawn
+      propertyPath: spawnRate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209171121456423938, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
+      propertyPath: spawnDelay
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209171121456423938, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
+      propertyPath: enemiesToSpawn
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5012305057232973547, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
       propertyPath: m_Name
