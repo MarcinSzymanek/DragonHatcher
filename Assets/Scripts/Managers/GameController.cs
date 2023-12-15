@@ -28,6 +28,8 @@ public class GameController : MonoBehaviour
 		if(!initialized){	
 			Debug.LogWarning("Subscribe to ACTIVE SCENE CHANGED");
 			SceneManager.activeSceneChanged += InitializeLevel;
+			// Add a unique tag to the player, so we can kill the copies
+			player_.AddComponent<Unique>();
 			initialized = true;
 		}
 		// This is stupid, we should SceneProperties.SceneType instead.
