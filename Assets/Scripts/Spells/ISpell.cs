@@ -10,6 +10,7 @@ public interface ISpell
 	public string name{get;}
 	public float castDelay{get;}
 	public float cooldown{get;}
+	SpellDataObject spellData{get;}
 	bool CastSpell(Vector3 mousePos);
 }
 

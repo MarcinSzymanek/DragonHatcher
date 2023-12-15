@@ -13,18 +13,9 @@ public class DungeonGenerator : MonoBehaviour
     // - Add variety to walls and fill-tiles
     // - Select random locations for potential spawning
     
-    public GameObject[] wallTilePrefab = null;
-    public GameObject[] wallTileRightPrefab = null;
-    public GameObject[] wallTileBottomPrefab = null;
-    public GameObject[] wallTileTopPrefab = null;
-    public GameObject[] wallTileCornerBottomLeftPrefab = null;
-    public GameObject[] wallTileCornerBottomRightPrefab = null;
-    public GameObject[] wallTileCornerTopRightPrefab = null;
-    public GameObject[] wallTileCornerTopLeftPrefab = null;
+    public GameObject wallTilePrefab = null;
 
     public GameObject doorPrefab = null;
-    public int numberOfRooms = 0;
-    public float sizeOfRooms = 0;
     private Tilemap tileMap = null;
     public TileBase[] tileToPlace = null;
     private int roomNumber = 1;
@@ -60,12 +51,14 @@ public class DungeonGenerator : MonoBehaviour
         listOfTeleporters = new List<Transform>();
 	    spawner = GetComponent<EnemySpawner>();
 	    spawner.SetAIStrategy(new AIStrategies.StrategyScanForPlayer());
+	    Debug.Log("DUNGEN AWAKE");
     }
     void Start()
     {
         //Generating several rooms next to each other
-        //Note: Only use un-even numbers for the size of the room as it messes up the tile allignment for the filling
-        SpawnSquaresNextToEachOther(numberOfRooms, sizeOfRooms);
+	    //Note: Only use un-even numbers for the size of the room as it messes up the tile allignment for the filling
+	    Debug.Log("DUNGEN START");
+        SpawnSquaresNextToEachOther(5, 19f);
     }
 
     void CreateRoom(Vector3 position, float size)
@@ -96,46 +89,13 @@ public class DungeonGenerator : MonoBehaviour
                 float posZ = position.z;
                 
                 // Check if the current position is on the outer border
-                bool isOuterBorder = Mathf.Abs(i) >= halfSize || Mathf.Abs(j) >= halfSize - padding;
+                bool isOuterBorder = Mathf.Abs(i) >= halfSize - padding || Mathf.Abs(j) >= halfSize - padding;
 
                 //If not, place a wall
                 if(isOuterBorder) {
-                    Vector3 test = new Vector3(posX, posY, posZ);
-                    Debug.Log(test);
-                    if ((Mathf.Approximately(posX, position.x - halfSize) && Mathf.Approximately(posY, position.y - halfSize)))
-                    {
-                        PlaceWall(posX + 1f, posY, posZ, wallTileCornerBottomLeftPrefab[Random.Range(0, wallTileCornerBottomLeftPrefab.Length)], room);
-                    }
-                    else if((Mathf.Approximately(posX, position.x + halfSize) && Mathf.Approximately(posY, position.y - halfSize)))
-                    {
-                        PlaceWall(posX - 1f, posY, posZ, wallTileCornerBottomRightPrefab[Random.Range(0, wallTileCornerBottomRightPrefab.Length)], room);
-                    }
-                    if (Mathf.Approximately(posX, position.x - halfSize) && Mathf.Approximately(posY, position.y + halfSize))
-                    {
-                        PlaceWall(posX + 1f, posY, posZ, wallTileCornerTopLeftPrefab[Random.Range(0, wallTileCornerTopLeftPrefab.Length)], room);
-                    }
-                    else if (Mathf.Approximately(posX, position.x + halfSize) && Mathf.Approximately(posY, position.y + halfSize))
-                    {
-                        PlaceWall(posX - 1f, posY, posZ, wallTileCornerTopRightPrefab[Random.Range(0, wallTileCornerTopRightPrefab.Length)], room);
-                    }
-                    else if(Mathf.Approximately(posX, position.x - halfSize))
-                    {
-                        PlaceWall(posX + 1f, posY, posZ, wallTilePrefab[Random.Range(0, wallTilePrefab.Length)], room);
-                    }
-                    else if(Mathf.Approximately(posX, position.x + halfSize))
-                    {
-                        PlaceWall(posX - 1f, posY, posZ, wallTileRightPrefab[Random.Range(0, wallTileRightPrefab.Length)], room);
-                    }
-                    else if(Mathf.Approximately(posY, position.y - halfSize))
-                    {
-                        PlaceWall(posX, posY, posZ, wallTileBottomPrefab[Random.Range(0, wallTileBottomPrefab.Length)], room);
-                    }
-                    else if(Mathf.Approximately(posY, position.y + halfSize))
-                    {
-                        PlaceWall(posX, posY, posZ, wallTileTopPrefab[Random.Range(0, wallTileTopPrefab.Length)], room);
-                    }
-
-                    if (acc == size/2f && posY > 0) {
+                    PlaceWall(posX, posY, posZ, wallTilePrefab, room);
+                     
+                    if(acc == size/2f && posY > 0) {
                         GameObject teleporter = PlaceTeleporter(posX, posY - 1.5f, posZ, doorPrefab, room);
                         listOfTeleporters.Add(teleporter.transform);
                     }
@@ -169,7 +129,9 @@ public class DungeonGenerator : MonoBehaviour
         for (int g = 0; g < random; g++ )
         {
             spawner.Spawn(randomPosition, room.transform);
+            //Instantiate(test, randomPosition, Quaternion.identity, room.transform);
         }
+        //spawner.Spawn(randomPosition, Random.Range(0,3));
         
 
         //Do the connection of the teleporters here
@@ -213,7 +175,7 @@ public class DungeonGenerator : MonoBehaviour
         {
         Vector3 position = new Vector3(i * (size + gap), 0, 0);
         squares.Add(new Square { position = position });
-        CreateRoom(position, size);
+	        CreateRoom(position, size);
         }
     }
 
@@ -231,7 +193,7 @@ public class DungeonGenerator : MonoBehaviour
     }
 
     GameObject PlaceTeleporter(float posX, float posY, float posZ, GameObject prefab, GameObject room)
-    {
+	{
         //Place Receiver
         Vector3 spawnPosition = new Vector3(posX, posY, posZ);
         GameObject teleporter = Instantiate(prefab, spawnPosition, Quaternion.identity, room.transform);
