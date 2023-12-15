@@ -44,23 +44,26 @@ public class InputManager : MonoBehaviour
 			return;
 		}
 		
-	    input_ = GetComponent<PlayerInput>();
-	    controlled_ = GameObject.Find("Player");
-	    playerTf_ = controlled_.transform;
-	    moveScript_ = controlled_.GetComponent<Movement>();
-	    // attackScript_ = controlled_.GetComponent<Attack>();
+		input_ = GetComponent<PlayerInput>();
+		
+		SetPlayer(GameObject.FindGameObjectWithTag("Player"));
 	    InputActionMap controlledMap = input_.actions.FindActionMap("Character");
 	    actionCast = controlledMap.FindAction("Attack");
 	    actionGet = controlledMap.FindAction("Get");
 		actionMove = controlledMap.FindAction("Move");
 	    
 	    actionShop = controlledMap.FindAction("Shop");
-	    actionCancel = controlledMap.FindAction("Cancel");
-	    
-	    itemPicker_ = controlled_.GetComponent<ItemPicker>();
-	    caster_ = controlled_.GetComponent<Spellcaster>();
-	    builder_ = controlled_.GetComponent<Builder>();
-	    
+	    actionCancel = controlledMap.FindAction("Cancel");   
+	}
+    
+	public void SetPlayer(GameObject player){
+		controlled_ = player;
+		playerTf_ = player.transform;
+		moveScript_ = player.GetComponent<Movement>();
+		itemPicker_ = controlled_.GetComponent<ItemPicker>();
+		caster_ = controlled_.GetComponent<Spellcaster>();
+		builder_ = controlled_.GetComponent<Builder>();
+
 	}
     
 	void Start(){

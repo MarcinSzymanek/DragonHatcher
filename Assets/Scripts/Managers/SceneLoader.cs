@@ -89,7 +89,11 @@ public class SceneLoader : MonoBehaviour
 			yield return new WaitForSeconds(0.5f);
 		}
 		op.allowSceneActivation = true;
-		SceneManager.MoveGameObjectToScene(player_, SceneManager.GetSceneByName(nextScene));
+		if(player_ != null){
+			input_ = GameObject.FindObjectOfType<InputManager>();
+			input_.SetPlayer(player_);
+			SceneManager.MoveGameObjectToScene(player_, SceneManager.GetSceneByName(nextScene));
+		}
 		op = SceneManager.UnloadSceneAsync(oldScene);
 		fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
 		Debug.Log("Fade changed to: " + fade_.name);
@@ -101,6 +105,12 @@ public class SceneLoader : MonoBehaviour
 		input_.EnableGameplayInput();
 		SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
 		SceneManager.UnloadSceneAsync(loadingScene);
+		// Check if there are player copies, and destroy them
+		var players = GameObject.FindGameObjectsWithTag("Player");
+		foreach(var player in players){
+			Unique unique = player.GetComponent<Unique>();
+			if(unique == null) Destroy(player);
+		}
 		GameObject.FindObjectOfType<CinemachineVirtualCamera>().Follow = GameObject.FindGameObjectWithTag("Player").transform;
 	}
 	
