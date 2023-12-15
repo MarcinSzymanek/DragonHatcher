@@ -86,7 +86,6 @@ public class InputManager : MonoBehaviour
 	void Update(){
 		if(!enabled_) return;
 		var moveDirection = actionMove.ReadValue<Vector2>();
-		//Debug.Log(moveDirection);
 		moveScript_.ChangeDirection(moveDirection.x, moveDirection.y);
 	}
 	
