@@ -37,11 +37,23 @@ public class Spellbook : MonoBehaviour
 	}
 	#nullable disable
 	
+	public List<SpellDataObject> GetHeldSpellDataList(){
+		List<SpellDataObject> ret = new List<SpellDataObject>();
+		foreach (var item in knownSpells)
+		{
+			if(item.slot == -1) continue;
+			ret.Add(item);
+		}
+		return ret;
+	}
+	
 	private void updateHeldSpells_(){
 		var spells = GetComponentsInChildren<ISpell>();
 		foreach (ISpell s in spells){
 			Debug.Log("Adding " + s.name + " to index " + s.id.ToString());
 			heldSpells[s.id] = s;
+			if(knownSpells.Contains(s.spellData)) continue;
+			knownSpells.Add(s.spellData);
 		} 
 	}
 	
@@ -59,6 +71,7 @@ public class Spellbook : MonoBehaviour
 		// update heldSpells with the new spell
 		GameObject obj = Instantiate(spell.spellPrefab, transform);
 		ISpell spellLogic = obj.GetComponent<ISpell>();
+		spell.slot = slot;
 		spellLogic.id = slot;
 		heldSpells[slot] = spellLogic; 
 		spellPrepared?.Invoke(this, new SpellPreparedArgs(slot, spell));

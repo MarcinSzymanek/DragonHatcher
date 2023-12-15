@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5276195911976051614
 MonoBehaviour:
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <cooldown>k__BackingField: 5
   <castDelay>k__BackingField: 0.2
+  spellSo: {fileID: 11400000, guid: a50b8625d22388d4197583b9b919294b, type: 2}
   lightningPrefab: {fileID: 5471292214467111266, guid: 1dfd22b6c609a49389dd761eeb7b1bda, type: 3}
   targetLayer:
     serializedVersion: 2

@@ -13,10 +13,23 @@ public class UIResourcePanel : MonoBehaviour
 	    foreach(var item in comps){
 	    	component_handles[item.ID] = item;
 	    }
+    	// Update all resource values
+    	var resources = ResourceManager.instance.GetPlayerResources();
+    	foreach (KeyValuePair<ResourceID, int> res in resources)
+    	{
+    		OnUpdate(res.Key, res.Value);
+    	}
     }
     
 	public void OnUpdate(ResourceID id, int count){
+		if(!component_handles.ContainsKey(id)) return;
 		component_handles[id].UpdateText(count.ToString());
+	}
+	
+	// Clean up
+	protected void OnDestroy()
+	{
+		ResourceManager.instance.resource_updated -= OnUpdate;
 	}
 
 }

@@ -1,8 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointTarget : MonoBehaviour
+public class PointTarget
 {
     public float x ;
     public float y;

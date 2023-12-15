@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5495646563971061746
 MonoBehaviour:
@@ -69,3 +69,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <cooldown>k__BackingField: 0.15
   <castDelay>k__BackingField: 0.15
+  <spellData>k__BackingField: {fileID: 11400000, guid: 5a7ae6a5bd8f01f4cbbb2b6e708fc97c, type: 2}

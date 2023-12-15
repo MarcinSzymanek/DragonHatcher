@@ -32,72 +32,80 @@ public class InputManager : MonoBehaviour
 	ItemPicker itemPicker_;
 	
 	private bool enabled_ = true;
+	private bool isBuilding_ = false;
 	
     // Start is called before the first frame update
 	void Awake()
-    {
-	    input_ = GetComponent<PlayerInput>();
-	    controlled_ = GameObject.Find("Player");
-	    playerTf_ = controlled_.transform;
-	    moveScript_ = controlled_.GetComponent<Movement>();
-	    // attackScript_ = controlled_.GetComponent<Attack>();
+	{
+		var sceneProps = GameObject.FindObjectOfType<SceneProperties>();
+		
+		// No Player Input during Loading/Death scenes
+		if(sceneProps.sceneType == SceneProperties.SceneType.LOADING) {
+			Destroy(this);
+			return;
+		}
+		
+		input_ = GetComponent<PlayerInput>();
+		
+		SetPlayer(GameObject.FindGameObjectWithTag("Player"));
 	    InputActionMap controlledMap = input_.actions.FindActionMap("Character");
 	    actionCast = controlledMap.FindAction("Attack");
 	    actionGet = controlledMap.FindAction("Get");
 		actionMove = controlledMap.FindAction("Move");
 	    
 	    actionShop = controlledMap.FindAction("Shop");
-	    actionCancel = controlledMap.FindAction("Cancel");
-	    
-	    itemPicker_ = controlled_.GetComponent<ItemPicker>();
-	    caster_ = controlled_.GetComponent<Spellcaster>();
-	    builder_ = controlled_.GetComponent<Builder>();
-	    shop_ = GameObject.FindObjectOfType<UIBuildingShop>();
-	    
-	    if(shop_ != null) {
-		    shop_.onBuildingCreated += EnterBuildMode;
-	    	actionShop.performed += OnShopButton;
-	    	Debug.Log(actionShop);
-	    }
-    }
-
-	void EnterBuildMode(object? obj, EventArgs args){
-		mode_ = InputMode.build;
+	    actionCancel = controlledMap.FindAction("Cancel");   
 	}
-	
-	void Start()
-	{
-		actionGet.performed += OnGet;
-		actionCast.performed += OnCast;
+    
+	public void SetPlayer(GameObject player){
+		controlled_ = player;
+		playerTf_ = player.transform;
+		moveScript_ = player.GetComponent<Movement>();
+		itemPicker_ = controlled_.GetComponent<ItemPicker>();
+		caster_ = controlled_.GetComponent<Spellcaster>();
+		builder_ = controlled_.GetComponent<Builder>();
+
+	}
+    
+	void Start(){
+		actionCast.performed += OnCast;	
 		actionShop.performed += OnShopButton;
 		actionCancel.performed += OnCancel;
-    }
+		
+		shop_ = GameObject.FindObjectOfType<UIBuildingShop>();
+		if(shop_ == null) return;
+		
+		shop_.onBuildingCreated += EnterBuildMode;
+	}
+
+	void EnterBuildMode(object? obj, EventArgs args){
+		isBuilding_ = true;
+	}
     
 	// Continuously read input from move action and change player movement based on that
 	void Update(){
 		if(!enabled_) return;
 		var moveDirection = actionMove.ReadValue<Vector2>();
-		//Debug.Log(moveDirection);
 		moveScript_.ChangeDirection(moveDirection.x, moveDirection.y);
 	}
 	
 	void OnShopButton(InputAction.CallbackContext context){
 		Debug.Log("Shop button pressed");
-		shop_?.SlidePanel();
+		if(shop_ == null) {
+			Debug.LogWarning("No shop in this scene!");
+			return;
+		}
+		shop_.SlidePanel();
 	}
 	
 	void OnCancel(InputAction.CallbackContext context){
 		Debug.Log("Cancel button pressed");
-		if(mode_ ==	InputMode.build){
+		if(isBuilding_){
 			builder_.CancelBuild();
 			mode_ = InputMode.cast;
+			isBuilding_ = false;
 		}
 	}
-	
-	void OnGet(InputAction.CallbackContext context){
-		//itemPicker_.OnPickup();
-	}
-	
 	
 	void OnCast(InputAction.CallbackContext context){
 		if(!enabled_) return;
@@ -107,6 +115,11 @@ public class InputManager : MonoBehaviour
 			caster_.CastSpell(int.Parse(context.control.name), mousePos);
 			return;
 		}	
+		
+		if(isBuilding_){
+			controlled_.GetComponent<Builder>().PlaceBuilding();
+			isBuilding_ = false;
+		}
 		
 		switch(mode_){
 		case InputMode.cast:
@@ -119,7 +132,7 @@ public class InputManager : MonoBehaviour
 			return;
 			
 		case InputMode.build:
-			controlled_.GetComponent<Builder>().PlaceBuilding();
+			// controlled_.GetComponent<Builder>().PlaceBuilding();
 			return;
 		}
 	}
@@ -129,6 +142,7 @@ public class InputManager : MonoBehaviour
 	}
 	
 	public void DisableGameplayInput(){
+		moveScript_.Stop();
 		enabled_ = false;
 	}
 	
@@ -140,6 +154,8 @@ public class InputManager : MonoBehaviour
 		mode_ = InputMode.ui;
 	}
 	public void OnPointerExitShop(){
-		if(mode_ != InputMode.build) mode_ = InputMode.cast;
+		mode_ = InputMode.cast;
 	}
+	
+	
 }

@@ -20,6 +20,8 @@ public class Spellcaster : MonoBehaviour
 	public int maxSpells;
 	public ISpell[] spellSlots;
 	Animator anim_;
+	
+	public int debugSpellCount = 0;
     
 	public event EventHandler<SpellCastArgs> spellCastEvent;
     
@@ -29,28 +31,21 @@ public class Spellcaster : MonoBehaviour
 		anim_ = GetComponentInChildren<Animator>();
 		spellbook = GetComponentInChildren<Spellbook>();
 		spellSlots = new ISpell[5];
-		Debug.Log("Spellbook contents: ");
-		Debug.Log(spellbook.spellCount.ToString());
 		for(int i = 0; i < maxSpells; i++){
 			spellSlots[i] = spellbook.GetSpellById(i);
+			if(spellSlots[i] != null) debugSpellCount++;
 		}
 	    ReadySpell(0, 0);
     }
     
 	public void ReadySpell(int slot, int id){
+		Debug.Log("Ready spell called");
 		spellSlots[slot] = spellbook.GetSpellById(id);
-	}
-
-	public void AddSpell(SpellDataObject spell){
-		//GameObject newspell = new GameObject(spell.name);
-		//newspell.transform.SetParent(spellbook.transform);
-		//if(spell.projectile){
-		//	var proj = newspell.AddComponent<Spawn_Projectile>();
-		//}
+		debugSpellCount++;
 	}
 	
 	public void CastSpell(int slot, Vector3 mousePosition){
-		// Debug.Log("CastSpell slot " + slot.ToString());
+		Debug.Log("CastSpell slot " + slot.ToString());
 		#nullable enable
 		ISpell? spell = spellbook.GetSpellById(slot);
 		if(spell == null){
@@ -59,7 +54,10 @@ public class Spellcaster : MonoBehaviour
 		}
 		#nullable disable
 		//Debug.Log("Trying to cast spell: " + spell.name);
-		if(!spell.CastSpell(mousePosition)) return;
+		if(!spell.CastSpell(mousePosition)) {
+			Debug.LogWarning("Casting spell failed...");
+			return;
+		}
 		spellCastEvent(this, new SpellCastArgs(slot, spell.castDelay, spell.cooldown));
 		anim_.SetTrigger("castSpell");
 		anim_.SetBool("casting", true);

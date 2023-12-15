@@ -32,7 +32,7 @@ Transform:
   - {fileID: 5044197560273001508}
   - {fileID: 3783370539957938935}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1209171121456423938
 MonoBehaviour:
@@ -46,11 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d588adc82c2cd284a8f96e4a8877f1ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCount: 10
+  enemiesToSpawn: 20
   spawnRate: 1
   spawnDelay: 1
   startOnSceneStart: 1
-  regulateThreshold: 0.5
+  regulateIntensity: 1.3
 --- !u!1001 &1365895665672690842
 PrefabInstance:
   m_ObjectHideFlags: 0

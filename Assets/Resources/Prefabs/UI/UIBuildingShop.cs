@@ -42,8 +42,8 @@ public class UIBuildingShop : MonoBehaviour
 			Debug.Log("Player tried to buy " + b.name + " but did not have enough resources");	
 			return;
 		}
-		GameObject building = Instantiate(b.prefab, GameObject.Find("PlayerBuildings").transform);
-		Debug.Log("Updating cost in builder: " + b.cost.Count + b.cost[0].amount);
+		GameObject building = Instantiate(b.prefab, GameObject.FindObjectOfType<Camera>().ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
+		building.transform.SetParent(GameObject.Find("PlayerBuildings").transform);
 		builderScript.UpdateSelected(building.GetComponent<Building>(), b.cost);
 		onBuildingCreated?.Invoke(this, new EventArgs());
 	}

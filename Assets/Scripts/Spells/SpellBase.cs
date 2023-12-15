@@ -13,10 +13,14 @@ public abstract class SpellBase<T> : MonoBehaviour, ISpell
 	public float cooldown{get; protected set;}
 	[field: SerializeField]
 	public float castDelay{get; protected set;}
-	
+	[field: SerializeField]
+	public SpellDataObject spellData{get; protected set;}
 	abstract internal void onCast(T param);
 	abstract internal T getTarget(Vector3 mousePos);
-
+	
+	void OnEnable(){
+		onCooldown = false;	
+	}
 	
 	public bool CastSpell(Vector3 mousePos){
 		if(onCooldown) return false;

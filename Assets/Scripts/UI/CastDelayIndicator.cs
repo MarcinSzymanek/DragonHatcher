@@ -34,7 +34,13 @@ public class CastDelayIndicator : MonoBehaviour
 		else{
 			noSteps = 25;
 		}
-		StartCoroutine(moveIndicator(noSteps, castDelay));
+		try {
+			
+			StartCoroutine(moveIndicator(noSteps, castDelay));
+		}
+			catch(MissingReferenceException missingRef){
+				Debug.Log("Tried to use castdelay indicator but what the fuck");
+			}
 		
 	}
 	
@@ -47,13 +53,10 @@ public class CastDelayIndicator : MonoBehaviour
 		float diffR = 255f - minR;
 		float diffG = 255f - minG;
 		float diffB = 255f - minB;
-		Debug.Log("stepscale: " + stepScale.ToString());
 		image_.color = new Color(1, 1, 1, 70/255f);
 		while(currentStep < halfstep){
 			currentStep++;
-			Debug.Log("step no." + currentStep.ToString());
 			tf_.localPosition = new Vector3(startX_ + (currentStep * (60/noSteps)), 0, 0);
-			Debug.Log((stepScale * currentStep * 90).ToString());
 			// Add up to 50 intensity
 			//light_.intensity += (stepScale * 50f);
 			//light_.color = new Color(

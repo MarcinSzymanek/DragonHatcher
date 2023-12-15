@@ -24,7 +24,6 @@ public class Movement : MonoBehaviour, IStopOnDeath
 	public float HopSpeed = 3f;
 
 	void Awake(){
-		locker_ = new Locker<Movement>();
 		tf_ = gameObject.transform;
 		body_ = tf_.GetComponent<Rigidbody2D>();
 		anim_ = tf_.GetChild(0).GetComponent<Animator>();
@@ -35,7 +34,7 @@ public class Movement : MonoBehaviour, IStopOnDeath
 	
     void Start()
 	{
-		
+		locker_ = new Locker<Movement>();
 		
     }
 
