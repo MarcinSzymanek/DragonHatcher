@@ -149,22 +149,28 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath, IAIBase
 		
 		float prevDistance = distance_to_target_;
 		// Debug.Log("Archer CloseIn");
-		
+	
 		var dir = Math2d.CalcDirection(t_.position, attackTarget_.position);
 		move_.ChangeDirection(dir.x, dir.y);
 		while(distance_to_target_ > AttackDistance){
 			// If current distance is farther then last distance, recalculate direction
 			if(distance_to_target_ > prevDistance){
+				if(attackTarget_ == null) {
+					Debug.LogWarning("AI lost its target");
+					break;
+				}
 				Vector2 newDir = Math2d.CalcDirection(t_.position, attackTarget_.position);
 				newDir = newDir.normalized;
 				move_.ChangeDirection(newDir.x, newDir.y);
 			}
 			prevDistance = distance_to_target_;
 			distance_to_target_ = Math2d.CalcDistance(t_.position, attackTarget_.position);
+			
 			yield return new WaitForFixedUpdate();
 		}
-		// Debug.Log("Closein finished");
 		state_ = State.attack;
+		
+		// Debug.Log("Closein finished");
 		pickAction_();
 	}
 	
