@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 13966, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: DungeonGenerator
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier:
   templateScene: {fileID: 102900000, guid: 5c6c58136e9902344ab6ecd8d584d4d4, type: 3}
   templateName: DungeonGeneratorTemplate
   description: Base scene for dungeon generation
@@ -230,7 +230,7 @@ MonoBehaviour:
   - dependency: {fileID: 2800000, guid: 0e23a258940c7f748a8fc3575e3d009d, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 7400000, guid: 27bd0b3344e4aab429ec8384a98c1c6d, type: 2}
-    instantiationMode: 1
+    instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 40265a896a0f341bb956e90c59025a29, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 0d5fd7e8153acb049b3c39c21851c957, type: 3}

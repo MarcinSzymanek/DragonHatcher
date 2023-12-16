@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿sing System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,7 +12,7 @@ public class DungeonGenerator : MonoBehaviour
 	//   Overall TODO:
 	// - Add variety to walls and fill-tiles
 	// - Select random locations for potential spawning
-    
+
 	public GameObject[] wallTilePrefab = null;
 	public GameObject[] wallTileRightPrefab = null;
 	public GameObject[] wallTileBottomPrefab = null;
@@ -85,7 +85,7 @@ public class DungeonGenerator : MonoBehaviour
 		float halfSize = size / 2f;
 
 		// Padding to leave some space from the outer border
-		float padding = 0.5f; 
+		float padding = 0.5f;
 
 		for (float i = -halfSize; i <= halfSize; i++)
 		{
@@ -94,7 +94,7 @@ public class DungeonGenerator : MonoBehaviour
 				float posX = position.x + i;
 				float posY = position.y + j;
 				float posZ = position.z;
-                
+
 				// Check if the current position is on the outer border
 				bool isOuterBorder = Mathf.Abs(i) >= halfSize || Mathf.Abs(j) >= halfSize - padding;
 
@@ -140,11 +140,11 @@ public class DungeonGenerator : MonoBehaviour
 						listOfTeleporters.Add(teleporter.transform);
 					}
 					if(acc == size/2f && posY < 0) {
-						GameObject teleporter = PlaceTeleporter(posX, posY + 1.3f, posZ, doorPrefab, room); 
+						GameObject teleporter = PlaceTeleporter(posX, posY + 1.3f, posZ, doorPrefab, room);
 						listOfTeleporters.Add(teleporter.transform);
 					}
 				}
-				else 
+				else
 				{
 					//Else, place filling for the room
 					PlaceTile((int)(posX-0.5), (int)(posY-0.5), (int)(posZ-0.5), tileToPlace[Random.Range(0,tileToPlace.Length)]);
@@ -165,12 +165,12 @@ public class DungeonGenerator : MonoBehaviour
 
 		int random = Random.Range(3, 10);
 		Vector3 randomPosition = new Vector3(RandomX, RandomY, 0f);
-        
+
 		for (int g = 0; g < random; g++ )
 		{
 			spawner.Spawn(randomPosition, room.transform);
 		}
-        
+
 
 		//Do the connection of the teleporters here
 		//Second receiver <- First Sender
@@ -206,7 +206,7 @@ public class DungeonGenerator : MonoBehaviour
 	}
 
 	void SpawnSquaresNextToEachOther(int amount, float size)
-	{   
+	{
 		float gap = 20f;
 
 		for (int i = 0; i < amount; i++)
