@@ -70,3 +70,6 @@ MonoBehaviour:
   <cooldown>k__BackingField: 0.15
   <castDelay>k__BackingField: 0.15
   <spellData>k__BackingField: {fileID: 11400000, guid: 5a7ae6a5bd8f01f4cbbb2b6e708fc97c, type: 2}
+  sfx_:
+  - {fileID: 8300000, guid: fc2452c2131b9c041ad68498a991c2ee, type: 3}
+  - {fileID: 8300000, guid: 3c3fb08fd8c00e546b7ff751a7f3addd, type: 3}
