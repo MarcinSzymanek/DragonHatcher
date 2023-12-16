@@ -1,4 +1,4 @@
-﻿sing System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -59,12 +59,13 @@ public class DungeonGenerator : MonoBehaviour
 		listOfRandomPositions = new List<Vector3>();
 		listOfTeleporters = new List<Transform>();
 		spawner = GetComponent<EnemySpawner>();
-		spawner.SetAIStrategy(new AIStrategies.StrategyScanForPlayer());
+		
 	}
 	void Start()
 	{
 		//Generating several rooms next to each other
 		//Note: Only use un-even numbers for the size of the room as it messes up the tile allignment for the filling
+		spawner.SetAIStrategy(new AIStrategies.StrategyScanForPlayer());
 		SpawnSquaresNextToEachOther(numberOfRooms, sizeOfRooms);
 	}
 
