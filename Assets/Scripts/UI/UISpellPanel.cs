@@ -28,7 +28,7 @@ public class UISpellPanel : MonoBehaviour
 		}
 		catch (System.Exception e)
 		{
-			Debug.LogError("Something went wrong...");
+			Debug.LogError("Something went wrong..." + e.Message);
 		}
 	}
 	

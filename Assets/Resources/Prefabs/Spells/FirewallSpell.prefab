@@ -46,5 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <cooldown>k__BackingField: 3
   <castDelay>k__BackingField: 0.2
-  spellSo: {fileID: 11400000, guid: 5b4875d30b17fa8449d280fd8bec3578, type: 2}
+  <spellData>k__BackingField: {fileID: 11400000, guid: 5b4875d30b17fa8449d280fd8bec3578, type: 2}
+  sfx_: []
   firewallPrefab: {fileID: 6807184933910990204, guid: a8689096e893a01418238d510a6a0ed0, type: 3}

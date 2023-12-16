@@ -60,6 +60,11 @@ public class GameController : MonoBehaviour
 			player_.GetComponent<DeathController>().objectDied += GameOver;
 			subbed = true;
 		}
+		
+		var vmcam = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
+		if(vmcam != null){
+			vmcam.Follow = player_.transform;
+		}
 	}
 
 	void InitializeLevel(Scene current, Scene next){

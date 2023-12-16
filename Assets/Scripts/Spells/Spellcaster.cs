@@ -58,7 +58,7 @@ public class Spellcaster : MonoBehaviour
 			Debug.LogWarning("Casting spell failed...");
 			return;
 		}
-		spellCastEvent(this, new SpellCastArgs(slot, spell.castDelay, spell.cooldown));
+		spellCastEvent?.Invoke(this, new SpellCastArgs(slot, spell.castDelay, spell.cooldown));
 		anim_.SetTrigger("castSpell");
 		anim_.SetBool("casting", true);
 	}
