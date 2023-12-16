@@ -101,7 +101,7 @@ public class DungeonGenerator : MonoBehaviour
 				//If not, place a wall
 				if(isOuterBorder) {
 					Vector3 test = new Vector3(posX, posY, posZ);
-					Debug.Log(test);
+
 					if ((Mathf.Approximately(posX, position.x - halfSize) && Mathf.Approximately(posY, position.y - halfSize)))
 					{
 						PlaceWall(posX + 1f, posY, posZ, wallTileCornerBottomLeftPrefab[Random.Range(0, wallTileCornerBottomLeftPrefab.Length)], room);

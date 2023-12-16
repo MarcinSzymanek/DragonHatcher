@@ -18,6 +18,14 @@ public abstract class SpellBase<T> : MonoBehaviour, ISpell
 	abstract internal void onCast(T param);
 	abstract internal T getTarget(Vector3 mousePos);
 	
+	[SerializeReference]
+	private AudioClip[] sfx_;
+	private AudioSource mainAudio_;
+	
+	void Start(){
+		mainAudio_ = transform.root.GetComponentInChildren<AudioSource>();	
+	}
+	
 	void OnEnable(){
 		onCooldown = false;	
 	}
@@ -32,6 +40,9 @@ public abstract class SpellBase<T> : MonoBehaviour, ISpell
 	private IEnumerator cast_(T target){
 		onCooldown = true;
 		yield return new WaitForSeconds(castDelay);
+		if(sfx_.Length != 0){
+			mainAudio_.PlayOneShot(sfx_[UnityEngine.Random.Range(0, sfx_.Length)]);
+		}
 		onCast(target);
 		yield return new WaitForSeconds(cooldown);
 		onCooldown = false;	
