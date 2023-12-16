@@ -153,22 +153,24 @@ public class DungeonGenerator : MonoBehaviour
 			acc++;
 		}
 
-		//Get random places within the dungeon to parse to the spawner
-
-		float MinX = position.x - halfSize + 0.5f;
-		float MaxX = position.x + halfSize - 0.5f;
-		float MinY = position.y - halfSize + 0.5f;
-		float MaxY = position.y + halfSize - 0.5f;
-
-		float RandomX = Random.Range(MinX, MaxX);
-		float RandomY = Random.Range(MinY, MaxY);
-
-		int random = Random.Range(3, 10);
-		Vector3 randomPosition = new Vector3(RandomX, RandomY, 0f);
-        
-		for (int g = 0; g < random; g++ )
+        //Get random places within the dungeon to parse to the spawner
+        int randomValue = Random.Range(5, 12);
+        List<Vector3> randomPositions = new List<Vector3>();
+        for (int i = 0; i < randomValue; i++)
 		{
-			spawner.Spawn(randomPosition, room.transform);
+            float MinX = position.x - halfSize + 0.5f;
+            float MaxX = position.x + halfSize - 0.5f;
+            float MinY = position.y - halfSize + 0.5f;
+            float MaxY = position.y + halfSize - 0.5f;
+
+            float RandomX = Random.Range(MinX, MaxX);
+            float RandomY = Random.Range(MinY, MaxY);
+			randomPositions.Add(new Vector3(RandomX, RandomY, 0));
+        }
+        
+		for (int g = 0; g < randomPositions.Count; g++ )
+		{
+			spawner.Spawn(randomPositions[g], room.transform);
 		}
         
 
