@@ -28,12 +28,15 @@ public class ObjectTeleportation : MonoBehaviour
 		Debug.Log("Trigger Enter");
 		if (other != null && canTeleport)
         {
-            fadeEffect.ScreenFadeOut();
-            Invoke("teleport", 0.5f);
-            fadeEffect.ScreenFadeIn();
+			fadeEffect.ScreenFadeOut(
+				() => {
+					teleport();
+					fadeEffect.ScreenFadeIn(null, 2f);
+				},
+				0.3f
+			);
         }
     }
-
 
 
     public void teleport()
