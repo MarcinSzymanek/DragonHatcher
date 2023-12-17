@@ -169,12 +169,13 @@ public class DungeonGenerator : MonoBehaviour
         //Get random places within the dungeon to parse to the spawner
 		int randomValue = Random.Range(minEnemyPerRoom, maxEnemyPerRoom);
         List<Vector3> randomPositions = new List<Vector3>();
+		float offset = 1f;
         for (int i = 0; i < randomValue; i++)
 		{
-            float MinX = position.x - halfSize + 0.5f;
-            float MaxX = position.x + halfSize - 0.5f;
-            float MinY = position.y - halfSize + 0.5f;
-            float MaxY = position.y + halfSize - 0.5f;
+            float MinX = position.x - halfSize + offset;
+            float MaxX = position.x + halfSize - offset;
+            float MinY = position.y - halfSize + offset;
+            float MaxY = position.y + halfSize - offset;
 
             float RandomX = Random.Range(MinX, MaxX);
             float RandomY = Random.Range(MinY, MaxY);
@@ -185,6 +186,7 @@ public class DungeonGenerator : MonoBehaviour
 		{
 			var enemy = spawner.Spawn(randomPositions[g], room.transform);
 			enemy.GetComponent<DeathController>().objectDied += counterScript.OnEnemyDeath;
+			Debug.Log(randomPositions[g]);
 		}
 		counterScript.setEnemyCount(randomPositions.Count);
 
