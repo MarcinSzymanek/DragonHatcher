@@ -7,6 +7,7 @@ using Cinemachine;
 public class SceneLoader : MonoBehaviour
 {
 	GameObject player_;
+	MusicController musicController_;
 	FadeEffect fade_;
 	string loadingScene = "Loading";
 	string nextScene = "";
@@ -15,6 +16,7 @@ public class SceneLoader : MonoBehaviour
 	
 	void Awake(){
 		fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
+		musicController_ = GameObject.FindObjectOfType<MusicController>();
 		player_ = GameObject.Find("Player");
 		input_ = GameObject.FindObjectOfType<InputManager>();
 	}
@@ -26,6 +28,13 @@ public class SceneLoader : MonoBehaviour
 		fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
 		Debug.Log("Fade changed to: " + fade_.name);
 		fade_.fadeOutFinished += OnFadeOutFinished;
+		musicController_.FadeOutMusic(
+			1f, 
+			() => {
+				musicController_.StopMusic();
+				musicController_.ResetVolume();	
+			}
+		);
 		fade_.ScreenFadeOut();
 		input_.DisableGameplayInput();
 		
@@ -35,6 +44,13 @@ public class SceneLoader : MonoBehaviour
 		fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
 		Debug.Log("Fade changed to: " + fade_.name);
 		fade_.ScreenFadeOut(OnDeathFadeout);
+		musicController_.FadeOutMusic(
+			1f, 
+			() => {
+				musicController_.StopMusic();
+				musicController_.ResetVolume();	
+			}
+		);
 		input_.DisableGameplayInput();
 	}
 	
@@ -69,7 +85,10 @@ public class SceneLoader : MonoBehaviour
 		
 		// Wait for the fade in
 		fade_ = GameObject.FindObjectOfType<FadeEffect>();
+		musicController_.PlayInterlude();
+
 		yield return new WaitForSeconds(fade_.fadeinTime + 0.1f);
+		
 		
 		// Old scene still exists: load in the new one and move the player object there
 		StartCoroutine(LoadNextScene(oldScene));
@@ -104,7 +123,7 @@ public class SceneLoader : MonoBehaviour
 	void FinishSceneLoad(AsyncOperation op){
 		input_.EnableGameplayInput();
 		SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
-		SceneManager.UnloadSceneAsync(loadingScene);
+		var operation = SceneManager.UnloadSceneAsync(loadingScene);
 		// Check if there are player copies, and destroy them
 		var players = GameObject.FindGameObjectsWithTag("Player");
 		foreach(var player in players){
@@ -112,6 +131,16 @@ public class SceneLoader : MonoBehaviour
 			if(unique == null) Destroy(player);
 		}
 		GameObject.FindObjectOfType<CinemachineVirtualCamera>().Follow = GameObject.FindGameObjectWithTag("Player").transform;
+		StartCoroutine(QueueUpMusic(operation));
+	}
+	
+	IEnumerator QueueUpMusic(AsyncOperation op){
+		while(!op.isDone){
+			Debug.Log("Waiting for Loading to unload");
+			yield return null;
+		}
+		Debug.Log(GameObject.FindObjectOfType<SceneProperties>().sceneType.ToString());
+		musicController_.PlayMusic();
 	}
 	
 	IEnumerator CheckAsyncOperation(AsyncOperation operation){

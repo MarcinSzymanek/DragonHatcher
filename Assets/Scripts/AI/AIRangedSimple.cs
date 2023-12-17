@@ -329,8 +329,10 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath, IAIBase
 		float wait_time = 0.2f;
 		Vector2 dir = new Vector2(0, 0);
 		float angle = 0;
+		
 		// "Charge" and lock in on target
 		while(attackTrigger_ == false){
+			if(attackTarget_ == null) attackTarget_ = GameObject.FindGameObjectWithTag("Player").transform;
 			dir = Math2d.CalcDirection(t_.position, attackTarget_.position);
 			angle = Math2d.GetDegreeFromVector(dir, 90);
 			attackMarker_.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
