@@ -21,6 +21,7 @@ public class DungeonGenerator : MonoBehaviour
 	public GameObject[] wallTileCornerBottomRightPrefab = null;
 	public GameObject[] wallTileCornerTopRightPrefab = null;
 	public GameObject[] wallTileCornerTopLeftPrefab = null;
+	public GameObject counter = null;
 
 	public GameObject doorPrefab = null;
 	public int numberOfRooms = 0;
@@ -34,13 +35,19 @@ public class DungeonGenerator : MonoBehaviour
 	private GameObject wallParent;
 	private GameObject player;
 
-	private Transform playerTransform;
+	private Count counterScript;
+    private Transform playerTransform;
 	private bool entranceTeleporterPlaced = false;
 	private bool exitTeleporterPlaced = false;
 	private List<ObjectTeleportation> listOfScripts;
 	private List <Vector3> listOfRandomPositions;
 	private EnemySpawner spawner;
 	private Vector3 randomPosition = Vector3.zero;
+
+	[field: SerializeField]
+	private int minEnemyPerRoom;
+	[field: SerializeField]
+	private int maxEnemyPerRoom;
 
 	struct Square
 	{
@@ -51,7 +58,7 @@ public class DungeonGenerator : MonoBehaviour
 
 
 	void Awake() {
-		tileMap = GameObject.Find("MapBackground").GetComponent<Tilemap>();
+        tileMap = GameObject.Find("MapBackground").GetComponent<Tilemap>();
 		wallParent = GameObject.Find("MapForeground");
 		wallParentTf_ = wallParent.transform;
 		player = GameObject.Find("Player");
@@ -59,7 +66,7 @@ public class DungeonGenerator : MonoBehaviour
 		listOfRandomPositions = new List<Vector3>();
 		listOfTeleporters = new List<Transform>();
 		spawner = GetComponent<EnemySpawner>();
-		
+
 	}
 	void Start()
 	{
@@ -74,7 +81,10 @@ public class DungeonGenerator : MonoBehaviour
 		playerTransform = player.transform;
 		float acc = 0.5f;
 		GameObject room = new GameObject("Room " + roomNumber);
-		GameObject initialTeleporter = null;
+		room.AddComponent<Count>();
+		counterScript = room.transform.GetComponent<Count>();
+		counterScript.setId(roomNumber);
+        GameObject initialTeleporter = null;
 		if(!entranceTeleporterPlaced) {
 			//Create the outer teleporter that we want to enter the dungeon in
 			//Currently hard-coded but we can change that for the dungeon entrance later on when integrating
@@ -101,8 +111,6 @@ public class DungeonGenerator : MonoBehaviour
 
 				//If not, place a wall
 				if(isOuterBorder) {
-					Vector3 test = new Vector3(posX, posY, posZ);
-
 					if ((Mathf.Approximately(posX, position.x - halfSize) && Mathf.Approximately(posY, position.y - halfSize)))
 					{
 						PlaceWall(posX + 1f, posY, posZ, wallTileCornerBottomLeftPrefab[Random.Range(0, wallTileCornerBottomLeftPrefab.Length)], room);
@@ -139,12 +147,16 @@ public class DungeonGenerator : MonoBehaviour
 					if (acc == size/2f && posY > 0) {
 						GameObject teleporter = PlaceTeleporter(posX, posY - 1.5f, posZ, doorPrefab, room);
 						listOfTeleporters.Add(teleporter.transform);
+						var tpScript = teleporter.GetComponent<ObjectTeleportation>();
+						counterScript.AddPortalScript(tpScript);
 					}
 					if(acc == size/2f && posY < 0) {
 						GameObject teleporter = PlaceTeleporter(posX, posY + 1.3f, posZ, doorPrefab, room);
-						listOfTeleporters.Add(teleporter.transform);
+                        listOfTeleporters.Add(teleporter.transform);
+						var tpScript = teleporter.GetComponent<ObjectTeleportation>();
+						counterScript.AddPortalScript(tpScript);
 					}
-				}
+                }
 				else
 				{
 					//Else, place filling for the room
@@ -154,23 +166,27 @@ public class DungeonGenerator : MonoBehaviour
 			acc++;
 		}
 
-		//Get random places within the dungeon to parse to the spawner
-
-		float MinX = position.x - halfSize + 0.5f;
-		float MaxX = position.x + halfSize - 0.5f;
-		float MinY = position.y - halfSize + 0.5f;
-		float MaxY = position.y + halfSize - 0.5f;
-
-		float RandomX = Random.Range(MinX, MaxX);
-		float RandomY = Random.Range(MinY, MaxY);
-
-		int random = Random.Range(3, 10);
-		Vector3 randomPosition = new Vector3(RandomX, RandomY, 0f);
-
-		for (int g = 0; g < random; g++ )
+        //Get random places within the dungeon to parse to the spawner
+		int randomValue = Random.Range(minEnemyPerRoom, maxEnemyPerRoom);
+        List<Vector3> randomPositions = new List<Vector3>();
+        for (int i = 0; i < randomValue; i++)
 		{
-			spawner.Spawn(randomPosition, room.transform);
+            float MinX = position.x - halfSize + 0.5f;
+            float MaxX = position.x + halfSize - 0.5f;
+            float MinY = position.y - halfSize + 0.5f;
+            float MaxY = position.y + halfSize - 0.5f;
+
+            float RandomX = Random.Range(MinX, MaxX);
+            float RandomY = Random.Range(MinY, MaxY);
+			randomPositions.Add(new Vector3(RandomX, RandomY, 0));
+        }
+
+		for (int g = 0; g < randomPositions.Count; g++ )
+		{
+			var enemy = spawner.Spawn(randomPositions[g], room.transform);
+			enemy.GetComponent<DeathController>().objectDied += counterScript.OnEnemyDeath;
 		}
+		counterScript.setEnemyCount(randomPositions.Count);
 
 
 		//Do the connection of the teleporters here
