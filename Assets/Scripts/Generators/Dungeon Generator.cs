@@ -186,7 +186,6 @@ public class DungeonGenerator : MonoBehaviour
 		{
 			var enemy = spawner.Spawn(randomPositions[g], room.transform);
 			enemy.GetComponent<DeathController>().objectDied += counterScript.OnEnemyDeath;
-			Debug.Log(randomPositions[g]);
 		}
 		counterScript.setEnemyCount(randomPositions.Count);
 
