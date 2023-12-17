@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 4983935074130740467}
   - component: {fileID: 1335657109407899088}
   - component: {fileID: 5535477857512007418}
-  - component: {fileID: 268222994883529964}
+  - component: {fileID: 8489097959022137273}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Untagged
@@ -773,7 +773,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   <FlashFalloffSpeed>k__BackingField: 3
---- !u!114 &268222994883529964
+--- !u!114 &8489097959022137273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -782,7 +782,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6777809937815544135}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e99e9ed3df3ac0428e9b58ddf92d971, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ff8b0c3883b98540bc3b30d295553d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <AttackDistance>k__BackingField: 2
