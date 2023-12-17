@@ -207,7 +207,7 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath, IAIBase
 		int min_degree_from_target;
 		Vector2 move_dir;
 		int dir_degree;
-		switch(getRange()){
+		switch(getRange()) {
 		case Range.out_of_range:
 			// Move roughly in the direction of the target
 			min_degree_from_target = 0;
