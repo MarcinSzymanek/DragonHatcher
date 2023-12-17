@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips_:
-  - {fileID: 8300000, guid: 592b130ff26b513468e86310b1eef6e4, type: 3}
+  - {fileID: 8300000, guid: b01993863676dfa49a071cb241908c07, type: 3}
 --- !u!1 &8937565274442709528
 GameObject:
   m_ObjectHideFlags: 0

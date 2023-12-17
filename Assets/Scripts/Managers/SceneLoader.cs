@@ -129,6 +129,9 @@ public class SceneLoader : MonoBehaviour
 		foreach(var player in players){
 			Unique unique = player.GetComponent<Unique>();
 			if(unique == null) Destroy(player);
+			else{
+				player.transform.position = Vector3.zero;
+			}
 		}
 		GameObject.FindObjectOfType<CinemachineVirtualCamera>().Follow = GameObject.FindGameObjectWithTag("Player").transform;
 		StartCoroutine(QueueUpMusic(operation));
