@@ -43,7 +43,12 @@ public class DungeonGenerator : MonoBehaviour
 	private List <Vector3> listOfRandomPositions;
 	private EnemySpawner spawner;
 	private Vector3 randomPosition = Vector3.zero;
-
+	
+	[field: SerializeField]
+	private int minEnemyPerRoom;
+	[field: SerializeField]
+	private int maxEnemyPerRoom;
+	
 	struct Square
 	{
 		public Vector3 position;
@@ -157,7 +162,7 @@ public class DungeonGenerator : MonoBehaviour
 		}
 
         //Get random places within the dungeon to parse to the spawner
-        int randomValue = Random.Range(5, 12);
+		int randomValue = Random.Range(minEnemyPerRoom, maxEnemyPerRoom);
         List<Vector3> randomPositions = new List<Vector3>();
         for (int i = 0; i < randomValue; i++)
 		{
