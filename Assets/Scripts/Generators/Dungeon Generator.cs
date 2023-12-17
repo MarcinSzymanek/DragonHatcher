@@ -145,12 +145,16 @@ public class DungeonGenerator : MonoBehaviour
 
 					if (acc == size/2f && posY > 0) {
 						GameObject teleporter = PlaceTeleporter(posX, posY - 1.5f, posZ, doorPrefab, room);
-						listOfTeleporters.Add(teleporter.transform);						
+						listOfTeleporters.Add(teleporter.transform);
+						var tpScript = teleporter.GetComponent<ObjectTeleportation>();
+						counterScript.AddPortalScript(tpScript);
 					}
 					if(acc == size/2f && posY < 0) {
 						GameObject teleporter = PlaceTeleporter(posX, posY + 1.3f, posZ, doorPrefab, room);
                         listOfTeleporters.Add(teleporter.transform);
-                    }
+						var tpScript = teleporter.GetComponent<ObjectTeleportation>();
+						counterScript.AddPortalScript(tpScript);
+					}
                 }
 				else 
 				{
@@ -178,7 +182,8 @@ public class DungeonGenerator : MonoBehaviour
         
 		for (int g = 0; g < randomPositions.Count; g++ )
 		{
-			spawner.Spawn(randomPositions[g], room.transform);
+			var enemy = spawner.Spawn(randomPositions[g], room.transform);
+			enemy.GetComponent<DeathController>().objectDied += counterScript.OnEnemyDeath;
 		}
 		counterScript.setEnemyCount(randomPositions.Count);
         

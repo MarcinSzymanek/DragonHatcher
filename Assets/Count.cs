@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Count : MonoBehaviour
 {
@@ -8,28 +9,16 @@ public class Count : MonoBehaviour
     private bool allEnemiesDead;
     public int ID;
     public List<ObjectTeleportation> listOfScripts;
-
-
-    void Start()
-    {
-        EnemyCount = 0;
-    }
-    private void Update()
-    {
-        if(EnemyCount == 0)
-        {
-            allEnemiesDead = true;
-            //Call ObjectTeleportation and change the value to true...
-        }
-    }
-
-    private void Awake()
-    {
-        GameObject room = this.gameObject;
-        List<GameObject> portals = new List<GameObject>();
-
-       
-    }
+    
+	// Callback on enemy death
+	public void OnEnemyDeath(object? obj, ObjectDeathArgs args){
+		EnemyCount--;
+		if(EnemyCount < 1){
+			foreach(var tpScript in listOfScripts){
+				tpScript.EnableTeleportation();
+			}
+		}
+	}
 
     public void setEnemyCount(int amount)
     {
@@ -50,8 +39,9 @@ public class Count : MonoBehaviour
     {
         return ID;
     }
-    public void addPortalScript(ObjectTeleportation script)
-    {
+	public void AddPortalScript(ObjectTeleportation script)
+	{
+		if(listOfScripts == null) listOfScripts = new List<ObjectTeleportation>();
         listOfScripts.Add(script);
     }
 }

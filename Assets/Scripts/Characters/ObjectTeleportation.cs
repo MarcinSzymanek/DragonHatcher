@@ -7,12 +7,13 @@ public class ObjectTeleportation : MonoBehaviour
 {
     public Transform objectToTeleport, destination;
     public GameObject playerg;
-    public float teleportDelay = 1.5f;
-    private bool canTeleport = true;
+	public float teleportDelay = 1.5f;
+    
+	// Disable teleportation by default
+	private bool canTeleport = false;
     private GameObject attachedGameObject = null;
     private Vector3 teleportOffset;
     private FadeEffect fadeEffect;
-    private bool allEnemiesDead;
 
     private void Awake()
     {
@@ -27,7 +28,7 @@ public class ObjectTeleportation : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
 	{
 		Debug.Log("Trigger Enter");
-		if (other != null && canTeleport && allEnemiesDead)
+		if (other != null && canTeleport)
         {
 			fadeEffect.ScreenFadeOut(
 				() => {
@@ -37,7 +38,16 @@ public class ObjectTeleportation : MonoBehaviour
 				0.3f
 			);
         }
-    }
+	}
+    
+	// One of the rare times where I like to have explicit setter methods
+	public void DisableTeleportation(){
+		canTeleport = false;
+	}
+
+	public void EnableTeleportation(){
+		canTeleport = true;
+	}
 
 
     public void teleport()
@@ -98,13 +108,4 @@ public class ObjectTeleportation : MonoBehaviour
         playerg = player;
     }
 
-    public void setAllEnemiesDead(bool value)
-    {
-        allEnemiesDead = value;
-    }
-
-    public bool getAllEnemiesDead()
-    {
-        return allEnemiesDead;
-    }
 }
