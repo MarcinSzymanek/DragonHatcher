@@ -35,7 +35,8 @@ public class DungeonGenerator : MonoBehaviour
 	private GameObject wallParent;
 	private GameObject player;
 
-	private Transform playerTransform;
+	private Count counterScript;
+    private Transform playerTransform;
 	private bool entranceTeleporterPlaced = false;
 	private bool exitTeleporterPlaced = false;
 	private List<ObjectTeleportation> listOfScripts;
@@ -74,8 +75,8 @@ public class DungeonGenerator : MonoBehaviour
 		playerTransform = player.transform;
 		float acc = 0.5f;
 		GameObject room = new GameObject("Room " + roomNumber);
-		GameObject counterObject = Instantiate(counter, room.transform, true);
-		Count counterScript = counterObject.transform.GetComponent<Count>();
+		room.AddComponent<Count>();
+		counterScript = room.transform.GetComponent<Count>();
 		counterScript.setId(roomNumber);
         GameObject initialTeleporter = null;
 		if(!entranceTeleporterPlaced) {
@@ -139,13 +140,13 @@ public class DungeonGenerator : MonoBehaviour
 
 					if (acc == size/2f && posY > 0) {
 						GameObject teleporter = PlaceTeleporter(posX, posY - 1.5f, posZ, doorPrefab, room);
-						listOfTeleporters.Add(teleporter.transform);
+						listOfTeleporters.Add(teleporter.transform);						
 					}
 					if(acc == size/2f && posY < 0) {
-						GameObject teleporter = PlaceTeleporter(posX, posY + 1.3f, posZ, doorPrefab, room); 
-						listOfTeleporters.Add(teleporter.transform);
-					}
-				}
+						GameObject teleporter = PlaceTeleporter(posX, posY + 1.3f, posZ, doorPrefab, room);
+                        listOfTeleporters.Add(teleporter.transform);
+                    }
+                }
 				else 
 				{
 					//Else, place filling for the room
