@@ -20,10 +20,12 @@ public abstract class SpellBase<T> : MonoBehaviour, ISpell
 	
 	[SerializeReference]
 	private AudioClip[] sfx_;
+	private ManagedSFX sfxBeforeEffect_;
 	private AudioSource mainAudio_;
 	
 	void Start(){
-		mainAudio_ = transform.root.GetComponentInChildren<AudioSource>();	
+		mainAudio_ = transform.root.GetComponentInChildren<AudioSource>();
+		sfxBeforeEffect_ = GetComponentInChildren<ManagedSFX>();
 	}
 	
 	void OnEnable(){
@@ -39,6 +41,9 @@ public abstract class SpellBase<T> : MonoBehaviour, ISpell
 	
 	private IEnumerator cast_(T target){
 		onCooldown = true;
+		if(sfxBeforeEffect_ != null){
+			sfxBeforeEffect_.PlaySfx();
+		}
 		yield return new WaitForSeconds(castDelay);
 		if(sfx_.Length != 0){
 			mainAudio_.PlayOneShot(sfx_[UnityEngine.Random.Range(0, sfx_.Length)]);

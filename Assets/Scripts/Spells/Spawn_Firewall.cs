@@ -17,6 +17,6 @@ public class Spawn_Firewall : SpellBase<PointTarget>
     private void SpawnFirewall(PointTarget pt)
     {
         Vector3 position = new Vector3(pt.x, pt.y, 0);
-        Instantiate(firewallPrefab, position, Quaternion.identity);
+	    var obj = Instantiate(firewallPrefab, position, Quaternion.identity); 
     }
 }
