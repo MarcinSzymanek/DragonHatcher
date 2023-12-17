@@ -12,6 +12,7 @@ public class ObjectTeleportation : MonoBehaviour
     private GameObject attachedGameObject = null;
     private Vector3 teleportOffset;
     private FadeEffect fadeEffect;
+    private bool allEnemiesDead;
 
     private void Awake()
     {
@@ -26,7 +27,7 @@ public class ObjectTeleportation : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
 	{
 		Debug.Log("Trigger Enter");
-		if (other != null && canTeleport)
+		if (other != null && canTeleport && allEnemiesDead)
         {
 			fadeEffect.ScreenFadeOut(
 				() => {
@@ -95,5 +96,15 @@ public class ObjectTeleportation : MonoBehaviour
 
     public void setPlayer(GameObject player) {
         playerg = player;
+    }
+
+    public void setAllEnemiesDead(bool value)
+    {
+        allEnemiesDead = value;
+    }
+
+    public bool getAllEnemiesDead()
+    {
+        return allEnemiesDead;
     }
 }

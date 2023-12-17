@@ -21,6 +21,7 @@ public class DungeonGenerator : MonoBehaviour
 	public GameObject[] wallTileCornerBottomRightPrefab = null;
 	public GameObject[] wallTileCornerTopRightPrefab = null;
 	public GameObject[] wallTileCornerTopLeftPrefab = null;
+	public GameObject counter = null;
 
 	public GameObject doorPrefab = null;
 	public int numberOfRooms = 0;
@@ -51,7 +52,7 @@ public class DungeonGenerator : MonoBehaviour
 
 
 	void Awake() {
-		tileMap = GameObject.Find("MapBackground").GetComponent<Tilemap>();
+        tileMap = GameObject.Find("MapBackground").GetComponent<Tilemap>();
 		wallParent = GameObject.Find("MapForeground");
 		wallParentTf_ = wallParent.transform;
 		player = GameObject.Find("Player");
@@ -73,7 +74,10 @@ public class DungeonGenerator : MonoBehaviour
 		playerTransform = player.transform;
 		float acc = 0.5f;
 		GameObject room = new GameObject("Room " + roomNumber);
-		GameObject initialTeleporter = null;
+		GameObject counterObject = Instantiate(counter, room.transform, true);
+		Count counterScript = counterObject.transform.GetComponent<Count>();
+		counterScript.setId(roomNumber);
+        GameObject initialTeleporter = null;
 		if(!entranceTeleporterPlaced) {
 			//Create the outer teleporter that we want to enter the dungeon in
 			//Currently hard-coded but we can change that for the dungeon entrance later on when integrating
@@ -100,8 +104,6 @@ public class DungeonGenerator : MonoBehaviour
 
 				//If not, place a wall
 				if(isOuterBorder) {
-					Vector3 test = new Vector3(posX, posY, posZ);
-					Debug.Log(test);
 					if ((Mathf.Approximately(posX, position.x - halfSize) && Mathf.Approximately(posY, position.y - halfSize)))
 					{
 						PlaceWall(posX + 1f, posY, posZ, wallTileCornerBottomLeftPrefab[Random.Range(0, wallTileCornerBottomLeftPrefab.Length)], room);
@@ -172,6 +174,7 @@ public class DungeonGenerator : MonoBehaviour
 		{
 			spawner.Spawn(randomPositions[g], room.transform);
 		}
+		counterScript.setEnemyCount(randomPositions.Count);
         
 
 		//Do the connection of the teleporters here
