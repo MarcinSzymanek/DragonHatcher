@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7523202746048098675
 MonoBehaviour:
@@ -77,7 +77,10 @@ MonoBehaviour:
   - {fileID: 2907750810227925635, guid: a07d3b03e8f8e564c8a250c6a9381e3f, type: 3}
   wallTileCornerTopLeftPrefab:
   - {fileID: 2907750810227925635, guid: 376d24b82f135ca49a0bf6183540978f, type: 3}
+  counter: {fileID: 0}
   doorPrefab: {fileID: 2589175252476403355, guid: a568d875067e55f4ab1e733d9f0ad4e8, type: 3}
+  numberOfRooms: 0
+  sizeOfRooms: 0
   tileToPlace:
   - {fileID: 11400000, guid: ee5161b2c86327f439f334654ec8592e, type: 2}
   - {fileID: 11400000, guid: b8311692b118a674282472f0930eae46, type: 2}
@@ -92,3 +95,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f89aeda5a1fc624409599251e46cfe9d, type: 2}
   - {fileID: 11400000, guid: c7a2124028b66e346bbf02d7ad262dbc, type: 2}
   - {fileID: 11400000, guid: 22bceda9461f92146be80a3d1318c03d, type: 2}
+  listOfRewards:
+  - {fileID: 7620662267393734494, guid: 920ce2fdba8af85458407773f689b657, type: 3}
+  - {fileID: 7314979198938841246, guid: 733ef2d6e977df24aa6ae23e82abcc43, type: 3}
+  minEnemyPerRoom: 0
+  maxEnemyPerRoom: 0

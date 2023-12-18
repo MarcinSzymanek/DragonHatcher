@@ -28,8 +28,7 @@ public class ManagedSFX : MonoBehaviour
 	
 	IEnumerator CleanUpSfx(){
 		while(source_.isPlaying){
-			Debug.LogWarning("Sfx waiting for cleanup");
-			yield return null;
+			yield return new WaitForSeconds(0.2f);
 		}
 		Destroy(gameObject);
 	}

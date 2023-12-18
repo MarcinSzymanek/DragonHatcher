@@ -265,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Facing: 1
   WeapEquipped: 0
-  <Speed>k__BackingField: 2
+  <Speed>k__BackingField: 150
   HopSpeed: 3
 --- !u!50 &2800097341721043378
 Rigidbody2D:
@@ -279,9 +279,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
-  m_LinearDrag: 8
-  m_AngularDrag: 8
+  m_Mass: 10
+  m_LinearDrag: 10
+  m_AngularDrag: 10
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:

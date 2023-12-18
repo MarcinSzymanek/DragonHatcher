@@ -12,6 +12,7 @@ public class ContactDamage : MonoBehaviour
 	public bool destroyOnDamage;
 	public bool logCollisions;
 	private string parentName_;
+	public event System.Action<Rigidbody2D> damageEffectEvent;
 	void Start(){
 		objDamage = new List<TakeDamage>();
 		parentName_ = transform.parent.name;
@@ -61,7 +62,7 @@ public class ContactDamage : MonoBehaviour
 				Debug.LogError(e.Source.ToString());
 				return;
 		}
-		
+		damageEffectEvent?.Invoke(collider.transform.parent.GetComponent<Rigidbody2D>());
 		if(objDamage.Contains(tdamage)) return;
 		objDamage.Add(tdamage);
 	}

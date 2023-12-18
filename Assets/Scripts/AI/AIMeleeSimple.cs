@@ -58,6 +58,7 @@ public class AIMeleeSimple : MonoBehaviour, IStopOnDeath, IAIBase
 
 	// Follow the target checking direction every x seconds
 	private IEnumerator LockOnTarget(){
+		if(attackTarget_ == null) attackTarget_ = GameObject.FindGameObjectWithTag("Player").transform;
 		Transform attackTarget = (Transform)attackTarget_;
 		Vector2 moveTarget, direction;
 
