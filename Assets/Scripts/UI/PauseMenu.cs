@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class PauseMenu : MonoBehaviour
@@ -6,31 +6,30 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     private bool GameIsPaused = false;
     UISettingsMenu settings;
-    PauseMenu pause;
-
+	GameObject pauseObject;
+    
     private void Awake()
-    {
-        settings = GetComponentInChildren<UISettingsMenu>();
-        pause = GetComponent<PauseMenu>();
+	{
+		pauseObject = transform.Find("UIPauseMenu").gameObject;
+		Debug.Log(pauseObject.name);
+	    settings = GetComponentInChildren<UISettingsMenu>(true);
+	    Debug.Log(settings.name);
     }
 
     public void PauseLogic()
-    {
-        //Debug.Log(settings.name);
-        //Debug.Log(pause.name);
-        //if (settings.gameObject.activeSelf)
-        //{
-            //settings.gameObject.SetActive(false);
-            //pause.gameObject.SetActive(false);
-        //}
+	{
+        if (settings.gameObject.activeSelf)
+        {
+            settings.gameObject.SetActive(false);
+	        pauseObject.SetActive(true);
+	        return;
+        }
         if (GameIsPaused)
         {
-            Resume();
+	        Resume();
+	        return;
         }
-        if (!GameIsPaused)
-        {
-            Pause();
-        }
+        Pause();
     }
 
     public void Resume()
