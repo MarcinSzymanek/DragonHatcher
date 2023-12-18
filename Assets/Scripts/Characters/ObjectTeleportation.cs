@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Searcher;
+// using UnityEditor.Searcher;
 using UnityEngine;
 
 public class ObjectTeleportation : MonoBehaviour
