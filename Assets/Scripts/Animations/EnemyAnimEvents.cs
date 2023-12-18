@@ -23,6 +23,7 @@ public class EnemyAnimEvents : MonoBehaviour
 	}
 	
 	public void AttackAnimFinished(){
+		Debug.Log("are we being called");
 		attackFinished?.Invoke(this, new EventArgs());
 	}
 	

@@ -45,13 +45,18 @@ public class Spawn_Projectile : MonoBehaviour
     
 	void setPrefabTarget(GameObject obj){
 		obj.layer = layerInt_;
-		var col = obj.transform.GetChild(1).GetComponent<Collider2D>();
-		col.gameObject.layer = layerInt_;
-	
-		col = obj.transform.GetChild(0).GetComponent<Collider2D>();
-		col.callbackLayers += targetLayer;
-		col.contactCaptureLayers += targetLayer;
-		col.gameObject.layer = layerInt_;
+		foreach(var i in obj.transform.GetComponentsInChildren<Transform>())
+		{
+			if(i == obj.transform)
+			{
+				continue;
+			}
+            var col = i.GetComponent<Collider2D>();
+            col.gameObject.layer = layerInt_;
+
+            col.callbackLayers += targetLayer;
+            col.contactCaptureLayers += targetLayer;
+        }
 		var rb = obj.GetComponent<Rigidbody2D>();
 	}
 }

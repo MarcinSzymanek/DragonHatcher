@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SkeletonAnimCtrl
+  m_Controller: {fileID: 9100000, guid: 8e1d32756deb65f4caadfab8db432414, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: b1e0bb7080566d84b993dbe3d2022fe2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 85df4158b60b2814883deb8371b6fe3f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: b4da068435232074c9a17e376d285de9, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 27bc03d9e554fe04fb13c9bd1f5cfee7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3ae8b8925a028ca4088cce13898a3594, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9e6f417996bca0842ac5e6a4290c5eda, type: 2}
