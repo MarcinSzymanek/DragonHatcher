@@ -220,6 +220,10 @@ public class DungeonGenerator : MonoBehaviour
             enemy.GetComponent<DeathController>().objectDied += counterScript.OnEnemyDeath;
         }
         counterScript.setEnemyCount(randomPositions.Count);
+        if(roomNumber == numberOfRooms)
+        {
+            rewardPosition = randomPositions[randomPositions.Count - 1];
+        }
 
 
         //Do the connection of the teleporters here
