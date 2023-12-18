@@ -24,7 +24,6 @@ public class AIMeleeSimple : MonoBehaviour, IStopOnDeath, IAIBase
     Vector2? moveTarget_ = null;
     Transform? attackTarget_ = null;
 
-
     Transform t_;
     IAI_Strategy strategy_;
 

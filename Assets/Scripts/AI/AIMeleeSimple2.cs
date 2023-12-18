@@ -11,7 +11,6 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
     AIScan scanner_;
     public AIScan scanner { get { return scanner_; } }
     AudioSource audio_;
-    Spawn_Projectile projectileSpawner_;
     [field: SerializeField]
     public float AttackDistance { get; set; }
     public IAI_Strategy strategy;
@@ -19,7 +18,7 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
     Vector2? moveTarget_ = null;
     Transform? attackTarget_ = null;
     Transform t_;
-    Transform attackMarker_;
+    public Transform firePoint_;
     float distance_to_target_;
 
     float range_close;
@@ -32,7 +31,6 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
         wait_player,
         move_to_target,
         attack,
-        reposition,
         attack_finished
     };
 
@@ -59,12 +57,8 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
         anim_ = GetComponentInChildren<Animator>();
 
         audio_ = transform.Find("mainAudio").GetComponent<AudioSource>();
-        projectileSpawner_ = GetComponent<Spawn_Projectile>();
 
-        GetComponentInChildren<EnemyAnimEvents>().arrowReleased += OnArrowRelease;
         GetComponentInChildren<EnemyAnimEvents>().attackFinished += OnAttackFinished;
-
-        attackMarker_ = t_.Find("AttackMarker");
 
         range_close = AttackDistance;
     }
@@ -78,11 +72,6 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
     public void OnDeath(object? s, EventArgs args)
     {
         StopAllCoroutines();
-    }
-
-    public void OnArrowRelease(object? s, EventArgs args)
-    {
-        attackTrigger_ = true;
     }
 
     public void OnAttackFinished(object? s, EventArgs args)
@@ -147,7 +136,6 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
             distance_to_target_ = Math2d.CalcDistance(t_.position, attackTarget_.position);
             yield return new WaitForFixedUpdate();
         }
-        // Debug.Log("Closein finished");
         state_ = State.attack;
         pickAction_();
     }
@@ -162,7 +150,6 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
             case Range.out_of_range:
                 // Move in the direction of the target
                 move_dir = Math2d.CalcDirection(t_.position, attackTarget_.position);
-                move_dir = findUnblockedDirection_(move_dir);
 
                 return move_dir;
 
@@ -176,72 +163,6 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
         // The code cannot ever get here...
         Debug.LogError("This should be impossible.");
         return new Vector2();
-    }
-
-    private IEnumerator Reposition()
-    {
-        state_ = State.reposition;
-        Vector2 move_dir = pickDirection_();
-        // Debug.Log("Move dir: " + move_dir.ToString());
-        MathVisualise.DrawArrow(t_, move_dir, Color.green, 5f);
-
-        Vector2 target = (Vector2)t_.position + move_dir;
-        var move_distance = Math2d.CalcDistance(t_.position, target);
-        move_.ChangeDirection(move_dir.x, move_dir.y);
-        float threshold = 0.02f;
-        float prev_move_distance;
-
-        int framesBeforeTimeout = 120;
-
-        while (move_distance > threshold && framesBeforeTimeout > 0)
-        {
-            framesBeforeTimeout--;
-            prev_move_distance = move_distance;
-            move_distance = Math2d.CalcDistance(t_.position, target);
-            if (move_distance > prev_move_distance)
-            {
-                // Recalculate move
-                move_dir = pickDirection_();
-                target = (Vector2)t_.position + move_dir;
-                move_.ChangeDirection(move_dir.x, move_dir.y);
-            }
-            yield return new WaitForFixedUpdate();
-        }
-        move_.Stop();
-        // Debug.Log("Reposition finished");
-        pickAction_();
-    }
-
-    private Vector2 findUnblockedDirection_(Vector2 move_dir)
-    {
-        bool done = false;
-        int no_iter = 0;
-        RaycastHit2D hitData;
-        LayerMask blocking = LayerMask.GetMask("Obstacles", "Enemy", "Player");
-        while (!done)
-        {
-            no_iter++;
-            if (no_iter > 5)
-            {
-                Debug.LogError("Could not find unblocked direction");
-                return move_dir;
-            }
-            MathVisualise.DrawArrow(t_, move_dir, Color.blue);
-            Ray2D ray = new Ray2D(t_.position, move_dir);
-            hitData = Physics2D.Raycast(t_.position, move_dir, 0.5f, blocking);
-            if (hitData && hitData.transform != transform)
-            {
-                // Path is blocked, try rotate and recalculate
-                Debug.Log("Path blocked! By: " + hitData.transform.gameObject.name);
-                move_dir = Math2d.RotVector(move_dir, 25);
-                Debug.Log("New move_dir: " + move_dir.ToString());
-            }
-            else
-            {
-                done = true;
-            }
-        }
-        return move_dir;
     }
 
     // Get range state based on distance to target and thresholds
@@ -260,7 +181,6 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
     {
         state_ = State.attack;
         move_.Stop();
-        attackMarker_.gameObject.SetActive(true);
         attackTrigger_ = false;
         animFinished_ = false;
         anim_.Play("Attack");
@@ -277,24 +197,16 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
     // Follow the target direction, release when animation event happens
     private IEnumerator MeleeAttackRoutine(System.Action callback)
     {
-        float wait_time = 0.2f;
         Vector2 dir = new Vector2(0, 0);
         float angle = 0;
-        // "Charge" and lock in on target
-        while (attackTrigger_ == false)
-        {
-            dir = Math2d.CalcDirection(t_.position, attackTarget_.position);
-            angle = Math2d.GetDegreeFromVector(dir, 90);
-            attackMarker_.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            attackMarker_.localPosition = dir;
-            wait_time -= 0.02f;
-            yield return new WaitForSeconds(wait_time);
-        }
+        dir = Math2d.CalcDirection(t_.position, attackTarget_.position);
+        angle = Math2d.GetDegreeFromVector(dir, 90);
+        firePoint_.localPosition = dir;
 
-        // Attack
-        attackMarker_.gameObject.SetActive(false);
         anim_.Play("Attack");
         audio_.PlayOneShot(audio_.clip);
+        Spawn_Projectile sp = GetComponent<Spawn_Projectile>();
+        sp.Shoot(new VectorTarget(t_.position, dir));
 
         while (animFinished_ == false)
         {
@@ -305,9 +217,9 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
         pickAction_();
     }
 
+
     public void OnDeath()
     {
         StopAllCoroutines();
-        if (attackMarker_.gameObject.activeSelf) attackMarker_.gameObject.SetActive(false);
     }
 }
