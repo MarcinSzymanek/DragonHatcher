@@ -20,6 +20,8 @@ public class InputManager : MonoBehaviour
 	Spellcaster caster_;
 	Builder builder_;
 	UIBuildingShop shop_;
+	PauseMenu pause_;
+	private bool GameIsPaused = false;
 	
 	InputAction actionCast;
 	InputAction actionGet;
@@ -52,8 +54,9 @@ public class InputManager : MonoBehaviour
 	    actionCast = controlledMap.FindAction("Attack");
 	    actionGet = controlledMap.FindAction("Get");
 		actionMove = controlledMap.FindAction("Move");
-	    
-	    actionShop = controlledMap.FindAction("Shop");
+		pause_ = FindObjectOfType<PauseMenu>();
+
+        actionShop = controlledMap.FindAction("Shop");
 	    actionCancel = controlledMap.FindAction("Cancel");   
 	}
     
@@ -64,7 +67,6 @@ public class InputManager : MonoBehaviour
 		itemPicker_ = controlled_.GetComponent<ItemPicker>();
 		caster_ = controlled_.GetComponent<Spellcaster>();
 		builder_ = controlled_.GetComponent<Builder>();
-
 	}
     
 	void Start(){
@@ -100,7 +102,9 @@ public class InputManager : MonoBehaviour
 	
 	void OnCancel(InputAction.CallbackContext context){
 		Debug.Log("Cancel button pressed");
-		if(isBuilding_){
+		Debug.Log(pause_.name);
+		pause_.PauseLogic();
+		if(isBuilding_) {
 			builder_.CancelBuild();
 			mode_ = InputMode.cast;
 			isBuilding_ = false;
