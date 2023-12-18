@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3383947219539421102}
-  - component: {fileID: 2674404315060658407}
+  - component: {fileID: 7137367641589755956}
+  - component: {fileID: 4899861030647724924}
   m_Layer: 6
   m_Name: TornadoSpell
   m_TagString: Untagged
@@ -30,9 +31,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2674404315060658407
+--- !u!114 &7137367641589755956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,12 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3321112975411102396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 309c7693b352c774f96979495e044f4f, type: 3}
+  m_Script: {fileID: 11500000, guid: f0f6a2ed8310a80429aaf7aec2e39bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <cooldown>k__BackingField: 0.5
-  <castDelay>k__BackingField: 0.1
-  tornadoPrefab: {fileID: 3092800731291281327, guid: aceb2347c41454c3f915804bfec5dfdd, type: 3}
+  projectilePrefab: {fileID: 3092800731291281327, guid: aceb2347c41454c3f915804bfec5dfdd, type: 3}
   firePoint: {fileID: 0}
   targetLayer:
     serializedVersion: 2
@@ -54,4 +53,21 @@ MonoBehaviour:
   ownerLayer:
     serializedVersion: 2
     m_Bits: 2048
-  speed: 2
+  rotationOffset: -90
+  speed: 5
+--- !u!114 &4899861030647724924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3321112975411102396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0131eb92cbd118c498aaffba1badbed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <cooldown>k__BackingField: 0.5
+  <castDelay>k__BackingField: 0.15
+  <spellData>k__BackingField: {fileID: 11400000, guid: c2621a4d8b7980f4aa20fe2530c3d316, type: 2}
+  sfx_: []

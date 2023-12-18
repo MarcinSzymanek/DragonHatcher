@@ -465,7 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Facing: 1
   WeapEquipped: 0
-  <Speed>k__BackingField: 1
+  <Speed>k__BackingField: 100
   HopSpeed: 2
 --- !u!50 &2662513041042208091
 Rigidbody2D:
@@ -479,9 +479,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
-  m_LinearDrag: 8
-  m_AngularDrag: 8
+  m_Mass: 10
+  m_LinearDrag: 10
+  m_AngularDrag: 10
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -732,7 +732,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1392490425
-  m_SortingLayer: 1
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1932087071, guid: cfd2483d36c14854f85e3107d143bf68, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

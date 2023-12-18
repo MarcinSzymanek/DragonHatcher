@@ -53,7 +53,7 @@ MonoBehaviour:
   ownerLayer:
     serializedVersion: 2
     m_Bits: 2048
-  rotationOffset: 90
+  rotationOffset: 0
   speed: 13
 --- !u!114 &1548116338808846345
 MonoBehaviour:

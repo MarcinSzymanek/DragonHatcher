@@ -7,6 +7,7 @@ using UnityEngine;
 
 public abstract class SpellBase<T> : MonoBehaviour, ISpell
 {
+	[field: SerializeField]
 	public int id{get; set;}
 	public bool onCooldown{get; private set;}
 	[field: SerializeField]

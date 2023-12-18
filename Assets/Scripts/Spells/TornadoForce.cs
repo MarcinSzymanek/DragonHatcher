@@ -5,23 +5,32 @@ using UnityEngine;
 
 public class TornadoForce : MonoBehaviour
 {
-    public float time = 0.1f;
-    public int knockbackForce = 0;
-    private void OnCollisionEnter2D(Collision2D collider)
-    {
-        Debug.Log("are we colliding?");
-        Rigidbody2D enemyRigidbody = collider.rigidbody;
-        if (enemyRigidbody != null)
-        {
-            Vector3 knockbackDirection = (collider.transform.position - transform.position).normalized;
-            enemyRigidbody.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
-        }
+	public float time = 0.05f;
+	public int knockbackForce = 0;
+    
+	void Awake(){
+		GetComponent<ContactDamage>().damageEffectEvent += ApplyForce;
+	}
+    
+    //private void OnCollisionEnter2D(Collision2D collider)
+    //{
+    //    Debug.Log("are we colliding?");
+    //    Rigidbody2D enemyRigidbody = collider.rigidbody;
+    //    if (enemyRigidbody != null)
+    //    {
+        	
+    //    }
 
-        Invoke("destroy", time);
-    }
-
-    private void destroy()
-    {
-        Destroy(transform.parent.gameObject);
-    }
+        
+    //}
+	
+	public void ApplyForce(Rigidbody2D body){
+		Debug.Log("Applying force");
+		var move = body.GetComponent<Movement>();
+		move.Stop();
+		move.LockMovementFor(0.5f);
+		Vector3 knockbackDirection = (body.transform.position - transform.position).normalized;
+		body.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+	}
+	
 }

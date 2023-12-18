@@ -23,7 +23,7 @@ public class Spawn_Projectile : MonoBehaviour
 			layerInt_ ++;
 		}
 		
-		if(firePoint == null) firePoint = transform.parent.parent.transform;
+		if(firePoint == null) firePoint = transform.root;
 		// Debug.Log("Layer int is: " + layerInt_.ToString());
 	}
 
@@ -39,7 +39,7 @@ public class Spawn_Projectile : MonoBehaviour
 		rb.velocity = target.direction * speed;
 
 		//float angle = Math2d.GetDegreeFromVector(shootDirection, rotationOffset);
-		projectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, target.angle));
+		projectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, target.angle + rotationOffset));
 
     }
     

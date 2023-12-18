@@ -4,6 +4,7 @@ using UnityEngine;
 
 // ISpell<Vector3> means you must put Vector3 as param 
 // SpellBase<VectorTarget> means that the spell effect needs to make a VectorTarget to cast it
+[RequireComponent(typeof(Spawn_Projectile))]
 public class ProjectileSpell : SpellBase<VectorTarget>, IVectorTargeted
 {
 	Spawn_Projectile projectileSpawner_;

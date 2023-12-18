@@ -395,7 +395,7 @@ Transform:
   - {fileID: 9115508353655514117}
   - {fileID: 547246493985174816}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5057374331487044504
 MonoBehaviour:
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Facing: 1
   WeapEquipped: 0
-  <Speed>k__BackingField: 4
+  <Speed>k__BackingField: 400
   HopSpeed: 3
 --- !u!50 &5533440427003115530
 Rigidbody2D:
@@ -425,9 +425,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
-  m_LinearDrag: 20
-  m_AngularDrag: 20
+  m_Mass: 20
+  m_LinearDrag: 10
+  m_AngularDrag: 10
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  <maxHealth>k__BackingField: 100
+  <maxHealth>k__BackingField: 50
 --- !u!81 &7893834810721719845
 AudioListener:
   m_ObjectHideFlags: 0
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips_:
   - {fileID: 8300000, guid: d8df0ec535e9ba54fb4fbde21aedf6e7, type: 3}
-  <FlashFalloffSpeed>k__BackingField: 1
+  <FlashFalloffSpeed>k__BackingField: 3
 --- !u!114 &6711520653642366815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,10 +925,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9115508353655514117}
     m_Modifications:
+    - target: {fileID: 1548116338808846345, guid: ee556e2a966888b4d85653f7c312c9b5, type: 3}
+      propertyPath: <castDelay>k__BackingField
+      value: 0.08
+      objectReference: {fileID: 0}
     - target: {fileID: 5185818274522853722, guid: ee556e2a966888b4d85653f7c312c9b5, type: 3}
       propertyPath: m_Name
       value: ArrowSpell
       objectReference: {fileID: 0}
+    - target: {fileID: 5495646563971061746, guid: ee556e2a966888b4d85653f7c312c9b5, type: 3}
+      propertyPath: speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495646563971061746, guid: ee556e2a966888b4d85653f7c312c9b5, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 7016162086260167800}
     - target: {fileID: 6310231216591015933, guid: ee556e2a966888b4d85653f7c312c9b5, type: 3}
       propertyPath: m_RootOrder
       value: -1

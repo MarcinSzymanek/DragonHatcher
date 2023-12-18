@@ -38,6 +38,7 @@ public class Spellbook : MonoBehaviour
 	#nullable disable
 	
 	public List<SpellDataObject> GetHeldSpellDataList(){
+		Debug.Log("Get Held Spell Data");
 		List<SpellDataObject> ret = new List<SpellDataObject>();
 		foreach (var item in knownSpells)
 		{
@@ -52,6 +53,7 @@ public class Spellbook : MonoBehaviour
 		foreach (ISpell s in spells){
 			Debug.Log("Adding " + s.name + " to index " + s.id.ToString());
 			heldSpells[s.id] = s;
+			s.spellData.slot = s.id;
 			if(knownSpells.Contains(s.spellData)) continue;
 			knownSpells.Add(s.spellData);
 		} 

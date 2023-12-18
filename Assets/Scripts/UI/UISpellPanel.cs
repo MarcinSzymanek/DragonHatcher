@@ -23,6 +23,7 @@ public class UISpellPanel : MonoBehaviour
 			var list = player.GetComponentInChildren<Spellbook>().GetHeldSpellDataList();
 			foreach (var item in list)
 			{
+				Debug.Log("Updating spell icon");
 				UpdateIcon(item.slot, item.icon);
 			}
 		}

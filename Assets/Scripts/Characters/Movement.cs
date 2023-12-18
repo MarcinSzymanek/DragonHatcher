@@ -53,6 +53,14 @@ public class Movement : MonoBehaviour, IStopOnDeath
 		
 	}
 	
+	public void LockMovementFor(float time){
+		directionLock_ = true;
+		Invoke("UnlockMovement", time);
+	}
+	
+	public void UnlockMovement(){
+		directionLock_ = false;
+	}
 
 	// Push this object in its current direction for time amount of time
 	public void HopForward(float time){
@@ -128,7 +136,7 @@ public class Movement : MonoBehaviour, IStopOnDeath
 		//var pos = tf_.position;
 		anim_.SetBool("IsMoving", true);
 		
-		body_.MovePosition((body_.position + new Vector2(dirx_, diry_) * Speed * Time.fixedDeltaTime));
+		body_.velocity = new Vector3(dirx_, diry_, 0) * Speed * Time.fixedDeltaTime;
 		
 	}
 	

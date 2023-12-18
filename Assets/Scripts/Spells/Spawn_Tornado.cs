@@ -16,7 +16,8 @@ public class Spawn_Tornado : SpellBase<VectorTarget>
     public float speed = 10f;
 
     void Start()
-    {
+	{
+		firePoint = transform.root;
         int layerVal = ownerLayer.value;
         while (layerVal > 1)
         {
