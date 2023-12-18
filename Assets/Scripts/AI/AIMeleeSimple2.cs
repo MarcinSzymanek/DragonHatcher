@@ -53,6 +53,7 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
     void Awake()
     {
         t_ = transform;
+	    firePoint_ = t_.Find("firePoint");
         scanner_ = GetComponentInChildren<AIScan>();
         move_ = GetComponent<Movement>();
         anim_ = GetComponentInChildren<Animator>();
@@ -60,7 +61,6 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
         audio_ = transform.Find("mainAudio").GetComponent<AudioSource>();
 
         GetComponentInChildren<EnemyAnimEvents>().attackFinished += OnAttackFinished;
-
         range_close = AttackDistance;
     }
 
@@ -82,7 +82,6 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
 
     public void OnAttackFinished(object? s, EventArgs args)
     {
-        Debug.Log("you copy");
         animFinished_ = true;
     }
 
@@ -193,7 +192,6 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
         move_.Stop();
         attackTrigger_ = false;
         animFinished_ = false;
-        Debug.Log(animFinished_);
         anim_.Play("Attack");
         StartCoroutine(MeleeAttackRoutine(() => {
             Debug.Log("Attack callback");
@@ -219,9 +217,8 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
         Spawn_Projectile sp = GetComponent<Spawn_Projectile>();
         sp.Shoot(new VectorTarget(t_.position, dir));
 
-        while (animFinished_ == false)
+	    while (!animFinished_)
         {
-            Debug.Log("we in here");
             yield return new WaitForFixedUpdate();
         }
 

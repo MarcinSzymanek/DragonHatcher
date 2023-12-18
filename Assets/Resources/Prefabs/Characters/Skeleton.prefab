@@ -575,7 +575,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1392490425
-  m_SortingLayer: 1
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1932087071, guid: 8472c3eb09ed7a54b990012053c865c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -802,7 +802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Facing: 1
   WeapEquipped: 0
-  <Speed>k__BackingField: 4
+  <Speed>k__BackingField: 200
   HopSpeed: 3
 --- !u!114 &1737215095433323119
 MonoBehaviour:

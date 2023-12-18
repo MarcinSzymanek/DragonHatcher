@@ -37,7 +37,10 @@ public class SFXController : MonoBehaviour
 	
 	IEnumerator delayedPlay(AudioSource source, AudioClip clip, float delay, float volume){
 		yield return new WaitForSeconds(delay);
-		if(timeSinceLastPlayed < 0.10f) volume *= 0.2f; 
+		if(timeSinceLastPlayed < 0.10f){
+			volume *= 0.2f;
+			Debug.Log("sfx volume adjusted to " + volume.ToString());
+		}  
 		source.PlayOneShot(clip, volume);
 		timeSinceLastPlayed = 0f;
 	}
