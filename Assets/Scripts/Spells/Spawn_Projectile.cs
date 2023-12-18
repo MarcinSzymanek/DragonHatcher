@@ -52,7 +52,6 @@ public class Spawn_Projectile : MonoBehaviour
 		col.gameObject.layer = layerInt_;
         col.callbackLayers += targetLayer;
         col.contactCaptureLayers += targetLayer;
-
 		// var rb = obj.GetComponent<Rigidbody2D>();
 	}
 }
