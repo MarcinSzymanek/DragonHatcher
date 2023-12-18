@@ -120,11 +120,9 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
     // Calculate direction to move to target
     private IEnumerator CloseIn()
 	{
-		Debug.Log("CloseIn");
         distance_to_target_ = Math2d.CalcDistance(t_.position, attackTarget_.position);
         if (distance_to_target_ < AttackDistance && timeSinceLastAttack > 2.0f) 
         {
-            Debug.Log("Attack");
             InitiateAttack();
 
         }

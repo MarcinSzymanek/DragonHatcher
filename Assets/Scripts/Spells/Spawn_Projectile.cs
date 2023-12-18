@@ -24,7 +24,7 @@ public class Spawn_Projectile : MonoBehaviour
 		}
 		
 		if(firePoint == null) firePoint = transform.parent.parent.transform;
-		// Debug.Log("Layer int is: " + layerInt_.ToString());
+		Debug.Log("Layer int is: " + layerInt_.ToString());
 	}
 
 	public void Shoot(VectorTarget target)
@@ -45,18 +45,14 @@ public class Spawn_Projectile : MonoBehaviour
     
 	void setPrefabTarget(GameObject obj){
 		obj.layer = layerInt_;
-		foreach(var i in obj.transform.GetComponentsInChildren<Transform>())
-		{
-			if(i == obj.transform)
-			{
-				continue;
-			}
-            var col = i.GetComponent<Collider2D>();
-            col.gameObject.layer = layerInt_;
-
-            col.callbackLayers += targetLayer;
-            col.contactCaptureLayers += targetLayer;
-        }
-		var rb = obj.GetComponent<Rigidbody2D>();
+		var dmg = obj.GetComponentInChildren<ContactDamage>();
+		if(dmg == null) return;
+		var col = dmg.GetComponent<Collider2D>();
+		if(col == null) Debug.LogError("Trying to set prefab target, but there is no damage collider");
+		col.gameObject.layer = layerInt_;
+        col.callbackLayers += targetLayer;
+        col.contactCaptureLayers += targetLayer;
+        
+		// var rb = obj.GetComponent<Rigidbody2D>();
 	}
 }
