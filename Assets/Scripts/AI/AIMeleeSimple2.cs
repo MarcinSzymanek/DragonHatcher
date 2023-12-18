@@ -20,6 +20,7 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
     Transform t_;
     public Transform firePoint_;
     float distance_to_target_;
+    float timeSinceLastAttack;
 
     float range_close;
 
@@ -63,6 +64,11 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
         range_close = AttackDistance;
     }
 
+    void FixedUpdate()
+    {
+        timeSinceLastAttack += 1 / 50f;
+    }
+
     public void SetStrategy(IAI_Strategy strat)
     {
         strategy = strat;
@@ -76,6 +82,7 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
 
     public void OnAttackFinished(object? s, EventArgs args)
     {
+        Debug.Log("you copy");
         animFinished_ = true;
     }
 
@@ -114,9 +121,11 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
     private IEnumerator CloseIn()
     {
         distance_to_target_ = Math2d.CalcDistance(t_.position, attackTarget_.position);
-        if (distance_to_target_ < AttackDistance)
+        if (distance_to_target_ < AttackDistance && timeSinceLastAttack > 2.0f) 
         {
+            Debug.Log("Attack");
             InitiateAttack();
+
         }
 
         float prevDistance = distance_to_target_;
@@ -136,7 +145,11 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
             distance_to_target_ = Math2d.CalcDistance(t_.position, attackTarget_.position);
             yield return new WaitForFixedUpdate();
         }
-        state_ = State.attack;
+        if(timeSinceLastAttack > 2.0f)
+        {
+            state_ = State.attack;
+        }
+        
         pickAction_();
     }
 
@@ -183,6 +196,7 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
         move_.Stop();
         attackTrigger_ = false;
         animFinished_ = false;
+        Debug.Log(animFinished_);
         anim_.Play("Attack");
         StartCoroutine(MeleeAttackRoutine(() => {
             Debug.Log("Attack callback");
@@ -210,8 +224,11 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
 
         while (animFinished_ == false)
         {
+            Debug.Log("we in here");
             yield return new WaitForFixedUpdate();
         }
+
+        timeSinceLastAttack = 0;
 
         state_ = State.attack_finished;
         pickAction_();

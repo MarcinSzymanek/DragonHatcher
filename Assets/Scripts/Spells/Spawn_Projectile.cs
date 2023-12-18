@@ -45,7 +45,7 @@ public class Spawn_Projectile : MonoBehaviour
 		obj.layer = layerInt_;
 		foreach(var i in obj.transform.GetComponentsInChildren<Transform>())
 		{
-			if(i == transform)
+			if(i == obj.transform)
 			{
 				continue;
 			}
