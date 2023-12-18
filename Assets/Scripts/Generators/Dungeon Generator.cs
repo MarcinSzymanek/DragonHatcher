@@ -117,7 +117,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             //Create the outer teleporter that we want to enter the dungeon in
             //Currently hard-coded but we can change that for the dungeon entrance later on when integrating
-            initialTeleporter = PlaceTeleporter(-0.5f, -10.5f, 0f, doorPrefab, room);
+            initialTeleporter = PlaceTeleporter(-99999f, -9999f, 0f, doorPrefab, room);
             listOfTeleporters.Add(initialTeleporter.transform);
             entranceTeleporterPlaced = true;
         }
@@ -265,6 +265,10 @@ public class DungeonGenerator : MonoBehaviour
                 listOfScripts[lastIndex].setDestination(listOfTeleporters[prevIndex]);
             }
         }
+
+        //I cant be asked dealing with the first two teleporters, so we move them to narnia!
+        listOfTeleporters[0].transform.position = new Vector3(99999f, 99999f, 0f);
+        listOfTeleporters[1].transform.position = new Vector3(99999f, 99999f, 0f);
     }
 
     void SpawnSquaresNextToEachOther(int amount, float size)
