@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -119,7 +119,8 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
 
     // Calculate direction to move to target
     private IEnumerator CloseIn()
-    {
+	{
+		Debug.Log("CloseIn");
         distance_to_target_ = Math2d.CalcDistance(t_.position, attackTarget_.position);
         if (distance_to_target_ < AttackDistance && timeSinceLastAttack > 2.0f) 
         {
@@ -132,11 +133,12 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
 
         var dir = Math2d.CalcDirection(t_.position, attackTarget_.position);
         move_.ChangeDirection(dir.x, dir.y);
-        while (distance_to_target_ > AttackDistance)
+		while (distance_to_target_ > AttackDistance || timeSinceLastAttack < 1.0f)
         {
             // If current distance is farther then last distance, recalculate direction
             if (distance_to_target_ > prevDistance)
             {
+            	Debug.Log("Recalculating");
                 Vector2 newDir = Math2d.CalcDirection(t_.position, attackTarget_.position);
                 newDir = newDir.normalized;
                 move_.ChangeDirection(newDir.x, newDir.y);
@@ -145,11 +147,8 @@ public class AIMeleeSimple2 : MonoBehaviour, IStopOnDeath, IAIBase
             distance_to_target_ = Math2d.CalcDistance(t_.position, attackTarget_.position);
             yield return new WaitForFixedUpdate();
         }
-        if(timeSinceLastAttack > 2.0f)
-        {
-            state_ = State.attack;
-        }
         
+	    state_ = State.attack;
         pickAction_();
     }
 
