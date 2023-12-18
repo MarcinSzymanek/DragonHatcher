@@ -157,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
       propertyPath: listOfRewards.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
       propertyPath: wallTilePrefab.Array.size
@@ -171,6 +171,14 @@ PrefabInstance:
       propertyPath: listOfRewards.Array.data[1]
       value: 
       objectReference: {fileID: 7314979198938841246, guid: 733ef2d6e977df24aa6ae23e82abcc43, type: 3}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: listOfRewards.Array.data[2]
+      value: 
+      objectReference: {fileID: 7314979198938841246, guid: 788cbd7c69684a1458bfb70ed9e8cad7, type: 3}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: listOfRewards.Array.data[3]
+      value: 
+      objectReference: {fileID: 7314979198938841246, guid: 30647f0e44cd0a44c9276aecaa290116, type: 3}
     - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
       propertyPath: wallTilePrefab.Array.data[0]
       value: 

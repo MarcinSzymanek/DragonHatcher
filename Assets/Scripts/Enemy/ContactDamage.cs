@@ -8,29 +8,41 @@ public class ContactDamage : MonoBehaviour
 	public int damageAmount;
 	private int currentGrace = 0;
 	public int gracePeriod;
+	// This keeps track of which objects should be damaged
 	public List<TakeDamage> objDamage;
+	
+	// This keeps track of which objects have already been damaged
+	public List<TakeDamage> objDamageDealt;
+	
 	public bool destroyOnDamage;
 	public bool logCollisions;
+	
+	[field: SerializeField]
+	private bool dealDamageOnce_ = true;
+	
 	private string parentName_;
 	public event System.Action<Rigidbody2D> damageEffectEvent;
 	void Start(){
 		objDamage = new List<TakeDamage>();
+		objDamageDealt = new List<TakeDamage>();
 		parentName_ = transform.parent.name;
 	}
 	
 	void FixedUpdate(){
-		if(currentGrace > 0){
-			currentGrace--;
-			return;
-		}
+		//if(currentGrace > 0){
+		//	currentGrace--;
+		//	return;
+		//}
 		if(objDamage.Count == 0) return;
 		bool dealtDamage = false;
 		List<int> toRemove = new List<int>();
-		// Debug.Log("Iterating through objDamage list");
-		for(int i = 0; i < objDamage.Count; i++){
+		
+		for(int i = 0; i < objDamage.Count; i++){			
 			var d = objDamage[i];
 			if(d == null) continue;
+			if(dealDamageOnce_ && objDamageDealt.Contains(d)) continue;
 			d.TriggerTakeDamage(damageAmount);
+			if(dealDamageOnce_) objDamageDealt.Add(d);
 			dealtDamage = true;
 			if(d.dead) toRemove.Add(i);
 		}

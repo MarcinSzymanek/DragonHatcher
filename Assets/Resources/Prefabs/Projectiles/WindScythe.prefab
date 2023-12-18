@@ -5283,7 +5283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5721043954608749229, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: destroyOnDamage
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7493965930957624231, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: m_RootOrder
