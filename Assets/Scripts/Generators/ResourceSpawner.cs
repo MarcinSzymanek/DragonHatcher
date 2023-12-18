@@ -21,8 +21,15 @@ public class ResourceSpawner : Spawner, IResourceSpawner
 		item.Count = Random.Range(1, maxResCount_);
 		return obj;
 	}
-	
-	public override GameObject Spawn(int index, Vector3 position, Transform parent){
+    public override GameObject Spawn(Vector3 position, Transform parent)
+    {
+        var obj = base.Spawn(position, parent);
+		PickableItem item = obj.GetComponent<PickableItem>();
+		item.Count = Random.Range(1, maxResCount_);
+		return obj;
+    }
+
+    public override GameObject Spawn(int index, Vector3 position, Transform parent){
 		var obj = base.Spawn(index, position);
 		PickableItem item = obj.GetComponent<PickableItem>();
 		item.Count = Random.Range(1, maxResCount_);
