@@ -514,7 +514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  <maxHealth>k__BackingField: 16
+  <maxHealth>k__BackingField: 11
 --- !u!114 &4348636280620666174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f6a2ed8310a80429aaf7aec2e39bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3699167215596049147, guid: b20cc32f2274fd74fb14e46a0bafeac6, type: 3}
+  projectilePrefab: {fileID: 5317319711417720598, guid: cb200df1e1ba1964b8bfe5e7f59837d5, type: 3}
   firePoint: {fileID: 0}
   targetLayer:
     serializedVersion: 2
@@ -591,7 +591,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   rotationOffset: 0
-  speed: 0
+  speed: 5
 --- !u!1 &5748121212825106085
 GameObject:
   m_ObjectHideFlags: 0

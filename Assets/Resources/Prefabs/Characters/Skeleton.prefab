@@ -817,7 +817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  <maxHealth>k__BackingField: 12
+  <maxHealth>k__BackingField: 9
 --- !u!114 &4983935074130740467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -871,7 +871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f6a2ed8310a80429aaf7aec2e39bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3699167215596049147, guid: b20cc32f2274fd74fb14e46a0bafeac6, type: 3}
+  projectilePrefab: {fileID: 8758573798596436605, guid: 82dc7ddb554e04c4da67b5ed2ad59a7a, type: 3}
   firePoint: {fileID: 5647149450256928961}
   targetLayer:
     serializedVersion: 2
@@ -880,7 +880,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   rotationOffset: 0
-  speed: 0
+  speed: 8
 --- !u!114 &1735228378079983762
 MonoBehaviour:
   m_ObjectHideFlags: 0
