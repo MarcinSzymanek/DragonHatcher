@@ -21,7 +21,6 @@ public class InputManager : MonoBehaviour
 	Builder builder_;
 	UIBuildingShop shop_;
 	PauseMenu pause_;
-	private bool GameIsPaused = false;
 	
 	InputAction actionCast;
 	InputAction actionGet;
@@ -84,6 +83,11 @@ public class InputManager : MonoBehaviour
 		shop_ = shop;
 		shop_.onBuildingCreated += EnterBuildMode;
 	}
+	
+	public void PauseCreated(PauseMenu pause){
+		pause_ = pause;
+		pause_.resumed += EnableGameplayInput;
+	}
 
 	void EnterBuildMode(object? obj, EventArgs args){
 		isBuilding_ = true;
@@ -116,8 +120,23 @@ public class InputManager : MonoBehaviour
 			return;
 		}
 		Debug.Log("Cancel button pressed");
-		pause_ = GameObject.FindObjectOfType<PauseMenu>();
-		if(pause_ != null) pause_.PauseLogic();
+		//pause_ = GameObject.FindObjectOfType<PauseMenu>();
+		if(pause_ != null) {
+			pause_.PauseLogic();
+			if(pause_.GameIsPaused) DisableGameplayInput();	
+		}
+		else{
+			try {
+				pause_ = GameObject.FindObjectOfType<PauseMenu>();
+				pause_.resumed += EnableGameplayInput;
+				pause_.PauseLogic();
+				if(pause_.GameIsPaused) DisableGameplayInput();		
+			}
+			catch (System.Exception e)
+			{
+				Debug.LogError("Could not find the pause menu!");
+			}
+		}
 		
 	}
 	

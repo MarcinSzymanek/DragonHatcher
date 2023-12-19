@@ -4,16 +4,17 @@
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
-    private bool GameIsPaused = false;
+	public bool GameIsPaused = false;
     UISettingsMenu settings;
 	GameObject pauseObject;
+    
+	public event System.Action resumed;
     
     private void Awake()
 	{
 		pauseObject = transform.Find("UIPauseMenu").gameObject;
-		Debug.Log(pauseObject.name);
 	    settings = GetComponentInChildren<UISettingsMenu>(true);
-	    Debug.Log(settings.name);
+		GameObject.FindObjectOfType<InputManager>().PauseCreated(this);
     }
 
     public void PauseLogic()
@@ -35,8 +36,9 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         GameIsPaused = false;
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+	    pauseMenuUI.SetActive(false);
+	    Time.timeScale = 1f;
+	    resumed?.Invoke();
     }
 
     public void Pause()
