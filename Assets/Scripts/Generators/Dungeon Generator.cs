@@ -204,7 +204,7 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         //Get random places within the dungeon to parse to the spawner
-        int randomValue = Random.Range(minEnemyPerRoom, maxEnemyPerRoom);
+	    int randomValue = Random.Range(minEnemyPerRoom, maxEnemyPerRoom + 1);
         List<Vector3> randomPositions = new List<Vector3>();
         float offset = 1f;
         for (int i = 0; i < randomValue; i++)
