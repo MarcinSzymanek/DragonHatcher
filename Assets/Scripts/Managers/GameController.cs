@@ -24,7 +24,6 @@ public class GameController : MonoBehaviour
 	void Awake()
 	{
 		input_ = GameObject.FindObjectOfType<InputManager>();
-		sceneLoader_ = FindObjectOfType<SceneLoader>();
 		player_ = GameObject.FindGameObjectWithTag("Player");
 		Scene s = SceneManager.GetActiveScene();
 		if(!initialized){
@@ -90,6 +89,7 @@ public class GameController : MonoBehaviour
 	}
 
 	private void GameOver(object? sender, ObjectDeathArgs args){
+		sceneLoader_ = FindObjectOfType<SceneLoader>();
 		// Handle player losing the game: Either player died or the egg got destroyed
 		Debug.Log(args.ObjectName + " died! Game over...");
 		input_.DisableGameplayInput();
@@ -103,6 +103,7 @@ public class GameController : MonoBehaviour
 
 	public void OnWinCondition(){
 		if(sandbox) return;
+		sceneLoader_ = FindObjectOfType<SceneLoader>();
 		currentSceneType = GameObject.FindObjectOfType<SceneProperties>().sceneType;
 		if(currentSceneType == SceneProperties.SceneType.WAVE_DEFENCE){
 			nextScene_ = "DungeonGenerator";

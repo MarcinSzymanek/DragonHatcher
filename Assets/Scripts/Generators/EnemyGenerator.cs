@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using AIStrategies;
+using UnityEngine.SceneManagement;
 
 public class EnemyGenerator : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class EnemyGenerator : MonoBehaviour
 	
 	GameController gameController_;
 	
+	SceneProperties.SceneType sceneType;
+	
 	void Regulate()
 	{
 		spawnRate *= regulateIntensity;
@@ -46,10 +49,22 @@ public class EnemyGenerator : MonoBehaviour
 	
 	// Set AI strategy according to scene type
 	public void Awake(){
+		SceneManager.activeSceneChanged += SetupSpawners;
+	}
+	
+	void SetupSpawners(Scene prev, Scene next){
+		StartCoroutine(setupSpawnersAsync());
+	}
+	
+	IEnumerator setupSpawnersAsync(){
+		while(SceneManager.loadedSceneCount > 1){
+			yield return null;
+		}
 		gameController_ = FindObjectOfType<GameController>();
 		
 		IAI_Strategy strategy;
 		SceneProperties sceneProps = GameObject.FindObjectOfType<SceneProperties>();
+		sceneType = sceneProps.sceneType;
 		if(sceneProps.sceneType == SceneProperties.SceneType.WAVE_DEFENCE) strategy = new AIStrategies.StrategyTargetEgg();
 		else strategy = new AIStrategies.StrategyScanForPlayer();
 		enemiesLeft_ = enemiesToSpawn;
@@ -63,12 +78,12 @@ public class EnemyGenerator : MonoBehaviour
 			regulateThresholdList.Add((int)(enemiesToSpawn - enemiesToSpawn * 1/(i + 1f)));
 		}
 		nextThreshold = regulateThresholdList[regulationCount];
-
 	}
 	
 	// Start is called before the first frame update
     void Start()
 	{
+		
 		if(startOnSceneStart){
 			Invoke("SpawnContinuously", 5f);
 		}
@@ -94,6 +109,7 @@ public class EnemyGenerator : MonoBehaviour
 	
 	void OnEnemyDeath(object? obj, ObjectDeathArgs args){
 		enemiesAlive_--;
+		gameController_ = FindObjectOfType<GameController>();
 		if(enemiesAlive_ < 1 && enemiesLeft_ < 1){
 			Debug.LogWarning("All enemies have been defeated!");
 			gameController_.OnWinCondition();

@@ -12,4 +12,11 @@ public class Health : MonoBehaviour
     {
         currentHealth = maxHealth;
     }
+   void Update()
+    {
+        if(maxHealth < currentHealth)
+        {
+            currentHealth = maxHealth;
+        }
+    }
 }

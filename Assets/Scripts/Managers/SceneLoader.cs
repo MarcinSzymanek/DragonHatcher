@@ -14,7 +14,16 @@ public class SceneLoader : MonoBehaviour
 	InputManager input_;
 	bool fadeOutDone = false;
 	
+	static SceneLoader instance_;
+	
 	void Awake(){
+		if(instance_ == null){
+			instance_ = this;
+		}
+		else{
+			Destroy(this);
+			return;
+		}
 		fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
 		musicController_ = GameObject.FindObjectOfType<MusicController>();
 		player_ = GameObject.Find("Player");
@@ -24,6 +33,7 @@ public class SceneLoader : MonoBehaviour
 	
 	// We should be able to load the scene here and set it active in OnFadeOutFinished callback, but I don't have time to figure that out now...
 	public void ChangeScene(string scenename){
+		musicController_ = GameObject.FindObjectOfType<MusicController>();
 		nextScene = scenename;
 		fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
 		Debug.Log("Fade changed to: " + fade_.name);

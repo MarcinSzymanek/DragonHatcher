@@ -14,6 +14,7 @@ public class ObjectTeleportation : MonoBehaviour
     private GameObject attachedGameObject = null;
     private Vector3 teleportOffset;
     private FadeEffect fadeEffect;
+    public bool isFinalTeleporter;
 
     private void Awake()
     {
@@ -26,19 +27,27 @@ public class ObjectTeleportation : MonoBehaviour
 
 
     void OnTriggerEnter2D(Collider2D other)
-	{
-		Debug.Log("Trigger Enter");
-		if (other != null && canTeleport)
+    {
+        Debug.Log("Trigger Enter");
+        if (other != null && canTeleport)
         {
-			fadeEffect.ScreenFadeOut(
-				() => {
-					teleport();
-					fadeEffect.ScreenFadeIn(null, 2f);
-				},
-				0.3f
-			);
+            if(isFinalTeleporter)
+            {
+            	canTeleport = false;
+            	var controller = GameObject.FindObjectOfType<GameController>();
+                controller.OnWinCondition();
+                return;
+            }
+            fadeEffect.ScreenFadeOut(
+                () =>
+                {
+                    teleport();
+                    fadeEffect.ScreenFadeIn(null, 2f);
+                },
+                0.3f
+            );
         }
-	}
+    }
     
 	// One of the rare times where I like to have explicit setter methods
 	public void DisableTeleportation(){
@@ -48,7 +57,6 @@ public class ObjectTeleportation : MonoBehaviour
 	public void EnableTeleportation(){
 		canTeleport = true;
 	}
-
 
     public void teleport()
     {
@@ -106,6 +114,11 @@ public class ObjectTeleportation : MonoBehaviour
 
     public void setPlayer(GameObject player) {
         playerg = player;
+    }
+
+    public void setFinalTeleporter()
+    {
+        isFinalTeleporter = true;
     }
 
 }

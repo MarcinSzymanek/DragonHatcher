@@ -10,10 +10,13 @@ public class Count : MonoBehaviour
     public int ID;
     public List<ObjectTeleportation> listOfScripts;
     
+	public event Action roomEmpty;
+    
 	// Callback on enemy death
 	public void OnEnemyDeath(object? obj, ObjectDeathArgs args){
 		EnemyCount--;
 		if(EnemyCount < 1){
+			roomEmpty?.Invoke();
 			foreach(var tpScript in listOfScripts){
 				tpScript.EnableTeleportation();
 			}

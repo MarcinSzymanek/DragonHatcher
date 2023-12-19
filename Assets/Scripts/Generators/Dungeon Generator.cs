@@ -52,6 +52,8 @@ public class DungeonGenerator : MonoBehaviour
     private Transform lastRoomTransform = null;
     private bool allRoomsEmpty = false;
 
+	private int roomsLeftToClear = 0;
+
     [field: SerializeField]
     private int minEnemyPerRoom;
     [field: SerializeField]
@@ -80,23 +82,7 @@ public class DungeonGenerator : MonoBehaviour
         resourceSpawner = GetComponent<ResourceSpawner>();
     }
 
-    private void Update()
-    {
-        int random = Random.Range(0, listOfRewards.Count - 1);
-        lastRoomTransform = allRooms[allRooms.Count - 1].transform;
-        if (!allRoomsEmpty)
-        {
-            allRoomsEmpty = AreAllRoomsEmpty();
-            if (allRoomsEmpty)
-            {
-                Vector3 test = player.transform.position;
-                Instantiate(listOfRewards[random], rewardPosition, Quaternion.identity, allRooms[allRooms.Count - 1].transform);
-                listOfRewards.Remove(listOfRewards[random]);
-                allRoomsEmpty = true;
-            }
-        }
-
-    }
+ 
     void Start()
     {
         //Generating several rooms next to each other
@@ -104,7 +90,22 @@ public class DungeonGenerator : MonoBehaviour
         spawner.SetAIStrategy(new AIStrategies.StrategyScanForPlayer());
         SpawnSquaresNextToEachOther(numberOfRooms, sizeOfRooms);
     }
-
+	
+	void OnRoomCleared(){
+		roomsLeftToClear--;
+		if(roomsLeftToClear == 0){
+			Debug.Log("Room cleared! Rooms left: " + roomsLeftToClear);
+			SpawnReward();
+			
+		}
+	}
+	
+	void SpawnReward(){
+		int random = Random.Range(0, listOfRewards.Count);
+		lastRoomTransform = allRooms[allRooms.Count - 1].transform;
+		Instantiate(listOfRewards[random], rewardPosition, Quaternion.identity, allRooms[allRooms.Count - 1].transform);
+	}
+	
     void CreateRoom(Vector3 position, float size)
     {
         playerTransform = player.transform;
@@ -113,7 +114,9 @@ public class DungeonGenerator : MonoBehaviour
         room.AddComponent<Count>();
         allRooms.Add(room);
         counterScript = room.transform.GetComponent<Count>();
-        counterScript.setId(roomNumber);
+	    counterScript.setId(roomNumber);
+	    counterScript.roomEmpty += OnRoomCleared;
+	    roomsLeftToClear++;
         GameObject initialTeleporter = null;
         if (!entranceTeleporterPlaced)
         {
@@ -201,7 +204,7 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         //Get random places within the dungeon to parse to the spawner
-        int randomValue = Random.Range(minEnemyPerRoom, maxEnemyPerRoom);
+	    int randomValue = Random.Range(minEnemyPerRoom, maxEnemyPerRoom + 1);
         List<Vector3> randomPositions = new List<Vector3>();
         float offset = 1f;
         for (int i = 0; i < randomValue; i++)
@@ -236,18 +239,26 @@ public class DungeonGenerator : MonoBehaviour
         {
             for (int i = 0; i < listOfTeleporters.Count - 1; i++)
             {
-                listOfScripts[i].setPlayer(player);
-                listOfScripts[i].setObjectToTeleport(playerTransform);
-                if (i % 2 == 0)
+                if (listOfTeleporters[i] != listOfTeleporters[listOfTeleporters.Count - 2])
                 {
-                    // Even-numbered teleporters teleport into rooms (forward)
-                    listOfScripts[i].setDestination(listOfTeleporters[(i + 1) % listOfTeleporters.Count]);
+
+                    listOfScripts[i].setPlayer(player);
+                    listOfScripts[i].setObjectToTeleport(playerTransform);
+                    if (i % 2 == 0)
+                    {
+                        // Even-numbered teleporters teleport into rooms (forward)
+                        listOfScripts[i].setDestination(listOfTeleporters[(i + 1) % listOfTeleporters.Count]);
+                    }
+                    else
+                    {
+                        // Odd-numbered teleporters teleport backwards
+                        int prevIndex = (i == 0) ? listOfTeleporters.Count - 1 : i - 1;
+                        listOfScripts[i].setDestination(listOfTeleporters[prevIndex]);
+                    }
                 }
-                else
+                if(listOfTeleporters[i] == listOfTeleporters[listOfTeleporters.Count - 2])
                 {
-                    // Odd-numbered teleporters teleport backwards
-                    int prevIndex = (i == 0) ? listOfTeleporters.Count - 1 : i - 1;
-                    listOfScripts[i].setDestination(listOfTeleporters[prevIndex]);
+                    listOfScripts[i].setFinalTeleporter();
                 }
             }
 
@@ -300,7 +311,7 @@ public class DungeonGenerator : MonoBehaviour
             resourceSpawner.Spawn(randomRessourcePositions[j], room.transform);
         }
 
-
+		
         //I cant be asked dealing with the first two teleporters, so we move them to narnia!
         listOfTeleporters[0].transform.position = new Vector3(99999f, 99999f, 0f);
         listOfTeleporters[1].transform.position = new Vector3(99999f, 99999f, 0f);
