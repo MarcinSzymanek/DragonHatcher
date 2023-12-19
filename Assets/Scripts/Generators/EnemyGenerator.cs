@@ -31,6 +31,7 @@ public class EnemyGenerator : MonoBehaviour
 	public float regulateIntensity = 1.3f;
 	private int regulationCount = 0;
 	private int nextThreshold = 0;
+	private int difficulty_;
 	
 	GameController gameController_;
 	
@@ -48,15 +49,13 @@ public class EnemyGenerator : MonoBehaviour
 	}
 	
 	// Set AI strategy according to scene type
-	public void Awake(){
-		SceneManager.activeSceneChanged += SetupSpawners;
-	}
-	
-	void SetupSpawners(Scene prev, Scene next){
+	public void SetupSpawners(int difficulty = 0){
+		difficulty_ = difficulty;
 		StartCoroutine(setupSpawnersAsync());
 	}
 	
 	IEnumerator setupSpawnersAsync(){
+		
 		while(SceneManager.loadedSceneCount > 1){
 			yield return null;
 		}
@@ -70,22 +69,33 @@ public class EnemyGenerator : MonoBehaviour
 		enemiesLeft_ = enemiesToSpawn;
 		spawners_ = GetComponentsInChildren<IEnemySpawner>();
 		foreach(var s in spawners_){
+			s.SetDifficulty(difficulty_);
 			s.SetAIStrategy(strategy);
 		}
 		
 		regulateThresholdList = new List<int>();
+		
+		// For each difficulty rating, add a regulation threshold where we increase intensity!
 		for(int i = sceneProps.difficulty; i > 0; i--){
 			regulateThresholdList.Add((int)(enemiesToSpawn - enemiesToSpawn * 1/(i + 1f)));
 		}
-		nextThreshold = regulateThresholdList[regulationCount];
+		if(regulationCount > 0){	
+			nextThreshold = regulateThresholdList[regulationCount];
+		}
+		
+		StartSpawners();		
+	}
+	
+	void StartSpawners(){
+		spawners_ = GetComponentsInChildren<IEnemySpawner>();
+		Invoke("SpawnContinuously", 5f);		
 	}
 	
 	// Start is called before the first frame update
     void Start()
 	{
-		
 		if(startOnSceneStart){
-			Invoke("SpawnContinuously", 5f);
+			StartSpawners();
 		}
     }
 
@@ -116,9 +126,6 @@ public class EnemyGenerator : MonoBehaviour
 		}
 	}
 	
-	void OnDestroy(){
-		SceneManager.activeSceneChanged -= SetupSpawners;
-	}
     
     
     

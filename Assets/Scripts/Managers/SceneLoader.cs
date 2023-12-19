@@ -14,11 +14,21 @@ public class SceneLoader : MonoBehaviour
 	InputManager input_;
 	bool fadeOutDone = false;
 	
+	static int difficulty = 0;
+	
 	static SceneLoader instance_;
+	
 	
 	void Awake(){
 		if(instance_ == null){
 			instance_ = this;
+			SceneProperties.SceneType type = GameObject.FindObjectOfType<SceneProperties>().sceneType;
+			if(type == SceneProperties.SceneType.DUNGEON_CRAWL){
+				GameObject.FindObjectOfType<DungeonGenerator>().SetDungeonGenerator(0);
+			}
+			else{
+				GameObject.FindObjectOfType<EnemyGenerator>().SetupSpawners();
+			}
 		}
 		else{
 			Destroy(this);
@@ -33,6 +43,7 @@ public class SceneLoader : MonoBehaviour
 	
 	// We should be able to load the scene here and set it active in OnFadeOutFinished callback, but I don't have time to figure that out now...
 	public void ChangeScene(string scenename){
+		Destroy(GameObject.FindObjectOfType<SceneProperties>().gameObject);
 		musicController_ = GameObject.FindObjectOfType<MusicController>();
 		nextScene = scenename;
 		fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
@@ -82,6 +93,7 @@ public class SceneLoader : MonoBehaviour
 		
 		while(!op.isDone){
 			Debug.Log("loading scene not done...");
+			
 			yield return new WaitForSeconds(0.3f);
 		}
 		Destroy(GameObject.FindGameObjectWithTag("GlobalLight"));
@@ -112,10 +124,13 @@ public class SceneLoader : MonoBehaviour
 		fade_ = GameObject.FindObjectOfType<FadeEffect>();
 		fade_.ScreenFadeOut(() => {
 			Debug.LogWarning("Finish fadeout");
+			if(oldScene.name == "DungeonGenerator"){	
+				difficulty++;
+			}
 			fadeOutDone = true;
 		});
 		while(!fadeOutDone ){
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(0.1f);
 		}
 		op.allowSceneActivation = true;
 		if(player_ != null){
@@ -133,6 +148,9 @@ public class SceneLoader : MonoBehaviour
 	void FinishSceneLoad(AsyncOperation op){
 		input_.EnableGameplayInput();
 		SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
+		GameObject.FindObjectOfType<SceneProperties>().difficulty = difficulty;
+		if(nextScene == "DungeonGenerator") GameObject.FindObjectOfType<DungeonGenerator>().SetDungeonGenerator(difficulty);
+		else GameObject.FindObjectOfType<EnemyGenerator>().SetupSpawners(difficulty);
 		var operation = SceneManager.UnloadSceneAsync(loadingScene);
 		// Check if there are player copies, and destroy them
 		var players = GameObject.FindGameObjectsWithTag("Player");

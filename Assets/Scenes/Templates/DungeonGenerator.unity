@@ -136,6 +136,14 @@ PrefabInstance:
       value: DungeonGenerator
       objectReference: {fileID: 0}
     - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: maxRoomSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: minRoomSize
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
       propertyPath: sizeOfRooms
       value: 11
       objectReference: {fileID: 0}
@@ -239,6 +247,18 @@ PrefabInstance:
       propertyPath: wallTileCornerBottomRightPrefab.Array.data[0]
       value: 
       objectReference: {fileID: 2907750810227925635, guid: f7bfc9c63e331d44c9b143b367f1cd6e, type: 3}
+    - target: {fileID: 7523202746048098675, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: objectPool.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523202746048098675, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: objectPool.Array.data[2]
+      value: 
+      objectReference: {fileID: 6777809937815544135, guid: 4a33e4b61a64508498010a9b364286c7, type: 3}
+    - target: {fileID: 7523202746048098675, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: objectPool.Array.data[3]
+      value: 
+      objectReference: {fileID: 3682185023840831594, guid: a9f536fe67af363468ba255ad32d6df0, type: 3}
     - target: {fileID: 8059406331999643152, guid: e3389476f75a94646a14d01c668943cf, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -559,7 +579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneType: 2
   maxEnemies: 0
-  difficulty: 1
+  difficulty: 0
 --- !u!4 &919926529
 Transform:
   m_ObjectHideFlags: 0

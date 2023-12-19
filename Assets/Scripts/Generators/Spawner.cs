@@ -20,9 +20,9 @@ public class Spawner : MonoBehaviour, ISpawner
 		return newobj;
 	}
 
-	public virtual GameObject Spawn(Vector3 position, Transform parent)
+	public virtual GameObject Spawn(Vector3 position, Transform parent, int index)
 	{
-        var newObj = Instantiate(objectPool[Random.Range(0, objectPool.Length)], position, Quaternion.identity, parent);
+		var newObj = Instantiate(objectPool[index], position, Quaternion.identity, parent);
 		return newObj;
 	}
 }

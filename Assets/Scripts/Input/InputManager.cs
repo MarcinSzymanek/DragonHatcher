@@ -140,6 +140,7 @@ public class InputManager : MonoBehaviour
 			return;
 			
 		case InputMode.build:
+			// We should get rid of this, we use a bool flag now instead
 			// controlled_.GetComponent<Builder>().PlaceBuilding();
 			return;
 		}
