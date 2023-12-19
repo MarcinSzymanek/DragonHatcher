@@ -816,22 +816,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1608373898740115602, guid: 85316b0ffb4360d4daee51f90f104aa2, type: 3}
-      propertyPath: m_Color.b
-      value: 0.7028302
-      objectReference: {fileID: 0}
-    - target: {fileID: 1608373898740115602, guid: 85316b0ffb4360d4daee51f90f104aa2, type: 3}
-      propertyPath: m_Color.g
-      value: 0.92671037
-      objectReference: {fileID: 0}
-    - target: {fileID: 1608373898740115602, guid: 85316b0ffb4360d4daee51f90f104aa2, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2267743280188022399, guid: 85316b0ffb4360d4daee51f90f104aa2, type: 3}
-      propertyPath: Tracked
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2798380179615065055, guid: 85316b0ffb4360d4daee51f90f104aa2, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -921,8 +905,7 @@ PrefabInstance:
       value: UIMain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8913730569582821217, guid: 85316b0ffb4360d4daee51f90f104aa2, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85316b0ffb4360d4daee51f90f104aa2, type: 3}
