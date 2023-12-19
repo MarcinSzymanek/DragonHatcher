@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8059406331999643152}
   - component: {fileID: 7523202746048098675}
   - component: {fileID: 1753699278332248998}
+  - component: {fileID: 6964852404110376501}
   m_Layer: 0
   m_Name: DungeonGenerator
   m_TagString: Untagged
@@ -100,3 +101,18 @@ MonoBehaviour:
   - {fileID: 7314979198938841246, guid: 733ef2d6e977df24aa6ae23e82abcc43, type: 3}
   minEnemyPerRoom: 0
   maxEnemyPerRoom: 0
+--- !u!114 &6964852404110376501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173362380306224252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9f6eb65e23c7c140ba870b7497ea564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPool:
+  - {fileID: 2061377610939267007, guid: 618834add522a9249995cd01dc0b0393, type: 3}
+  - {fileID: 6315562092802337400, guid: 525e55fd9180ef242a457f3d04d22761, type: 3}

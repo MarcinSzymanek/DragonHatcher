@@ -37,6 +37,7 @@ public class DungeonGenerator : MonoBehaviour
     private Transform wallParentTf_;
     private GameObject wallParent;
     private GameObject player;
+    private ResourceSpawner resourceSpawner;
 
     private Count counterScript;
     private Transform playerTransform;
@@ -76,6 +77,7 @@ public class DungeonGenerator : MonoBehaviour
         spawner = GetComponent<EnemySpawner>();
         allRooms = new List<GameObject>();
         rewardPosition = new Vector3(32f, 0.6f, 0f);
+        resourceSpawner = GetComponent<ResourceSpawner>();
     }
 
     private void Update()
@@ -265,6 +267,39 @@ public class DungeonGenerator : MonoBehaviour
                 listOfScripts[lastIndex].setDestination(listOfTeleporters[prevIndex]);
             }
         }
+
+        //Spawn random ressources into the dungeon for pickup
+        List<Vector3> randomRessourcePositions = new List<Vector3>();
+        int value = 0;
+        if(size < 15)
+        {
+            value = 3;
+        }
+        if(15 < size && size < 25)
+        {
+            value = 5;
+        }
+        if(size > 35)
+        {
+            value = 8;
+        }
+        for (int i = 0; i < value; i++)
+        {
+            float MinX = position.x - halfSize + offset;
+            float MaxX = position.x + halfSize - offset;
+            float MinY = position.y - halfSize + offset;
+            float MaxY = position.y + halfSize - offset;
+
+            float RandomX = Random.Range(MinX, MaxX);
+            float RandomY = Random.Range(MinY, MaxY);
+           
+            randomRessourcePositions.Add(new Vector3(RandomX, RandomY, 0));
+        }
+        for (int j = 0; j < randomRessourcePositions.Count(); j++)
+        {
+            resourceSpawner.Spawn(randomRessourcePositions[j], room.transform);
+        }
+
 
         //I cant be asked dealing with the first two teleporters, so we move them to narnia!
         listOfTeleporters[0].transform.position = new Vector3(99999f, 99999f, 0f);
