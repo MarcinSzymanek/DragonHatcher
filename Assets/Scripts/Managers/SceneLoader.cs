@@ -20,6 +20,8 @@ public class SceneLoader : MonoBehaviour
 	
 	[field: SerializeField]
 	List<GameObject> rewardsList_;
+	[field: SerializeField]
+	GameObject dummyReward_;
 
 	void Awake(){
 		if(instance_ == null){
@@ -154,8 +156,14 @@ public class SceneLoader : MonoBehaviour
 		SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
 		GameObject.FindObjectOfType<SceneProperties>().difficulty = difficulty;
 		if(nextScene == "DungeonGenerator") {
-			GameObject reward = rewardsList_[UnityEngine.Random.Range(0, rewardsList_.Count)];
-			rewardsList_.Remove(reward);
+			GameObject reward;
+			if(rewardsList_.Count != null){
+				reward = rewardsList_[UnityEngine.Random.Range(0, rewardsList_.Count)];
+				rewardsList_.Remove(reward);
+			}
+			else{
+				reward = dummyReward_;
+			}
 			GameObject.FindObjectOfType<DungeonGenerator>().SetDungeonGenerator(difficulty, reward);
 		}
 		
