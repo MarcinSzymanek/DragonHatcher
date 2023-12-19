@@ -5,6 +5,7 @@ using UnityEngine;
 public class SceneProperties : MonoBehaviour
 {
 	public enum SceneType{
+		START_MENU,
 		LOADING,
 		WAVE_DEFENCE,
 		DUNGEON_CRAWL

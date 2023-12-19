@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5824222440845078077}
   - component: {fileID: 8347730537464253336}
+  - component: {fileID: -3983645681216563335}
   m_Layer: 0
   m_Name: SceneLoader
   m_TagString: Untagged
@@ -51,3 +52,15 @@ MonoBehaviour:
   - {fileID: 7314979198938841246, guid: d6ac9dc0327857f4b85e2dd90697f9bb, type: 3}
   - {fileID: 7314979198938841246, guid: 788cbd7c69684a1458bfb70ed9e8cad7, type: 3}
   dummyReward_: {fileID: 6315562092802337400, guid: 525e55fd9180ef242a457f3d04d22761, type: 3}
+--- !u!114 &-3983645681216563335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7317880786011837258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad09cff3abef344f867faafbca76767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

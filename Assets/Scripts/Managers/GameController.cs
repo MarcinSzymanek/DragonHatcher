@@ -24,55 +24,69 @@ public class GameController : MonoBehaviour
 	void Awake()
 	{
 		input_ = GameObject.FindObjectOfType<InputManager>();
-		player_ = GameObject.FindGameObjectWithTag("Player");
 		Scene s = SceneManager.GetActiveScene();
 		if(!initialized){
 			Debug.LogWarning("Subscribe to ACTIVE SCENE CHANGED");
 			SceneManager.activeSceneChanged += InitializeLevel;
-			// Add a unique tag to the player, so we can kill the copies
-			player_.AddComponent<Unique>();
-			initialized = true;
-		}
-		// This is stupid, we should SceneProperties.SceneType instead.
-		if(s.name == "TitleScene"){
-    		state_ = GameState.title;
+
+				StartCoroutine(WaitForPlayer());
 		}
 	}
-
-	void InitializeLevel(){
-		// Setup lose condition here
+	
+	IEnumerator WaitForPlayer(){
+		while(player_ == null){
+			player_ = GameObject.FindGameObjectWithTag("Player");
+			Debug.Log("Waiting for player!");
+			yield return new WaitForSeconds(0.2f);
+		}
+		player_.AddComponent<Unique>();
+		Debug.LogWarning("GAMECONTROLLER SUB TO PLAYER DEATH");
+		player_.GetComponent<DeathController>().objectDied += GameOver;
+	}
+	
+	void InitializeLevel(Scene next){
+		
 		currentSceneType = GameObject.FindObjectOfType<SceneProperties>().sceneType;
-		InitializePlayer();
 		if(currentSceneType == SceneProperties.SceneType.LOADING) return;
 		if(currentSceneType == SceneProperties.SceneType.WAVE_DEFENCE){
 			// Set egg dying as the lose condition
 			GameObject.Find("DragonEgg").GetComponent<DeathController>().objectDied += GameOver;
 			nextScene_ = "DungeonGenerator";
 		}
+		if(currentSceneType == SceneProperties.SceneType.START_MENU) Destroy(this);
 		else{
 			nextScene_ = "WaveDefense";
 		}
 
-		var dc = player_.GetComponent<DeathController>();
-		if(!subbed){
-			Debug.LogWarning("SUB TO PLAYER DEATH");
-			player_.GetComponent<DeathController>().objectDied += GameOver;
-			subbed = true;
-		}
-		
 		var vmcam = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
 		if(vmcam != null){
 			vmcam.Follow = player_.transform;
 		}
 	}
-
-	void InitializeLevel(Scene current, Scene next){
-		Debug.Log("Current: " + current.name + " next: " + next.name);
-		InitializeLevel();
+	
+	IEnumerator WaitForScene(Scene next){
+		while(SceneManager.GetActiveScene() != next){
+			yield return new WaitForSeconds(0.1f);
+		}
+		InitializeLevel(next);
 	}
 
-	void InitializePlayer(){
-		// Load player spells and resources here
+	void InitializeLevel(Scene current, Scene next){
+		if(this == null){
+			Destroy(this);
+		}
+		Debug.Log("Waiting for: current: " + current.name + " next: " + next.name);
+		StartCoroutine(WaitForScene(next));
+	}
+
+	public void InitializePlayer(GameObject player){
+		if(player_ == null){
+			player_ = player;
+			player.GetComponent<DeathController>().objectDied += GameOver;
+		}
+		else{
+			Destroy(player);
+		}
 	}
 
 	public void StartNewGame(){
@@ -89,9 +103,11 @@ public class GameController : MonoBehaviour
 	}
 
 	private void GameOver(object? sender, ObjectDeathArgs args){
+		Debug.Log(args.ObjectName + " died! Game over...");
+		DeathController dc = (DeathController) sender;
+		dc.objectDied -= GameOver;
 		sceneLoader_ = FindObjectOfType<SceneLoader>();
 		// Handle player losing the game: Either player died or the egg got destroyed
-		Debug.Log(args.ObjectName + " died! Game over...");
 		input_.DisableGameplayInput();
 
 		// Cleanup objects which are no longer needed
@@ -112,5 +128,23 @@ public class GameController : MonoBehaviour
 			nextScene_ = "WaveDefense";
 		}
 		sceneLoader_.ChangeScene(nextScene_);
+	}
+	
+	// This function is called when the behaviour becomes disabled () or inactive.
+	protected void OnDisable()
+	{
+		Debug.LogWarning("GAMECONTROLLER DISABLED");
+		try{
+			SceneManager.activeSceneChanged -= InitializeLevel;
+			player_.GetComponent<DeathController>().objectDied -= GameOver;
+		}
+		catch (System.Exception e)
+		{
+			Debug.LogWarning("Could not unsub");
+		}
+	}
+
+	protected void OnDestroy(){
+		Debug.LogWarning("GAME CONTROLLER DESTROYED");
 	}
 }

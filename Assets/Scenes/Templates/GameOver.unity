@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <fadeinTime>k__BackingField: 3
+  effectActive: 0
 --- !u!114 &1122887100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +458,7 @@ GameObject:
   - component: {fileID: 1692399147}
   - component: {fileID: 1692399146}
   - component: {fileID: 1692399148}
+  - component: {fileID: 1692399149}
   m_Layer: 0
   m_Name: Properties
   m_TagString: Untagged
@@ -476,7 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b79a0e794158b47a8923e466855693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneType: 0
+  sceneType: 1
   maxEnemies: 0
   difficulty: 1
 --- !u!4 &1692399147
@@ -502,6 +504,18 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692399145}
   m_Enabled: 1
+--- !u!114 &1692399149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692399145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a59e1811410fb49a0744e1bb017090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1898541649
 GameObject:
   m_ObjectHideFlags: 0

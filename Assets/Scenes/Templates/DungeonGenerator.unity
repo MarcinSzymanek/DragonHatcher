@@ -136,6 +136,10 @@ PrefabInstance:
       value: DungeonGenerator
       objectReference: {fileID: 0}
     - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
+      propertyPath: potion
+      value: 
+      objectReference: {fileID: 2061377610939267007, guid: 32f379240ca61ba4087f4a66c0adf60b, type: 3}
+    - target: {fileID: 1753699278332248998, guid: e3389476f75a94646a14d01c668943cf, type: 3}
       propertyPath: maxRoomSize
       value: 15
       objectReference: {fileID: 0}
@@ -577,7 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b79a0e794158b47a8923e466855693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneType: 2
+  sceneType: 3
   maxEnemies: 0
   difficulty: 0
 --- !u!4 &919926529
@@ -754,6 +758,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.18063134
       objectReference: {fileID: 0}
+    - target: {fileID: 8741459653927213273, guid: 84ebf58f51381644a9a0f3d10607e923, type: 3}
+      propertyPath: musicTracksWave_.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8741459653927213273, guid: 84ebf58f51381644a9a0f3d10607e923, type: 3}
+      propertyPath: musicTracksWave_.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f0f492c433a56eb4e9e6671ce8c74852, type: 3}
+    - target: {fileID: 8741459653927213273, guid: 84ebf58f51381644a9a0f3d10607e923, type: 3}
+      propertyPath: musicTracksWave_.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f0259f62504443843a034e8d96ab7cfb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

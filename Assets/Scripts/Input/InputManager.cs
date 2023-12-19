@@ -35,13 +35,14 @@ public class InputManager : MonoBehaviour
 	private bool enabled_ = true;
 	private bool isBuilding_ = false;
 	
+	private bool initialized = false;
     // Start is called before the first frame update
 	void Awake()
 	{
 		var sceneProps = GameObject.FindObjectOfType<SceneProperties>();
 		
 		// No Player Input during Loading/Death scenes
-		if(sceneProps.sceneType == SceneProperties.SceneType.LOADING) {
+		if(sceneProps.sceneType == SceneProperties.SceneType.LOADING || sceneProps.sceneType == SceneProperties.SceneType.START_MENU) {
 			Destroy(this);
 			return;
 		}
@@ -75,8 +76,16 @@ public class InputManager : MonoBehaviour
 		actionShop.performed += OnShopButton;
 		actionCancel.performed += OnCancel;
 		
+		initialized = true;
 		shop_ = GameObject.FindObjectOfType<UIBuildingShop>();
 		if(shop_ == null) return;
+	}
+	
+	void OnDestroy(){
+		if(!initialized) return;
+		actionCast.performed -= OnCast;
+		actionShop.performed -= OnShopButton;
+		actionCancel.performed -= OnCancel;
 	}
 	
 	public void ShopCreated(UIBuildingShop shop){

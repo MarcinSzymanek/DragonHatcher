@@ -33,7 +33,8 @@ public class SceneLoader : MonoBehaviour
 				GameObject.FindObjectOfType<DungeonGenerator>().SetDungeonGenerator(0, reward);
 			}
 			else{
-				GameObject.FindObjectOfType<EnemyGenerator>().SetupSpawners();
+				EnemyGenerator gen = GameObject.FindObjectOfType<EnemyGenerator>();
+				if(gen != null) gen.SetupSpawners();
 			}
 		}
 		else{
@@ -83,6 +84,15 @@ public class SceneLoader : MonoBehaviour
 	
 	void OnDeathFadeout(){
 		SceneManager.LoadScene("GameOver");
+		Invoke("OnDeathFinished", 2.5f);
+	}
+	
+	void OnDeathFinished(){
+		fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
+		fade_.ScreenFadeOut( () =>{
+			SceneManager.LoadScene("StartMenu");
+		},
+			1f);
 	}
 	
 	void OnFadeOutFinished(){

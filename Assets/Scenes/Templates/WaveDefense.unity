@@ -1874,7 +1874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b79a0e794158b47a8923e466855693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneType: 1
+  sceneType: 2
   maxEnemies: 0
   difficulty: 0
 --- !u!4 &1068375637

@@ -285,6 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <fadeinTime>k__BackingField: 3
+  effectActive: 0
 --- !u!114 &1122887100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,7 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b79a0e794158b47a8923e466855693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneType: 0
+  sceneType: 1
   maxEnemies: 0
   difficulty: 1
 --- !u!4 &1692399147
