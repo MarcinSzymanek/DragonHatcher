@@ -110,8 +110,8 @@ public class InputManager : MonoBehaviour
 			return;
 		}
 		Debug.Log("Cancel button pressed");
-		if(pause_ == null) pause_ = GameObject.FindObjectOfType<PauseMenu>();
-		pause_.PauseLogic();
+		pause_ = GameObject.FindObjectOfType<PauseMenu>();
+		if(pause_ != null) pause_.PauseLogic();
 		
 	}
 	
