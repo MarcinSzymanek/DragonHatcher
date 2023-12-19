@@ -67,6 +67,8 @@ public class InputManager : MonoBehaviour
 		itemPicker_ = controlled_.GetComponent<ItemPicker>();
 		caster_ = controlled_.GetComponent<Spellcaster>();
 		builder_ = controlled_.GetComponent<Builder>();
+		
+		pause_ = FindObjectOfType<PauseMenu>();
 	}
     
 	void Start(){
@@ -101,14 +103,16 @@ public class InputManager : MonoBehaviour
 	}
 	
 	void OnCancel(InputAction.CallbackContext context){
-		Debug.Log("Cancel button pressed");
-		Debug.Log(pause_.name);
-		pause_.PauseLogic();
 		if(isBuilding_) {
 			builder_.CancelBuild();
 			mode_ = InputMode.cast;
 			isBuilding_ = false;
+			return;
 		}
+		Debug.Log("Cancel button pressed");
+		if(pause_ == null) pause_ = GameObject.FindObjectOfType<PauseMenu>();
+		pause_.PauseLogic();
+		
 	}
 	
 	void OnCast(InputAction.CallbackContext context){
