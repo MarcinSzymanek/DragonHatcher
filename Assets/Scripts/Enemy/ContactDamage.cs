@@ -2,12 +2,49 @@
 using UnityEditor;
 using System.Collections.Generic;
 
+
+// Cooldown for damage is in FRAMES per fixed update!
 public class ContactDamage : MonoBehaviour
 {
-
+	[System.Serializable]
+	public class DamageToken{
+		public DamageToken(TakeDamage dmg, float baseCd, int applyDamage = 0){
+			dmgScript = dmg;
+			baseDmgCooldown = baseCd;
+			
+			damage = applyDamage;
+			if(applyDamage > 0){
+				DealDamage();
+			}
+		}
+		public void DealDamage(){
+			if(cooldownRemaining > 1) return;
+			dmgScript.TriggerTakeDamage(damage);
+			cooldownRemaining = baseDmgCooldown;
+		}
+		
+		public bool Contains(TakeDamage dmg){
+			return dmgScript == dmg;
+		}
+		
+		public void ProcessCooldown(){
+			cooldownRemaining -= 1;
+			if(cooldownRemaining < 1){
+				DealDamage();
+			}
+		}
+		int damage;
+		float baseDmgCooldown;
+		public float cooldownRemaining;
+		public TakeDamage dmgScript;
+		public bool effectApplied = false;
+	}
+	
 	public int damageAmount;
 	private int currentGrace = 0;
 	public int gracePeriod;
+	
+	public List<DamageToken> dmgTokens;
 	// This keeps track of which objects should be damaged
 	public List<TakeDamage> objDamage;
 	
@@ -19,46 +56,35 @@ public class ContactDamage : MonoBehaviour
 	
 	[field: SerializeField]
 	private bool dealDamageOnce_ = true;
+	private bool dealtDamage = false;
 	
 	private string parentName_;
 	public event System.Action<Rigidbody2D> damageEffectEvent;
 	void Start(){
+		dmgTokens = new List<DamageToken>();
 		objDamage = new List<TakeDamage>();
 		objDamageDealt = new List<TakeDamage>();
 		parentName_ = transform.parent.name;
 	}
 	
+	
 	void FixedUpdate(){
-		//if(currentGrace > 0){
-		//	currentGrace--;
-		//	return;
-		//}
-		if(objDamage.Count == 0) return;
-		bool dealtDamage = false;
-		List<int> toRemove = new List<int>();
-		
-		for(int i = 0; i < objDamage.Count; i++){			
-			var d = objDamage[i];
-			if(d == null) continue;
-			if(dealDamageOnce_ && objDamageDealt.Contains(d)) continue;
-			d.TriggerTakeDamage(damageAmount);
-			if(dealDamageOnce_) objDamageDealt.Add(d);
-			dealtDamage = true;
-			if(d.dead) toRemove.Add(i);
+		if(dmgTokens.Count == 0) return;
+		// Process individual cooldowns
+		foreach (var item in dmgTokens)
+		{
+			if(item.cooldownRemaining > 0){
+				dealtDamage = true;
+				item.ProcessCooldown();
+			} 
 		}
 		
-		foreach(int i in toRemove){
-			if(i < objDamage.Count) objDamage.RemoveAt(i);
-		}
 		// Debug.Log("Done");
 		if(dealtDamage && destroyOnDamage){
 			var ctrl = transform.parent.GetComponent<ParticleController>();
 			if(ctrl != null) ctrl.DetachParticles();
 			transform.parent.gameObject.SetActive(false);
 		}
-		
-		if(objDamage.Count == 0) return;
-		currentGrace = gracePeriod;
 	}
     
 	private void OnTriggerEnter2D(Collider2D collider){
@@ -75,8 +101,13 @@ public class ContactDamage : MonoBehaviour
 				return;
 		}
 		damageEffectEvent?.Invoke(collider.transform.parent.GetComponent<Rigidbody2D>());
-		if(objDamage.Contains(tdamage)) return;
-		objDamage.Add(tdamage);
+		
+		foreach (var item in dmgTokens)
+		{
+			if(item.Contains(tdamage)) return;
+		}
+		
+		dmgTokens.Add(new DamageToken(tdamage, gracePeriod, damageAmount));
 	}
 	
 	// OnTriggerExit is called when the Collider other has stopped touching the trigger.
@@ -85,7 +116,13 @@ public class ContactDamage : MonoBehaviour
 		TakeDamage tdamage;
 		if(!collider || !collider.transform.parent.TryGetComponent<TakeDamage>(out tdamage)) return;
 		if (tdamage.dead) return;
-		objDamage.Remove(tdamage);
+		DamageToken? toRemove = null;
+		foreach(var token in dmgTokens){
+			if(token.Contains(tdamage)) toRemove = token;
+		}
+		if(toRemove != null){
+			dmgTokens.Remove(toRemove);
+		}
 	}
 }
 
