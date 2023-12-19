@@ -240,8 +240,13 @@ public class DungeonGenerator : MonoBehaviour
         counterScript.setEnemyCount(randomPositions.Count);
         if(roomNumber == numberOfRooms)
         {
-            potionPosition = randomPositions[randomPositions.Count - 2];
-            rewardPosition = randomPositions[randomPositions.Count - 1];
+        	Debug.Log(randomPositions.Count);
+	        if(randomPositions.Count == 1){
+		        potionPosition = randomPositions[randomPositions.Count - 1];
+		        rewardPosition = randomPositions[randomPositions.Count - 1];
+	        }
+	        potionPosition = randomPositions[randomPositions.Count - 2];
+	        rewardPosition = randomPositions[randomPositions.Count - 1];
         }
 		
 		

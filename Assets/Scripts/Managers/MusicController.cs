@@ -11,8 +11,9 @@ public class MusicController : MonoBehaviour
 	AudioSource audios_;
 	// Start is called before the first frame update
 	
+	static int trackIdx = 0;
 	[field: SerializeField]
-	AudioClip musicTrackWave_;
+	AudioClip[] musicTracksWave_;
 	[field: SerializeField]
 	AudioClip musicTrackDungeon_;
 	[field: SerializeField]
@@ -48,7 +49,11 @@ public class MusicController : MonoBehaviour
 		var sceneType = properties.sceneType;
 		AudioClip clip;
 		if(sceneType == SceneProperties.SceneType.WAVE_DEFENCE){
-			clip = musicTrackWave_;
+			clip = musicTracksWave_[trackIdx];
+			if(trackIdx == 0) trackIdx = 1;
+			else{
+				trackIdx = 0;
+			}
 		}
 		else if(sceneType == SceneProperties.SceneType.DUNGEON_CRAWL){
 			clip = musicTrackDungeon_;

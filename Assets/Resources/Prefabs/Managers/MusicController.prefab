@@ -141,7 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68d1d10412c3384f94a59f682c3b973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicTrackWave_: {fileID: 8300000, guid: cacff89ab7095694e9c426c45f06bace, type: 3}
+  musicTracksWave_:
+  - {fileID: 8300000, guid: f0259f62504443843a034e8d96ab7cfb, type: 3}
+  - {fileID: 8300000, guid: f0f492c433a56eb4e9e6671ce8c74852, type: 3}
   musicTrackDungeon_: {fileID: 8300000, guid: 41bc89662eb1c6b4785735d7933bb14b, type: 3}
   interludeTrack_: {fileID: 8300000, guid: 3d0022c508fd4a44f94b313f57686c35, type: 3}
+  musicVolume: 0.35
   playMusic: 1
