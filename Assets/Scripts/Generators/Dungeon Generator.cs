@@ -236,18 +236,26 @@ public class DungeonGenerator : MonoBehaviour
         {
             for (int i = 0; i < listOfTeleporters.Count - 1; i++)
             {
-                listOfScripts[i].setPlayer(player);
-                listOfScripts[i].setObjectToTeleport(playerTransform);
-                if (i % 2 == 0)
+                if (listOfTeleporters[i] != listOfTeleporters[listOfTeleporters.Count - 2])
                 {
-                    // Even-numbered teleporters teleport into rooms (forward)
-                    listOfScripts[i].setDestination(listOfTeleporters[(i + 1) % listOfTeleporters.Count]);
+
+                    listOfScripts[i].setPlayer(player);
+                    listOfScripts[i].setObjectToTeleport(playerTransform);
+                    if (i % 2 == 0)
+                    {
+                        // Even-numbered teleporters teleport into rooms (forward)
+                        listOfScripts[i].setDestination(listOfTeleporters[(i + 1) % listOfTeleporters.Count]);
+                    }
+                    else
+                    {
+                        // Odd-numbered teleporters teleport backwards
+                        int prevIndex = (i == 0) ? listOfTeleporters.Count - 1 : i - 1;
+                        listOfScripts[i].setDestination(listOfTeleporters[prevIndex]);
+                    }
                 }
-                else
+                if(listOfTeleporters[i] == listOfTeleporters[listOfTeleporters.Count - 2])
                 {
-                    // Odd-numbered teleporters teleport backwards
-                    int prevIndex = (i == 0) ? listOfTeleporters.Count - 1 : i - 1;
-                    listOfScripts[i].setDestination(listOfTeleporters[prevIndex]);
+                    listOfScripts[i].setFinalTeleporter();
                 }
             }
 
