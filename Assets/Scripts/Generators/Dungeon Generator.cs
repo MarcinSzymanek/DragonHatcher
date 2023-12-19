@@ -50,6 +50,8 @@ public class DungeonGenerator : MonoBehaviour
     private Vector3 rewardPosition = Vector3.zero;
     private Transform lastRoomTransform = null;
     private bool allRoomsEmpty = false;
+    private Vector3 potionPosition;
+    public GameObject potion;
 
 	private int roomsLeftToClear = 0;
 
@@ -91,6 +93,7 @@ public class DungeonGenerator : MonoBehaviour
 		spawner = GetComponent<EnemySpawner>();
 		allRooms = new List<GameObject>();
 		rewardPosition = new Vector3(32f, 0.6f, 0f);
+        potionPosition = new Vector3(0f, 0f, 0f);
 		resourceSpawner = GetComponent<ResourceSpawner>();
 		
 		spawner.SetDifficulty(difficulty);
@@ -109,7 +112,8 @@ public class DungeonGenerator : MonoBehaviour
 	
 	void SpawnReward(){
 		lastRoomTransform = allRooms[allRooms.Count - 1].transform;
-		Instantiate(dungeonReward_, rewardPosition, Quaternion.identity, allRooms[allRooms.Count - 1].transform);
+        Instantiate(potion, potionPosition, Quaternion.identity, allRooms[allRooms.Count - 1].transform);
+        Instantiate(dungeonReward_, rewardPosition, Quaternion.identity, allRooms[allRooms.Count - 1].transform);
 	}
 	
 	void CreateRoom(Vector3 position, float size, bool singleTeleporter = false)
@@ -236,6 +240,7 @@ public class DungeonGenerator : MonoBehaviour
         counterScript.setEnemyCount(randomPositions.Count);
         if(roomNumber == numberOfRooms)
         {
+            potionPosition = randomPositions[randomPositions.Count - 2];
             rewardPosition = randomPositions[randomPositions.Count - 1];
         }
 		
