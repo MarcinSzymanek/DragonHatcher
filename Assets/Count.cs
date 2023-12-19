@@ -18,7 +18,7 @@ public class Count : MonoBehaviour
 		if(EnemyCount < 1){
 			roomEmpty?.Invoke();
 			foreach(var tpScript in listOfScripts){
-				tpScript.EnableTeleportation();
+				if(!tpScript.isFinalTeleporter) tpScript.EnableTeleportation();
 			}
 		}
 	}

@@ -14,6 +14,10 @@ public class PickableSpell : MonoBehaviour, IPickable
 	
 	public void OnPickup(){
 		Debug.Log("Player picked up spell: " + spellData.name);
+		NotifyOnPickup notifier = GetComponent<NotifyOnPickup>();
+		if(GetComponent<NotifyOnPickup>() != null){
+			notifier.OnPickup();
+		}
 		playerSpellbook_.LearnSpell(spellData);
 		gameObject.SetActive(false);
 	}

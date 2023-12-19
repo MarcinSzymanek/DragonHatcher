@@ -66,7 +66,7 @@ public class DungeonGenerator : MonoBehaviour
 	private int maxRoomSize;
 	
 	GameObject dungeonReward_;
-	
+	GameObject activeReward_;
     struct Square
     {
         public Vector3 position;
@@ -112,8 +112,15 @@ public class DungeonGenerator : MonoBehaviour
 	
 	void SpawnReward(){
 		lastRoomTransform = allRooms[allRooms.Count - 1].transform;
-        Instantiate(potion, potionPosition, Quaternion.identity, allRooms[allRooms.Count - 1].transform);
-        Instantiate(dungeonReward_, rewardPosition, Quaternion.identity, allRooms[allRooms.Count - 1].transform);
+		Instantiate(potion, potionPosition, Quaternion.identity, allRooms[allRooms.Count - 1].transform);
+		listOfScripts[listOfScripts.Count-1].DisableTeleportation();
+		activeReward_ = Instantiate(dungeonReward_, rewardPosition, Quaternion.identity, allRooms[allRooms.Count - 1].transform);
+		var notifier = activeReward_.AddComponent<NotifyOnPickup>();
+		notifier.pickup += EnableFinalTp;
+	}
+	
+	void EnableFinalTp(){
+		listOfScripts[listOfScripts.Count-1].EnableTeleportation();
 	}
 	
 	void CreateRoom(Vector3 position, float size, bool singleTeleporter = false)
@@ -245,8 +252,10 @@ public class DungeonGenerator : MonoBehaviour
 		        potionPosition = randomPositions[randomPositions.Count - 1];
 		        rewardPosition = randomPositions[randomPositions.Count - 1];
 	        }
-	        potionPosition = randomPositions[randomPositions.Count - 2];
-	        rewardPosition = randomPositions[randomPositions.Count - 1];
+	        else{
+		        potionPosition = randomPositions[randomPositions.Count - 2];
+		        rewardPosition = randomPositions[randomPositions.Count - 1];
+	        }
         }
 		
 		
@@ -342,7 +351,9 @@ public class DungeonGenerator : MonoBehaviour
 	        if(i == 0) singleTeleporter = true;
 	        CreateRoom(position, size, singleTeleporter);
         }
-	    listOfScripts[listOfScripts.Count -1].setFinalTeleporter();
+	    var finaltp = listOfScripts[listOfScripts.Count -1];
+	    finaltp.setFinalTeleporter();
+	    finaltp.DisableTeleportation();
     }
 
 
