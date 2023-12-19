@@ -134,6 +134,7 @@ public class SceneLoader : MonoBehaviour
 	}
 	
 	IEnumerator LoadNextScene(Scene oldScene){
+		if(difficulty > 3) nextScene = "WinScreen";
 		AsyncOperation op = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Additive);
 		op.allowSceneActivation = false;
 		bool fadeOutDone = false;
