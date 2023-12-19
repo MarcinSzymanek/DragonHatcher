@@ -15,6 +15,7 @@ public class UIBuildingShop : MonoBehaviour
 	private Dictionary<int, BuildingData> buildings;
 
 	public BuildingData initData;
+	
 	void Awake()
 	{
 		slidingPanel_ = GetComponentInChildren<SlidingElement>();
@@ -28,7 +29,7 @@ public class UIBuildingShop : MonoBehaviour
 	    var id = button.Id;
 	    button.clicked += OnButtonClick;
 	    buildings[id] = initData;
-	    
+		GameObject.FindObjectOfType<InputManager>().ShopCreated(this);
     }
 	
 	public void AddItem(BuildingData building){

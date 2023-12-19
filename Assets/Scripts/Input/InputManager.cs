@@ -78,7 +78,10 @@ public class InputManager : MonoBehaviour
 		
 		shop_ = GameObject.FindObjectOfType<UIBuildingShop>();
 		if(shop_ == null) return;
-		
+	}
+	
+	public void ShopCreated(UIBuildingShop shop){
+		shop_ = shop;
 		shop_.onBuildingCreated += EnterBuildMode;
 	}
 
@@ -94,11 +97,14 @@ public class InputManager : MonoBehaviour
 	}
 	
 	void OnShopButton(InputAction.CallbackContext context){
-		Debug.Log("Shop button pressed");
 		if(shop_ == null) {
-			Debug.LogWarning("No shop in this scene!");
-			return;
+			shop_ = GameObject.FindObjectOfType<UIBuildingShop>();
+			if(shop_ == null){	
+				Debug.LogWarning("No shop in this scene!");
+				return;
+			}
 		}
+		
 		shop_.SlidePanel();
 	}
 	

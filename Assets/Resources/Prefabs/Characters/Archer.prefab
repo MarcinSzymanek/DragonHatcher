@@ -507,7 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  <maxHealth>k__BackingField: 5
+  <maxHealth>k__BackingField: 3
 --- !u!114 &7232989592569405414
 MonoBehaviour:
   m_ObjectHideFlags: 0

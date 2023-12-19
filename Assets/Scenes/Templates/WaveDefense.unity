@@ -9966,8 +9966,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1209171121456423938, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
+      propertyPath: spawnDelay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209171121456423938, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
       propertyPath: enemiesToSpawn
-      value: 1
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1209171121456423938, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
+      propertyPath: regulateIntensity
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 1209171121456423938, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
       propertyPath: startOnSceneStart

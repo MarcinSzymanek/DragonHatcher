@@ -23,7 +23,6 @@ public class EnemyGenerator : MonoBehaviour
 	// Whether or not the generation is on or off
 	public bool enabled{get; private set;}
 	
-	public bool startOnSceneStart = true;
 	// The scripts responsible for placing enemies in the scene
 	private IEnemySpawner[] spawners_;
     
@@ -51,6 +50,7 @@ public class EnemyGenerator : MonoBehaviour
 	// Set AI strategy according to scene type
 	public void SetupSpawners(int difficulty = 0){
 		difficulty_ = difficulty;
+		enemiesToSpawn = enemiesToSpawn + difficulty * enemiesToSpawn;
 		StartCoroutine(setupSpawnersAsync());
 	}
 	
@@ -90,14 +90,6 @@ public class EnemyGenerator : MonoBehaviour
 		spawners_ = GetComponentsInChildren<IEnemySpawner>();
 		Invoke("SpawnContinuously", 5f);		
 	}
-	
-	// Start is called before the first frame update
-    void Start()
-	{
-		if(startOnSceneStart){
-			StartSpawners();
-		}
-    }
 
 	void SpawnContinuously(){
 		int spawner_index = UnityEngine.Random.Range(0, spawners_.Length);
