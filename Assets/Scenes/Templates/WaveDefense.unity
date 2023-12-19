@@ -10416,10 +10416,26 @@ PrefabInstance:
       propertyPath: enemiesToSpawn
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4136815999249203244, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
+      propertyPath: objectPool.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4136815999249203244, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
+      propertyPath: objectPool.Array.data[2]
+      value: 
+      objectReference: {fileID: 6777809937815544135, guid: 4a33e4b61a64508498010a9b364286c7, type: 3}
     - target: {fileID: 5012305057232973547, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
       propertyPath: m_Name
       value: EnemyGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 5469975492143544063, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
+      propertyPath: objectPool.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469975492143544063, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
+      propertyPath: objectPool.Array.data[2]
+      value: 
+      objectReference: {fileID: 6777809937815544135, guid: 4a33e4b61a64508498010a9b364286c7, type: 3}
     - target: {fileID: 6806618607152634007, guid: 4b79efd268c6c144fb8b3d0499e54093, type: 3}
       propertyPath: m_RootOrder
       value: 6

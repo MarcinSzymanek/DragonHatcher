@@ -16,7 +16,7 @@ public class Cursor : MonoBehaviour
     }
 
     // Follow mouse position
-    void FixedUpdate()
+    void Update()
     {
         updatePosition();
     }
