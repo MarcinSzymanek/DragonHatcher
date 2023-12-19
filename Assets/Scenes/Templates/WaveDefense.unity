@@ -10529,14 +10529,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 422296910854181576}
-    - target: {fileID: 2248717381818762644, guid: 860d7e34e99206f40a4e1bf9f8644753, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 2248717381818762644, guid: 860d7e34e99206f40a4e1bf9f8644753, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 4489724976652047130, guid: 860d7e34e99206f40a4e1bf9f8644753, type: 3}
       propertyPath: m_Name
       value: UIMainWave
