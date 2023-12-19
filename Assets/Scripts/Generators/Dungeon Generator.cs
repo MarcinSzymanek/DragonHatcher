@@ -31,7 +31,6 @@ public class DungeonGenerator : MonoBehaviour
     private Tilemap tileMap = null;
     public TileBase[] tileToPlace = null;
     private int roomNumber = 1;
-    public List<GameObject> listOfRewards = null;
 
     private List<Transform> listOfTeleporters;
     private Transform wallParentTf_;
@@ -64,7 +63,8 @@ public class DungeonGenerator : MonoBehaviour
 	[field: SerializeField]
 	private int maxRoomSize;
 	
-
+	GameObject dungeonReward_;
+	
     struct Square
     {
         public Vector3 position;
@@ -72,7 +72,7 @@ public class DungeonGenerator : MonoBehaviour
 
     List<Square> squares = new List<Square>();
     
-	public void SetDungeonGenerator(int difficulty){
+	public void SetDungeonGenerator(int difficulty, GameObject reward){
 		//Generating several rooms next to each other
 		//Note: Only use un-even numbers for the size of the room as it messes up the tile allignment for the filling
 		numberOfRooms = UnityEngine.Random.Range(2, 4) + difficulty * 2;
@@ -95,6 +95,7 @@ public class DungeonGenerator : MonoBehaviour
 		
 		spawner.SetDifficulty(difficulty);
 		spawner.SetAIStrategy(new AIStrategies.StrategyScanForPlayer());
+		dungeonReward_ = reward;
 		SpawnSquaresNextToEachOther(numberOfRooms, sizeOfRooms);
 	}
 	
@@ -107,9 +108,8 @@ public class DungeonGenerator : MonoBehaviour
 	}
 	
 	void SpawnReward(){
-		int random = Random.Range(0, listOfRewards.Count);
 		lastRoomTransform = allRooms[allRooms.Count - 1].transform;
-		Instantiate(listOfRewards[random], rewardPosition, Quaternion.identity, allRooms[allRooms.Count - 1].transform);
+		Instantiate(dungeonReward_, rewardPosition, Quaternion.identity, allRooms[allRooms.Count - 1].transform);
 	}
 	
 	void CreateRoom(Vector3 position, float size, bool singleTeleporter = false)

@@ -9756,6 +9756,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8213031378293616905, guid: 84ebf58f51381644a9a0f3d10607e923, type: 3}
+      propertyPath: rewardsList_.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8213031378293616905, guid: 84ebf58f51381644a9a0f3d10607e923, type: 3}
+      propertyPath: rewardsList_.Array.data[0]
+      value: 
+      objectReference: {fileID: 7620662267393734494, guid: 920ce2fdba8af85458407773f689b657, type: 3}
+    - target: {fileID: 8213031378293616905, guid: 84ebf58f51381644a9a0f3d10607e923, type: 3}
+      propertyPath: rewardsList_.Array.data[1]
+      value: 
+      objectReference: {fileID: 7314979198938841246, guid: 30647f0e44cd0a44c9276aecaa290116, type: 3}
+    - target: {fileID: 8213031378293616905, guid: 84ebf58f51381644a9a0f3d10607e923, type: 3}
+      propertyPath: rewardsList_.Array.data[2]
+      value: 
+      objectReference: {fileID: 7314979198938841246, guid: 733ef2d6e977df24aa6ae23e82abcc43, type: 3}
+    - target: {fileID: 8213031378293616905, guid: 84ebf58f51381644a9a0f3d10607e923, type: 3}
+      propertyPath: rewardsList_.Array.data[3]
+      value: 
+      objectReference: {fileID: 7314979198938841246, guid: d6ac9dc0327857f4b85e2dd90697f9bb, type: 3}
+    - target: {fileID: 8213031378293616905, guid: 84ebf58f51381644a9a0f3d10607e923, type: 3}
+      propertyPath: rewardsList_.Array.data[4]
+      value: 
+      objectReference: {fileID: 7314979198938841246, guid: 788cbd7c69684a1458bfb70ed9e8cad7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

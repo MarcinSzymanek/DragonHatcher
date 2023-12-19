@@ -18,13 +18,17 @@ public class SceneLoader : MonoBehaviour
 	
 	static SceneLoader instance_;
 	
-	
+	[field: SerializeField]
+	List<GameObject> rewardsList_;
+
 	void Awake(){
 		if(instance_ == null){
 			instance_ = this;
 			SceneProperties.SceneType type = GameObject.FindObjectOfType<SceneProperties>().sceneType;
 			if(type == SceneProperties.SceneType.DUNGEON_CRAWL){
-				GameObject.FindObjectOfType<DungeonGenerator>().SetDungeonGenerator(0);
+				GameObject reward = rewardsList_[UnityEngine.Random.Range(0, rewardsList_.Count)];
+				rewardsList_.Remove(reward);
+				GameObject.FindObjectOfType<DungeonGenerator>().SetDungeonGenerator(0, reward);
 			}
 			else{
 				GameObject.FindObjectOfType<EnemyGenerator>().SetupSpawners();
@@ -149,7 +153,12 @@ public class SceneLoader : MonoBehaviour
 		input_.EnableGameplayInput();
 		SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextScene));
 		GameObject.FindObjectOfType<SceneProperties>().difficulty = difficulty;
-		if(nextScene == "DungeonGenerator") GameObject.FindObjectOfType<DungeonGenerator>().SetDungeonGenerator(difficulty);
+		if(nextScene == "DungeonGenerator") {
+			GameObject reward = rewardsList_[UnityEngine.Random.Range(0, rewardsList_.Count)];
+			rewardsList_.Remove(reward);
+			GameObject.FindObjectOfType<DungeonGenerator>().SetDungeonGenerator(difficulty, reward);
+		}
+		
 		else GameObject.FindObjectOfType<EnemyGenerator>().SetupSpawners(difficulty);
 		var operation = SceneManager.UnloadSceneAsync(loadingScene);
 		// Check if there are player copies, and destroy them
