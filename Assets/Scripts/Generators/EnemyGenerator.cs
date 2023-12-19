@@ -115,6 +115,10 @@ public class EnemyGenerator : MonoBehaviour
 			gameController_.OnWinCondition();
 		}
 	}
+	
+	void OnDestroy(){
+		SceneManager.activeSceneChanged -= SetupSpawners;
+	}
     
     
     
