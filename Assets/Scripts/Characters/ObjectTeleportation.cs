@@ -15,7 +15,6 @@ public class ObjectTeleportation : MonoBehaviour
     private Vector3 teleportOffset;
     private FadeEffect fadeEffect;
     public bool isFinalTeleporter;
-    private GameController controller;
 
     private void Awake()
     {
@@ -24,7 +23,6 @@ public class ObjectTeleportation : MonoBehaviour
         GameObject uiMain = GameObject.Find("UIMain");
         GameObject blackscreen = uiMain.transform.Find("BlackScreen").gameObject;
         fadeEffect = blackscreen.GetComponent<FadeEffect>();
-        controller = GameObject.FindObjectOfType<GameController>();
     }
 
 
@@ -35,6 +33,8 @@ public class ObjectTeleportation : MonoBehaviour
         {
             if(isFinalTeleporter)
             {
+            	canTeleport = false;
+            	var controller = GameObject.FindObjectOfType<GameController>();
                 controller.OnWinCondition();
                 return;
             }
