@@ -44,7 +44,7 @@ public class Spawn_Tornado : SpellBase<VectorTarget>
         setPrefabTarget(tornado);
         Rigidbody2D rb = tornado.GetComponent<Rigidbody2D>();
         Debug.Log(target.direction * speed);
-        rb.velocity = target.direction * speed;
+        rb.linearVelocity = target.direction * speed;
 
 	    tornado.transform.rotation = Quaternion.Euler(new Vector3(0, 0, target.angle));
     }

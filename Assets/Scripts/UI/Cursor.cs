@@ -10,7 +10,7 @@ public class Cursor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
 	{
-		UnityEngine.Cursor.visible = false;
+		UnityEngine.Cursor.visible = true;
 	    tf_ = GetComponent<Transform>();
 	    cam_ = Camera.main;
     }
@@ -18,7 +18,7 @@ public class Cursor : MonoBehaviour
     // Follow mouse position
     void Update()
     {
-        updatePosition();
+        //updatePosition();
     }
 
     void updatePosition(){

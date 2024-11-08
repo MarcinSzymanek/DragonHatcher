@@ -77,6 +77,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -89,6 +90,7 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -103,6 +105,7 @@ ScriptedImporter:
     pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 0
@@ -124,6 +127,7 @@ ScriptedImporter:
     pivot: {x: 0.375, y: -0.35}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 96
@@ -144,6 +148,7 @@ ScriptedImporter:
     pivot: {x: 0.44444445, y: -0.2857143}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 79
@@ -164,6 +169,7 @@ ScriptedImporter:
     pivot: {x: 0.71428573, y: -0.11111111}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 109
@@ -184,6 +190,7 @@ ScriptedImporter:
     pivot: {x: 0.7647059, y: -0.107142866}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 54
@@ -204,6 +211,7 @@ ScriptedImporter:
     pivot: {x: 0.7647059, y: -0.10344827}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 4
@@ -224,6 +232,7 @@ ScriptedImporter:
     pivot: {x: 0.7647059, y: -0.10344827}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 29
@@ -244,6 +253,7 @@ ScriptedImporter:
     pivot: {x: 0.4074074, y: -0.033333335}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 41
@@ -264,6 +274,7 @@ ScriptedImporter:
     pivot: {x: 0.4827586, y: -0.033333335}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 4
@@ -284,6 +295,7 @@ ScriptedImporter:
     pivot: {x: 0.59999996, y: -0.06896552}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 76
@@ -304,6 +316,7 @@ ScriptedImporter:
     pivot: {x: 0.5, y: -0.36842105}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 4
@@ -324,6 +337,7 @@ ScriptedImporter:
     pivot: {x: 0.375, y: -0.35}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
     rect:
       serializedVersion: 2
       x: 112
@@ -348,88 +362,99 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: Head_Ballista_attack_Frame_0
+    - name: Frame_0
       frameIndex: 0
+      additiveSortOrder: 0
       cellRect:
         x: 13
         y: 7
         width: 8
         height: 20
       spriteId: 29817ce3a4b61c94ea7ec05337be9dae
-    - name: Head_Ballista_attack_Frame_1
+    - name: Frame_1
       frameIndex: 1
+      additiveSortOrder: 0
       cellRect:
         x: 12
         y: 6
         width: 9
         height: 21
       spriteId: af1d5bce22f320646bae81ebd4ebdd0b
-    - name: Head_Ballista_attack_Frame_2
+    - name: Frame_2
       frameIndex: 2
+      additiveSortOrder: 0
       cellRect:
         x: 6
         y: 3
         width: 14
         height: 27
       spriteId: cdf980c48ffde81428274084df42750c
-    - name: Head_Ballista_attack_Frame_3
+    - name: Frame_3
       frameIndex: 3
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 3
         width: 17
         height: 28
       spriteId: c1fb4979262be4e4a8ce3b1bf3d5b949
-    - name: Head_Ballista_attack_Frame_4
+    - name: Frame_4
       frameIndex: 4
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 3
         width: 17
         height: 29
       spriteId: c3e378a2f97dd9a459a417f7eaebb440
-    - name: Head_Ballista_attack_Frame_5
+    - name: Frame_5
       frameIndex: 5
+      additiveSortOrder: 0
       cellRect:
         x: 3
         y: 3
         width: 17
         height: 29
       spriteId: f79ab88c45d5a4044badf23e1dd338ce
-    - name: Head_Ballista_attack_Frame_6
+    - name: Frame_6
       frameIndex: 6
+      additiveSortOrder: 0
       cellRect:
         x: 5
         y: 1
         width: 27
         height: 30
       spriteId: 9338d034d2c87f54e89730062c8abd42
-    - name: Head_Ballista_attack_Frame_7
+    - name: Frame_7
       frameIndex: 7
+      additiveSortOrder: 0
       cellRect:
         x: 2
         y: 1
         width: 29
         height: 30
       spriteId: 00edbb68b94306b4eb2f1568db6992be
-    - name: Head_Ballista_attack_Frame_8
+    - name: Frame_8
       frameIndex: 8
+      additiveSortOrder: 0
       cellRect:
         x: 1
         y: 2
         width: 25
         height: 29
       spriteId: 36e94e389853c3f4eb9f85226abb2036
-    - name: Head_Ballista_attack_Frame_9
+    - name: Frame_9
       frameIndex: 9
+      additiveSortOrder: 0
       cellRect:
         x: 12
         y: 7
         width: 8
         height: 19
       spriteId: bfd3ca4ffb18cb44bba782922818aa7d
-    - name: Head_Ballista_attack_Frame_10
+    - name: Frame_10
       frameIndex: 10
+      additiveSortOrder: 0
       cellRect:
         x: 13
         y: 7
@@ -439,6 +464,7 @@ ScriptedImporter:
     linkedCells: []
     parentIndex: -1
   platformSettings: []
+  generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 32, y: 32}
