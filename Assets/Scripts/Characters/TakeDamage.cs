@@ -19,7 +19,8 @@ public class TakeDamage: MonoBehaviour
 	public void TriggerTakeDamage(int amount)
 	{
 		if(dead) return;
-        OnDamageTaken?.Invoke(amount);
+		OnDamageTaken?.Invoke(amount);
+		Debug.Log(this.name + " took " + amount.ToString() + " damage");
         healthComponent.currentHealth -= amount;
         if (healthComponent.currentHealth <= 0)
         {

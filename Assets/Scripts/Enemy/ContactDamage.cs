@@ -101,7 +101,8 @@ public class ContactDamage : MonoBehaviour
 				return;
 		}
 		damageEffectEvent?.Invoke(collider.transform.parent.GetComponent<Rigidbody2D>());
-		
+		// Prevent damaging entities multiple times if damaged before
+		// in a short amount of time.
 		foreach (var item in dmgTokens)
 		{
 			if(item.Contains(tdamage)) return;
