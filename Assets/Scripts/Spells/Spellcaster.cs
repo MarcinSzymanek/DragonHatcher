@@ -39,7 +39,6 @@ public class Spellcaster : MonoBehaviour
     }
     
 	public void ReadySpell(int slot, int id){
-		Debug.Log("Ready spell called");
 		spellSlots[slot] = spellbook.GetSpellById(id);
 		debugSpellCount++;
 	}

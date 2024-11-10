@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using UnityEngine.Rendering.Universal;
 
 public class SceneLoader : MonoBehaviour
 {
 	GameObject player_;
 	MusicController musicController_;
+	CinemachineVirtualCamera camera_;
+	Light2D globalLight_;
 	FadeEffect fade_;
 	string loadingScene = "Loading";
 	string nextScene = "";
@@ -22,17 +25,19 @@ public class SceneLoader : MonoBehaviour
 	List<GameObject> rewardsList_;
 	[field: SerializeField]
 	GameObject dummyReward_;
+	SceneProperties sceneProps_;
 
 	void Awake(){
 		if(instance_ == null){
 			instance_ = this;
-			SceneProperties.SceneType type = GameObject.FindObjectOfType<SceneProperties>().sceneType;
-			if(type == SceneProperties.SceneType.DUNGEON_CRAWL){
+			sceneProps_ = GameObject.FindObjectOfType<SceneProperties>();
+			if(sceneProps_.sceneType == SceneProperties.SceneType.DUNGEON_CRAWL){
 				GameObject reward = rewardsList_[UnityEngine.Random.Range(0, rewardsList_.Count)];
 				rewardsList_.Remove(reward);
 				GameObject.FindObjectOfType<DungeonGenerator>().SetDungeonGenerator(0, reward);
 			}
-			else{
+			else if (sceneProps_.sceneType ==	SceneProperties.SceneType.WAVE_DEFENCE){
+				fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
 				EnemyGenerator gen = GameObject.FindObjectOfType<EnemyGenerator>();
 				if(gen != null) gen.SetupSpawners();
 			}
@@ -41,10 +46,54 @@ public class SceneLoader : MonoBehaviour
 			Destroy(this);
 			return;
 		}
-		fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
 		musicController_ = GameObject.FindObjectOfType<MusicController>();
 		player_ = GameObject.Find("Player");
 		input_ = GameObject.FindObjectOfType<InputManager>();
+	}
+	
+	public void StartGame(){
+		if (!(sceneProps_.sceneType == SceneProperties.SceneType.START_MENU)){
+			Debug.LogError("Cannot start game: Incorrect SceneType", this);
+			return;
+		}
+		// Set scene type
+		sceneProps_.sceneType =	SceneProperties.SceneType.WAVE_DEFENCE;
+		
+		// Enable relevant managers
+		// GameObject.Find("BlackScreen").SetActive(true);
+		//GameObject.Find("BlackScreen").SetActive(true);
+		//GameObject.Find("UIMainWave").SetActive(true);
+		musicController_.PlayInterlude();
+		camera_ = GameObject.FindObjectOfType<CinemachineVirtualCamera>(); 
+		globalLight_ = GameObject.FindGameObjectWithTag("GlobalLight").GetComponent<Light2D>();
+		UIMainMenu mainMenu = GameObject.FindObjectOfType<UIMainMenu>();
+		this.Invoke("StartMonsterGeneration", 5);
+		StartCoroutine(Utils.Enumerators.DoUntil(
+			() => {
+				camera_.m_Lens.OrthographicSize += 0.01f;
+			},
+			() => camera_.m_Lens.OrthographicSize >= 6f,
+			0.02f
+		));
+		StartCoroutine(Utils.Enumerators.DoUntilAndThen(
+			() => {
+				globalLight_.intensity += 0.01f;
+			},
+			() =>  globalLight_.intensity >= 0.95f
+			,
+			() => {
+				globalLight_.intensity = 0.95f;
+			}
+		));
+		// Fades in/out relevant UI groups
+		UIManager.Instance.OnGameStart();
+		ActivatePlayer();
+	}
+	
+	void ActivatePlayer(){
+		player_.transform.Find("Model").gameObject.SetActive(true);
+		player_.GetComponent<Movement>().enabled = true;
+		input_.EnableGameplayInput();
 	}
 	
 	
@@ -178,7 +227,6 @@ public class SceneLoader : MonoBehaviour
 			GameObject.FindObjectOfType<DungeonGenerator>().SetDungeonGenerator(difficulty, reward);
 		}
 		
-		else GameObject.FindObjectOfType<EnemyGenerator>().SetupSpawners(difficulty);
 		var operation = SceneManager.UnloadSceneAsync(loadingScene);
 		// Check if there are player copies, and destroy them
 		var players = GameObject.FindGameObjectsWithTag("Player");

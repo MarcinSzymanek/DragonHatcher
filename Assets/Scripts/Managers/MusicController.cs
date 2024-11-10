@@ -18,7 +18,8 @@ public class MusicController : MonoBehaviour
 	AudioClip musicTrackDungeon_;
 	[field: SerializeField]
 	AudioClip interludeTrack_;
-	
+	[field: SerializeField]
+	AudioClip musicTrackMainMenu_;
 	
 	[Range(0f, 1f)]
 	public float musicVolume;
@@ -54,6 +55,9 @@ public class MusicController : MonoBehaviour
 			else{
 				trackIdx = 0;
 			}
+		}
+		else if(sceneType == SceneProperties.SceneType.START_MENU){
+			clip = musicTrackMainMenu_;
 		}
 		else if(sceneType == SceneProperties.SceneType.DUNGEON_CRAWL){
 			clip = musicTrackDungeon_;

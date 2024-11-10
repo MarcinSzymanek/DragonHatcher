@@ -4,8 +4,31 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using System;
 
+[RequireComponent(typeof(Light2D))]
 public class LightEffects : MonoBehaviour
 {
+	void FixedUpdate()
+	{
+		if(gradual.active) processGradual();
+	}
+
+	// Gradual change of the lightning. Runs every FixedUpdate() step
+	[Serializable]
+	public class Gradual
+	{
+		public bool enabled;
+		public bool active = false;
+		public bool repeat = true;
+		public bool invertOnMax = true;
+		// Duration of time that light increases/decreases over
+		public float duration = 1f;
+		public float intensityStep;
+		public float maxIntensity = 1.0f;
+		public float minIntensity = 0f;
+		public bool stepUp = true;
+		public int ticksLeft = 0;
+	}
+	
 	[Serializable]
 	public class Flicker
 	{
@@ -15,17 +38,7 @@ public class LightEffects : MonoBehaviour
 		public float delayBetweenFlicker = 0.5f;
 		public float flickerTime = 0.2f;
 		public bool stepUp = true;
-		//private void OnAnimationStep(){
-		//	counter += 1;
-		
-		//	if(counter < 30) return;
-		//	light_.intensity += (stepUp)? intensityStep: -intensityStep;
-		//	light_.pointLightOuterRadius += (stepUp)? outerRadiusStep: -outerRadiusStep;
-		//	if(stepUp) stepUp = false;
-		//	else stepUp = true;
-		
-		//	counter = 0;
-		//} 
+
 	}
 	
 	[Serializable]
@@ -50,6 +63,7 @@ public class LightEffects : MonoBehaviour
 	
 	public Flicker flicker;
 	public Flash flash;
+	public Gradual gradual;
 	
 	void Awake()
 	{
@@ -58,7 +72,27 @@ public class LightEffects : MonoBehaviour
 		baseInnerRadius_ = light_.pointLightInnerRadius;
 		baseOuterRadius_ = light_.pointLightOuterRadius;
 		if(flicker.enabled) Invoke("processFlicker", flicker.delayBetweenFlicker);
+		if(gradual.enabled) startGradual();
 	}
+	
+	void startGradual(){
+		gradual.intensityStep = 1/(gradual.duration*100)*(gradual.maxIntensity - gradual.minIntensity);
+		gradual.ticksLeft = (int)(gradual.duration/gradual.intensityStep);
+		gradual.active = true;
+	}
+	
+	void processGradual(){
+		if(!gradual.enabled) return;
+		if(gradual.ticksLeft <= 0){
+			gradual.stepUp = !gradual.stepUp;
+			gradual.ticksLeft = (int)(gradual.duration/gradual.intensityStep);	
+		}
+		if(gradual.stepUp) light_.intensity += gradual.intensityStep;
+		else light_.intensity -= gradual.intensityStep;
+		gradual.ticksLeft--;
+	}
+	
+	
 	
 	void processFlicker(){
 		if(!flicker.enabled) return;

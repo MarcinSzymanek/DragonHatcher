@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+	public static GameController Instance;
+
 	enum GameState{
 		title,
 		paused,
@@ -14,15 +16,21 @@ public class GameController : MonoBehaviour
 	GameState state_;
 	InputManager input_;
 	SceneLoader sceneLoader_;
+	EnemyGenerator enemyGenerator_;
 	public SceneProperties.SceneType currentSceneType{get; private set;}
 	string nextScene_;
 	GameObject player_;
 	static bool subbed = false;
 	static bool initialized = false;
 	public bool sandbox = false;
-
+	
 	void Awake()
 	{
+		if(Instance == null) Instance = this;
+		else{
+			Destroy(this);
+		}
+
 		input_ = GameObject.FindObjectOfType<InputManager>();
 		Scene s = SceneManager.GetActiveScene();
 		if(!initialized){
@@ -62,6 +70,11 @@ public class GameController : MonoBehaviour
 		if(vmcam != null){
 			vmcam.Follow = player_.transform;
 		}
+	}
+	
+	void TriggerEnemySpawn()
+	{
+		enemyGenerator_.SetupSpawners();
 	}
 	
 	IEnumerator WaitForScene(Scene next){
@@ -117,6 +130,10 @@ public class GameController : MonoBehaviour
 		sceneLoader_.OnDeath();
 	}
 
+	public void TriggerSpawn(){
+		
+	}
+	
 	public void OnWinCondition(){
 		if(sandbox) return;
 		sceneLoader_ = FindObjectOfType<SceneLoader>();
@@ -143,8 +160,15 @@ public class GameController : MonoBehaviour
 			Debug.LogWarning("Could not unsub");
 		}
 	}
-
 	protected void OnDestroy(){
 		Debug.LogWarning("GAME CONTROLLER DESTROYED");
+	}
+	
+	public void RegisterEnemyGenerator(EnemyGenerator generator)
+	{
+		enemyGenerator_ = generator;
+	}
+	public void RemoveEnemyGenerator(){
+		enemyGenerator_ = null;
 	}
 }

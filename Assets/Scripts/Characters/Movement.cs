@@ -135,9 +135,7 @@ public class Movement : MonoBehaviour, IStopOnDeath
 		}
 		//var pos = tf_.position;
 		anim_.SetBool("IsMoving", true);
-		
 		body_.linearVelocity = new Vector3(dirx_, diry_, 0) * Speed * Time.fixedDeltaTime;
-		
 	}
 	
 	public void Flip(){

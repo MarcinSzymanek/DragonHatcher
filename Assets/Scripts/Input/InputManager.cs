@@ -43,8 +43,8 @@ public class InputManager : MonoBehaviour
 		
 		// No Player Input during Loading/Death scenes
 		if(sceneProps.sceneType == SceneProperties.SceneType.LOADING || sceneProps.sceneType == SceneProperties.SceneType.START_MENU) {
-			Destroy(this);
-			return;
+			if(!this.enabled_) return;
+			this.enabled_ = false;
 		}
 		
 		input_ = GetComponent<PlayerInput>();
@@ -165,6 +165,7 @@ public class InputManager : MonoBehaviour
 		
 		switch(mode_){
 		case InputMode.cast:
+			Debug.Log("Camera: " + Camera.main);
 			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			caster_.CastSpell(0, mousePos);
 			return;

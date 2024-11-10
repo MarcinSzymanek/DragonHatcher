@@ -2,21 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
-public class UIMainMenu : MonoBehaviour
+[RequireComponent(typeof(UIGroupFadeEffects))]
+public class UIMainMenu : MonoBehaviour, IUIGroup
 {
-	void Awake(){
-		KeepBetweenScenes toClean = GameObject.FindObjectOfType<KeepBetweenScenes>();
-		if(toClean != null) {
-			Debug.Log("Cleaning up...");
-			var objects = toClean.GetComponentsInChildren<DestroyOnStartMenu>();
-			foreach (var item in objects)
-			{
-				Destroy(item.gameObject);
-			}
-			Destroy(toClean.gameObject);
-		}
+	UIGroupFadeEffects fadeEffects_;
+	void Awake()
+	{
+		fadeEffects_ = GetComponent<UIGroupFadeEffects>();	
 	}
+	
+	void Start()
+	{
+		UIManager.Instance.Register(this);
+	}
+	
+	void OnDestroy()
+	{
+		UIManager.Instance.Remove(this);
+	}
+	
+	public UIType GetType() => UIType.MAIN_MENU;
+	
+	public void FadeIn()
+	{
+		fadeEffects_.FadeIn();
+	}
+	
+	public void FadeOut()
+	{
+		fadeEffects_.FadeOut();
+		
+	}
+	
+	public void FadeOut(float duration, float speed){
+		fadeEffects_.FadeOut(duration, speed);
+	}
+	public void FadeIn(float duration, float speed){
+		fadeEffects_.FadeIn(duration, speed);
+	}
+
     public void Play() 
     {
         SceneManager.LoadScene("WaveDefense");

@@ -32,8 +32,6 @@ public class EnemyGenerator : MonoBehaviour
 	private int nextThreshold = 0;
 	private int difficulty_;
 	
-	GameController gameController_;
-	
 	SceneProperties.SceneType sceneType;
 	
 	void Regulate()
@@ -59,7 +57,6 @@ public class EnemyGenerator : MonoBehaviour
 		while(SceneManager.loadedSceneCount > 1){
 			yield return null;
 		}
-		gameController_ = FindObjectOfType<GameController>();
 		
 		IAI_Strategy strategy;
 		SceneProperties sceneProps = GameObject.FindObjectOfType<SceneProperties>();
@@ -111,10 +108,9 @@ public class EnemyGenerator : MonoBehaviour
 	
 	void OnEnemyDeath(object? obj, ObjectDeathArgs args){
 		enemiesAlive_--;
-		gameController_ = FindObjectOfType<GameController>();
 		if(enemiesAlive_ < 1 && enemiesLeft_ < 1){
 			Debug.LogWarning("All enemies have been defeated!");
-			gameController_.OnWinCondition();
+			GameController.Instance.OnWinCondition();
 		}
 	}
 	
