@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Controls game state, triggers events. Changes scene on win/loss
 public class GameController : MonoBehaviour
 {
 	public static GameController Instance;
@@ -48,7 +49,6 @@ public class GameController : MonoBehaviour
 			yield return new WaitForSeconds(0.2f);
 		}
 		player_.AddComponent<Unique>();
-		Debug.LogWarning("GAMECONTROLLER SUB TO PLAYER DEATH");
 		player_.GetComponent<DeathController>().objectDied += GameOver;
 	}
 	
@@ -59,20 +59,14 @@ public class GameController : MonoBehaviour
 		if(currentSceneType == SceneProperties.SceneType.WAVE_DEFENCE){
 			// Set egg dying as the lose condition
 			GameObject.Find("DragonEgg").GetComponent<DeathController>().objectDied += GameOver;
-			nextScene_ = "DungeonGenerator";
 		}
 		if(currentSceneType == SceneProperties.SceneType.START_MENU) Destroy(this);
 		else{
 			nextScene_ = "WaveDefense";
 		}
-
-		var vmcam = FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
-		if(vmcam != null){
-			vmcam.Follow = player_.transform;
-		}
 	}
 	
-	void TriggerEnemySpawn()
+	public void TriggerEnemySpawn()
 	{
 		enemyGenerator_.SetupSpawners();
 	}
@@ -129,10 +123,6 @@ public class GameController : MonoBehaviour
 		// Scene transition
 		sceneLoader_.OnDeath();
 	}
-
-	public void TriggerSpawn(){
-		
-	}
 	
 	public void OnWinCondition(){
 		if(sandbox) return;
@@ -150,7 +140,7 @@ public class GameController : MonoBehaviour
 	// This function is called when the behaviour becomes disabled () or inactive.
 	protected void OnDisable()
 	{
-		Debug.LogWarning("GAMECONTROLLER DISABLED");
+		//Debug.LogWarning("GAMECONTROLLER DISABLED");
 		try{
 			SceneManager.activeSceneChanged -= InitializeLevel;
 			player_.GetComponent<DeathController>().objectDied -= GameOver;
@@ -161,13 +151,14 @@ public class GameController : MonoBehaviour
 		}
 	}
 	protected void OnDestroy(){
-		Debug.LogWarning("GAME CONTROLLER DESTROYED");
+		//Debug.LogWarning("GAME CONTROLLER DESTROYED");
 	}
 	
 	public void RegisterEnemyGenerator(EnemyGenerator generator)
 	{
 		enemyGenerator_ = generator;
 	}
+
 	public void RemoveEnemyGenerator(){
 		enemyGenerator_ = null;
 	}

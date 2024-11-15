@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerAnimEvents : MonoBehaviour
 {
 	Animator anim_;
+	Animator weaponAnim_;
 	AudioFeedback audio_;
     // Start is called before the first frame update
     void Start()
 	{
 		audio_ = transform.Find("AudioFootsteps").GetComponent<AudioFeedback>();
-	    anim_ = GetComponent<Animator>();
+		anim_ = GetComponent<Animator>();
+		weaponAnim_ = GetComponentInChildren<Animator>();
     }
 
 	public void OnIdleLoop(){
@@ -24,4 +26,10 @@ public class PlayerAnimEvents : MonoBehaviour
 	public void PlayFootstepSound(){
 		audio_.PlayFootstep();
 	}
+	
+	public void SetMoving(bool val){
+		anim_.SetBool("IsMoving", val);
+		weaponAnim_.SetBool("IsMoving", val);
+	}	
+	
 }

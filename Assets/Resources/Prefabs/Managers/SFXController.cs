@@ -30,7 +30,7 @@ public class SFXController : MonoBehaviour
 		{
 			if(source.isPlaying) delay += 0.02f;
 		}
-		Debug.Log("Starting new sfx with volume: " + volume.ToString() + " , delay: " + delay.ToString());
+		//Debug.Log("Starting new sfx with volume: " + volume.ToString() + " , delay: " + delay.ToString());
 		StartCoroutine(delayedPlay(sourceToPlay, clip, delay, volume));
 		
 	}

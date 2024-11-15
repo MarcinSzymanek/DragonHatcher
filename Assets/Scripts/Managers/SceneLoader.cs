@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Cinemachine;
 using UnityEngine.Rendering.Universal;
+
 
 public class SceneLoader : MonoBehaviour
 {
 	GameObject player_;
 	MusicController musicController_;
-	CinemachineVirtualCamera camera_;
+	//CinemachineCamera camera_;
 	Light2D globalLight_;
 	FadeEffect fade_;
 	string loadingScene = "Loading";
@@ -37,7 +37,7 @@ public class SceneLoader : MonoBehaviour
 				GameObject.FindObjectOfType<DungeonGenerator>().SetDungeonGenerator(0, reward);
 			}
 			else if (sceneProps_.sceneType ==	SceneProperties.SceneType.WAVE_DEFENCE){
-				fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
+			fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
 				EnemyGenerator gen = GameObject.FindObjectOfType<EnemyGenerator>();
 				if(gen != null) gen.SetupSpawners();
 			}
@@ -64,17 +64,17 @@ public class SceneLoader : MonoBehaviour
 		//GameObject.Find("BlackScreen").SetActive(true);
 		//GameObject.Find("UIMainWave").SetActive(true);
 		musicController_.PlayInterlude();
-		camera_ = GameObject.FindObjectOfType<CinemachineVirtualCamera>(); 
+		//camera_ = GameObject.FindObjectOfType<CinemachineVirtualCamera>(); 
 		globalLight_ = GameObject.FindGameObjectWithTag("GlobalLight").GetComponent<Light2D>();
 		UIMainMenu mainMenu = GameObject.FindObjectOfType<UIMainMenu>();
 		this.Invoke("StartMonsterGeneration", 5);
-		StartCoroutine(Utils.Enumerators.DoUntil(
-			() => {
-				camera_.m_Lens.OrthographicSize += 0.01f;
-			},
-			() => camera_.m_Lens.OrthographicSize >= 6f,
-			0.02f
-		));
+		//StartCoroutine(Utils.Enumerators.DoUntil(
+		//	() => {
+		//		camera_.m_Lens.OrthographicSize += 0.01f;
+		//	},
+		//	() => camera_.m_Lens.OrthographicSize >= 6f,
+		//	0.02f
+		//));
 		StartCoroutine(Utils.Enumerators.DoUntilAndThen(
 			() => {
 				globalLight_.intensity += 0.01f;
@@ -163,7 +163,7 @@ public class SceneLoader : MonoBehaviour
 		}
 		Destroy(GameObject.FindGameObjectWithTag("GlobalLight"));
 		Destroy(GameObject.FindObjectOfType<Grid>().gameObject);
-		Destroy(GameObject.FindObjectOfType<CinemachineVirtualCamera>());
+		//Destroy(GameObject.FindObjectOfType<CinemachineVirtualCamera>());
 	
 		Destroy(GameObject.FindObjectOfType<DisableUIComponents>().gameObject);
 		
@@ -237,7 +237,7 @@ public class SceneLoader : MonoBehaviour
 				player.transform.position = Vector3.zero;
 			}
 		}
-		GameObject.FindObjectOfType<CinemachineVirtualCamera>().Follow = GameObject.FindGameObjectWithTag("Player").transform;
+		//GameObject.FindObjectOfType<CinemachineVirtualCamera>().Follow = GameObject.FindGameObjectWithTag("Player").transform;
 		StartCoroutine(QueueUpMusic(operation));
 	}
 	

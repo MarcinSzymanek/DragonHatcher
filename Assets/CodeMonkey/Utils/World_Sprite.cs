@@ -44,7 +44,7 @@ namespace CodeMonkey.Utils {
             gameObject.transform.parent = parent;
             gameObject.transform.localPosition = localPosition;
             TextMesh textMesh = UtilsClass.CreateWorldText(text, gameObject.transform, Vector3.zero, fontSize, Color.white, TextAnchor.MiddleCenter, TextAlignment.Center, 20000);
-            Bounds rendererBounds = textMesh.GetComponent<MeshRenderer>().bounds;
+	        UnityEngine.Bounds rendererBounds = textMesh.GetComponent<MeshRenderer>().bounds;
 
             Color color = UtilsClass.GetColorFromString("00BA00FF");
             if (color.r >= 1f) color.r = .9f;

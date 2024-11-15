@@ -9,7 +9,7 @@
                     "name": "Move",
                     "type": "Button",
                     "id": "4abfcb75-e76b-4d15-9b0b-2883727f9525",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -27,25 +27,16 @@
                     "name": "Attack",
                     "type": "Button",
                     "id": "7ca28160-52b3-4292-be34-c043a3f9a55f",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Get",
-                    "type": "Button",
-                    "id": "2ab90fb2-090e-49f5-97d8-369dea01b3ac",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold,Press",
                     "initialStateCheck": false
                 },
                 {
                     "name": "Shop",
                     "type": "Button",
                     "id": "78f63223-791b-4ef8-abff-f90cf3422aac",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -55,6 +46,24 @@
                     "type": "Button",
                     "id": "086bf6d8-2c2f-4d52-928a-d669f9905b46",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "36580cdc-18a5-40a3-89cf-b32e5aeee1a5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "8258c008-70ac-49a0-9644-27835cc0a0cc",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -294,17 +303,6 @@
                 },
                 {
                     "name": "",
-                    "id": "b7cdeb44-6236-420f-8387-abe433976c2f",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Get",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "1f676587-18e7-464f-adf3-4e25e10df607",
                     "path": "<Keyboard>/tab",
                     "interactions": "",
@@ -322,6 +320,50 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "387ff2d5-122a-49f8-99f5-581eed435d1f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ed384c3-4d37-4cee-a92b-623072932dd3",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da4bb302-c4e3-4778-90c0-ecf8ee3fb7e4",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "23ffa95c-7400-44f9-9312-35ca3f61f78a",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

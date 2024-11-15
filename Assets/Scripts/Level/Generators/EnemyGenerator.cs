@@ -34,6 +34,23 @@ public class EnemyGenerator : MonoBehaviour
 	
 	SceneProperties.SceneType sceneType;
 	
+	private void Start()
+	{
+		// Disable initial spawner GOs. Workaround for the fact that you can't get interfaces from inactive GOs
+		spawners_ = GetComponentsInChildren<IEnemySpawner>();
+		foreach(var spawner in spawners_)
+		{
+			(spawner as MonoBehaviour).gameObject.SetActive(false);
+		}
+		Debug.Log("Found " + spawners_.Length + " spawners");
+		GameController.Instance.RegisterEnemyGenerator(this);
+	}
+	
+	private void OnDestroy()
+	{
+		GameController.Instance.RemoveEnemyGenerator();
+	}
+	
 	void Regulate()
 	{
 		spawnRate *= regulateIntensity;
@@ -64,10 +81,15 @@ public class EnemyGenerator : MonoBehaviour
 		if(sceneProps.sceneType == SceneProperties.SceneType.WAVE_DEFENCE) strategy = new AIStrategies.StrategyTargetEgg();
 		else strategy = new AIStrategies.StrategyScanForPlayer();
 		enemiesLeft_ = enemiesToSpawn;
-		spawners_ = GetComponentsInChildren<IEnemySpawner>();
 		foreach(var s in spawners_){
 			s.SetDifficulty(difficulty_);
 			s.SetAIStrategy(strategy);
+
+			if(!(s as MonoBehaviour).gameObject.active)
+			{
+				(s as MonoBehaviour).gameObject.SetActive(true);
+			}
+			
 		}
 		
 		regulateThresholdList = new List<int>();
@@ -84,7 +106,10 @@ public class EnemyGenerator : MonoBehaviour
 	}
 	
 	void StartSpawners(){
-		spawners_ = GetComponentsInChildren<IEnemySpawner>();
+		foreach(var spawner in spawners_)
+		{
+			(spawner as MonoBehaviour).gameObject.SetActive(true);
+		}
 		Invoke("SpawnContinuously", 5f);		
 	}
 

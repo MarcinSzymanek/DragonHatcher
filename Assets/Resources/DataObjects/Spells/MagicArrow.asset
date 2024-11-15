@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeda647e1b83fa1488c6d416e48e2a46, type: 3}
   m_Name: MagicArrow
   m_EditorClassIdentifier: 
-  name: Arrow
+  slot: 0
+  name: Magic Arrow
   description: A wizardly classic
   icon: {fileID: 21300000, guid: 49730d1e64faf644b806b12ce37edcfb, type: 3}
   cooldown: 0.3

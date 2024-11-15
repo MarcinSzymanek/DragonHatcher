@@ -6,7 +6,8 @@ public class Spawn_Firewall : SpellBase<PointTarget>
 {
     public GameObject firewallPrefab;
 
-	internal override PointTarget getTarget(Vector3 mousePos){
+	internal override PointTarget getTarget(){
+		var mousePos = Camera.main.WorldToScreenPoint(Input.mousePosition);
 		return new PointTarget(mousePos.x, mousePos.y);
 	}
 

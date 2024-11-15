@@ -11,8 +11,19 @@ public interface ISpell
 	public float castDelay{get;}
 	public float cooldown{get;}
 	SpellDataObject spellData{get;}
-	bool CastSpell(Vector3 mousePos);
+	bool CastSpell();
 }
+
+public interface ISpell<T>
+{
+	public int id{get; set;}
+	public string name{get;}
+	public float castDelay{get;}
+	public float cooldown{get;}
+	SpellDataObject spellData{get;}
+	bool CastSpell(T targetParam);
+}
+
 
 internal interface ISpellEffect<T>
 {

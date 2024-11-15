@@ -4,17 +4,13 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public sealed class Spawn_Lightning : SpellBase<Int32>
+public sealed class Spawn_Lightning : SpellBase
 {
     public GameObject lightningPrefab;
     public LayerMask targetLayer;
     public float spawnRadius = 5f;
 	
-	internal override Int32 getTarget(Vector3 mousePos){
-		return 0;
-	}
-	
-	internal override void onCast(Int32 nothing){
+	internal override void onCast(){
 		SpawnLightningAboveEnemies();
 	}
     

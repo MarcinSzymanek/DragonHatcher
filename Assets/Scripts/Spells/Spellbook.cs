@@ -38,7 +38,6 @@ public class Spellbook : MonoBehaviour
 	#nullable disable
 	
 	public List<SpellDataObject> GetHeldSpellDataList(){
-		Debug.Log("Get Held Spell Data");
 		List<SpellDataObject> ret = new List<SpellDataObject>();
 		foreach (var item in knownSpells)
 		{
@@ -51,7 +50,6 @@ public class Spellbook : MonoBehaviour
 	private void updateHeldSpells_(){
 		var spells = GetComponentsInChildren<ISpell>();
 		foreach (ISpell s in spells){
-			Debug.Log("Adding " + s.name + " to index " + s.id.ToString());
 			heldSpells[s.id] = s;
 			s.spellData.slot = s.id;
 			if(knownSpells.Contains(s.spellData)) continue;
@@ -77,5 +75,10 @@ public class Spellbook : MonoBehaviour
 		spellLogic.id = slot;
 		heldSpells[slot] = spellLogic; 
 		spellPrepared?.Invoke(this, new SpellPreparedArgs(slot, spell));
+	}
+
+	private void OnDisable()
+	{
+		Debug.LogWarning("Spellbook Disabled");
 	}
 }

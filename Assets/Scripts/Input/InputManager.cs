@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 using System;
 
 public class InputManager : MonoBehaviour
@@ -14,6 +15,7 @@ public class InputManager : MonoBehaviour
 	
 	private InputMode mode_ = InputMode.cast;
 	
+	public GameObject PlayerObject;
 	PlayerInput input_;
 	GameObject controlled_;
 	Transform playerTf_;
@@ -21,19 +23,23 @@ public class InputManager : MonoBehaviour
 	Builder builder_;
 	UIBuildingShop shop_;
 	PauseMenu pause_;
-	
 	InputAction actionCast;
 	InputAction actionGet;
 	InputAction actionMove;
-	
+	InputAction actionDash;
+	InputAction actionInteract;
 	InputAction actionShop;
 	InputAction actionCancel;
 	
 	Movement moveScript_;
+	Dash dashScript_;
+	InteractActor interactScript_;
 	ItemPicker itemPicker_;
 	
 	private bool enabled_ = true;
 	private bool isBuilding_ = false;
+	private bool autofire_ = false;
+	
 	
 	private bool initialized = false;
     // Start is called before the first frame update
@@ -49,22 +55,24 @@ public class InputManager : MonoBehaviour
 		
 		input_ = GetComponent<PlayerInput>();
 		
-		SetPlayer(GameObject.FindGameObjectWithTag("Player"));
 	    InputActionMap controlledMap = input_.actions.FindActionMap("Character");
 	    actionCast = controlledMap.FindAction("Attack");
 	    actionGet = controlledMap.FindAction("Get");
 		actionMove = controlledMap.FindAction("Move");
+		actionDash = controlledMap.FindAction("Dash");
+		actionInteract = controlledMap.FindAction("Interact");
 		pause_ = FindObjectOfType<PauseMenu>();
 
         actionShop = controlledMap.FindAction("Shop");
-	    actionCancel = controlledMap.FindAction("Cancel");   
+	    actionCancel = controlledMap.FindAction("Cancel"); 
 	}
-    
+	
 	public void SetPlayer(GameObject player){
 		controlled_ = player;
-		playerTf_ = player.transform;
-		moveScript_ = player.GetComponent<Movement>();
+		moveScript_ = controlled_.GetComponent<Movement>();
+		dashScript_ = controlled_.GetComponent<Dash>();
 		itemPicker_ = controlled_.GetComponent<ItemPicker>();
+		interactScript_ = controlled_.GetComponentInChildren<InteractActor>();
 		caster_ = controlled_.GetComponent<Spellcaster>();
 		builder_ = controlled_.GetComponent<Builder>();
 		
@@ -72,20 +80,43 @@ public class InputManager : MonoBehaviour
 	}
     
 	void Start(){
-		actionCast.performed += OnCast;	
+
+		SetPlayer(PlayerObject);
+		actionCast.started -= OnCastStarted;
+		actionCast.started += OnCastStarted;	
+		actionCast.performed += OnCastPerformed;
+		actionCast.canceled += OnCastCanceled;
+		actionDash.performed += OnDashButton;
+		actionInteract.performed += OnInteractButton;
+		
 		actionShop.performed += OnShopButton;
 		actionCancel.performed += OnCancel;
-		
+
 		initialized = true;
 		shop_ = GameObject.FindObjectOfType<UIBuildingShop>();
 		if(shop_ == null) return;
 	}
 	
-	void OnDestroy(){
-		if(!initialized) return;
-		actionCast.performed -= OnCast;
+	void OnDisable()
+	{
+		actionCast.started -= OnCastStarted;
+		actionCast.performed -= OnCastPerformed;
+		actionCast.canceled -= OnCastCanceled;
 		actionShop.performed -= OnShopButton;
 		actionCancel.performed -= OnCancel;
+		actionDash.performed -= OnDashButton;
+		initialized = false;	
+	}
+	
+	void OnDestroy()
+	{
+		actionCast.started -= OnCastStarted;
+		actionCast.performed -= OnCastPerformed;
+		actionCast.canceled -= OnCastCanceled;
+		actionShop.performed -= OnShopButton;
+		actionCancel.performed -= OnCancel;
+		actionDash.performed -= OnDashButton;
+		initialized = false;	
 	}
 	
 	public void ShopCreated(UIBuildingShop shop){
@@ -109,12 +140,28 @@ public class InputManager : MonoBehaviour
 		moveScript_.ChangeDirection(moveDirection.x, moveDirection.y);
 	}
 	
+	void FixedUpdate()
+	{
+		if(autofire_)
+		{
+			caster_.CastSpell(0);
+		}
+	}
+	
+	void OnDashButton(InputAction.CallbackContext context){
+		dashScript_.TriggerDash();
+	}
+	
+	void OnInteractButton(InputAction.CallbackContext context){
+		interactScript_.Interact();
+	}
+	
 	void OnShopButton(InputAction.CallbackContext context){
 		if(shop_ == null) {
 			shop_ = GameObject.FindObjectOfType<UIBuildingShop>();
 			if(shop_ == null){	
 				Debug.LogWarning("No shop in this scene!");
-				return;
+				return ;
 			}
 		}
 		
@@ -149,12 +196,20 @@ public class InputManager : MonoBehaviour
 		
 	}
 	
-	void OnCast(InputAction.CallbackContext context){
+	void OnCastStarted(InputAction.CallbackContext context)
+	{
+		if(!enabled_) return;
+		if(context.control.device is Pointer){
+			caster_.CastSpell(0);
+		}
+	}
+	
+	void OnCastPerformed(InputAction.CallbackContext context)
+	{
 		if(!enabled_) return;
 		
 		if(context.control.name == "1" || context.control.name == "2" || context.control.name == "3" ||context.control.name == "4"){
-			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			caster_.CastSpell(int.Parse(context.control.name), mousePos);
+			caster_.CastSpell(int.Parse(context.control.name));
 			return;
 		}	
 		
@@ -163,22 +218,19 @@ public class InputManager : MonoBehaviour
 			isBuilding_ = false;
 		}
 		
-		switch(mode_){
-		case InputMode.cast:
-			Debug.Log("Camera: " + Camera.main);
-			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			caster_.CastSpell(0, mousePos);
-			return;
-		
-		case InputMode.ui:
-			// Just return cause UI events are handled elsewhere
-			return;
-			
-		case InputMode.build:
-			// We should get rid of this, we use a bool flag now instead
-			// controlled_.GetComponent<Builder>().PlaceBuilding();
+		// Just return cause UI events are handled elsewhere
+		if(mode_ == InputMode.ui) return;
+
+		if(context.interaction is HoldInteraction)
+		{
+			autofire_ = true;
 			return;
 		}
+	}
+	
+	void OnCastCanceled(InputAction.CallbackContext context)
+	{
+		autofire_ = false;
 	}
    
 	public void SwitchInputMode(InputMode mode){

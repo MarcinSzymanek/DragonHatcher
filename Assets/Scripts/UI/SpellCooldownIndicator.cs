@@ -17,7 +17,6 @@ public class SpellCooldownIndicator : MonoBehaviour
 	}
 	
 	public void StartCooldownIndicator(float cooldown){
-		Debug.Log("Start cooldown ind, cd= " + cooldown.ToString());
 		image_.color = new Color(image_.color.r, image_.color.g, image_.color.b, baseAlpha_);
 		StartCoroutine(ProgressCooldown(cooldown));
 	}
@@ -29,8 +28,7 @@ public class SpellCooldownIndicator : MonoBehaviour
 			step = step * 2;
 			add_to_mask = add_to_mask * 2;
 		}
-		Debug.Log("Single step: " + step.ToString());
-		
+
 		while(rectMask_.padding.z < maxPaddingRight_){
 			rectMask_.padding = new Vector4(0, 0, rectMask_.padding.z + add_to_mask, 0);
 			yield return new WaitForSeconds(step);

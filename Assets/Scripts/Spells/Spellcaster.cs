@@ -16,10 +16,13 @@ public class SpellCastArgs : EventArgs{
 
 public class Spellcaster : MonoBehaviour
 {
+	public static int id = 0;
 	public Spellbook spellbook;
 	public int maxSpells;
 	public ISpell[] spellSlots;
-	Animator anim_;
+	
+	// The animator that is going to play casting animation
+	public Animator Anim;
 	
 	public int debugSpellCount = 0;
     
@@ -28,7 +31,7 @@ public class Spellcaster : MonoBehaviour
 	// Start is called before the first frame update
     void Start()
 	{
-		anim_ = GetComponentInChildren<Animator>();
+		id++;
 		spellbook = GetComponentInChildren<Spellbook>();
 		spellSlots = new ISpell[5];
 		for(int i = 0; i < maxSpells; i++){
@@ -39,27 +42,30 @@ public class Spellcaster : MonoBehaviour
     }
     
 	public void ReadySpell(int slot, int id){
+		
 		spellSlots[slot] = spellbook.GetSpellById(id);
-		debugSpellCount++;
+		int i = 0;
+		foreach(var s in spellSlots)
+		{
+			if(s is not null){
+				i++;
+			}
+		}
+		debugSpellCount = i;
 	}
 	
-	public void CastSpell(int slot, Vector3 mousePosition){
-		Debug.Log("CastSpell slot " + slot.ToString());
-		#nullable enable
+	public void CastSpell(int slot){
+
 		ISpell? spell = spellbook.GetSpellById(slot);
-		if(spell == null){
+		if(spell is null){
 			Debug.LogWarning("Player tried to cast spell at slot " + slot.ToString() + ", but does not have spell in that slot!");
 			return;
 		}
-		#nullable disable
-		//Debug.Log("Trying to cast spell: " + spell.name);
-		if(!spell.CastSpell(mousePosition)) {
-			Debug.LogWarning("Casting spell failed...");
+		if(!spell.CastSpell()) {
 			return;
 		}
 		spellCastEvent?.Invoke(this, new SpellCastArgs(slot, spell.castDelay, spell.cooldown));
-		anim_.SetTrigger("castSpell");
-		anim_.SetBool("casting", true);
+		Anim.SetTrigger("Cast");
 	}
 	
 	//public void CastSpell(VectorTarget target){

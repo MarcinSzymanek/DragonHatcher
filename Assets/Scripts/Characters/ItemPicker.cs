@@ -11,9 +11,6 @@ public class ItemPicker : MonoBehaviour
 
 			pickable.OnPickup();
 		}
-		else{
-			Debug.Log("Couldn't get coll2d");
-		}
 	}
 	
 	void OnTriggerExit2D(Collider2D other){

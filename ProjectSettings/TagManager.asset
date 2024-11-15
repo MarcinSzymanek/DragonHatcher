@@ -27,8 +27,8 @@ TagManager:
   - NonBlockingObjects
   - Cursor
   - BuildingPanel
-  - 
-  - 
+  - LevelBounds
+  - Interactable
   - 
   - 
   - 

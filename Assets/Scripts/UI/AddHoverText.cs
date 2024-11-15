@@ -8,21 +8,29 @@ public class AddHoverText : MonoBehaviour
 	GameObject prefab_;
 	
 	[SerializeField]
+	[TextArea]
 	string text_;
 	TextMeshPro textComponent_;
     // Start is called before the first frame update
-    void Start()
+	void Awake()
     {
 	    var tf = gameObject.transform;
-	    prefab_ = Resources.Load("Prefabs/Debug/HoverText") as GameObject;
-	    var obj = Instantiate(prefab_, tf);
-	    if(obj.TryGetComponent<TextMeshPro>(out TextMeshPro textComp)) {
-	    	textComponent_ = textComp;
-	    	textComponent_.text = text_;
-	    }
+	    textComponent_ = GetComponentInChildren<TextMeshPro>();
     }
     
+	void OnEnable()
+	{
+		textComponent_.enabled = true;
+	}
+    
+	void OnDisable()
+	{
+		textComponent_.enabled = false;
+		//textComponent_.text = "";
+	}
+    
 	public void SetText(string text) {
+		text_ = text;	
 		textComponent_.text = text;
 	}
 

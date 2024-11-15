@@ -49,7 +49,6 @@ public class UISpellPanel : MonoBehaviour
 	
 	private IEnumerator OnSpellCooldown(int slot, float delay, float cooldown){
 		yield return new WaitForSeconds(delay);
-		Debug.Log("UI spell process cooldown");
 		iconDict[slot].StartCooldownIndicator(cooldown);
 	}
 	

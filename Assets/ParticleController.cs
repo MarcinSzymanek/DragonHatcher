@@ -4,18 +4,32 @@ using UnityEngine;
 
 public class ParticleController : MonoBehaviour
 {
-	bool detachOnDisable_ = true;
-	ParticleSystem particles_;
-    // Start is called before the first frame update
-    void Start()
+	private ParticleSystem[] particleSystems_;
+	private int activeParticleSystems_;
+
+	void Awake()
 	{
-		particles_ = GetComponentInChildren<ParticleSystem>();
-		
+		if(particleSystems_ != null) return;
+		particleSystems_ = GetComponentsInChildren<ParticleSystem>();
+	}
+	
+	private void OnEnable()
+	{
+		activeParticleSystems_ = particleSystems_.Length;
 	}
 	
 	public void DetachParticles(){
-		particles_.transform.SetParent(transform.parent);
-		particles_.Stop();
+		particleSystems_[0].transform.SetParent(transform.parent);
+		particleSystems_[0].Stop();
+	}
+	
+	public void	NotifyParticleSystemFinished()
+	{
+		activeParticleSystems_--;
+		if(activeParticleSystems_ <= 0)
+		{
+			gameObject.SetActive(false);
+		}
 	}
 
 }

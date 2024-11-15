@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// ISpell<Vector3> means you must put Vector3 as param 
-// SpellBase<VectorTarget> means that the spell effect needs to make a VectorTarget to cast it
 [RequireComponent(typeof(Spawn_Projectile))]
-public class ProjectileSpell : SpellBase<VectorTarget>, IVectorTargeted
+public class ProjectileSpell : SpellBase, IVectorTargeted
 {
 	Spawn_Projectile projectileSpawner_;
+	Transform parentTf_;
 	
 	void Awake(){
 		projectileSpawner_ = GetComponent<Spawn_Projectile>();
+		parentTf_ = transform.parent;
 	}
 	
-	internal override VectorTarget getTarget(Vector3 mousePos){
-		Vector3 parentPos = transform.parent.parent.position;
-		return new VectorTarget(parentPos, Math2d.CalcDirection(parentPos, mousePos));
+	private VectorTarget getMouseVector()
+	{
+		var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		return new VectorTarget(parentTf_, Math2d.CalcDirection(parentTf_.position, mousePos));
 	}
 
-	internal override void onCast(VectorTarget target){
-		projectileSpawner_.Shoot(target);
+	internal override void onCast(){	
+		projectileSpawner_.Shoot(getMouseVector());
 	}
 }

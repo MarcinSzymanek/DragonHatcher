@@ -27,7 +27,9 @@ public class Spawn_Tornado : SpellBase<VectorTarget>
         // Debug.Log("Layer int is: " + layerInt_.ToString());
     }
 	
-	internal override VectorTarget getTarget(Vector3 mousePos){
+	internal override VectorTarget getTarget()
+	{
+		var mousePos = Camera.main.WorldToScreenPoint(Input.mousePosition);
 		Vector2 direction = ((Vector2)mousePos - (Vector2)firePoint.position).normalized;
 		return new VectorTarget(firePoint.position, direction);
 	}

@@ -32,14 +32,14 @@ public class Spawn_Projectile : MonoBehaviour
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
-
+		VectorTarget t2 = new VectorTarget(firePoint, Math2d.CalcDirection(firePoint.position, Camera.main.ScreenToWorldPoint(Input.mousePosition)));
 	    GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
 	    setPrefabTarget(projectile);
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-		rb.linearVelocity = target.direction * speed;
+		rb.linearVelocity = t2.direction * speed;
 
 		//float angle = Math2d.GetDegreeFromVector(shootDirection, rotationOffset);
-		projectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, target.angle + rotationOffset));
+		projectile.transform.rotation = Quaternion.Euler(new Vector3(0, 0, t2.angle + rotationOffset));
 
     }
 

@@ -38,7 +38,7 @@ public class CastDelayIndicator : MonoBehaviour
 			
 			StartCoroutine(moveIndicator(noSteps, castDelay));
 		}
-			catch(MissingReferenceException missingRef){
+			catch(MissingReferenceException _){
 				Debug.Log("Tried to use castdelay indicator but what the fuck");
 			}
 		
