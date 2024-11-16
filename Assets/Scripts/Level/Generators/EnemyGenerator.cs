@@ -12,8 +12,12 @@ public class EnemyGenerator : MonoBehaviour
 	public float spawnRate = 1.0f;
 	
 	// Base delay between enemies spawning
-	public float spawnDelay = 2.0f;
 	
+	public float spawnDelay = 2.0f;
+	public float spawnDelayRange = 0.5f;
+	private float minSpawnDelay_;
+	private float maxSpawnDelay_;
+
 	// How many enemies are yet to be spawned
 	private int enemiesLeft_;
 	private int enemiesAlive_;
@@ -42,8 +46,11 @@ public class EnemyGenerator : MonoBehaviour
 		{
 			(spawner as MonoBehaviour).gameObject.SetActive(false);
 		}
-		Debug.Log("Found " + spawners_.Length + " spawners");
 		GameController.Instance.RegisterEnemyGenerator(this);
+		
+		minSpawnDelay_ = spawnDelay - spawnDelayRange;
+		maxSpawnDelay_ = spawnDelay + spawnDelayRange;
+		Mathf.Clamp(minSpawnDelay_, 0, maxSpawnDelay_);	
 	}
 	
 	private void OnDestroy()
@@ -129,7 +136,7 @@ public class EnemyGenerator : MonoBehaviour
 			Regulate();
 		}
 		
-		Invoke("SpawnContinuously", 1/spawnRate * spawnDelay);
+		Invoke("SpawnContinuously", 1/spawnRate * Random.RandomRange(minSpawnDelay_, maxSpawnDelay_));
 	}
 	
 	void OnEnemyDeath(object? obj, ObjectDeathArgs args){
