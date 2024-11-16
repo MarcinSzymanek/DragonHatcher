@@ -24,7 +24,7 @@ public class UIGame : MonoBehaviour, IUIGroup
 		UIManager.Instance.Remove(this);
 	}
 	
-	public UIType GetType() => UIType.GAME_UI;
+	public UIType GetUIType() => UIType.GAME_UI;
 	
 	
 	public void FadeIn()

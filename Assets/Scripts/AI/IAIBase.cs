@@ -5,6 +5,7 @@ using AIStrategies;
 
 public interface IAIBase
 {
+	#nullable enable
 	public void OnTargetAcquired(object? sender, ObjectEnteredArgs args);
 	public AIScan scanner{get;}
 	public void SetStrategy(IAI_Strategy strategy);

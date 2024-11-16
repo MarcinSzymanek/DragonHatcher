@@ -13,7 +13,7 @@ public class UIHp : MonoBehaviour
 		slider_ = GetComponentInChildren<Slider>();
 		if(name == "UIPlayerHp") Tracked = GameObject.Find("Player");
 		if(name == "UIEggHp") Tracked = GameObject.FindGameObjectWithTag("Egg");
-		Tracked.GetComponent<TakeDamage>().OnDamageTaken += ReduceHp;
+		Tracked.GetComponent<TakeDamage>().DamageTakenEvent += ReduceHp;
 		
 	}
 	

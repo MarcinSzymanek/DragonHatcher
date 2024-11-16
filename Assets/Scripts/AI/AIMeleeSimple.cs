@@ -10,6 +10,7 @@ public enum State
     aware
 }
 
+#nullable enable
 public class AIMeleeSimple : MonoBehaviour, IStopOnDeath, IAIBase
 {
     Movement move_;
@@ -43,7 +44,7 @@ public class AIMeleeSimple : MonoBehaviour, IStopOnDeath, IAIBase
         move_ = GetComponent<Movement>();
     }
 
-
+	#nullable enable
 	public void OnDeath(object? s, EventArgs args){
 		StopAllCoroutines();
 	}

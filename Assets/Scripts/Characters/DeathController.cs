@@ -64,7 +64,6 @@ public class DeathController : MonoBehaviour
 		}
 		
 		if(anim_) anim_.SetTrigger("Death");
-		Debug.LogWarning("Invoke death event");
 		objectDied?.Invoke(this, new ObjectDeathArgs(name));
 	}
 	

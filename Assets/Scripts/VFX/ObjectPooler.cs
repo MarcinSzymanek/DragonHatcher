@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+#nullable enable
 public class ObjectPooler : MonoBehaviour
 {
 	public enum ObjectType

@@ -4,6 +4,7 @@ using UnityEngine;
 //using UnityEditor;
 using System;
 
+#nullable enable
 public class UIBuildingShop : MonoBehaviour
 {
 	private int numberOfItems;

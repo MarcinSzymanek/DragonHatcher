@@ -55,7 +55,7 @@ public class ContactDamage : MonoBehaviour
 	public bool logCollisions;
 	
 	[field: SerializeField]
-	private bool dealDamageOnce_ = true;
+	//private bool dealDamageOnce_ = true;
 	private bool dealtDamage = false;
 	
 	private string parentName_;

@@ -21,8 +21,14 @@ public class Movement : MonoBehaviour, IStopOnDeath
 	public int Facing = 1;
 	public bool WeapEquipped = false;
 	
+	[Tooltip("Whether the animator controls facing")]
+	public bool UseAnimFacing = true;
+	[Tooltip("Whether to flip sprite X axis on direction change")]
+	public bool FlipSpriteXOnDirectionChange = false;
+	
 	float dirx_;
 	float diry_;
+
 	[field: SerializeField]
 	public float Speed{get; set;}
 	public float HopSpeed = 3f;
@@ -59,7 +65,8 @@ public class Movement : MonoBehaviour, IStopOnDeath
 		}
 	}
 	
-	private void SetAnimMoving(bool moving){
+	private void SetAnimMoving(bool moving)
+	{
 		if(compositeAnim_ != null){
 			compositeAnim_.SetMoving(moving);
 		}
@@ -68,17 +75,38 @@ public class Movement : MonoBehaviour, IStopOnDeath
 		}
 	}
 	
-	public void ChangeDirection(float dirx, float diry){
+	public void ChangeDirection(float dirx, float diry)
+	{
 		if(directionLock_) return;
 		dirx_ = dirx;
 		diry_ = diry;
-		if(dirx_ < 0){
+
+		if(FlipSpriteXOnDirectionChange && dirx_ != 0)
+		{
+			
+			if(dirx_ < 0 && Facing > 0)
+			{
+				Facing = -1;
+				sprite_.flipX = !sprite_.flipX;
+			}
+			else if (dirx_ > 0 && Facing < 0)
+			{
+				sprite_.flipX = !sprite_.flipX;
+				Facing = 1;
+		
+			}
+		}
+
+		if(!UseAnimFacing) return;
+
+		if(dirx_ < 0)
+		{
 			SetAnimFacing(true);
 		}
-		else if(dirx_ > 0){
+		else if(dirx_ > 0)
+		{
 			SetAnimFacing(false);
 		}
-		
 	}
 	
 	public Vector2 GetDirection(){
@@ -176,7 +204,8 @@ public class Movement : MonoBehaviour, IStopOnDeath
 	}
 	
 	public void Move(){
-		if(dirx_ == 0 && diry_ == 0) {
+		if(dirx_ == 0 && diry_ == 0) 
+		{
 			SetAnimMoving(false);
 			return;
 		}
@@ -195,8 +224,10 @@ public class Movement : MonoBehaviour, IStopOnDeath
 	}
 	
 	// Flip an object AND its hitbox
-	public void Flip(){
-		if(Facing > 0){
+	public void Flip()
+	{
+		if(Facing > 0)
+		{
 			hitboxTf_.localEulerAngles = new Vector3(0, 180, 0);
 			modelTf_.localEulerAngles = new Vector3(0, 180, 0);
 			Facing = -1;
@@ -207,8 +238,9 @@ public class Movement : MonoBehaviour, IStopOnDeath
 		modelTf_.localEulerAngles = new Vector3(0, 0, 0);
 		Facing = 1;
 	}
-	    
-	public void Stop(){
+	
+	public void Stop()
+	{
 		dirx_ = 0;
 		diry_ = 0;
 		anim_.SetBool("IsMoving", false);

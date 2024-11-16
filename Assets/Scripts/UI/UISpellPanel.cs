@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#nullable enable
 public class UISpellPanel : MonoBehaviour
 {
 	Dictionary<int, UISpellIcon> iconDict;

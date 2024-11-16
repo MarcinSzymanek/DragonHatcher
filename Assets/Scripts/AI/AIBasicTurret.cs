@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
+#nullable enable
 public class AIBasicTurret : MonoBehaviour
 {
 	private AIScan scanner;

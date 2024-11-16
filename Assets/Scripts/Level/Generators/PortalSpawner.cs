@@ -8,10 +8,12 @@ public class PortalSpawner : Spawner, IEnemySpawner
 	private Vector3 position;
 	private IAI_Strategy strategy_;
 	private int difficulty_ = 0;
+	private int maxMonsterIndex_;
 	private const int maxDifficulty = 2;
 	
 	void Start(){
 		position = transform.position + offset;
+		maxMonsterIndex_ = objectPool.Length - 1; 
 	}
 	
 	// Difficulty controls which monsters can be spawned by this object
@@ -27,20 +29,29 @@ public class PortalSpawner : Spawner, IEnemySpawner
 	// This could really use some refactoring...
 	public GameObject Spawn(){
 		// Pick enemy at random
-		int index = UnityEngine.Random.Range(0, 2 + difficulty_);
+		int index = UnityEngine.Random.Range(0, maxMonsterIndex_);
 		var obj = Spawn(index);
 		return obj;
 	}
 	
 	public GameObject Spawn(int index){
-		var newobj = Instantiate(objectPool[index], position, Quaternion.identity);
-		newobj.GetComponent<IAIBase>().SetStrategy(strategy_);
-		return newobj;
+		
+		try
+		{
+			var newobj = Instantiate(objectPool[index], position, Quaternion.identity);
+			newobj.GetComponent<IAIBase>().SetStrategy(strategy_);
+			return newobj;
+		}
+		catch
+		{
+			Debug.Break();
+			return null;
+		}
 	}
 
 	public GameObject Spawn(Vector3 position, Transform parent)
 	{
-		int index = UnityEngine.Random.Range(0, 2 + difficulty_);
+		int index = UnityEngine.Random.Range(0, maxMonsterIndex_);
 		GameObject enemy = base.Spawn(index, position, parent);
 		enemy.GetComponent<IAIBase>().SetStrategy(strategy_);
 		return enemy;

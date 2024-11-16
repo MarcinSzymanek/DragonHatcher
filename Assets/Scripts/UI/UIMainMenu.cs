@@ -24,7 +24,7 @@ public class UIMainMenu : MonoBehaviour, IUIGroup
 		UIManager.Instance.Remove(this);
 	}
 	
-	public UIType GetType() => UIType.MAIN_MENU;
+	public UIType GetUIType() => UIType.MAIN_MENU;
 	
 	public void FadeIn()
 	{

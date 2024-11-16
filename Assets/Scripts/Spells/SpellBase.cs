@@ -12,7 +12,7 @@ public abstract class SpellBase : MonoBehaviour, ISpell
 	public int id{get; set;}
 	public bool onCooldown{get; private set;}
 	[field: SerializeField]
-	public string name{get; private set;}
+	new public string name{get; private set;}
 	[field: SerializeField]
 	public float cooldown{get; protected set;}
 	[field: SerializeField]

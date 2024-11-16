@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
 	static bool subbed = false;
 	static bool initialized = false;
 	public bool sandbox = false;
+	public UIGroupFadeEffects EggFadeEffects;
 	
 	void Awake()
 	{
@@ -69,6 +70,7 @@ public class GameController : MonoBehaviour
 	public void TriggerEnemySpawn()
 	{
 		enemyGenerator_.SetupSpawners();
+		EggFadeEffects.FadeIn();
 	}
 	
 	IEnumerator WaitForScene(Scene next){
@@ -108,7 +110,8 @@ public class GameController : MonoBehaviour
 		Application.Quit();
 		#endif
 	}
-
+	
+	#nullable enable
 	private void GameOver(object? sender, ObjectDeathArgs args){
 		Debug.Log(args.ObjectName + " died! Game over...");
 		DeathController dc = (DeathController) sender;

@@ -593,7 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757207fe084e5ce4ebd903a5f1f0db4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RootObjectTf: {fileID: 0}
+  RootObjectTf: {fileID: 7016162086260167800}
 --- !u!1 &4815124461374969247
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,6 +887,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Facing: 1
   WeapEquipped: 0
+  UseAnimFacing: 1
+  FlipSpriteXOnDirectionChange: 0
   <Speed>k__BackingField: 600
   HopSpeed: 3
 --- !u!50 &5533440427003115530

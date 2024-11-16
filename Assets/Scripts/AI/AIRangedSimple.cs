@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using AIStrategies;
 
+#nullable enable
 public class AIRangedSimple : MonoBehaviour, IStopOnDeath, IAIBase
 {
 	Movement move_;

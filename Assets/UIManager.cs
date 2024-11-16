@@ -32,7 +32,7 @@ public class UIManager : MonoBehaviour
 	
 	public void Register(IUIGroup uiElement)
 	{
-		switch (uiElement.GetType())
+		switch (uiElement.GetUIType())
 		{
 		case UIType.GAME_UI:
 			gameUI_ = uiElement;
@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
 
 	public void Remove(IUIGroup uiElement)
 	{
-		switch (uiElement.GetType())
+		switch (uiElement.GetUIType())
 		{
 		case UIType.GAME_UI:
 			gameUI_ = null;

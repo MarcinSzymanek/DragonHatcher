@@ -5,9 +5,11 @@ using UnityEngine;
 public class TakeDamage: MonoBehaviour
 {
     // Events
-    public event System.Action<int> OnDamageTaken;
+    public event System.Action<int> DamageTakenEvent;
 	public event System.Action Death;
 	public bool dead{get; private set;}
+	
+	public bool LogDamage = false;
 	
 	Health healthComponent;
 	
@@ -19,8 +21,11 @@ public class TakeDamage: MonoBehaviour
 	public void TriggerTakeDamage(int amount)
 	{
 		if(dead) return;
-		OnDamageTaken?.Invoke(amount);
-		Debug.Log(this.name + " took " + amount.ToString() + " damage");
+		DamageTakenEvent?.Invoke(amount);
+		if(LogDamage)
+		{
+			Debug.Log(this.name + " took " + amount.ToString() + " damage");
+		}
         healthComponent.currentHealth -= amount;
         if (healthComponent.currentHealth <= 0)
         {

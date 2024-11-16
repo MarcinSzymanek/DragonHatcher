@@ -17,5 +17,5 @@ public interface IUIGroup
 	// :param duration: Duration in seconds
 	// :param speed: How often the screen should update in seconds. Default 0.1s;
 	void FadeOut(float duration, float speed);
-	UIType GetType();
+	UIType GetUIType();
 }
