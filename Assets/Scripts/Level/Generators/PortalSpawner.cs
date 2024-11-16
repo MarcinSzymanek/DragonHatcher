@@ -1,18 +1,27 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using AIStrategies;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class PortalSpawner : Spawner, IEnemySpawner
 {
 
 	public Vector3 offset;
-	private Vector3 position;
 	private IAI_Strategy strategy_;
 	private int difficulty_ = 0;
 	private int maxMonsterIndex_;
 	private const int maxDifficulty = 2;
 	
+	private UnityEngine.Bounds spawnBounds_;
+	
+	private void Awake()
+	{
+		List<UnityEngine.Bounds> bounds = new List<UnityEngine.Bounds>();
+		GetComponent<BoxCollider2D>().GetShapeBounds(bounds, false, false);
+		spawnBounds_ = bounds[0];
+	}
+	
 	void Start(){
-		position = transform.position + offset;
 		maxMonsterIndex_ = objectPool.Length - 1; 
 	}
 	
@@ -34,7 +43,12 @@ public class PortalSpawner : Spawner, IEnemySpawner
 		return obj;
 	}
 	
+	// Spawn object within spawn radius (box collider bounds)
 	public GameObject Spawn(int index){
+		
+		Vector3 position = Vector3.zero;
+		position.x = Random.RandomRange(spawnBounds_.min.x, spawnBounds_.max.x);
+		position.y = Random.RandomRange(spawnBounds_.min.y, spawnBounds_.max.y);
 		
 		try
 		{

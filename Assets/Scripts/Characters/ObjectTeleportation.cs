@@ -13,7 +13,7 @@ public class ObjectTeleportation : MonoBehaviour
 	private bool canTeleport = false;
     private GameObject attachedGameObject = null;
     private Vector3 teleportOffset;
-    private FadeEffect fadeEffect;
+    private BlackScreenFade BlackScreenFade;
     public bool isFinalTeleporter;
 
     private void Awake()
@@ -22,7 +22,7 @@ public class ObjectTeleportation : MonoBehaviour
         attachedGameObject = this.gameObject;  
         GameObject uiMain = GameObject.Find("UIMain");
         GameObject blackscreen = uiMain.transform.Find("BlackScreen").gameObject;
-        fadeEffect = blackscreen.GetComponent<FadeEffect>();
+        BlackScreenFade = blackscreen.GetComponent<BlackScreenFade>();
     }
 
 
@@ -38,11 +38,11 @@ public class ObjectTeleportation : MonoBehaviour
                 controller.OnWinCondition();
                 return;
             }
-            fadeEffect.ScreenFadeOut(
+            BlackScreenFade.ScreenFadeOut(
                 () =>
                 {
                     teleport();
-                    fadeEffect.ScreenFadeIn(null, 2f);
+                    BlackScreenFade.ScreenFadeIn(null, 2f);
                 },
                 0.3f
             );

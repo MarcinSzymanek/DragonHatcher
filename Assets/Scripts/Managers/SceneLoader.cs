@@ -11,7 +11,7 @@ public class SceneLoader : MonoBehaviour
 	MusicController musicController_;
 	//CinemachineCamera camera_;
 	Light2D globalLight_;
-	FadeEffect fade_;
+	BlackScreenFade fade_;
 	string loadingScene = "Loading";
 	string nextScene = "";
 	InputManager input_;
@@ -37,9 +37,7 @@ public class SceneLoader : MonoBehaviour
 				GameObject.FindObjectOfType<DungeonGenerator>().SetDungeonGenerator(0, reward);
 			}
 			else if (sceneProps_.sceneType ==	SceneProperties.SceneType.WAVE_DEFENCE){
-			fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
-				EnemyGenerator gen = GameObject.FindObjectOfType<EnemyGenerator>();
-				if(gen != null) gen.SetupSpawners();
+				fade_ = GameObject.Find("BlackScreen").GetComponent<BlackScreenFade>();
 			}
 		}
 		else{
@@ -102,7 +100,7 @@ public class SceneLoader : MonoBehaviour
 		Destroy(GameObject.FindObjectOfType<SceneProperties>().gameObject);
 		musicController_ = GameObject.FindObjectOfType<MusicController>();
 		nextScene = scenename;
-		fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
+		fade_ = GameObject.Find("BlackScreen").GetComponent<BlackScreenFade>();
 		Debug.Log("Fade changed to: " + fade_.name);
 		fade_.fadeOutFinished += OnFadeOutFinished;
 		musicController_.FadeOutMusic(
@@ -118,7 +116,7 @@ public class SceneLoader : MonoBehaviour
 	}
 	
 	public void OnDeath(){
-		fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
+		fade_ = GameObject.Find("BlackScreen").GetComponent<BlackScreenFade>();
 		Debug.Log("Fade changed to: " + fade_.name);
 		fade_.ScreenFadeOut(OnDeathFadeout);
 		musicController_.FadeOutMusic(
@@ -137,7 +135,7 @@ public class SceneLoader : MonoBehaviour
 	}
 	
 	void OnDeathFinished(){
-		fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
+		fade_ = GameObject.Find("BlackScreen").GetComponent<BlackScreenFade>();
 		fade_.ScreenFadeOut( () =>{
 			SceneManager.LoadScene("StartMenu");
 		},
@@ -171,7 +169,7 @@ public class SceneLoader : MonoBehaviour
 		SceneManager.SetActiveScene(SceneManager.GetSceneByName(loadingScene));
 		
 		// Wait for the fade in
-		fade_ = GameObject.FindObjectOfType<FadeEffect>();
+		fade_ = GameObject.FindObjectOfType<BlackScreenFade>();
 		musicController_.PlayInterlude();
 
 		yield return new WaitForSeconds(fade_.fadeinTime + 0.1f);
@@ -187,7 +185,7 @@ public class SceneLoader : MonoBehaviour
 		AsyncOperation op = SceneManager.LoadSceneAsync(nextScene, LoadSceneMode.Additive);
 		op.allowSceneActivation = false;
 		bool fadeOutDone = false;
-		fade_ = GameObject.FindObjectOfType<FadeEffect>();
+		fade_ = GameObject.FindObjectOfType<BlackScreenFade>();
 		fade_.ScreenFadeOut(() => {
 			Debug.LogWarning("Finish fadeout");
 			if(oldScene.name == "DungeonGenerator"){	
@@ -205,7 +203,7 @@ public class SceneLoader : MonoBehaviour
 			SceneManager.MoveGameObjectToScene(player_, SceneManager.GetSceneByName(nextScene));
 		}
 		op = SceneManager.UnloadSceneAsync(oldScene);
-		fade_ = GameObject.Find("BlackScreen").GetComponent<FadeEffect>();
+		fade_ = GameObject.Find("BlackScreen").GetComponent<BlackScreenFade>();
 		Debug.Log("Fade changed to: " + fade_.name);
 		if(!op.isDone) op.completed += FinishSceneLoad;
 		else FinishSceneLoad(op);

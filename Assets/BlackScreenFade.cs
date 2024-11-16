@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FadeEffect : MonoBehaviour
+#nullable enable
+public class BlackScreenFade : MonoBehaviour
 {
 	Image image_;
 	[field: SerializeField]
 	public float fadeinTime{get; set;} 
 	public event System.Action fadeInFinished;
 	public event System.Action fadeOutFinished;
+	private bool locked_ = false;
 	
 	// We need to keep track if any fade effect is in progress and only have one active at a time
 	// Otherwise we get to situations where both effects are trying to adjust alpha colour at the same time and bugs happen
@@ -26,6 +28,8 @@ public class FadeEffect : MonoBehaviour
 	// This method is asynchronous. Use onFinish param as callback. Waits for ScreenFadeOut to finish before proceeding
 	// duration is optional and overrides the object fade duration. Must be positive to have effect.
 	public void ScreenFadeIn(System.Action? onFinish = null, float duration = -1f){
+		if(locked_) return;
+		locked_ = true;
 		StartCoroutine(fadeIn(duration, onFinish));
 	}
 	
@@ -33,6 +37,8 @@ public class FadeEffect : MonoBehaviour
 	// This method is asynchronous. Use onFinish param as callback. Waits for ScreenFadeIn to finish before proceeding
 	// duration is optional and overrides the object fade duration. Must be positive to have effect
 	public void ScreenFadeOut(System.Action? onFinish = null, float duration = -1f){
+		if(locked_) return;
+		locked_ = true;
 		StartCoroutine(fadeOut(duration, onFinish));
 	}
 	
@@ -63,6 +69,7 @@ public class FadeEffect : MonoBehaviour
 		fadeOutFinished?.Invoke();
 		onFinish?.Invoke();
 		effectActive = false;
+		locked_ = false;
 	}
 	
 	IEnumerator fadeIn(float duration, System.Action? onFinish = null){
@@ -87,6 +94,7 @@ public class FadeEffect : MonoBehaviour
 		fadeInFinished?.Invoke();
 		onFinish?.Invoke();
 		effectActive = false;
+		locked_ = false;
 	}
 	
 	

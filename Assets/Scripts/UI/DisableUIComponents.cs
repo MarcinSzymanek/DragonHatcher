@@ -8,7 +8,7 @@ public class DisableUIComponents : MonoBehaviour
 		Debug.Log("Call disableui");
 		var children = GetComponentsInChildren<Transform>();
 		foreach(var child in children){
-			if(child.GetComponent<FadeEffect>() != null || child == transform){
+			if(child.GetComponent<BlackScreenFade>() != null || child == transform){
 				continue;
 			}
 			child.gameObject.SetActive(false);

@@ -129,15 +129,8 @@ public class GameController : MonoBehaviour
 	
 	public void OnWinCondition(){
 		if(sandbox) return;
-		sceneLoader_ = FindObjectOfType<SceneLoader>();
-		currentSceneType = GameObject.FindObjectOfType<SceneProperties>().sceneType;
-		if(currentSceneType == SceneProperties.SceneType.WAVE_DEFENCE){
-			nextScene_ = "DungeonGenerator";
-		}
-		else{
-			nextScene_ = "WaveDefense";
-		}
-		sceneLoader_.ChangeScene(nextScene_);
+		//sceneLoader_ = FindObjectOfType<SceneLoader>();
+		//sceneLoader_.ChangeScene(nextScene_);
 	}
 	
 	// This function is called when the behaviour becomes disabled () or inactive.

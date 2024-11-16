@@ -64,6 +64,7 @@ public class EnemyGenerator : MonoBehaviour
 	
 	// Set AI strategy according to scene type
 	public void SetupSpawners(int difficulty = 0){
+		Debug.Log("Setup spawners invoked");
 		difficulty_ = difficulty;
 		enemiesToSpawn = enemiesToSpawn + difficulty * enemiesToSpawn;
 		StartCoroutine(setupSpawnersAsync());
