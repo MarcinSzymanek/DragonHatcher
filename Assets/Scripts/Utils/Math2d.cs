@@ -38,4 +38,9 @@ public class Math2d
 		float y = vector.x * Mathf.Sin(rad) + vector.y * Mathf.Cos(rad);
 		return new Vector2(x, y);		
 	}
+	
+	public static Vector3 GetMousePos()
+	{
+		return Camera.main.ScreenToWorldPoint(Input.mousePosition);
+	}
 }

@@ -32,6 +32,8 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath, IAIBase
 	bool animFinished_ = false;
 	bool attackTrigger_ = false;
 	
+	private GameObject[] targets_;
+
 	enum State{
 		wait_player,
 		move_to_target,
@@ -64,7 +66,7 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath, IAIBase
 		audio_ = transform.Find("mainAudio").GetComponent<AudioSource>();
 		projectileSpawner_ = GetComponent<Spawn_Projectile>();
 	    
-		GetComponentInChildren<EnemyAnimEvents>().arrowReleased += OnArrowRelease;
+		GetComponentInChildren<EnemyAnimEvents>().projectileReleased += OnProjectileRelease;
 		GetComponentInChildren<EnemyAnimEvents>().attackFinished += OnAttackFinished;
     	
 		attackMarker_ = t_.Find("AttackMarker");
@@ -77,7 +79,7 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath, IAIBase
     // Start is called before the first frame update
     void Start()
     {
-	    
+	    targets_ = EnemyTracker.Instance.GetTargetsInScene();
     }
     
 	public void SetStrategy(IAI_Strategy strat){
@@ -89,7 +91,7 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath, IAIBase
 		StopAllCoroutines();
 	}
 	
-	public void OnArrowRelease(object? s, EventArgs args){
+	public void OnProjectileRelease(object? s, EventArgs args){
 		attackTrigger_ = true;
 	}
 	
@@ -333,7 +335,7 @@ public class AIRangedSimple : MonoBehaviour, IStopOnDeath, IAIBase
 		
 		// "Charge" and lock in on target
 		while(attackTrigger_ == false){
-			if(attackTarget_ == null) attackTarget_ = GameObject.FindGameObjectWithTag("Player").transform;
+			if(attackTarget_ == null) attackTarget_ = Utils.Collections.GetRandom<GameObject>(targets_).transform;
 			dir = Math2d.CalcDirection(t_.position, attackTarget_.position);
 			angle = Math2d.GetDegreeFromVector(dir, 90);
 			attackMarker_.rotation = Quaternion.Euler(new Vector3(0, 0, angle));

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParticleController : MonoBehaviour
+public class ParticleController : MonoBehaviour, IParticleSubscriber
 {
 	private ParticleSystem[] particleSystems_;
 	private int activeParticleSystems_;
@@ -11,6 +11,11 @@ public class ParticleController : MonoBehaviour
 	{
 		if(particleSystems_ != null) return;
 		particleSystems_ = GetComponentsInChildren<ParticleSystem>();
+		var notifiers = GetComponentsInChildren<ParticleStoppedNotifier>();
+		foreach(var n in notifiers)
+		{
+			n.SetSubscriber(this);
+		}
 	}
 	
 	private void OnEnable()
@@ -22,8 +27,8 @@ public class ParticleController : MonoBehaviour
 		particleSystems_[0].transform.SetParent(transform.parent);
 		particleSystems_[0].Stop();
 	}
-	
-	public void	NotifyParticleSystemFinished()
+
+	public void OnParticleEnd()
 	{
 		activeParticleSystems_--;
 		if(activeParticleSystems_ <= 0)

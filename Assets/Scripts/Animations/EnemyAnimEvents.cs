@@ -7,7 +7,7 @@ public class EnemyAnimEvents : MonoBehaviour
 {
 	AudioFeedback audio_;
 	public event EventHandler attackFinished;
-	public event EventHandler arrowReleased;
+	public event EventHandler projectileReleased;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +18,8 @@ public class EnemyAnimEvents : MonoBehaviour
 		audio_.PlayFootstep();
 	}
 	
-	public void ReleaseArrow(){
-		arrowReleased?.Invoke(this, new EventArgs());
+	public void ReleaseProjectile(){
+		projectileReleased?.Invoke(this, new EventArgs());
 	}
 	
 	public void AttackAnimFinished(){

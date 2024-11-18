@@ -22,7 +22,7 @@ public class PortalSpawner : Spawner, IEnemySpawner
 	}
 	
 	void Start(){
-		maxMonsterIndex_ = objectPool.Length - 1; 
+		maxMonsterIndex_ = objectPool.Length; 
 	}
 	
 	// Difficulty controls which monsters can be spawned by this object

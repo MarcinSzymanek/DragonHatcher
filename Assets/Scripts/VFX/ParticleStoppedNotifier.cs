@@ -3,11 +3,16 @@
 [RequireComponent(typeof(ParticleSystem))]
 public class ParticleStoppedNotifier : MonoBehaviour
 {
-	public ParticleController ParticleController;
-	
+	private IParticleSubscriber callbackSubscriber_;
+
 	private void OnParticleSystemStopped()
 	{
-		ParticleController.NotifyParticleSystemFinished();
+		callbackSubscriber_.OnParticleEnd();
+	}
+
+	public void SetSubscriber(IParticleSubscriber subscriber)
+	{
+		callbackSubscriber_ = subscriber;
 	}
 
 }

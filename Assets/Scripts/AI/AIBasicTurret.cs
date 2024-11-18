@@ -28,7 +28,7 @@ public class AIBasicTurret : MonoBehaviour
 		scanner.objectExited += OnObjectExited;
 		anim = GetComponentInChildren<Animator>();
 		var events = GetComponentInChildren<EnemyAnimEvents>();
-		events.arrowReleased += OnArrowReleased;
+		events.projectileReleased += OnProjectileReleased;
 		events.attackFinished += OnAttackFinished;
 		projectiles = GetComponent<Spawn_Projectile>();
 	}
@@ -45,7 +45,7 @@ public class AIBasicTurret : MonoBehaviour
 		anim.SetTrigger("Attack");
 	}
 	
-	void OnArrowReleased(object? sender, System.EventArgs args){
+	void OnProjectileReleased(object? sender, System.EventArgs args){
 		// Actually shoot the projectile here
 		Vector2 direction = new Vector2(0, 0);
 		if(currentTarget != null) direction = Math2d.CalcDirection(transform.position, currentTarget.position);

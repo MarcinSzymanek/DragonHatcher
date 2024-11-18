@@ -86,9 +86,9 @@ public class EnemyGenerator : MonoBehaviour
 		IAI_Strategy strategy;
 		SceneProperties sceneProps = GameObject.FindObjectOfType<SceneProperties>();
 		sceneType = sceneProps.sceneType;
-		if(sceneProps.sceneType == SceneProperties.SceneType.WAVE_DEFENCE) strategy = new AIStrategies.StrategyTargetEgg();
-		else strategy = new AIStrategies.StrategyScanForPlayer();
-		enemiesLeft_ = enemiesToSpawn;
+		//if(sceneProps.sceneType == SceneProperties.SceneType.WAVE_DEFENCE) strategy = new AIStrategies.StrategyTargetEgg();
+		//else strategy = new AIStrategies.StrategyScanForPlayer();
+		strategy = new AIStrategies.StrategyTargetRandom();
 		foreach(var s in spawners_){
 			s.SetDifficulty(difficulty_);
 			s.SetAIStrategy(strategy);
@@ -100,6 +100,7 @@ public class EnemyGenerator : MonoBehaviour
 			
 		}
 		
+		enemiesLeft_ = enemiesToSpawn;
 		regulateThresholdList = new List<int>();
 		
 		// For each difficulty rating, add a regulation threshold where we increase intensity!

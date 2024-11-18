@@ -14,6 +14,16 @@ namespace AIStrategies{
 		}
 	}
 	
+	public class StrategyTargetRandom : IAI_Strategy
+	{
+		public void Setup(IAIBase ai)
+		{
+			GameObject[] targets = EnemyTracker.Instance.GetTargetsInScene();
+			GameObject target = Utils.Collections.GetRandom<GameObject>(targets);
+			ai.OnTargetAcquired(this, new ObjectEnteredArgs(target.transform));
+		}
+	}
+	
 	public class StrategyScanForPlayer : IAI_Strategy
 	{
 		public void Setup(IAIBase ai){

@@ -50,7 +50,7 @@ public class AIMeleeSimple : MonoBehaviour, IStopOnDeath, IAIBase
 	}
 
 	public void OnTargetAcquired(object? sender, ObjectEnteredArgs args){
-		Debug.Log("Noticed the player!!! Distance: " + Math2d.CalcDistance(t_.position, args.T.position));
+		//Debug.Log("Noticed the player!!! Distance: " + Math2d.CalcDistance(t_.position, args.T.position));
 		scanner_.objectEntered -= OnTargetAcquired;
 		attackTarget_ = args.T;
 		moveTarget_ = (Vector2)(((Transform)attackTarget_).position);

@@ -46,7 +46,7 @@ public class DeathController : MonoBehaviour
     }
 	
 	public void OnDeath(){
-		Debug.Log(gameObject.name + " died!");
+		//Debug.Log(gameObject.name + " died!");
 		dmgScript_.Death -= OnDeath;
 		
 		// If we set a death audio clip, play it loud

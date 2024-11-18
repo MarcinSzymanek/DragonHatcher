@@ -7,6 +7,7 @@ public class ProjectileSpell : SpellBase, IVectorTargeted
 {
 	Spawn_Projectile projectileSpawner_;
 	Transform parentTf_;
+	public Transform firePointTf_;
 	
 	void Awake(){
 		projectileSpawner_ = GetComponent<Spawn_Projectile>();
@@ -16,7 +17,7 @@ public class ProjectileSpell : SpellBase, IVectorTargeted
 	private VectorTarget getMouseVector()
 	{
 		var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		return new VectorTarget(parentTf_, Math2d.CalcDirection(parentTf_.position, mousePos));
+		return new VectorTarget(firePointTf_, Math2d.CalcDirection(firePointTf_.position, mousePos));
 	}
 
 	internal override void onCast(){	
