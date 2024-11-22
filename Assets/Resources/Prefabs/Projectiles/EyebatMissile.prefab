@@ -91,6 +91,37 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.1673364, y: 0.16934595}
   m_EdgeRadius: 0
+--- !u!1 &4903541873796087572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1995660457525200352}
+  m_Layer: 0
+  m_Name: Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1995660457525200352
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4903541873796087572}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6195404239061673304}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5521624851157861753
 GameObject:
   m_ObjectHideFlags: 0
@@ -4959,6 +4990,7 @@ Transform:
   - {fileID: 8218720867970196932}
   - {fileID: 6299825441088305664}
   - {fileID: 924040391406924093}
+  - {fileID: 1995660457525200352}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &461422437955039656
@@ -5079,7 +5111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2420661955800115770, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5721043954608749229, guid: d9b31fd263eda9d469934be88c2795af, type: 3}
       propertyPath: destroyOnDamage
@@ -5169,10 +5201,10 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0

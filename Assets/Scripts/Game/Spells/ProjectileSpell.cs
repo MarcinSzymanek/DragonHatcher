@@ -20,7 +20,15 @@ public class ProjectileSpell : SpellBase, IVectorTargeted
 		return new VectorTarget(firePointTf_, Math2d.CalcDirection(firePointTf_.position, mousePos));
 	}
 
-	internal override void onCast(){	
-		projectileSpawner_.Shoot(getMouseVector());
+	internal override void onCast()
+	{
+		if(spellData.UseLinearVelocity)
+		{
+			projectileSpawner_.Shoot(getMouseVector(), spellData.VelocityData);
+		}
+		else
+		{
+			projectileSpawner_.Shoot(getMouseVector());
+		}
 	}
 }

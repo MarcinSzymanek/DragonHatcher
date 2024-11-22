@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2801013129822675672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3748924540326419702}
+  - component: {fileID: 7273941121817025357}
+  - component: {fileID: 5322867730491161374}
+  m_Layer: 6
+  m_Name: IceSpear
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3748924540326419702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2801013129822675672}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.69340193, w: 0.7205511}
+  m_LocalPosition: {x: 8.42, y: -1.56, z: 0.03973891}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 87.8}
+--- !u!114 &7273941121817025357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2801013129822675672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f6a2ed8310a80429aaf7aec2e39bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 5519816656771802829, guid: 1a00d8115a574fa43958846f74a64918, type: 3}
+  firePoint: {fileID: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  ownerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  rotationOffset: 0
+  speed: 20
+--- !u!114 &5322867730491161374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2801013129822675672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0131eb92cbd118c498aaffba1badbed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <id>k__BackingField: 2
+  <name>k__BackingField: 
+  <cooldown>k__BackingField: 0
+  <castDelay>k__BackingField: 0
+  <spellData>k__BackingField: {fileID: 11400000, guid: 2e4417e002da4fb48bf841edbcd41dc6, type: 2}
+  sfx_:
+  - {fileID: 8300000, guid: 184320f5a744b4c4da7b6f90f11011c6, type: 3}
+  - {fileID: 8300000, guid: 184320f5a744b4c4da7b6f90f11011c6, type: 3}
+  - {fileID: 8300000, guid: 184320f5a744b4c4da7b6f90f11011c6, type: 3}
+  firePointTf_: {fileID: 0}

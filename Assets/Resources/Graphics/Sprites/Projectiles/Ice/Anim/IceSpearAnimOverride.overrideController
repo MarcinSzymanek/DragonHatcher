@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: IceSpearAnimOverride
+  m_Controller: {fileID: 9100000, guid: 7df9b0ae0f46acd48b1261b76dbccb21, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 46e4bd0b609bf944e85ebbb001b817be, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 71518ce8a8f8f1648af6afac1d1c181f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 66e178c739b9043448271a4627203f04, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ff074d23007c9b24fa113288c467d754, type: 2}

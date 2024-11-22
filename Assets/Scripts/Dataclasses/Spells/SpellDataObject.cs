@@ -16,8 +16,23 @@ public class SpellDataObject : ScriptableObject
 	[SerializeReference]
 	public Sprite icon;
 	public float cooldown;
+	public float Lifetime;
 	[SerializeReference]
 	public GameObject spellPrefab;
 	[SerializeReference]
 	public LayerMask target;
+	public bool UseLinearVelocity = false;
+	[SerializeField]
+	public LinearVelocityData VelocityData;
+	
+}
+
+#nullable enable
+[Serializable]
+public struct LinearVelocityData
+{
+	public float StartSpeed;
+	public float EndSpeed;
+	public float SpeedDuration;
+	public float LinearVelocityDelay;
 }

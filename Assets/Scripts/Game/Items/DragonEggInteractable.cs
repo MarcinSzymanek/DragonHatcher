@@ -17,6 +17,7 @@ public class DragonEggInteractable : MonoBehaviour, IInteractable
 		if(triggered) return;
 		Debug.Log("Egg triggered");
 		GameController.Instance.TriggerEnemySpawn();
+		ToggleInteractableText();
 		triggered = true;
 	}
 	
@@ -27,6 +28,7 @@ public class DragonEggInteractable : MonoBehaviour, IInteractable
 
 	public void ToggleInteractableText()
 	{
+		if(triggered) return;
 		if(text_.enabled)
 		{
 			text_.enabled = false;
